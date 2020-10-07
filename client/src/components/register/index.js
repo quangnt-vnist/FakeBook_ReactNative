@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image, ImageBackground, Button, Alert, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const FB_BG_REG = {
     uri: "https://i0.wp.com/www.dealersunited.com/wp-content/uploads/2016/09/foolproof-guidelines-to-help-your-dealership-respond-to-comments-engagement-on-facebook.png?fit=635%2C318&ssl=1"
@@ -23,7 +23,7 @@ const Register = () => {
                     // onPress={() => Alert.alert('Button with adjusted color pressed')}
                     onPress={onPressBtnPrev}
                 >
-                    <Icon name="arrowleft" color="#eee" size={30} />
+                    <Icon name="arrow-left" color="#eee" size={30} />
                     {/* <Text >{' <--- '}</Text> */}
                 </TouchableOpacity>
                 <Text style={{ fontSize: 15, fontWeight: "600", }}> Quay lại trang trước</Text>
@@ -80,7 +80,7 @@ const style = StyleSheet.create({
         // justifyContent: "center"
     },
     view1: {
-        backgroundColor: "red",
+        // backgroundColor: "red",
         height: "40%",
         flex: 2
     },

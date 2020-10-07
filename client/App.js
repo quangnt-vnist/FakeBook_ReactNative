@@ -29,8 +29,8 @@ import { LoginWithNewAccount } from './src/components';
 const App: () => React$Node = () => {
 	return (
 		<>
-			<Register />
-			{/* <LoginWithNewAccount /> */}
+			{/* <Register /> */}
+			<LoginWithNewAccount />
 		</>
 	);
 };

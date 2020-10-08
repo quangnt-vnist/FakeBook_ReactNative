@@ -1,7 +1,9 @@
 import Register from './register';
-import LoginWithNewAccount from './login'
-
+import { LoginNewAccount } from './login/loginNewAccount'
+import { LoginRecentlyAcc } from './login/loginRecentlyAcc'
 export {
     Register,
-    LoginWithNewAccount
+    LoginNewAccount,
+    LoginRecentlyAcc
+
 }

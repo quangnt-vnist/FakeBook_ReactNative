@@ -24,13 +24,15 @@ import {
 	ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { Register } from './src/components';
-import { LoginWithNewAccount } from './src/components';
+import { LoginNewAccount } from './src/components';
+import { LoginRecentlyAcc } from './src/components';
 
 const App: () => React$Node = () => {
 	return (
 		<>
 			{/* <Register /> */}
-			<LoginWithNewAccount />
+			{/* <LoginNewAccount /> */}
+			<LoginRecentlyAcc />
 		</>
 	);
 };

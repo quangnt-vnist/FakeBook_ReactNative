@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 
-const image = {
-    // uri: "https://i0.wp.com/www.dealersunited.com/wp-content/uploads/2016/09/foolproof-guidelines-to-help-your-dealership-respond-to-comments-engagement-on-facebook.png?fit=635%2C318&ssl=1"
+const imageDefault = {
     uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
+}
+const imageResize = {
+    // uri: "http://nutrientsmdvn.com/image/catalog/nutrient/facebook.png"
+    uri: "./fb_reg.png"
 }
 
 
 
-const LoginWithNewAccount = () => {
+const LoginNewAccount = () => {
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
+    const [resizeImage, setResizeImage] = useState(false);
 
+    // const focusOnTextInput = (flex) => {
+    //     setImageFlex(flex);
+    //     Alert.alert('change image flex to 2');
+
+    // }
     const onPressLogin = () => {
 
         Alert.alert('Account: ' + acc + '\n Password: ' + password)
@@ -25,15 +34,16 @@ const LoginWithNewAccount = () => {
     const onPressCreateAcc = () => {
         Alert.alert('Create new acc')
     }
+
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={image}
-                style={styles.image}
+                source={resizeImage ? imageResize : imageDefault}
+                style={resizeImage ? styles.imageOnFocusInput : styles.image}
             >
             </ImageBackground>
             <View style={styles.row}>
-                <View style={styles.inputSection}>
+                <View style={resizeImage ? styles.inputSectionOnFocus : styles.inputSection}>
                     <View style={{ borderColor: "gray", borderWidth: 1, borderRadius: 5 }}>
                         {/* Điền tài khoản */}
                         <TextInput
@@ -41,18 +51,22 @@ const LoginWithNewAccount = () => {
                             placeholder="Tên đăng nhập"
                             onChangeText={acc => setAcc(acc)}
                             value={acc}
+                            onFocus={() => setResizeImage(true)}
+
                         />
                         {/* Điền mật khẩu */}
                         <TextInput
                             style={styles.inputPassword}
                             placeholder="Mật khẩu"
+                            secureTextEntry={true}
+                            onFocus={() => setResizeImage(true)}
                             onChangeText={password => setPassword(password)}
                             value={password}
                         />
                     </View>
                 </View>
                 {/* Chọn options */}
-                <View style={styles.optionsSection} >
+                <View style={resizeImage ? styles.optionsSectionOnFocus : styles.optionsSection} >
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={styles.loginBtn}
@@ -60,19 +74,33 @@ const LoginWithNewAccount = () => {
                     >
                         <Text style={styles.loginText}>Đăng nhập</Text>
                     </TouchableOpacity>
-                    <Text style={styles.options} onPress={onPressForgotPW}> Quên mật khẩu? </Text>
-                    <Text style={styles.options} onPress={onPressBack}> Quay lại </Text>
+
+                    <TouchableOpacity
+                        style={{ alignSelf: 'center' }}
+                        onPress={onPressForgotPW}
+                    >
+                        <Text style={styles.options} > Quên mật khẩu? </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{ alignSelf: 'center' }}
+                        onPress={onPressBack}
+                    >
+                        <Text style={styles.options}> Quay lại </Text>
+                    </TouchableOpacity>
+
                 </View>
                 {/* Tạo Acc mới */}
                 <View style={styles.bottomSection} >
-                    <Text style={{ fontSize: 13, fontWeight: "600", marginBottom: 12, textAlign: "center", }}>
-                        <View style={styles.lineLeft}></View>
+                    {!resizeImage &&
+                        <Text style={{ fontSize: 13, fontWeight: "600", marginBottom: 12, textAlign: "center", }}>
+                            <View style={styles.lineLeft}></View>
                          HOẶC
                         <View style={styles.lineRight}></View>
-                    </Text>
+                        </Text>}
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={styles.createNewBtn}
+                        style={resizeImage ? styles.createNewBtnOnFocus : styles.createNewBtn}
                         onPress={onPressCreateAcc}
                     >
                         <Text style={styles.btnText}>Tạo tài khoản mới</Text>
@@ -93,6 +121,10 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         // justifyContent: "center",
     },
+    imageOnFocusInput: {
+        flex: 3,
+        resizeMode: "contain",
+    },
 
     row: {
         flex: 9,
@@ -105,11 +137,17 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
 
+    inputSectionOnFocus: {
+        flex: 2,
+        marginTop: 20,
+    },
+
     inputAcc: {
         height: 40,
         borderBottomColor: 'gray',
         borderBottomWidth: 1,
-        fontSize: 16
+        fontSize: 16,
+
     },
     inputPassword: {
         height: 40,
@@ -125,16 +163,19 @@ const styles = StyleSheet.create({
     optionsSection: {
         flex: 5
     },
+    optionsSectionOnFocus: {
+        flex: 4,
+        marginTop: 15
+    },
 
     options: {
+        display: "flex",
         fontSize: 20,
         fontWeight: "700",
         color: "#204BF5",
         textAlign: "center",
         marginTop: 12,
-        backgroundColor: "black",
-        alignContent: 'center',
-
+        // backgroundColor: "black",
     },
 
     loginText: {
@@ -171,7 +212,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         display: "flex",
         justifyContent: "center"
+    },
+
+    createNewBtnOnFocus: {
+        backgroundColor: "#D0E7F5",
+        height: 40,
+        borderRadius: 8,
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 25
     }
 });
 
-export default LoginWithNewAccount;
+export { LoginNewAccount };

@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -23,6 +24,7 @@ import {
 	DebugInstructions,
 	ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
 import { Register } from './src/components';
 import { LoginNewAccount } from './src/components';
 import { LoginRecentlyAcc } from './src/components';
@@ -35,14 +37,21 @@ import { Name } from './src/components';
 import { Password } from './src/components';
 import { PhoneNumber } from './src/components';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { Navigate } from './src/navigator/navigate.page';
+
+// const App = () => {
 const App: () => React$Node = () => {
 	return (
 		<>
-			{/* <Register /> */}
-			{/* <LoginNewAccount /> */}
-			{/* <LoginRecentlyAcc /> */}
-			{/* <StartCreateAcc /> */}
-			<PhoneNumber />
+			{/* <NavigationContainer> */}
+				<Navigate />
+				{/* <Register /> */}
+				{/* <LoginNewAccount /> */}
+				{/* <LoginRecentlyAcc /> */}
+				{/* <StartCreateAcc /> */}
+				{/* <PhoneNumber /> */}
+			{/* </NavigationContainer> */}
 
 		</>
 	);

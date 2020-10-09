@@ -1,33 +1,38 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image, ImageBackground, Button, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { pageName } from './../../navigator/constant.page'
 
 const FB_BG_REG = {
     uri: "https://i0.wp.com/www.dealersunited.com/wp-content/uploads/2016/09/foolproof-guidelines-to-help-your-dealership-respond-to-comments-engagement-on-facebook.png?fit=635%2C318&ssl=1"
 }
 
-const onPressBtnNext = () => {
-    Alert.alert('Button Next pressed')
-}
-const onPressBtnPrev = () => {
-    Alert.alert('Button Prev pressed')
-}
+// const onPressBtnNext = () => {
+//     // Alert.alert('Button Next pressed')
+// }
 
-const Register = () => {
+const Register = ({ navigation }) => {
+    const onPressBtnNext = () => {
+        // Alert.alert('Button Next pressed')
+        navigation.navigate(pageName.REG_NAME);
+    }
+
+    const onPressHasAccount = () => {
+        // Alert.alert('Button Prev pressed');
+        navigation.navigate(pageName.LOG_IN_NEW_ACC);
+    }
+
     return (
         <View style={style.view}>
-            <View style={style.navbar}>
+            {/* <View style={style.navbar}>
                 <TouchableOpacity
-                    // style={style.btnNext}
                     activeOpacity={0.5}
-                    // onPress={() => Alert.alert('Button with adjusted color pressed')}
                     onPress={onPressBtnPrev}
                 >
                     <Icon name="arrow-left" color="#eee" size={30} />
-                    {/* <Text >{' <--- '}</Text> */}
                 </TouchableOpacity>
                 <Text style={{ fontSize: 15, fontWeight: "600", }}> Quay lại trang trước</Text>
-            </View>
+            </View> */}
             <View style={style.view1}>
                 <ImageBackground style={style.imageStyle}
                     source={FB_BG_REG}>
@@ -38,15 +43,7 @@ const Register = () => {
                     <Text style={{ fontSize: 20 }}>Tham gia FakeBook</Text>
                     <Text style={{ color: '#aaa', textAlign: 'center' }}>Chúng tôi sẽ giúp bạn tạo tài khoản mới sau vài bước dễ dàng</Text>
                 </View>
-                {/* <View style={style.btnNext}>
-                    <Button 
-                        // onPress={onPressBtnNext}
-                        onPress={() => Alert.alert('Button with adjusted color pressed')}
-                        title="Tiếp"
-                        color="#007AFF"
-                        accessibilityLabel="Next button"
-                    />
-                </View> */}
+
                 <TouchableOpacity
                     style={style.btnNext}
                     activeOpacity={0.5}
@@ -57,7 +54,12 @@ const Register = () => {
                 </TouchableOpacity>
             </View>
             <View style={style.view3}>
-                <Text style={{ color: '#007AFF' }}>Bạn đã có tài khoản?</Text>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={onPressHasAccount}
+                >
+                    <Text style={{ color: '#007AFF' }}>Bạn đã có tài khoản?</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

@@ -16,6 +16,7 @@ const PhoneNumber = () => {
                         <TextInput
                             style={styles.phoneNumberInput}
                             placeholder="0123456789"
+                            keyboardType={'number-pad'}
                         >
                         </TextInput>
                     </View>

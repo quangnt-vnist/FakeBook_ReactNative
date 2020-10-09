@@ -10,28 +10,29 @@ const PhoneNumber = () => {
 
                 <View style={{ flex: 7.5 }}>
 
-                    <Text style={CommonStyle.mediumBlueText}>Số di động của bạn là gì?</Text>
+                    <Text style={[CommonStyle.mediumText, { color: "#204bf5" }]}>Số di động của bạn là gì?</Text>
 
                     <View style={styles.input}>
                         <TextInput
                             style={styles.phoneNumberInput}
                             placeholder="0123456789"
+                            keyboardType="numeric"
                         >
                         </TextInput>
                     </View>
 
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={CommonStyle.submitBtn}
+                        style={[CommonStyle.submitBtn, { backgroundColor: "#204BF5" }]}
                     >
-                        <Text style={CommonStyle.textSubmit}>Tiếp</Text>
+                        <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tiếp</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={styles.otherBtn}
                     >
-                        <Text style={styles.otherText}>Dùng địa chỉ email của bạn</Text>
+                        <Text style={[CommonStyle.mediumText, { color: "#777" }]}>Dùng địa chỉ email của bạn</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -39,22 +40,16 @@ const PhoneNumber = () => {
 
             </View >
             <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallBlueText}>Bạn đã có tài khoản?</Text>
+                <Text style={[CommonStyle.smallText, { color: "#204BF5" }]}>Bạn đã có tài khoản?</Text>
             </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    content: {
-        margin: 15,
-        textAlign: "center"
-    },
     input: {
         flexDirection: 'row',
         marginTop: 10,
-        marginBottom: 10,
-
     },
     phoneNumberInput: {
         width: "100%",
@@ -64,12 +59,7 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
-    content: {
-        fontSize: 15,
-        textAlign: "center"
-    },
     otherBtn: {
-        // backgroundColor: "#ffe",
         borderRadius: 5,
         borderColor: "#CCC",
         borderWidth: 1,
@@ -78,15 +68,7 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         marginTop: 20
-
     },
-    otherText: {
-        fontSize: 20,
-        fontWeight: "700",
-        color: "#777",
-        textAlign: "center"
-    },
-
 })
 
 export { PhoneNumber }

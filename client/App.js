@@ -42,7 +42,11 @@ const App: () => React$Node = () => {
 			{/* <LoginNewAccount /> */}
 			{/* <LoginRecentlyAcc /> */}
 			{/* <StartCreateAcc /> */}
-			<PhoneNumber />
+			{/* <Birthday /> */}
+			{/* <FinishCreateAcc /> */}
+			{/* <Name /> */}
+			<Password />
+			{/* <PhoneNumber /> */}
 
 		</>
 	);

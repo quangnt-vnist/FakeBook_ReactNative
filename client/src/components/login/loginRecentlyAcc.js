@@ -1,16 +1,27 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, Image, StyleSheet, ImageBackground, ListView } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoginRecentlyAcc = () => {
     return (
         <View style={styles.row}>
-            {/* <View style={{ borderRadius: 50 }}> */}
             <Icon name="facebook-official" style={styles.fb_icon} />
 
             <View style={styles.list_avatar}>
                 <Text style={{ color: "green", fontSize: 35 }}> Avartar of recently users here</Text>
             </View>
+
+            {/*ve sau se su dung list view */}
+            {/* <ListView
+                style={styles.list_avatar}
+                dataSource=
+                renderRow={(listAvt) => {
+                    <View>
+                        <Text>{listAvt}</Text>
+                    </View>
+                }}
+            >
+            </ListView> */}
 
             <View style={styles.other_options}>
                 <Icon name="cog" color="#204bf5" size={25} />

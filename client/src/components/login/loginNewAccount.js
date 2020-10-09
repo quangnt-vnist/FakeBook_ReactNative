@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { CommonStyle } from '../sign-up/commonStyle'
 
 const imageDefault = {
     uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
 }
 const imageResize = {
-    // uri: "http://nutrientsmdvn.com/image/catalog/nutrient/facebook.png"
-    uri: "./fb_reg.png"
+    uri: "http://nutrientsmdvn.com/image/catalog/nutrient/facebook.png"
+    // uri: "./fb_reg.png"
 }
 
 
@@ -69,7 +70,7 @@ const LoginNewAccount = () => {
                 <View style={resizeImage ? styles.optionsSectionOnFocus : styles.optionsSection} >
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={styles.loginBtn}
+                        style={CommonStyle.submitBtn}
                         onPress={onPressLogin}
                     >
                         <Text style={styles.loginText}>Đăng nhập</Text>

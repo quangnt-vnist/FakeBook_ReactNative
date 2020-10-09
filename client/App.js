@@ -27,12 +27,23 @@ import { Register } from './src/components';
 import { LoginNewAccount } from './src/components';
 import { LoginRecentlyAcc } from './src/components';
 
+import { StartCreateAcc } from './src/components';
+import { Birthday } from './src/components';
+import { FinishCreateAcc } from './src/components';
+import { Gender } from './src/components';
+import { Name } from './src/components';
+import { Password } from './src/components';
+import { PhoneNumber } from './src/components';
+
 const App: () => React$Node = () => {
 	return (
 		<>
 			{/* <Register /> */}
 			{/* <LoginNewAccount /> */}
-			<LoginRecentlyAcc />
+			{/* <LoginRecentlyAcc /> */}
+			{/* <StartCreateAcc /> */}
+			<PhoneNumber />
+
 		</>
 	);
 };

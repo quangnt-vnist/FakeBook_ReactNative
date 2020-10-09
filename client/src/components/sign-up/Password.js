@@ -10,7 +10,7 @@ const Password = () => {
 
                 <View style={{ flex: 7.5 }}>
 
-                    <Text style={CommonStyle.mediumBlueText}>Tạo mật khẩu</Text>
+                    <Text style={CommonStyle.mediumText}>Tạo mật khẩu</Text>
 
                     <View style={styles.input}>
                         <TextInput
@@ -19,40 +19,25 @@ const Password = () => {
                             secureTextEntry={true}
                         >
                         </TextInput>
-                        {/* <DatePickerAndroid></DatePickerAndroid> */}
                     </View>
 
-                    {/* Nếu đã điền trường tên thì sẽ cho hiện TouchableOpacity */}
-                    <Text style={styles.content1}>Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số chữ cái và dấu chấm câu (như ! và &).</Text>
-
-                    {/* <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={CommonStyle.submitBtn}
-                    >
-                        <Text style={CommonStyle.textSubmit}>Tiếp</Text>
-                    </TouchableOpacity> */}
-
+                    <Text style={CommonStyle.content}>Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số chữ cái và dấu chấm câu (như ! và &).</Text>
                 </View>
 
 
             </View >
             <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallBlueText}>Bạn đã có tài khoản?</Text>
+                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    content: {
-        margin: 15,
-        textAlign: "center"
-    },
+
     input: {
         flexDirection: 'row',
         marginTop: 10,
-        marginBottom: 10,
-
     },
     passwordInput: {
         width: "100%",

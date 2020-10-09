@@ -10,7 +10,7 @@ const Birthday = () => {
 
                 <View style={{ flex: 7.5 }}>
 
-                    <Text style={CommonStyle.mediumBlueText}>Khi nào là Sinh nhật của bạn?</Text>
+                    <Text style={CommonStyle.mediumText}>Khi nào là Sinh nhật của bạn?</Text>
 
                     <View style={styles.input}>
                         <TextInput
@@ -22,37 +22,24 @@ const Birthday = () => {
                     </View>
 
                     {/* Nếu đã điền trường tên thì sẽ cho hiện TouchableOpacity */}
-                    <Text style={styles.content1}>Bạn có thể chọn xem ai được thấy nội dung này trên trang cá nhân của mình.</Text>
-                    <Text style={styles.content2}>Tại sao tôi cần cung cấp ngày sinh của mình?</Text>
-
-                    {/* <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={CommonStyle.submitBtn}
-                    >
-                        <Text style={CommonStyle.textSubmit}>Tiếp</Text>
-                    </TouchableOpacity> */}
+                    <Text style={CommonStyle.content}>Bạn có thể chọn xem ai được thấy nội dung này trên trang cá nhân của mình.</Text>
+                    <Text style={[CommonStyle.content, { color: "#204BF5", marginTop: -10 }]}>Tại sao tôi cần cung cấp ngày sinh của mình?</Text>
 
                 </View>
 
 
             </View >
             <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallBlueText}>Bạn đã có tài khoản?</Text>
+                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    content: {
-        margin: 15,
-        textAlign: "center"
-    },
     input: {
         flexDirection: 'row',
         marginTop: 10,
-        marginBottom: 10,
-
     },
     birthdayInput: {
         width: "100%",
@@ -62,17 +49,6 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 15,
     },
-    content1: {
-        fontSize: 15,
-        textAlign: "center",
-
-    },
-    content2: {
-        fontSize: 15,
-        textAlign: "center",
-        color: "#204bf5"
-    }
-
 })
 
 export { Birthday }

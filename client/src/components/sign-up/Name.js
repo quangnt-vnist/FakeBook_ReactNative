@@ -10,7 +10,7 @@ const Name = () => {
 
                 <View style={{ flex: 7.5 }}>
 
-                    <Text style={CommonStyle.mediumBlueText}>Bạn tên gì?</Text>
+                    <Text style={CommonStyle.mediumText}>Bạn tên gì?</Text>
 
                     <View style={styles.nameInput}>
                         <TextInput
@@ -20,20 +20,20 @@ const Name = () => {
                         </TextInput>
 
                         <TextInput
-                            style={styles.lastNameInput}
+                            style={[styles.firstNameInput, { marginLeft: "5%" }]}
                             placeholder="Tên"
                         >
                         </TextInput>
                     </View>
 
                     {/* Nếu đã điền trường tên thì sẽ cho hiện TouchableOpacity */}
-                    <Text style={styles.content}>Dùng tên thật giúp bạn bè dễ dàng nhận ra bạn hơn.</Text>
+                    <Text style={CommonStyle.content}>Dùng tên thật giúp bạn bè dễ dàng nhận ra bạn hơn.</Text>
 
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
                     >
-                        <Text style={CommonStyle.textSubmit}>Tiếp</Text>
+                        <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tiếp</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -41,22 +41,16 @@ const Name = () => {
 
             </View >
             <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallBlueText}>Bạn đã có tài khoản?</Text>
+                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    content: {
-        margin: 15,
-        textAlign: "center"
-    },
     nameInput: {
         flexDirection: 'row',
         marginTop: 10,
-        marginBottom: 10,
-
     },
     firstNameInput: {
         width: "47.5%",
@@ -66,20 +60,6 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
-    lastNameInput: {
-        width: "47.5%",
-        borderRadius: 5,
-        borderColor: "#CCC",
-        borderWidth: 1,
-        height: 40,
-        fontSize: 16,
-        marginLeft: "5%"
-    },
-    content: {
-        fontSize: 15,
-        textAlign: "center"
-    }
-
 })
 
 export { Name }

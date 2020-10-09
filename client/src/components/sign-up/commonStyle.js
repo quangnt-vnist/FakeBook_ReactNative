@@ -7,37 +7,43 @@ export const CommonStyle = StyleSheet.create({
         marginLeft: '5%'
     },
 
+    // Font chữ 15 màu đen xám để thể hiện content
+    content: {
+        margin: 10,
+        fontSize: 15,
+        textAlign: "center",
+        color: "#4A4A4A"
+    },
+
+    // Nút xác nhận mặc định màu blue, width 100%
     submitBtn: {
-        backgroundColor: "#1877f2",
+        backgroundColor: "#204BF5",
         height: 40,
         borderRadius: 8,
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+
     },
 
-    textSubmit: {
-        fontSize: 20,
-        fontWeight: "700",
-        color: "#FFF",
-        textAlign: "center"
-    },
-
-    mediumBlueText: {
+    // Font chữ 20 mặc định là màu blue
+    mediumText: {
         display: "flex",
         fontSize: 20,
         fontWeight: "700",
-        color: "#204BF5",
         textAlign: "center",
+        color: "#204BF5"
     },
 
-    smallBlueText: {
+    // Font chữ 14 mặc định là màu blue
+    smallText: {
         display: "flex",
         fontSize: 14,
         fontWeight: "600",
-        color: "#204BF5",
         textAlign: "center",
+        color: "#204BF5"
     },
 
+    // Footer phần tạo tài khoản
     footerQuestion: {
         borderTopColor: "#CCC",
         borderTopWidth: 1,

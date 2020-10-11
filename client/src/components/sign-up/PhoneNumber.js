@@ -1,47 +1,47 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
+import { pageName } from './../../navigator/constant.page'
 
-const PhoneNumber = () => {
+const PhoneNumber = ({ navigation }) => {
+    const onPressBtnNext = () => {
+        navigation.navigate(pageName.REG_PASSWORD);
+    }
     return (
         <>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 2.5 }}></View>
+                <View style={{ flex: 1.5 }}></View>
 
-                <View style={{ flex: 7.5 }}>
+                <View style={{ flex: 2 }}>
 
-                    <Text style={[CommonStyle.mediumText, { color: "#204bf5" }]}>Số di động của bạn là gì?</Text>
+                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Nhập số di động của bạn?</Text>
 
                     <View style={styles.input}>
                         <TextInput
                             style={styles.phoneNumberInput}
                             placeholder="0123456789"
-                            // keyboardType={'number-pad'}
                             keyboardType="numeric"
                         >
                         </TextInput>
                     </View>
 
+                </View>
+                <View style={{ flex: 3 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={[CommonStyle.submitBtn, { backgroundColor: "#204BF5" }]}
+                        style={[CommonStyle.submitBtn]}
+                        onPress={onPressBtnNext}
                     >
-                        <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tiếp</Text>
+                        <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
                     </TouchableOpacity>
-
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={styles.otherBtn}
-                    >
-                        <Text style={[CommonStyle.mediumText, { color: "#777" }]}>Dùng địa chỉ email của bạn</Text>
-                    </TouchableOpacity>
-
                 </View>
 
-
             </View >
-            <View style={CommonStyle.footerQuestion}>
-                <Text style={[CommonStyle.smallText, { color: "#204BF5" }]}>Bạn đã có tài khoản?</Text>
+
+
+
+            <View style={CommonStyle.footer}>
+                <Text style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng địa chỉ email</Text>
             </View>
         </>
     )

@@ -13,7 +13,6 @@ const FB_BG_REG = {
 
 const Register = ({ navigation }) => {
     const onPressBtnNext = () => {
-        // Alert.alert('Button Next pressed')
         navigation.navigate(pageName.REG_NAME);
     }
 

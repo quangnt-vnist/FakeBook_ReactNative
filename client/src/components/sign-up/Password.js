@@ -1,63 +1,78 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
 import { CommonStyle } from './commonStyle'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { pageName } from '../../navigator/constant.page';
 
-const Password = () => {
+const Password = ({ navigation }) => {
+    const onPressBtnNext = () => {
+        navigation.navigate(pageName.REG_BIRTH)
+    }
     return (
         <>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 2.5 }}></View>
+                <View style={{ flex: 1 }}></View>
 
-                <View style={{ flex: 7.5 }}>
+                <View style={{ flex: 3 }}>
 
-                    <Text style={CommonStyle.mediumText}>Tạo mật khẩu</Text>
+                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Chọn mật khẩu</Text>
+                    <Text style={[CommonStyle.smallText, { color: "red" }]}>Mật khẩu của bạn phải cso thối thiểu 6 chữ cái, số và biểu tượng (như ! và %%)</Text>
+                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
 
                     <View style={styles.input}>
                         <TextInput
-                            style={styles.passwordInput}
+                            style={styles.phoneNumberInput}
                             placeholder="Mật khẩu"
-                            secureTextEntry={true}
                         >
                         </TextInput>
                     </View>
 
-                    <Text style={CommonStyle.content}>Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số chữ cái và dấu chấm câu (như ! và &).</Text>
+                </View>
+                <View style={{ flex: 4 }}>
+                    <TouchableOpacity
+                        activeOpacity={0.5}
+                        style={[CommonStyle.submitBtn]}
+                        onPress={onPressBtnNext}
+                    >
+                        <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
+                    </TouchableOpacity>
                 </View>
 
-
             </View >
-            <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View>
+
         </>
     )
 }
 
 const styles = StyleSheet.create({
-
     input: {
         flexDirection: 'row',
         marginTop: 10,
     },
-    passwordInput: {
+    phoneNumberInput: {
         width: "100%",
         borderRadius: 5,
-        borderColor: "#999",
+        borderColor: "#CCC",
         borderWidth: 1,
         height: 40,
-        fontSize: 15,
+        fontSize: 16,
     },
-    content1: {
-        fontSize: 15,
-        textAlign: "center",
-
+    otherBtn: {
+        borderRadius: 5,
+        borderColor: "#CCC",
+        borderWidth: 1,
+        height: 40,
+        borderRadius: 8,
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 20
     },
-    content2: {
-        fontSize: 15,
-        textAlign: "center",
-        color: "#204bf5"
+    warning: {
+        color: "red",
+        fontSize: 20,
+        textAlign: "right"
     }
-
 })
+
 
 export { Password }

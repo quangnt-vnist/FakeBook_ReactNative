@@ -18,7 +18,7 @@ export const CommonStyle = StyleSheet.create({
     // Nút xác nhận mặc định màu blue, width 100%
     submitBtn: {
         backgroundColor: "#204BF5",
-        height: 40,
+        height: 45,
         borderRadius: 8,
         display: "flex",
         justifyContent: "center",
@@ -31,7 +31,7 @@ export const CommonStyle = StyleSheet.create({
         fontSize: 20,
         fontWeight: "700",
         textAlign: "center",
-        color: "#204BF5"
+        color: "#222"
     },
 
     // Font chữ 14 mặc định là màu blue
@@ -43,11 +43,19 @@ export const CommonStyle = StyleSheet.create({
         color: "#204BF5"
     },
 
+    textBtn: {
+        display: "flex",
+        fontSize: 16,
+        fontWeight: "600",
+        textAlign: "center",
+        color: "#FFF"
+    },
+
     // Footer phần tạo tài khoản
-    footerQuestion: {
-        borderTopColor: "#CCC",
-        borderTopWidth: 1,
-        padding: 10
+    footer: {
+        padding: 10,
+        display: "flex",
+        alignSelf: "center"
     }
 
 })

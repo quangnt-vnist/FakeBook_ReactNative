@@ -10,6 +10,12 @@ export const pageName = {
     REG_BEGIN: "Tạo tài khoản",
     REG_NAME: "Tên",
     REG_BIRTH: "Ngày sinh",
+    REG_AGE: "Tuổi",
+    REG_GENDER: "Giới tính",
+    REG_PHONE: "Số di dộng",
+    REG_PASSWORD: "Mật khẩu",
+    REG_EMAIL: "Email",
+
 
     LOG_IN_NEW_ACC: "Đăng nhập",
 

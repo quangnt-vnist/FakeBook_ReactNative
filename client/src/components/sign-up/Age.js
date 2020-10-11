@@ -4,10 +4,9 @@ import { CommonStyle } from './commonStyle'
 import { pageName } from './../../navigator/constant.page';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Birthday = ({ navigation }) => {
+const Age = ({ navigation }) => {
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.REG_AGE)
-        console.log("clicked")
+        navigation.navigate(pageName.REG_GENDER)
     }
 
     return (
@@ -15,15 +14,16 @@ const Birthday = ({ navigation }) => {
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1.5 }}></View>
 
-                <View style={{ flex: 2.5 }}>
+                <View style={{ flex: 2 }}>
 
-                    <Text style={CommonStyle.mediumText}>Sinh nhật của bạn khi nào?</Text>
-                    <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
-                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
+                    <Text style={CommonStyle.mediumText}>Bạn bao nhiêu tuổi?</Text>
+                    {/* <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
+                    <Icon name="exclamation-circle" style={styles.warning}></Icon> */}
                     <View style={styles.input}>
                         <TextInput
-                            style={styles.birthdayInput}
-                            placeholder="Sau thay bằng datePicker"
+                            style={styles.ageInput}
+                            placeholder="Độ tuổi"
+                            keyboardType="numeric"
                         >
                         </TextInput>
                     </View>
@@ -42,25 +42,25 @@ const Birthday = ({ navigation }) => {
                 </View>
 
             </View >
-            {/* <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View> */}
+            <View style={CommonStyle.footer}>
+                <Text style={CommonStyle.smallText, { fontWeight: "700", color: "#204bf5" }}>Dùng ngày sinh</Text>
+            </View>
         </>
     )
 }
 
 const styles = StyleSheet.create({
     input: {
-        flexDirection: 'row',
-        marginTop: 10,
+        display: "flex",
+        alignItems: "center",
+        marginTop: 10
     },
-    birthdayInput: {
-        width: "100%",
-        borderRadius: 5,
-        borderColor: "#999",
-        borderWidth: 1,
-        height: 40,
-        fontSize: 15,
+    ageInput: {
+        width: "30%",
+        borderBottomColor: "#CCC",
+        borderBottomWidth: 1,
+        height: 45,
+        fontSize: 20,
     },
     warning: {
         color: "red",
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export { Birthday }
+export { Age }

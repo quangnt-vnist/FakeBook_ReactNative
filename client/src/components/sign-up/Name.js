@@ -1,17 +1,23 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { pageName } from './../../navigator/constant.page';
 
-const Name = () => {
+const Name = ({ navigation }) => {
+    const onPressBtnNext = () => {
+        navigation.navigate(pageName.REG_BIRTH);
+    }
     return (
         <>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 2.5 }}></View>
+                <View style={{ flex: 1.5 }}></View>
 
-                <View style={{ flex: 7.5 }}>
+                <View style={{ flex: 2.5 }}>
 
                     <Text style={CommonStyle.mediumText}>Bạn tên gì?</Text>
-
+                    <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Vui lòng nhập họ và tên của bạn</Text>
+                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
                     <View style={styles.nameInput}>
                         <TextInput
                             style={styles.firstNameInput}
@@ -25,24 +31,26 @@ const Name = () => {
                         >
                         </TextInput>
                     </View>
-
-                    {/* Nếu đã điền trường tên thì sẽ cho hiện TouchableOpacity */}
-                    <Text style={CommonStyle.content}>Dùng tên thật giúp bạn bè dễ dàng nhận ra bạn hơn.</Text>
-
+                </View>
+                <View style={{ flex: 3 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
+                        onPress={onPressBtnNext}
                     >
-                        <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tiếp</Text>
+                        <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
                     </TouchableOpacity>
-
                 </View>
 
 
+
+
+
+
             </View >
-            <View style={CommonStyle.footerQuestion}>
+            {/* <View style={CommonStyle.footerQuestion}>
                 <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View>
+            </View> */}
         </>
     )
 }
@@ -50,16 +58,20 @@ const Name = () => {
 const styles = StyleSheet.create({
     nameInput: {
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 20,
     },
     firstNameInput: {
         width: "47.5%",
-        borderRadius: 5,
-        borderColor: "#CCC",
-        borderWidth: 1,
+        borderBottomColor: "#CCC",
+        borderBottomWidth: 1,
         height: 40,
-        fontSize: 16,
+        fontSize: 20,
     },
+    warning: {
+        color: "red",
+        fontSize: 20,
+        textAlign: "right"
+    }
 })
 
 export { Name }

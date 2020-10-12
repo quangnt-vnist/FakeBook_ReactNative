@@ -38,20 +38,15 @@ const Birthday = ({ navigation }) => {
                     <Text style={CommonStyle.mediumText}>Sinh nhật của bạn khi nào?</Text>
                     <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
                     <Icon name="exclamation-circle" style={styles.warning}></Icon>
-                    {/* <View style={styles.input}>
-                        <TextInput
-                            style={styles.birthdayInput}
-                            placeholder="Sau thay bằng datePicker"
-                        >
-                        </TextInput>
-                    </View> */}
+
                     <View style={styles.birthday}>
                         {/* Chon ngay */}
                         <View style={styles.birthdayCol}>
                             <WheelPicker
                                 //   selectedItem={this.state.selectedItem}
-                                data={wheelPickerDay}
                                 width={50}
+                                data={wheelPickerDay}
+
                             //   onItemSelected={this.onItemSelected}
                             />
                         </View>
@@ -76,9 +71,6 @@ const Birthday = ({ navigation }) => {
                         </View>
                     </View>
 
-
-                    {/* Nếu đã điền trường tên thì sẽ cho hiện TouchableOpacity */}
-
                 </View>
                 <View style={{ flex: 3 }}>
                     <TouchableOpacity
@@ -91,9 +83,6 @@ const Birthday = ({ navigation }) => {
                 </View>
 
             </View >
-            {/* <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View> */}
         </>
     )
 }
@@ -118,11 +107,12 @@ const styles = StyleSheet.create({
     },
     birthday: {
         flexDirection: "row",
-        justifyContent: "center"
+        justifyContent: "center",
+
     },
     birthdayCol: {
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 5,
     }
 })
 

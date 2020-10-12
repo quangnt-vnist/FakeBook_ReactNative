@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,8 +9,11 @@ const Gender = ({ navigation }) => {
     const onPressBtnNext = () => {
         navigation.navigate(pageName.REG_PHONE);
     }
-    const handleSelectGender = (gender) => {
-        console.log(gender)
+    const [gender, setGender] = useState(4);
+
+    const handleSelectGender = (value) => {
+        setGender(value);
+        console.log("you have selected ", value)
     }
     const radioOptions = [
         { label: 'Nữ', value: 0 }, // Nam
@@ -30,18 +33,7 @@ const Gender = ({ navigation }) => {
                 </View >
 
                 <View style={{ flex: 2.5 }}>
-                    <RadioForm
-                        // radio_props={radioOptions}
-                        initial={0}
-
-                        // formHorizontal={false}
-                        // labelHorizontal={true}
-                        // animation={true}
-                        // onPress={(value) => { handleSelectGender(value) }}
-
-                        // formHorizontal={false}
-                        animation={true}
-                    >
+                    <RadioForm animation={true}               >
                         {/*                        
                                      ==========  CUSTOM RADIO  ============ 
                             Xem thêm : https://www.npmjs.com/package/react-native-simple-radio-button
@@ -49,27 +41,24 @@ const Gender = ({ navigation }) => {
 
                         {
                             radioOptions.map((obj, i) => (
-                                <RadioButton labelHorizontal={true} key={i} style={{ paddingBottom: 15, paddingTop: 15, borderBottomWidth: 1, borderBottomColor: "#999" }} >
-                                    {/*  You can set RadioButtonLabel before RadioButtonInput */}
+                                <RadioButton labelHorizontal={true} key={i} wrapStyle={styles.radioButton} >
                                     <RadioButtonLabel
                                         obj={obj}
                                         index={i}
                                         labelHorizontal={false}
                                         onPress={() => console.log("you clicked me")}
-                                        labelStyle={{ fontSize: 16, color: '#222', fontWeight: "700" }}
-                                        labelWrapStyle={{ width: "20%" }}
+                                        labelWrapStyle={styles.labelStyle}
                                     />
                                     <RadioButtonInput
                                         obj={obj}
                                         index={i}
-                                        // isSelected={console.log("selected me")}
+                                        isSelected={gender == i}
                                         onPress={handleSelectGender}
                                         borderWidth={1.5}
-                                        buttonInnerColor={'#000'}
+                                        buttonInnerColor={'#222'}
                                         buttonOuterColor={'#000'}
                                         buttonSize={8}
-                                        buttonStyle={{}}
-                                        buttonWrapStyle={{ marginLeft: "75%" }}
+                                        buttonWrapStyle={styles.radioStyle}
                                     />
                                 </RadioButton>
                             ))
@@ -87,21 +76,27 @@ const Gender = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-
-
-
-
-
             </View >
-            {/* <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View> */}
         </>
     )
 }
 
 const styles = StyleSheet.create({
-
+    radioButton: {
+        paddingBottom: 15,
+        paddingTop: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: "#999"
+    },
+    labelStyle: {
+        fontSize: 16,
+        color: '#222',
+        fontWeight: "700",
+        width: "20%"
+    },
+    radioStyle: {
+        marginLeft: "75%",
+    }
 })
 
 export { Gender }

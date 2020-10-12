@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     birthdayCol: {
         marginLeft: 5,
         marginRight: 5,
+
     }
 })
 

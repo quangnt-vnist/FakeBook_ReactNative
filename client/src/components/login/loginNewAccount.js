@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
+import { pageName } from '../../navigator/constant.page'
 
 const imageDefault = {
     uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
@@ -12,10 +13,12 @@ const imageResize = {
 
 
 
-const LoginNewAccount = () => {
+const LoginNewAccount = ({ navigation }) => {
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
     const [resizeImage, setResizeImage] = useState(false);
+    const [enteringText, setEnteringText] = useState(false);
+    const [enteringPass, setEnteringPass] = useState(false);
 
     // const focusOnTextInput = (flex) => {
     //     setImageFlex(flex);
@@ -29,11 +32,8 @@ const LoginNewAccount = () => {
     const onPressForgotPW = () => {
         Alert.alert('Forgot pw')
     }
-    const onPressBack = () => {
-        Alert.alert('No way back')
-    }
     const onPressCreateAcc = () => {
-        Alert.alert('Create new acc')
+        navigation.navigate(pageName.REG_BEGIN)
     }
 
     return (
@@ -43,70 +43,88 @@ const LoginNewAccount = () => {
                 style={resizeImage ? styles.imageOnFocusInput : styles.image}
             >
             </ImageBackground>
-            <View style={styles.row}>
-                <View style={resizeImage ? styles.inputSectionOnFocus : styles.inputSection}>
-                    <View style={{ borderColor: "gray", borderWidth: 1, borderRadius: 5 }}>
-                        {/* Điền tài khoản */}
-                        <TextInput
-                            style={styles.inputAcc}
-                            placeholder="Tên đăng nhập"
-                            onChangeText={acc => setAcc(acc)}
-                            value={acc}
-                            onFocus={() => setResizeImage(true)}
 
-                        />
-                        {/* Điền mật khẩu */}
-                        <TextInput
-                            style={styles.inputPassword}
-                            placeholder="Mật khẩu"
-                            secureTextEntry={true}
-                            onFocus={() => setResizeImage(true)}
-                            onChangeText={password => setPassword(password)}
-                            value={password}
-                        />
-                    </View>
-                </View>
-                {/* Chọn options */}
-                <View style={resizeImage ? styles.optionsSectionOnFocus : styles.optionsSection} >
+            <View style={styles.row}>
+                <View style={styles.inputSection}>
+
+                    {/* Điền tài khoản */}
+                    <TextInput
+                        style={[styles.input, enteringText && CommonStyle.inputUnderLine]}
+                        placeholder="Số điện thoại hoặc email"
+                        onChangeText={acc => setAcc(acc)}
+                        value={acc}
+                        onFocus={() => {
+                            setResizeImage(true);
+                            setEnteringText(true)
+                        }}
+                        onBlur={() => {
+                            setEnteringText(false)
+                        }}
+
+                    />
+
+                    {/* Điền mật khẩu */}
+                    <TextInput
+                        style={[styles.input, enteringPass && CommonStyle.inputUnderLine]}
+                        placeholder="Mật khẩu"
+                        secureTextEntry={true}
+                        onFocus={() => {
+                            setResizeImage(true);
+                            setEnteringPass(true)
+                        }}
+                        onBlur={() => {
+                            // setResizeImage(false);
+                            setEnteringPass(false)
+                        }}
+                        onChangeText={password => setPassword(password)}
+                        value={password}
+                    />
+
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
                         onPress={onPressLogin}
                     >
-                        <Text style={styles.loginText}>Đăng nhập</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={{ alignSelf: 'center' }}
-                        onPress={onPressForgotPW}
-                    >
-                        <Text style={styles.options} > Quên mật khẩu? </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={{ alignSelf: 'center' }}
-                        onPress={onPressBack}
-                    >
-                        <Text style={styles.options}> Quay lại </Text>
-                    </TouchableOpacity>
-
-                </View>
-                {/* Tạo Acc mới */}
-                <View style={styles.bottomSection} >
-                    {!resizeImage &&
-                        <Text style={{ fontSize: 13, fontWeight: "600", marginBottom: 12, textAlign: "center", }}>
-                            <View style={styles.lineLeft}></View>
-                         HOẶC
-                        <View style={styles.lineRight}></View>
-                        </Text>}
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={resizeImage ? styles.createNewBtnOnFocus : styles.createNewBtn}
-                        onPress={onPressCreateAcc}
-                    >
-                        <Text style={styles.btnText}>Tạo tài khoản mới</Text>
+                        <Text style={[CommonStyle.mediumText, { color: "#ddd" }]}>Đăng nhập</Text>
                     </TouchableOpacity>
                 </View>
+
+                {!resizeImage ?
+                    <View style={styles.optionsSection} >
+
+                        {/* Quên mật khẩu */}
+                        <TouchableOpacity
+                            onPress={onPressForgotPW}
+                        >
+                            <Text style={styles.options} > Quên mật khẩu? </Text>
+                        </TouchableOpacity>
+
+                        {/* Hoặc */}
+                        <Text style={{ fontSize: 13, fontWeight: "600", marginTop: "15%" }}>
+                            HOẶC
+                        </Text>
+
+                        {/* Nút tạo new acc */}
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            style={[CommonStyle.submitBtn, { backgroundColor: "#32A24C", marginTop: "15%", width: "90%" }]}
+                            onPress={onPressCreateAcc}
+                        >
+                            <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tạo tài khoản Facebook mới</Text>
+                        </TouchableOpacity>
+
+                    </View> :
+
+                    <View>
+                        {/* Tạo new acc*/}
+                        <TouchableOpacity
+                            onPress={onPressCreateAcc}
+                            style={{ marginBottom: "25%", }}
+                        >
+                            <Text style={[styles.options, { fontSize: 18 }]} > Tạo tài khoản Facebook mới </Text>
+                        </TouchableOpacity>
+                    </View>
+                }
             </View>
         </View>
     );
@@ -114,7 +132,8 @@ const LoginNewAccount = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "#FFF"
     },
 
     image: {
@@ -134,7 +153,7 @@ const styles = StyleSheet.create({
     },
 
     inputSection: {
-        flex: 2,
+        flex: 4,
         marginTop: 40,
     },
 
@@ -143,27 +162,20 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
 
-    inputAcc: {
+    input: {
         height: 40,
-        borderBottomColor: 'gray',
+        borderBottomColor: '#999',
         borderBottomWidth: 1,
         fontSize: 16,
-
-    },
-    inputPassword: {
-        height: 40,
-        fontSize: 16
-    },
-
-    text: {
-        color: "grey",
-        fontSize: 30,
-        fontWeight: "bold"
+        marginBottom: 15
     },
 
     optionsSection: {
-        flex: 5
+        flex: 7,
+        alignItems: "center"
+
     },
+
     optionsSectionOnFocus: {
         flex: 4,
         marginTop: 15
@@ -176,53 +188,8 @@ const styles = StyleSheet.create({
         color: "#204BF5",
         textAlign: "center",
         marginTop: 12,
-        // backgroundColor: "black",
-    },
-
-    loginText: {
-        fontSize: 20,
-        fontWeight: "700",
-        color: "#D0E7F5",
-        textAlign: "center"
-    },
-
-    btnText: {
-        fontSize: 20,
-        fontWeight: "700",
-        color: "#204BF5",
-        textAlign: "center",
-
-    },
-
-    loginBtn: {
-        backgroundColor: "#1877f2",
-        height: 40,
-        borderRadius: 8,
-        display: "flex",
-        justifyContent: "center"
-    },
-
-    bottomSection: {
-        flex: 2,
-    },
-
-
-    createNewBtn: {
-        backgroundColor: "#D0E7F5",
-        height: 40,
-        borderRadius: 8,
-        display: "flex",
-        justifyContent: "center"
-    },
-
-    createNewBtnOnFocus: {
-        backgroundColor: "#D0E7F5",
-        height: 40,
-        borderRadius: 8,
-        display: "flex",
-        justifyContent: "center",
-        marginTop: 25
     }
+
 });
 
 export { LoginNewAccount };

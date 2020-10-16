@@ -30,7 +30,7 @@ export const CommonStyle = StyleSheet.create({
 
     },
 
-    // Font chữ 20 mặc định là màu blue
+    // Font chữ 20 mặc định là màu đen
     mediumText: {
         display: "flex",
         fontSize: 20,
@@ -54,6 +54,12 @@ export const CommonStyle = StyleSheet.create({
         fontWeight: "600",
         textAlign: "center",
         color: "#FFF"
+    },
+
+    // border bottom cho input khi focus 
+    inputUnderLine: {
+        borderBottomColor: '#204bf5',
+        borderBottomWidth: 2,
     },
 
     // Footer phần tạo tài khoản

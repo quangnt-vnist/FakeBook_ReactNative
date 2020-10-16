@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const CommonStyle = StyleSheet.create({
+    background: {
+        backgroundColor: "#FFF",
+        flex: 1
+    },
+
     row_90: {
         flex: 1,
         width: '90%',

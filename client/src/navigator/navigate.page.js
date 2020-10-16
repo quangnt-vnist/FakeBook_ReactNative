@@ -29,9 +29,9 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name={pageName.REG_GENDER} component={Gender} />
 
                 <Stack.Screen name={pageName.REG_BIRTH} component={Birthday} />
+                <Stack.Screen name={pageName.REG_GENDER} component={Gender} />
 
                 <Stack.Screen name={pageName.REG_AGE} component={Age} />
                 <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />

@@ -9,7 +9,7 @@ const Password = ({ navigation }) => {
         navigation.navigate(pageName.REG_BIRTH)
     }
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1 }}></View>
 
@@ -40,7 +40,7 @@ const Password = ({ navigation }) => {
 
             </View >
 
-        </>
+        </View>
     )
 }
 

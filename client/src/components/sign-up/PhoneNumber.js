@@ -8,7 +8,7 @@ const PhoneNumber = ({ navigation }) => {
         navigation.navigate(pageName.REG_PASSWORD);
     }
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1.5 }}></View>
 
@@ -43,7 +43,7 @@ const PhoneNumber = ({ navigation }) => {
             <View style={CommonStyle.footer}>
                 <Text style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng địa chỉ email</Text>
             </View>
-        </>
+        </View>
     )
 }
 

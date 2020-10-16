@@ -4,7 +4,7 @@ import { CommonStyle } from './commonStyle'
 
 const StartCreateAcc = () => {
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 2.5 }}></View>
 
@@ -27,7 +27,7 @@ const StartCreateAcc = () => {
             <View style={CommonStyle.footerQuestion}>
                 <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View>
-        </>
+        </View>
     )
 }
 

@@ -9,7 +9,7 @@ const Name = ({ navigation }) => {
         navigation.navigate(pageName.REG_BIRTH);
     }
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1.5 }}></View>
 
@@ -51,7 +51,7 @@ const Name = ({ navigation }) => {
             {/* <View style={CommonStyle.footerQuestion}>
                 <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View> */}
-        </>
+        </View>
     )
 }
 

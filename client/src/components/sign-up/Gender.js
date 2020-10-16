@@ -22,7 +22,7 @@ const Gender = ({ navigation }) => {
     ];
 
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
 
                 <View style={{ flex: 1 }}></View>
@@ -52,7 +52,7 @@ const Gender = ({ navigation }) => {
                                     <RadioButtonInput
                                         obj={obj}
                                         index={i}
-                                        isSelected={gender == i}
+                                        isSelected={gender === i}
                                         onPress={handleSelectGender}
                                         borderWidth={1.5}
                                         buttonInnerColor={'#222'}
@@ -77,7 +77,7 @@ const Gender = ({ navigation }) => {
                 </View>
 
             </View >
-        </>
+        </View>
     )
 }
 

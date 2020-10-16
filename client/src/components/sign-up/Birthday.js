@@ -1,75 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import { pageName } from './../../navigator/constant.page';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { WheelPicker, TimePicker, DatePicker } from "react-native-wheel-picker-android";
+import DatePicker from 'react-native-date-picker'
 
 const Birthday = ({ navigation }) => {
     const onPressBtnNext = () => {
         navigation.navigate(pageName.REG_AGE)
-        console.log("clicked")
-    }
-    const wheelPickerDay = [];
-    const wheelPickerMonth = [];
-    const wheelPickerYear = [];
-
-    let date = new Date();
-
-    for (let i = 1; i <= 31; i++) {
-        let x = `${i}`;
-        wheelPickerDay.push(x);
-        if (i <= 12) wheelPickerMonth.push(x);
+        console.log(date)
     }
 
-    let currentYear = date.getFullYear();
-    for (let i = 1900; i <= currentYear; i++) {
-        let x = `${i}`;
-        wheelPickerYear.push(x);
-    }
-
+    const [date, setDate] = useState(new Date())
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 1.5 }}></View>
+                <View style={{ flex: 1 }}></View>
 
-                <View style={{ flex: 2.5 }}>
+                <View style={{ flex: 3, display: "flex", alignItems: "center" }}>
 
                     <Text style={CommonStyle.mediumText}>Sinh nhật của bạn khi nào?</Text>
                     <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
                     <Icon name="exclamation-circle" style={styles.warning}></Icon>
 
-                    <View style={styles.birthday}>
-                        {/* Chon ngay */}
-                        <View style={styles.birthdayCol}>
-                            <WheelPicker
-                                //   selectedItem={this.state.selectedItem}
-                                width={50}
-                                data={wheelPickerDay}
-
-                            //   onItemSelected={this.onItemSelected}
-                            />
-                        </View>
-
-                        {/* Chon thang */}
-                        <View style={styles.birthdayCol}>
-                            <WheelPicker
-                                //   selectedItem={this.state.selectedItem}
-                                width={50}
-                                data={wheelPickerMonth}
-                            //   onItemSelected={this.onItemSelected}
-                            />
-                        </View>
-                        {/* Chon nam */}
-                        <View style={styles.birthdayCol}>
-                            <WheelPicker
-                                //   selectedItem={this.state.selectedItem}
-                                width={50}
-                                data={wheelPickerYear}
-                            //   onItemSelected={this.onItemSelected}
-                            />
-                        </View>
-                    </View>
+                    <DatePicker
+                        date={date}
+                        mode="date"
+                        androidVariant="nativeAndroid"
+                        locale='vi'
+                        onDateChange={setDate}
+                    />
 
                 </View>
                 <View style={{ flex: 3 }}>
@@ -83,7 +43,7 @@ const Birthday = ({ navigation }) => {
                 </View>
 
             </View >
-        </>
+        </View>
     )
 }
 

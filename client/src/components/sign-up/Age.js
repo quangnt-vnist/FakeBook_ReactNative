@@ -10,7 +10,7 @@ const Age = ({ navigation }) => {
     }
 
     return (
-        <>
+        <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1.5 }}></View>
 
@@ -45,7 +45,7 @@ const Age = ({ navigation }) => {
             <View style={CommonStyle.footer}>
                 <Text style={CommonStyle.smallText, { fontWeight: "700", color: "#204bf5" }}>Dùng ngày sinh</Text>
             </View>
-        </>
+        </View>
     )
 }
 

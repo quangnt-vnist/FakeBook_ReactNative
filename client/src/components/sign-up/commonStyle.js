@@ -30,7 +30,7 @@ export const CommonStyle = StyleSheet.create({
 
     },
 
-    // Font chữ 20 mặc định là màu blue
+    // Font chữ 20 mặc định là màu đen
     mediumText: {
         display: "flex",
         fontSize: 20,

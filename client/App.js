@@ -45,12 +45,12 @@ const App: () => React$Node = () => {
 	return (
 		<>
 			{/* <NavigationContainer> */}
-				<Navigate />
-				{/* <Register /> */}
-				{/* <LoginNewAccount /> */}
-				{/* <LoginRecentlyAcc /> */}
-				{/* <StartCreateAcc /> */}
-				{/* <PhoneNumber /> */}
+			<Navigate />
+			{/* <Register /> */}
+			{/* <LoginNewAccount /> */}
+			{/* <LoginRecentlyAcc /> */}
+			{/* <StartCreateAcc /> */}
+			{/* <PhoneNumber /> */}
 			{/* </NavigationContainer> */}
 
 		</>

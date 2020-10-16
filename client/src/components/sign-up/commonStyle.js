@@ -56,6 +56,12 @@ export const CommonStyle = StyleSheet.create({
         color: "#FFF"
     },
 
+    // border bottom cho input khi focus 
+    inputUnderLine: {
+        borderBottomColor: '#204bf5',
+        borderBottomWidth: 2,
+    },
+
     // Footer phần tạo tài khoản
     footer: {
         padding: 10,

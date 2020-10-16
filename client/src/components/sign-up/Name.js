@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { pageName } from './../../navigator/constant.page';
 
 const Name = ({ navigation }) => {
+
+    const [filled, setFilled] = useState(true);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [enteringLastName, setEnteringLastName] = useState(false);
+    const [enteringFirstName, setEnteringFirstName] = useState(false);
+
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.REG_BIRTH);
+        if (firstName.length && lastName.length) {
+            setFilled(true);
+            navigation.navigate(pageName.REG_BIRTH);
+        }
+        else {
+            setFilled(false)
+        }
     }
+
+
+
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
@@ -16,18 +32,38 @@ const Name = ({ navigation }) => {
                 <View style={{ flex: 2.5 }}>
 
                     <Text style={CommonStyle.mediumText}>Bạn tên gì?</Text>
-                    <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Vui lòng nhập họ và tên của bạn</Text>
-                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
+                    {!filled &&
+                        <Text style={{ textAlign: "center" }} >
+                            <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Vui lòng nhập họ và tên của bạn</Text>
+                            <Icon name="exclamation-circle" style={styles.warning}></Icon>
+                        </Text>
+                    }
                     <View style={styles.nameInput}>
                         <TextInput
-                            style={styles.firstNameInput}
+                            style={[styles.firstNameInput, enteringFirstName && CommonStyle.inputUnderLine]}
                             placeholder="Họ"
+                            onChangeText={text => setFirstName(text)}
+                            value={firstName}
+                            onFocus={() => {
+                                setEnteringFirstName(true)
+                            }}
+                            onBlur={() => {
+                                setEnteringFirstName(false)
+                            }}
                         >
                         </TextInput>
 
                         <TextInput
-                            style={[styles.firstNameInput, { marginLeft: "5%" }]}
+                            style={[styles.firstNameInput, enteringLastName && CommonStyle.inputUnderLine, { marginLeft: "5%" }]}
                             placeholder="Tên"
+                            onChangeText={text => setLastName(text)}
+                            value={lastName}
+                            onFocus={() => {
+                                setEnteringLastName(true);
+                            }}
+                            onBlur={() => {
+                                setEnteringLastName(false)
+                            }}
                         >
                         </TextInput>
                     </View>
@@ -51,7 +87,7 @@ const Name = ({ navigation }) => {
             {/* <View style={CommonStyle.footerQuestion}>
                 <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
             </View> */}
-        </View>
+        </View >
     )
 }
 
@@ -70,7 +106,6 @@ const styles = StyleSheet.create({
     warning: {
         color: "red",
         fontSize: 20,
-        textAlign: "right"
     }
 })
 

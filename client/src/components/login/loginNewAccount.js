@@ -17,6 +17,8 @@ const LoginNewAccount = ({ navigation }) => {
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
     const [resizeImage, setResizeImage] = useState(false);
+    const [enteringText, setEnteringText] = useState(false);
+    const [enteringPass, setEnteringPass] = useState(false);
 
     // const focusOnTextInput = (flex) => {
     //     setImageFlex(flex);
@@ -47,20 +49,33 @@ const LoginNewAccount = ({ navigation }) => {
 
                     {/* Điền tài khoản */}
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, enteringText && CommonStyle.inputUnderLine]}
                         placeholder="Số điện thoại hoặc email"
                         onChangeText={acc => setAcc(acc)}
                         value={acc}
-                        onFocus={() => setResizeImage(false)}
+                        onFocus={() => {
+                            setResizeImage(true);
+                            setEnteringText(true)
+                        }}
+                        onBlur={() => {
+                            setEnteringText(false)
+                        }}
 
                     />
 
                     {/* Điền mật khẩu */}
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, enteringPass && CommonStyle.inputUnderLine]}
                         placeholder="Mật khẩu"
                         secureTextEntry={true}
-                        onFocus={() => setResizeImage(true)}
+                        onFocus={() => {
+                            setResizeImage(true);
+                            setEnteringPass(true)
+                        }}
+                        onBlur={() => {
+                            // setResizeImage(false);
+                            setEnteringPass(false)
+                        }}
                         onChangeText={password => setPassword(password)}
                         value={password}
                     />
@@ -92,7 +107,7 @@ const LoginNewAccount = ({ navigation }) => {
                         {/* Nút tạo new acc */}
                         <TouchableOpacity
                             activeOpacity={0.5}
-                            style={[CommonStyle.submitBtn, { backgroundColor: "#009A1C", marginTop: "15%", width: "90%" }]}
+                            style={[CommonStyle.submitBtn, { backgroundColor: "#32A24C", marginTop: "15%", width: "90%" }]}
                             onPress={onPressCreateAcc}
                         >
                             <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tạo tài khoản Facebook mới</Text>
@@ -104,8 +119,9 @@ const LoginNewAccount = ({ navigation }) => {
                         {/* Tạo new acc*/}
                         <TouchableOpacity
                             onPress={onPressCreateAcc}
+                            style={{ marginBottom: "25%", }}
                         >
-                            <Text style={[styles.options, { marginBottom: "25%", fontSize: 18 }]} > Tạo tài khoản Facebook mới </Text>
+                            <Text style={[styles.options, { fontSize: 18 }]} > Tạo tài khoản Facebook mới </Text>
                         </TouchableOpacity>
                     </View>
                 }

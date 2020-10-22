@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import { pageName } from './../../navigator/constant.page'
 
 const PhoneNumber = ({ navigation }) => {
+
+    const [phoneNumber, setPhoneNumber] = useState("");
+
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.REG_PASSWORD);
+
+        if (validatePhoneNumber()) {
+            navigation.navigate(pageName.REG_PASSWORD);
+        }
+        else {
+            console.log("hello, sucker ")
+        }
+
     }
+
+    const validatePhoneNumber = () => {
+
+        let reg = /([0-9]{10})\b/;
+
+        return reg.test(phoneNumber);
+    }
+
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
@@ -18,6 +36,8 @@ const PhoneNumber = ({ navigation }) => {
 
                     <View style={styles.input}>
                         <TextInput
+                            value={phoneNumber}
+                            onChangeText={phone => setPhoneNumber(phone)}
                             style={styles.phoneNumberInput}
                             placeholder="0123456789"
                             keyboardType="numeric"

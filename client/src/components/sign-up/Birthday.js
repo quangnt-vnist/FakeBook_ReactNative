@@ -6,12 +6,32 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-date-picker'
 
 const Birthday = ({ navigation }) => {
+
+    const [date, setDate] = useState(new Date());
+    const [isEnoughAge, setIsEnoughAge] = useState(true);
+
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.REG_AGE)
-        console.log(date)
+        let nextPage = checkAge();
+
+        if (nextPage) {
+            setIsEnoughAge(true);
+            navigation.navigate(pageName.REG_GENDER);
+        }
+        else {
+            setIsEnoughAge(false);
+        }
+
     }
 
-    const [date, setDate] = useState(new Date())
+    // Xử lý tuổi
+    const checkAge = () => {
+        let today = new Date();
+        let mod = Math.ceil((today.getFullYear() - date.getFullYear()) / 4); // so nam nhuan toi da
+        let age = Math.floor((today - date - 86400000 * mod) / 31536000000);
+
+        return age >= 5;
+    }
+
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
@@ -20,15 +40,22 @@ const Birthday = ({ navigation }) => {
                 <View style={{ flex: 3, display: "flex", alignItems: "center" }}>
 
                     <Text style={CommonStyle.mediumText}>Sinh nhật của bạn khi nào?</Text>
-                    <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
-                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
 
+                    {!isEnoughAge &&
+                        <Text style={{ textAlign: "center" }}>
+                            <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
+                            <Icon name="exclamation-circle" style={[styles.warning]}></Icon>
+                        </Text>
+
+                    }
                     <DatePicker
                         date={date}
                         mode="date"
                         androidVariant="nativeAndroid"
                         locale='vi'
-                        onDateChange={setDate}
+                        onDateChange={
+                            setDate
+                        }
                     />
 
                 </View>

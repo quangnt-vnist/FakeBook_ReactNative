@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { pageName } from '../../navigator/constant.page';
 
 const Password = ({ navigation }) => {
+
+    const [password, setPassword] = useState("");
+    const [strongPassword, setStrongPassword] = useState(true);
+
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.REG_BIRTH)
+
+        setStrongPassword(false);
+
+        if (validatePassword()) {
+            setStrongPassword(true);
+            navigation.navigate(pageName.REG_BIRTH)
+        }
+        else {
+            setStrongPassword(false);
+        }
     }
+
+    const validatePassword = () => {
+
+        let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+
+        return reg.test(password);
+    }
+
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
@@ -16,11 +37,16 @@ const Password = ({ navigation }) => {
                 <View style={{ flex: 3 }}>
 
                     <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Chọn mật khẩu</Text>
-                    <Text style={[CommonStyle.smallText, { color: "red" }]}>Mật khẩu của bạn phải cso thối thiểu 6 chữ cái, số và biểu tượng (như ! và %%)</Text>
-                    <Icon name="exclamation-circle" style={styles.warning}></Icon>
-
+                    {!strongPassword &&
+                        <Text style={{ textAlign: "center" }}>
+                            <Text style={[CommonStyle.smallText, { color: "red" }]}>Mật khẩu của bạn phải cso thối thiểu 6 chữ cái, số và biểu tượng (như ! và %%)</Text>
+                            <Icon name="exclamation-circle" style={styles.warning}></Icon>
+                        </Text>
+                    }
                     <View style={styles.input}>
                         <TextInput
+                            value={password}
+                            onChangeText={setPassword}
                             style={styles.phoneNumberInput}
                             placeholder="Mật khẩu"
                         >
@@ -32,7 +58,9 @@ const Password = ({ navigation }) => {
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={[CommonStyle.submitBtn]}
-                        onPress={onPressBtnNext}
+                        onPress={
+                            onPressBtnNext
+                        }
                     >
                         <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
                     </TouchableOpacity>

@@ -1,3 +1,13 @@
+
+
+
+//  =============================================================
+//  =================== TRANG NÀY SAU BỎ K DÙNG =================
+//  =============================================================
+
+
+
+
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
 import { CommonStyle } from './commonStyle'
@@ -7,6 +17,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Age = ({ navigation }) => {
     const onPressBtnNext = () => {
         navigation.navigate(pageName.REG_GENDER)
+    }
+    const handleBack = () => {
+        navigation.navigate(pageName.REG_BIRTH)
     }
 
     return (
@@ -43,7 +56,7 @@ const Age = ({ navigation }) => {
 
             </View >
             <View style={CommonStyle.footer}>
-                <Text style={CommonStyle.smallText, { fontWeight: "700", color: "#204bf5" }}>Dùng ngày sinh</Text>
+                <Text onPress={handleBack} style={CommonStyle.smallText, { fontWeight: "700", color: "#204bf5" }}>Dùng ngày sinh</Text>
             </View>
         </View>
     )

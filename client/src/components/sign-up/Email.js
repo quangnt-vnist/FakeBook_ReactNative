@@ -1,68 +1,59 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { pageName } from '../../navigator/constant.page';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { pageName } from './../../navigator/constant.page'
 
-const Password = ({ navigation }) => {
+const Email = ({ navigation }) => {
 
-    const [password, setPassword] = useState("");
-    const [strongPassword, setStrongPassword] = useState(true);
+    const [email, setEmail] = useState("");
+    const [validEmail, setValidEmail] = useState(true)
 
     const onPressBtnNext = () => {
+        setValidEmail(true);
+        navigation.navigate(pageName.REG_PASSWORD);
 
-        setStrongPassword(false);
-
-        // COMMENT VALIDATE ĐỂ CHECK CHO NHANH
-
-        // if (validatePassword()) {
-        //     setStrongPassword(true);
-        navigation.navigate(pageName.REG_POLICY)
-        // }
-        // else {
-        //     setStrongPassword(false);
-        // }
+    }
+    const handleUsePhoneNumber = () => {
+        navigation.navigate(pageName.REG_PHONE);
     }
 
-    const validatePassword = () => {
+    // const validateEmail = () => {  
 
-        let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+    //     let reg = /([0-9]{10})\b/;
 
-        return reg.test(password);
-    }
+    //     return reg.test(email);
+    // }
 
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 1 }}></View>
+                <View style={{ flex: 1.5 }}></View>
 
-                <View style={{ flex: 3 }}>
+                <View style={{ flex: 2 }}>
 
-                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Chọn mật khẩu</Text>
-                    {!strongPassword &&
+                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Nhập địa chỉ email của bạn</Text>
+                    {!validEmail &&
                         <Text style={{ textAlign: "center" }}>
-                            <Text style={[CommonStyle.smallText, { color: "red" }]}>Mật khẩu của bạn phải có thối thiểu 6 chữ cái, số và biểu tượng (như ! và %%)</Text>
+                            <Text style={[CommonStyle.smallText, { color: "red" }]}>Vui lòng nhập địa chỉ email hợp lệ.</Text>
                             <Icon name="exclamation-circle" style={styles.warning}></Icon>
                         </Text>
                     }
                     <View style={styles.input}>
                         <TextInput
-                            value={password}
-                            onChangeText={setPassword}
+                            value={email}
+                            onChangeText={phone => setEmail(phone)}
                             style={styles.phoneNumberInput}
-                            placeholder="Mật khẩu"
                         >
                         </TextInput>
                     </View>
 
                 </View>
-                <View style={{ flex: 4 }}>
+                <View style={{ flex: 3 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={[CommonStyle.submitBtn]}
-                        onPress={
-                            onPressBtnNext
-                        }
+                        onPress={onPressBtnNext}
                     >
                         <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
                     </TouchableOpacity>
@@ -70,6 +61,11 @@ const Password = ({ navigation }) => {
 
             </View >
 
+
+
+            <View style={CommonStyle.footer}>
+                <Text onPress={handleUsePhoneNumber} style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng số di động</Text>
+            </View>
         </View>
     )
 }
@@ -104,5 +100,4 @@ const styles = StyleSheet.create({
     }
 })
 
-
-export { Password }
+export { Email }

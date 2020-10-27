@@ -11,6 +11,8 @@ import { Age } from './sign-up/Age'
 import { Password } from './sign-up/Password'
 import { PhoneNumber } from './sign-up/PhoneNumber'
 import { FinishCreateAcc } from './sign-up/FinishCreateAcc'
+import { Email } from './sign-up/Email'
+import { Policy } from './sign-up/Policy'
 
 export {
 
@@ -30,7 +32,6 @@ export {
     Name,
     Password,
     PhoneNumber,
-
-
-
+    Email,
+    Policy
 }

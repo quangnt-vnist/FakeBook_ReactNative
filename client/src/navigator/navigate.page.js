@@ -21,7 +21,9 @@ import {
     Name,
     Password,
     PhoneNumber,
-    Age
+    Age,
+    Email,
+    Policy
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -29,6 +31,11 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen name={pageName.REG_PASSWORD} component={Password} />
+
+                <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />
+                <Stack.Screen name={pageName.REG_EMAIL} component={Email} />
+
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
                 <Stack.Screen name={pageName.REG_BEGIN} component={Register} />
 
@@ -36,10 +43,9 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.REG_GENDER} component={Gender} />
 
                 <Stack.Screen name={pageName.REG_AGE} component={Age} />
-                <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />
-                <Stack.Screen name={pageName.REG_PASSWORD} component={Password} />
 
                 <Stack.Screen name={pageName.REG_NAME} component={Name} />
+                <Stack.Screen name={pageName.REG_POLICY} component={Policy} />
 
 
 

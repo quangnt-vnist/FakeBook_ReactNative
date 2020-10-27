@@ -15,6 +15,7 @@ export const pageName = {
     REG_PHONE: "Số di dộng",
     REG_PASSWORD: "Mật khẩu",
     REG_EMAIL: "Email",
+    REG_POLICY: "Điều khoản & Quyền riêng tư",
 
 
     LOG_IN_NEW_ACC: "Đăng nhập",

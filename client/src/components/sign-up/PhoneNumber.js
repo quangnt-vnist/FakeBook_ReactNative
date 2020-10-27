@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { pageName } from './../../navigator/constant.page'
 
 const PhoneNumber = ({ navigation }) => {
 
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [validPhoneNumber, setValidPhoneNumber] = useState(true)
 
     const onPressBtnNext = () => {
 
         if (validatePhoneNumber()) {
+            setValidPhoneNumber(true);
             navigation.navigate(pageName.REG_PASSWORD);
         }
         else {
-            console.log("hello, sucker ")
+            setValidPhoneNumber(false)
         }
 
+    }
+    const handleUseEmail = () => {
+        navigation.navigate(pageName.REG_EMAIL);
     }
 
     const validatePhoneNumber = () => {
@@ -32,8 +38,13 @@ const PhoneNumber = ({ navigation }) => {
 
                 <View style={{ flex: 2 }}>
 
-                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Nhập số di động của bạn?</Text>
-
+                    <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Nhập số di động của bạn</Text>
+                    {!validPhoneNumber &&
+                        <Text style={{ textAlign: "center" }}>
+                            <Text style={[CommonStyle.smallText, { color: "red" }]}>Vui lòng nhập một số điện thoại hợp lệ hoặc dùng địa chỉ email của bạn.</Text>
+                            <Icon name="exclamation-circle" style={styles.warning}></Icon>
+                        </Text>
+                    }
                     <View style={styles.input}>
                         <TextInput
                             value={phoneNumber}
@@ -61,7 +72,7 @@ const PhoneNumber = ({ navigation }) => {
 
 
             <View style={CommonStyle.footer}>
-                <Text style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng địa chỉ email</Text>
+                <Text onPress={handleUseEmail} style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng địa chỉ email</Text>
             </View>
         </View>
     )
@@ -90,6 +101,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20
     },
+    warning: {
+        color: "red",
+        fontSize: 20,
+        textAlign: "right"
+    }
 })
 
 export { PhoneNumber }

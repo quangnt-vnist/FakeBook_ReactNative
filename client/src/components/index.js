@@ -13,6 +13,9 @@ import { PhoneNumber } from './sign-up/PhoneNumber'
 import { FinishCreateAcc } from './sign-up/FinishCreateAcc'
 import { Email } from './sign-up/Email'
 import { Policy } from './sign-up/Policy'
+import { ConfirmAcc } from './sign-up/ConfirmAcc'
+import { Remind } from './sign-up/Remind'
+import { Remember } from './sign-up/Remember'
 
 export {
 
@@ -33,5 +36,8 @@ export {
     Password,
     PhoneNumber,
     Email,
-    Policy
+    Policy,
+    ConfirmAcc,
+    Remind,
+    Remember
 }

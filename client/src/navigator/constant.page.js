@@ -16,7 +16,9 @@ export const pageName = {
     REG_PASSWORD: "Mật khẩu",
     REG_EMAIL: "Email",
     REG_POLICY: "Điều khoản & Quyền riêng tư",
-
+    REG_CONFIRM: "Xác nhận tài khoản",
+    REG_REMIND: "Nhớ tài khoản",
+    REG_REMEMBER: "Lưu thông tin đăng nhập",
 
     LOG_IN_NEW_ACC: "Đăng nhập",
 

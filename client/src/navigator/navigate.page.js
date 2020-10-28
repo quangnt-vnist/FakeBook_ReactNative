@@ -23,7 +23,10 @@ import {
     PhoneNumber,
     Age,
     Email,
-    Policy
+    Policy,
+    ConfirmAcc,
+    Remind,
+    Remember
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -31,13 +34,17 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+
+                <Stack.Screen name={pageName.REG_CONFIRM} component={ConfirmAcc} />
+                <Stack.Screen name={pageName.REG_REMIND} component={Remind} />
+                <Stack.Screen name={pageName.REG_REMEMBER} component={Remember} />
+                <Stack.Screen name={pageName.REG_BEGIN} component={Register} />
                 <Stack.Screen name={pageName.REG_PASSWORD} component={Password} />
 
                 <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />
                 <Stack.Screen name={pageName.REG_EMAIL} component={Email} />
 
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
-                <Stack.Screen name={pageName.REG_BEGIN} component={Register} />
 
                 <Stack.Screen name={pageName.REG_BIRTH} component={Birthday} />
                 <Stack.Screen name={pageName.REG_GENDER} component={Gender} />

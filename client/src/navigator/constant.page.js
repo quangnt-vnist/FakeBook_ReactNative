@@ -1,24 +1,20 @@
-// export {
-//     pageName
-// }
 
 /**
  * Các biến constant tên của trang,
  * Nên chú ý có giá trị khác nhau, để dùng cho navigate
+ * 
+ * Tạm quy ước đặt Key theo kiểu: tên Module_TÊN TRANG GIAO DIỆN
  */
 export const pageName = {
-    REG_BEGIN: "Tạo tài khoản",
-    REG_NAME: "Tên",
-    REG_BIRTH: "Ngày sinh",
-    REG_AGE: "Tuổi",
-    REG_GENDER: "Giới tính",
-    REG_PHONE: "Số di dộng",
-    REG_PASSWORD: "Mật khẩu",
-    REG_EMAIL: "Email",
-    REG_POLICY: "Điều khoản & Quyền riêng tư",
-    REG_CONFIRM: "Xác nhận tài khoản",
-    REG_REMIND: "Nhớ tài khoản",
-    REG_REMEMBER: "Lưu thông tin đăng nhập",
+    signUp_BEGIN: "Tạo tài khoản",
+    signUp_NAME: "Tên",
+    signUp_BIRTH: "Ngày sinh",
+    signUp_PHONE: "Số di dộng",
+    signUp_PASSWORD: "Mật khẩu",
+    signUp_POLICY: "Điều khoản & Quyền riêng tư",
+    signUp_CONFIRM: "Xác nhận tài khoản",
+    signUp_REMIND: "Đang đăng nhập...",
+    signUp_REMEMBER: "Lưu thông tin đăng nhập",
 
     LOG_IN_NEW_ACC: "Đăng nhập",
 

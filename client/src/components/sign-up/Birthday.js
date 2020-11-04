@@ -15,7 +15,7 @@ const Birthday = ({ navigation }) => {
 
         if (nextPage) {
             setIsEnoughAge(true);
-            navigation.navigate(pageName.REG_GENDER);
+            navigation.navigate(pageName.signUp_PHONE);
         }
         else {
             setIsEnoughAge(false);

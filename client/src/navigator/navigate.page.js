@@ -13,47 +13,39 @@ import { pageName } from './constant.page';
 import {
     Register,
     LoginNewAccount,
-    LoginRecentlyAcc,
-    StartCreateAcc,
     Birthday,
-    FinishCreateAcc,
-    Gender,
     Name,
     Password,
     PhoneNumber,
-    Age,
-    Email,
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+    StartCreateAcc
 } from '../components';
 
 const Stack = createStackNavigator();
 const Navigate = () => {
+    console.log(pageName.signUp_BEGIN)
+    console.log(pageName.LOG_IN_NEW_ACC)
     return (
         <NavigationContainer>
             <Stack.Navigator>
 
-                <Stack.Screen name={pageName.REG_CONFIRM} component={ConfirmAcc} />
-                <Stack.Screen name={pageName.REG_REMIND} component={Remind} />
-                <Stack.Screen name={pageName.REG_REMEMBER} component={Remember} />
-                <Stack.Screen name={pageName.REG_BEGIN} component={Register} />
-                <Stack.Screen name={pageName.REG_PASSWORD} component={Password} />
-
-                <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />
-                <Stack.Screen name={pageName.REG_EMAIL} component={Email} />
-
+                {/* Đăng nhập */}
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
-                <Stack.Screen name={pageName.REG_BIRTH} component={Birthday} />
-                <Stack.Screen name={pageName.REG_GENDER} component={Gender} />
+                {/* Tạo tài khoản */}
 
-                <Stack.Screen name={pageName.REG_AGE} component={Age} />
-
-                <Stack.Screen name={pageName.REG_NAME} component={Name} />
-                <Stack.Screen name={pageName.REG_POLICY} component={Policy} />
-
+                <Stack.Screen name={pageName.signUp_CONFIRM} component={ConfirmAcc} />
+                <Stack.Screen name={pageName.signUp_REMIND} component={Remind} />
+                <Stack.Screen name={pageName.signUp_REMEMBER} component={Remember} />
+                <Stack.Screen name={pageName.signUp_BEGIN} component={StartCreateAcc} />
+                <Stack.Screen name={pageName.signUp_PASSWORD} component={Password} />
+                <Stack.Screen name={pageName.signUp_PHONE} component={PhoneNumber} />
+                <Stack.Screen name={pageName.signUp_BIRTH} component={Birthday} />
+                <Stack.Screen name={pageName.signUp_NAME} component={Name} />
+                <Stack.Screen name={pageName.signUp_POLICY} component={Policy} />
 
 
             </Stack.Navigator>

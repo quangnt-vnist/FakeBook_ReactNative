@@ -33,7 +33,7 @@ const LoginNewAccount = ({ navigation }) => {
         Alert.alert('Forgot pw')
     }
     const onPressCreateAcc = () => {
-        navigation.navigate(pageName.REG_BEGIN)
+        navigation.navigate(pageName.signUp_BEGIN)
     }
 
     return (

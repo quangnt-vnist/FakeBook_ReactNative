@@ -13,7 +13,7 @@ const PhoneNumber = ({ navigation }) => {
 
         if (validatePhoneNumber()) {
             setValidPhoneNumber(true);
-            navigation.navigate(pageName.REG_PASSWORD);
+            navigation.navigate(pageName.signUp_PASSWORD);
         }
         else {
             setValidPhoneNumber(false)
@@ -21,7 +21,7 @@ const PhoneNumber = ({ navigation }) => {
 
     }
     const handleUseEmail = () => {
-        navigation.navigate(pageName.REG_EMAIL);
+        // navigation.navigate(pageName.signUp_PASSWORD);
     }
 
     const validatePhoneNumber = () => {

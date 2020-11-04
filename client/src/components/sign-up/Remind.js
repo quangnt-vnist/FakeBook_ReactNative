@@ -11,10 +11,8 @@ const Remind = ({ navigation }) => {
     const onPressBtnNext = () => {
         setIsVisible(false);
 
-        navigation.navigate(pageName.REG_REMEMBER);
-
+        navigation.navigate(pageName.signUp_REMEMBER);
     }
-
 
     return (
         <Modal

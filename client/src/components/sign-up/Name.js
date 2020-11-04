@@ -15,7 +15,7 @@ const Name = ({ navigation }) => {
     const onPressBtnNext = () => {
         if (firstName.length && lastName.length) {
             setFilled(true);
-            navigation.navigate(pageName.REG_BIRTH);
+            navigation.navigate(pageName.signUp_BIRTH);
         }
         else {
             setFilled(false)
@@ -42,6 +42,7 @@ const Name = ({ navigation }) => {
                         <TextInput
                             style={[styles.firstNameInput, enteringFirstName && CommonStyle.inputUnderLine]}
                             placeholder="Họ"
+                            autoFocus={true}
                             onChangeText={text => setFirstName(text)}
                             value={firstName}
                             onFocus={() => {

@@ -9,8 +9,8 @@ const Remember = ({ navigation }) => {
 
 
     const onPressBtnNext = () => {
-        alert("Tạo tài khoản xong, chúc bạn sớm tìm được ny")
-
+        // alert("Tạo tài khoản xong, chúc bạn sớm tìm được ny")
+        navigation.navigate(pageName.signUp_BEGIN)
     }
 
 
@@ -33,17 +33,17 @@ const Remember = ({ navigation }) => {
                         <Text style={[CommonStyle.content]}>Lần tới khi đăng nhập vào điện thoại này, bạn chỉ cần nhấn vào ảnh đại diện thay vì nhập mật khẩu.</Text>
 
                     </View>
-                    <View style={{ flex: 2 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "center" }}>
                         <TouchableOpacity
                             activeOpacity={0.5}
-                            style={[CommonStyle.submitBtn, { backgroundColor: "#999", marginBottom: 10 }]}
+                            style={[CommonStyle.submitBtn, styles.button, { backgroundColor: "#A0A0A0" }]}
                             onPress={onPressBtnNext}
                         >
                             <Text style={[CommonStyle.textBtn]}>Lúc khác</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={0.5}
-                            style={[CommonStyle.submitBtn, { marginBottom: 10 }]}
+                            style={[CommonStyle.submitBtn, styles.button]}
                             onPress={onPressBtnNext}
                         >
                             <Text style={[CommonStyle.textBtn]}>OK</Text>
@@ -57,11 +57,9 @@ const Remember = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    model: {
-        // width: "80%",
-        // marginLeft: "10%",
-        // marginBottom: "40%",
-        // marginTop: "40%"
+    button: {
+        margin: 10,
+        width: "40%"
     }
 })
 

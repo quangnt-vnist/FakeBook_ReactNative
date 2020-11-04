@@ -24,7 +24,7 @@ const LoginRecentlyAcc = () => {
             </ListView> */}
 
             <View style={styles.other_options}>
-                <Icon name="cog" color="#204bf5" size={25} />
+                <Icon name="cog" color="#1577F2" size={25} />
                 <Text style={styles.link}>Đăng nhập bằng tài khoản khác</Text>
                 <Text style={styles.link}>Đăng ký Facebook</Text>
             </View>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
     fb_icon: {
         flex: 2,
-        color: "#204BF5",
+        color: "#1577F2",
         fontSize: 40,
         marginTop: 40,
         borderRadius: 10
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     link: {
-        color: "#204BF5",
+        color: "#1577F2",
         marginTop: 20,
         fontSize: 15
     }

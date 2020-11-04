@@ -34,16 +34,16 @@ const PhoneNumber = ({ navigation }) => {
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 1.5 }}></View>
+                <View style={{ flex: 1 }}></View>
 
                 <View style={{ flex: 2 }}>
 
                     <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Nhập số di động của bạn</Text>
                     {!validPhoneNumber &&
-                        <Text style={{ textAlign: "center" }}>
+                        <View style={styles.noti}>
                             <Text style={[CommonStyle.smallText, { color: "red" }]}>Vui lòng nhập một số điện thoại hợp lệ hoặc dùng địa chỉ email của bạn.</Text>
                             <Icon name="exclamation-circle" style={styles.warning}></Icon>
-                        </Text>
+                        </View>
                     }
                     <View style={styles.input}>
                         <TextInput
@@ -52,12 +52,13 @@ const PhoneNumber = ({ navigation }) => {
                             style={styles.phoneNumberInput}
                             placeholder="0123456789"
                             keyboardType="numeric"
+                            autoFocus={true}
                         >
                         </TextInput>
                     </View>
 
                 </View>
-                <View style={{ flex: 3 }}>
+                <View style={{ flex: 3.5 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={[CommonStyle.submitBtn]}
@@ -68,12 +69,6 @@ const PhoneNumber = ({ navigation }) => {
                 </View>
 
             </View >
-
-
-
-            <View style={CommonStyle.footer}>
-                <Text onPress={handleUseEmail} style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng ký bằng địa chỉ email</Text>
-            </View>
         </View>
     )
 }
@@ -101,11 +96,17 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20
     },
+    noti: {
+        flexDirection: "row",
+        width: "90%",
+        marginLeft: "5%"
+    },
+
     warning: {
         color: "red",
         fontSize: 20,
-        textAlign: "right"
-    }
+        textAlignVertical: "bottom",
+    },
 })
 
 export { PhoneNumber }

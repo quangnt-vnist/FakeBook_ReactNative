@@ -3,9 +3,7 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image, Ima
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { pageName } from './../../navigator/constant.page'
 
-const FB_BG_REG = {
-    uri: "https://i0.wp.com/www.dealersunited.com/wp-content/uploads/2016/09/foolproof-guidelines-to-help-your-dealership-respond-to-comments-engagement-on-facebook.png?fit=635%2C318&ssl=1"
-}
+const FB_BG_REG = require('../../public/img/create_acc.png')
 
 // const onPressBtnNext = () => {
 //     // Alert.alert('Button Next pressed')
@@ -23,15 +21,6 @@ const StartCreateAcc = ({ navigation }) => {
 
     return (
         <View style={style.view}>
-            {/* <View style={style.navbar}>
-                <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={onPressBtnPrev}
-                >
-                    <Icon name="arrow-left" color="#eee" size={30} />
-                </TouchableOpacity>
-                <Text style={{ fontSize: 15, fontWeight: "600", }}> Quay lại trang trước</Text>
-            </View> */}
             <View style={style.view1}>
                 <ImageBackground style={style.imageStyle}
                     source={FB_BG_REG}>

@@ -28,15 +28,20 @@ const Remind = ({ navigation }) => {
                     </View>
 
                     <View style={{ flex: 8 }}>
-                        <Text style={[CommonStyle.mediumText]}>Nhớ số điện thoại và mật khẩu của bạn.</Text>
+                        <Text
+                            style={[CommonStyle.mediumText, styles.alignLeft, { marginLeft: 10 }]}>
+                            Nhớ số điện thoại và mật khẩu của bạn.
+                            </Text>
 
-                        <Text style={[CommonStyle.content]}>Bạn cần nhập thông tin này vào lần đăng nhập sau</Text>
+                        <Text style={[CommonStyle.content, styles.alignLeft]}>
+                            Bạn cần nhập thông tin này vào lần đăng nhập sau
+                            </Text>
 
-                        <Text style={[CommonStyle.smallText]}>Số điện thoại</Text>
-                        <Text style={[CommonStyle.content]}>026656666</Text>
+                        <Text style={[CommonStyle.smallText, styles.alignLeft, { marginLeft: 10 }]}>Số điện thoại</Text>
+                        <Text style={[CommonStyle.content, styles.alignLeft]}>026656666</Text>
 
-                        <Text style={[CommonStyle.smallText]}>Mật khẩu</Text>
-                        <Text style={[CommonStyle.content]}>linhdeptraiquatroi</Text>
+                        <Text style={[CommonStyle.smallText, styles.alignLeft, { marginLeft: 10 }]}>Mật khẩu</Text>
+                        <Text style={[CommonStyle.content, styles.alignLeft]}>linhdeptraiquatroi</Text>
 
 
                     </View>
@@ -62,6 +67,9 @@ const styles = StyleSheet.create({
         marginLeft: "10%",
         marginBottom: "40%",
         marginTop: "40%"
+    },
+    alignLeft: {
+        textAlign: "left"
     }
 })
 

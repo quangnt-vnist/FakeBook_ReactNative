@@ -36,30 +36,31 @@ const Password = ({ navigation }) => {
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1 }}></View>
 
-                <View style={{ flex: 3 }}>
+                <View style={{ flex: 2 }}>
 
                     <Text style={[CommonStyle.mediumText, { marginBottom: 20 }]}>Chọn mật khẩu</Text>
                     {!strongPassword &&
-                        <Text style={{ textAlign: "center" }}>
+                        <View style={styles.noti}>
                             <Text style={[CommonStyle.smallText, { color: "red" }]}>Mật khẩu của bạn phải có thối thiểu 6 chữ cái, số và biểu tượng (như ! và %%)</Text>
                             <Icon name="exclamation-circle" style={styles.warning}></Icon>
-                        </Text>
+                        </View>
                     }
                     <View style={styles.input}>
                         <TextInput
                             value={password}
                             onChangeText={setPassword}
-                            style={styles.phoneNumberInput}
+                            style={styles.passwordInput}
                             placeholder="Mật khẩu"
+                            autoFocus={true}
                         >
                         </TextInput>
                     </View>
 
                 </View>
-                <View style={{ flex: 4 }}>
+                <View style={{ flex: 3.5 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={[CommonStyle.submitBtn]}
+                        style={[CommonStyle.submitBtn, { marginTop: 20 }]}
                         onPress={
                             onPressBtnNext
                         }
@@ -79,13 +80,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
     },
-    phoneNumberInput: {
+    passwordInput: {
         width: "100%",
         borderRadius: 5,
         borderColor: "#CCC",
         borderWidth: 1,
         height: 40,
-        fontSize: 16,
+        fontSize: 16
     },
     otherBtn: {
         borderRadius: 5,
@@ -97,11 +98,17 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20
     },
+    noti: {
+        flexDirection: "row",
+        width: "90%",
+        marginLeft: "5%"
+    },
+
     warning: {
         color: "red",
         fontSize: 20,
-        textAlign: "right"
-    }
+        textAlignVertical: "bottom",
+    },
 })
 
 

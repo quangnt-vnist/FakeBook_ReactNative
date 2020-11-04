@@ -27,16 +27,16 @@ const Name = ({ navigation }) => {
     return (
         <View style={CommonStyle.background}>
             <View style={CommonStyle.row_90}>
-                <View style={{ flex: 1.5 }}></View>
+                <View style={{ flex: 1 }}></View>
 
                 <View style={{ flex: 2.5 }}>
 
                     <Text style={CommonStyle.mediumText}>Bạn tên gì?</Text>
                     {!filled &&
-                        <Text style={{ textAlign: "center" }} >
+                        <View style={styles.noti} >
                             <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Vui lòng nhập họ và tên của bạn</Text>
                             <Icon name="exclamation-circle" style={styles.warning}></Icon>
-                        </Text>
+                        </View>
                     }
                     <View style={styles.nameInput}>
                         <TextInput
@@ -78,16 +78,7 @@ const Name = ({ navigation }) => {
                         <Text style={[CommonStyle.textBtn]}>Tiếp</Text>
                     </TouchableOpacity>
                 </View>
-
-
-
-
-
-
             </View >
-            {/* <View style={CommonStyle.footerQuestion}>
-                <Text style={CommonStyle.smallText}>Bạn đã có tài khoản?</Text>
-            </View> */}
         </View >
     )
 }
@@ -104,9 +95,17 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 20,
     },
+
+    noti: {
+        flexDirection: "row",
+        justifyContent: "center"
+    },
+
     warning: {
         color: "red",
         fontSize: 20,
+        textAlignVertical: "bottom",
+        marginLeft: 10
     }
 })
 

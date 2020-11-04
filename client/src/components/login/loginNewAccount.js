@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
         display: "flex",
         fontSize: 20,
         fontWeight: "700",
-        color: "#204BF5",
+        color: "#1577F2",
         textAlign: "center",
         marginTop: 12,
     }

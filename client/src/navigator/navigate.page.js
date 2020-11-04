@@ -36,16 +36,17 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
                 {/* Tạo tài khoản */}
-
+                <Stack.Screen name={pageName.signUp_BEGIN} component={StartCreateAcc} />
+                <Stack.Screen name={pageName.signUp_NAME} component={Name} />
+                <Stack.Screen name={pageName.signUp_BIRTH} component={Birthday} />
+                <Stack.Screen name={pageName.signUp_PHONE} component={PhoneNumber} />
+                <Stack.Screen name={pageName.signUp_PASSWORD} component={Password} />
+                <Stack.Screen name={pageName.signUp_POLICY} component={Policy} />
                 <Stack.Screen name={pageName.signUp_CONFIRM} component={ConfirmAcc} />
                 <Stack.Screen name={pageName.signUp_REMIND} component={Remind} />
                 <Stack.Screen name={pageName.signUp_REMEMBER} component={Remember} />
-                <Stack.Screen name={pageName.signUp_BEGIN} component={StartCreateAcc} />
-                <Stack.Screen name={pageName.signUp_PASSWORD} component={Password} />
-                <Stack.Screen name={pageName.signUp_PHONE} component={PhoneNumber} />
-                <Stack.Screen name={pageName.signUp_BIRTH} component={Birthday} />
-                <Stack.Screen name={pageName.signUp_NAME} component={Name} />
-                <Stack.Screen name={pageName.signUp_POLICY} component={Policy} />
+
+
 
 
             </Stack.Navigator>

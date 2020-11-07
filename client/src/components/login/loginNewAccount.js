@@ -85,7 +85,7 @@ const LoginNewAccount = ({ navigation }) => {
                         style={CommonStyle.submitBtn}
                         onPress={onPressLogin}
                     >
-                        <Text style={[CommonStyle.mediumText, { color: "#ddd" }]}>Đăng nhập</Text>
+                        <Text style={[CommonStyle.mediumText, { color: "#8DB0EB" }]}>Đăng nhập</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -107,7 +107,7 @@ const LoginNewAccount = ({ navigation }) => {
                         {/* Nút tạo new acc */}
                         <TouchableOpacity
                             activeOpacity={0.5}
-                            style={[CommonStyle.submitBtn, { backgroundColor: "#32A24C", marginTop: "15%", width: "90%" }]}
+                            style={[CommonStyle.submitBtn, { backgroundColor: "#32A24C", marginTop: "15%", width: "80%" }]}
                             onPress={onPressCreateAcc}
                         >
                             <Text style={[CommonStyle.mediumText, { color: "#FFF" }]}>Tạo tài khoản Facebook mới</Text>
@@ -121,7 +121,7 @@ const LoginNewAccount = ({ navigation }) => {
                             onPress={onPressCreateAcc}
                             style={{ marginBottom: "25%", }}
                         >
-                            <Text style={[styles.options, { fontSize: 18 }]} > Tạo tài khoản Facebook mới </Text>
+                            <Text style={[styles.options, { fontSize: 16 }]} > Tạo tài khoản Facebook mới </Text>
                         </TouchableOpacity>
                     </View>
                 }

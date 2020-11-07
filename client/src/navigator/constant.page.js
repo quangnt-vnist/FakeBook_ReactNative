@@ -17,5 +17,6 @@ export const pageName = {
     signUp_REMEMBER: "Lưu thông tin đăng nhập",
 
     LOG_IN_NEW_ACC: "Đăng nhập",
+    login_ACC_RECENTLY: "Đăng nhập gần đây"
 
 }

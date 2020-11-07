@@ -11,8 +11,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { pageName } from './constant.page';
 
 import {
-    Register,
+    // Login
     LoginNewAccount,
+    LoginRecentlyAcc,
+
+    // Sign up
     Birthday,
     Name,
     Password,
@@ -33,6 +36,7 @@ const Navigate = () => {
             <Stack.Navigator>
 
                 {/* Đăng nhập */}
+                <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
                 {/* Tạo tài khoản */}

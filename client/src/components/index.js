@@ -12,6 +12,7 @@ import { Policy } from './sign-up/Policy'
 import { ConfirmAcc } from './sign-up/ConfirmAcc'
 import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
+import {CreatePost} from './post/create-post'
 
 export {
 
@@ -32,5 +33,8 @@ export {
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+
+    //create post
+    CreatePost,
 }

@@ -5,7 +5,7 @@ import { pageName } from './../../navigator/constant.page'
 
 const Policy = ({ navigation }) => {
     const onPressNext = ()=>{
-        navigation.navigate(pageName.signUp_CONFIRM)
+        navigation.navigate(pageName.sign_up.CONFIRM)
     }
     return (
         <>

@@ -13,6 +13,8 @@ import { ConfirmAcc } from './sign-up/ConfirmAcc'
 import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
 
+import { Comments } from './comment/comments'
+
 export {
 
     // Register
@@ -32,5 +34,8 @@ export {
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+
+    //Comments
+    Comments
 }

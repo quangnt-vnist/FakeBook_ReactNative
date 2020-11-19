@@ -17,7 +17,7 @@ const Password = ({ navigation }) => {
 
         // if (validatePassword()) {
         //     setStrongPassword(true);
-        navigation.navigate(pageName.signUp_POLICY)
+        navigation.navigate(pageName.sign_up.POLICY)
         // }
         // else {
         //     setStrongPassword(false);

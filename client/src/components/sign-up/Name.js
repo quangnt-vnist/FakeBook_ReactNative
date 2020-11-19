@@ -15,7 +15,7 @@ const Name = ({ navigation }) => {
     const onPressBtnNext = () => {
         if (firstName.length && lastName.length) {
             setFilled(true);
-            navigation.navigate(pageName.signUp_BIRTH);
+            navigation.navigate(pageName.sign_up.BIRTH);
         }
         else {
             setFilled(false)

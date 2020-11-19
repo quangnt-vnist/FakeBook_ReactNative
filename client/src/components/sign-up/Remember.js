@@ -10,7 +10,7 @@ const Remember = ({ navigation }) => {
 
     const onPressBtnNext = () => {
         // alert("Tạo tài khoản xong, chúc bạn sớm tìm được ny")
-        navigation.navigate(pageName.signUp_BEGIN)
+        navigation.navigate(pageName.sign_up.BEGIN)
     }
 
 

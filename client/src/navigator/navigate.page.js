@@ -26,7 +26,9 @@ import {
     Remember,
     StartCreateAcc,
 
-    Comments
+    Comments,
+    // create post
+    CreatePost,
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -53,7 +55,8 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.sign_up.REMEMBER} component={Remember} />
 
 
-
+                {/*Tạo bài viết*/}
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
 
             </Stack.Navigator>
         </NavigationContainer>

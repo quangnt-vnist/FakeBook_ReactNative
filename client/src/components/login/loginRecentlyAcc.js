@@ -8,7 +8,7 @@ import { pageName } from '../../navigator/constant.page';
 const LoginRecentlyAcc = ({ navigation }) => {
 
     const onPressCreateAcc = () => {
-        navigation.navigate(pageName.signUp_BEGIN)
+        navigation.navigate(pageName.sign_up.BEGIN)
     }
 
     return (

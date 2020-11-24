@@ -11,7 +11,7 @@ const FB_BG_REG = require('../../public/img/create_acc.png')
 
 const StartCreateAcc = ({ navigation }) => {
     const onPressBtnNext = () => {
-        navigation.navigate(pageName.signUp_NAME);
+        navigation.navigate(pageName.sign_up.NAME);
     }
 
     const onPressHasAccount = () => {

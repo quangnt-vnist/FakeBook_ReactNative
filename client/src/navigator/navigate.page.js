@@ -30,13 +30,15 @@ import {
     ConfirmAcc,
     Remind,
     Remember,
-    StartCreateAcc
+    StartCreateAcc,
+
+    Comments,
+    // create post
+    CreatePost,
 } from '../components';
 
 const Stack = createStackNavigator();
 const Navigate = () => {
-    console.log(pageName.signUp_BEGIN)
-    console.log(pageName.LOG_IN_NEW_ACC)
     return (
         <NavigationContainer>
             <Stack.Navigator>
@@ -48,23 +50,27 @@ const Navigate = () => {
                 />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
                 
+                {/* Commments */}
+                <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />
+
                 {/* Đăng nhập */}
                 <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
                 {/* Tạo tài khoản */}
-                <Stack.Screen name={pageName.signUp_BEGIN} component={StartCreateAcc} />
-                <Stack.Screen name={pageName.signUp_NAME} component={Name} />
-                <Stack.Screen name={pageName.signUp_BIRTH} component={Birthday} />
-                <Stack.Screen name={pageName.signUp_PHONE} component={PhoneNumber} />
-                <Stack.Screen name={pageName.signUp_PASSWORD} component={Password} />
-                <Stack.Screen name={pageName.signUp_POLICY} component={Policy} />
-                <Stack.Screen name={pageName.signUp_CONFIRM} component={ConfirmAcc} />
-                <Stack.Screen name={pageName.signUp_REMIND} component={Remind} />
-                <Stack.Screen name={pageName.signUp_REMEMBER} component={Remember} />
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
+                <Stack.Screen name={pageName.sign_up.NAME} component={Name} />
+                <Stack.Screen name={pageName.sign_up.BIRTH} component={Birthday} />
+                <Stack.Screen name={pageName.sign_up.PHONE} component={PhoneNumber} />
+                <Stack.Screen name={pageName.sign_up.PASSWORD} component={Password} />
+                <Stack.Screen name={pageName.sign_up.POLICY} component={Policy} />
+                <Stack.Screen name={pageName.sign_up.CONFIRM} component={ConfirmAcc} />
+                <Stack.Screen name={pageName.sign_up.REMIND} component={Remind} />
+                <Stack.Screen name={pageName.sign_up.REMEMBER} component={Remember} />
 
 
-
+                {/*Tạo bài viết*/}
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
 
             </Stack.Navigator>
         </NavigationContainer>

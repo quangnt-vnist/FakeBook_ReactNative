@@ -19,6 +19,9 @@ import { Policy } from './sign-up/Policy'
 import { ConfirmAcc } from './sign-up/ConfirmAcc'
 import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
+import { CreatePost } from './post/create-post'
+
+import { Comments } from './comment/comments'
 
 export {
     // main contain
@@ -42,5 +45,10 @@ export {
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+
+    //Comments
+    Comments,
+    //create post
+    CreatePost,
 }

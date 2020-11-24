@@ -15,17 +15,25 @@ export const pageName = {
         NEW_FEED: "Dòng thời gian",
     },
 
-    signUp_BEGIN: "Tạo tài khoản",
-    signUp_NAME: "Tên",
-    signUp_BIRTH: "Ngày sinh",
-    signUp_PHONE: "Số di dộng",
-    signUp_PASSWORD: "Mật khẩu",
-    signUp_POLICY: "Điều khoản & Quyền riêng tư",
-    signUp_CONFIRM: "Xác nhận tài khoản",
-    signUp_REMIND: "Đang đăng nhập...",
-    signUp_REMEMBER: "Lưu thông tin đăng nhập",
+    sign_up: {
+        BEGIN: "Tạo tài khoản",
+        NAME: "Tên",
+        BIRTH: "Ngày sinh",
+        PHONE: "Số di dộng",
+        PASSWORD: "Mật khẩu",
+        POLICY: "Điều khoản & Quyền riêng tư",
+        CONFIRM: "Xác nhận tài khoản",
+        REMIND: "Đang đăng nhập...",
+        REMEMBER: "Lưu thông tin đăng nhập",
+    },
+
+    comment: {
+        COMMENT: "Binh luan"
+    },
 
     LOG_IN_NEW_ACC: "Đăng nhập",
-    login_ACC_RECENTLY: "Đăng nhập gần đây"
+    login_ACC_RECENTLY: "Đăng nhập gần đây",
+
+    post_NEW_POST: "Tạo bài viết",
 
 }

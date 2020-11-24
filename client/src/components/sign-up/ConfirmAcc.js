@@ -14,7 +14,7 @@ const ConfirmAcc = ({ navigation }) => {
 
         // if (validatePhoneNumber()) {
         //     setValidConfirmCode(true);
-        navigation.navigate(pageName.signUp_REMIND);
+        navigation.navigate(pageName.sign_up.REMIND);
         // }
         // else {
         //     setValidConfirmCode(false)

@@ -11,6 +11,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { pageName } from './constant.page';
 
 import {
+    // Main content
+    MainContainer,
+
+    // // New feed
+    // NewFeed,
+
     // Login
     LoginNewAccount,
     LoginRecentlyAcc,
@@ -34,7 +40,14 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-
+                {/* Main container */}
+                <Stack.Screen 
+                    name={pageName.main.MAIN} 
+                    component={MainContainer} 
+                    options={{ headerShown: false }}
+                />
+                {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
+                
                 {/* Đăng nhập */}
                 <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />

@@ -6,6 +6,15 @@
  * Tạm quy ước đặt Key theo kiểu: tên Module_TÊN TRANG GIAO DIỆN
  */
 export const pageName = {
+
+    main: {
+        MAIN: "Main app content",
+    },
+
+    feed: {
+        NEW_FEED: "Dòng thời gian",
+    },
+
     signUp_BEGIN: "Tạo tài khoản",
     signUp_NAME: "Tên",
     signUp_BIRTH: "Ngày sinh",

@@ -1,5 +1,12 @@
 // import Register from './register';
 
+import { MainContainer } from './main-content'
+import { NewFeed } from './new-feed'
+import { FriendRequestTab } from './friend-request-tab'
+import { WatchTab } from './watchs-tab'
+import { NotificationTab } from './notification-tab'
+import { OptionTab } from './option-tab'
+
 import { LoginNewAccount } from './login/loginNewAccount'
 import { LoginRecentlyAcc } from './login/loginRecentlyAcc'
 
@@ -14,9 +21,13 @@ import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
 
 export {
-
-    // Register
-    // Register,
+    // main contain
+    MainContainer,
+    NewFeed,
+    FriendRequestTab,
+    WatchTab,
+    NotificationTab,
+    OptionTab,
 
     // Login
     LoginNewAccount,
@@ -25,7 +36,6 @@ export {
     // Create new account
     StartCreateAcc,
     Birthday,
-
     Name,
     Password,
     PhoneNumber,

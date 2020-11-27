@@ -28,6 +28,9 @@ import {
 
     // create post
     CreatePost,
+    Feeling,
+    Activity,
+
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -56,6 +59,8 @@ const Navigate = () => {
 
                 {/*Tạo bài viết*/}
                 <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
+                <Stack.Screen name={pageName.post_feeling} component={Feeling} />
+                <Stack.Screen name={pageName.post_activity} component={Activity} />
 
             </Stack.Navigator>
         </NavigationContainer>

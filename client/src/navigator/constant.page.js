@@ -20,5 +20,9 @@ export const pageName = {
     login_ACC_RECENTLY: "Đăng nhập gần đây",
 
     post_NEW_POST: "Tạo bài viết",
+    post_feeling: "Bạn đang cảm thấy thế nào",
+    post_activity: "Bạn đang làm gì vậy",
+    
+
 
 }

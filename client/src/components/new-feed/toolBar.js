@@ -5,6 +5,9 @@ import Avatar from "./avatar";
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
+
+import { pageName } from '../../navigator/constant.page'
 
 const Container = styled.View`
 	width: 100%;
@@ -49,13 +52,24 @@ const BottomDivider = styled.View`
 	height: 9px;
 	background: #f0f2f5;
 `
-const ToolBar = () => {
+const ToolBar = ({ navigation }) => {
+
+    
+    const onPressCreatePost = () => {
+        navigation.navigate(pageName.post_NEW_POST)
+    }
+
     return (
         <>
             <Container>
                 <Row>
                     <Avatar source={require('./../../public/img/assets/user1.jpg')} />
-                    <Input placeholder="Bạn đang nghĩ gì?" />
+                    <TouchableOpacity
+                        onPress={onPressCreatePost}
+                    >
+                        <Text>Bạn đang nghĩ gì?</Text>
+                    </TouchableOpacity>
+                    {/* <Input placeholder="Bạn đang nghĩ gì?" /> */}
                 </Row>
                 <Divider />
                 <Row>

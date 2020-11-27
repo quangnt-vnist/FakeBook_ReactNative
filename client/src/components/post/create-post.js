@@ -68,7 +68,7 @@ const CreatePost = ({ navigation }) => {
     );
 
     const onPressFeeling = () => {
-        navigation.navigate(pageName.post_feeling)
+        navigation.navigate(pageName.post_feeling_activity)
     }
 
     const onPressTextInput = () => {
@@ -237,10 +237,10 @@ const styles = StyleSheet.create({
     },
     input: {
         fontSize: 25,
-       // backgroundColor: "blue",
+        // backgroundColor: "blue",
     },
     img: {
-      //  backgroundColor: "red",
+        //  backgroundColor: "red",
     },
     icon_create_room: {
         color: `#6495ed`,

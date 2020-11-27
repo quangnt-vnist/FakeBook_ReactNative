@@ -121,14 +121,6 @@ const Feeling = ({ navigation }) => {
     );
     return (
         <>
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.feeling}>
-                    <Text style={styles.status}>CẢM XÚC</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onPressActivity}>
-                    <Text style={styles.status}>HOẠT ĐỘNG</Text>
-                </TouchableOpacity>
-            </View>
             <View>
                 <TextInput
                     placeholder="Tìm kiếm?"

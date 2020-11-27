@@ -19,9 +19,10 @@ import { Policy } from './sign-up/Policy'
 import { ConfirmAcc } from './sign-up/ConfirmAcc'
 import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
-import {CreatePost} from './post/create-post'
-import { Feeling} from './post/feeling'
-import { Activity} from './post/activity'
+import { CreatePost } from './post/create-post'
+import { Feeling } from './post/feeling'
+import { Activity } from './post/activity'
+import { Feeling_Activity } from './post/feeling_activity'
 
 import { Comments } from './comment/comments'
 
@@ -55,4 +56,6 @@ export {
     CreatePost,
     Feeling,
     Activity,
+    Feeling_Activity,
+    
 }

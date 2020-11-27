@@ -37,6 +37,8 @@ import {
     CreatePost,
     Feeling,
     Activity,
+    Feeling_Activity,
+
 
 } from '../components';
 
@@ -46,13 +48,13 @@ const Navigate = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 {/* Main container */}
-                <Stack.Screen 
-                    name={pageName.main.MAIN} 
-                    component={MainContainer} 
+                <Stack.Screen
+                    name={pageName.main.MAIN}
+                    component={MainContainer}
                     options={{ headerShown: false }}
                 />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
-                
+
                 {/* Commments */}
                 <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />
 
@@ -76,6 +78,7 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
+                <Stack.Screen name={pageName.post_feeling_activity} component={Feeling_Activity} />
 
             </Stack.Navigator>
         </NavigationContainer>

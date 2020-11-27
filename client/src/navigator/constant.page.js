@@ -37,7 +37,8 @@ export const pageName = {
     post_NEW_POST: "Tạo bài viết",
     post_feeling: "Bạn đang cảm thấy thế nào",
     post_activity: "Bạn đang làm gì vậy",
-    
+    post_feeling_activity: "Cảm xúc/ Hoạt động",
+
 
 
 }

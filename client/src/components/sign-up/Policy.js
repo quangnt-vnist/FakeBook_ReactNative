@@ -5,7 +5,7 @@ import { pageName } from './../../navigator/constant.page'
 
 const Policy = ({ navigation }) => {
     const onPressNext = ()=>{
-        navigation.navigate(pageName.REG_CONFIRM)
+        navigation.navigate(pageName.sign_up.CONFIRM)
     }
     return (
         <>
@@ -29,7 +29,7 @@ const Policy = ({ navigation }) => {
                     >
                         <Text style={[CommonStyle.textBtn, { color: "#FFF" }]}>Đăng ký</Text>
                     </TouchableOpacity>
-                    <Text style={[CommonStyle.smallText, { color: "#204bf5", marginTop:10 }]}>Đăng ký mà không tải danh bạ của tôi lên</Text>
+                    <Text style={[CommonStyle.smallText, { color: "#1577F2", marginTop:10 }]}>Đăng ký mà không tải danh bạ của tôi lên</Text>
 
                 </View>
 

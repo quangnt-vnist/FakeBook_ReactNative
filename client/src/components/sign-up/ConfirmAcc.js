@@ -14,7 +14,7 @@ const ConfirmAcc = ({ navigation }) => {
 
         // if (validatePhoneNumber()) {
         //     setValidConfirmCode(true);
-        navigation.navigate(pageName.REG_REMIND);
+        navigation.navigate(pageName.sign_up.REMIND);
         // }
         // else {
         //     setValidConfirmCode(false)
@@ -41,6 +41,7 @@ const ConfirmAcc = ({ navigation }) => {
                             onChangeText={phone => setPhoneNumber(phone)}
                             style={styles.phoneNumberInput}
                             keyboardType="numeric"
+                            autoFocus={true}
                         >
                         </TextInput>
                     </View>
@@ -69,7 +70,7 @@ const ConfirmAcc = ({ navigation }) => {
 
 
             <View style={CommonStyle.footer}>
-                <Text style={[CommonStyle.smallText, { color: "#204BF5", fontWeight: "700" }]}>Đăng xuất</Text>
+                <Text style={[CommonStyle.smallText, { color: "#1577F2", fontWeight: "700" }]}>Đăng xuất</Text>
             </View>
         </View>
     )

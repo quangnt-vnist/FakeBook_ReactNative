@@ -1,26 +1,39 @@
-import Register from './register';
+// import Register from './register';
+
+import { MainContainer } from './main-content'
+import { NewFeed } from './new-feed'
+import { FriendRequestTab } from './friend-request-tab'
+import { WatchTab } from './watchs-tab'
+import { NotificationTab } from './notification-tab'
+import { OptionTab } from './option-tab'
 
 import { LoginNewAccount } from './login/loginNewAccount'
 import { LoginRecentlyAcc } from './login/loginRecentlyAcc'
 
 import { StartCreateAcc } from './sign-up/StartCreateAcc'
 import { Birthday } from './sign-up/Birthday'
-import { Gender } from './sign-up/Gender'
 import { Name } from './sign-up/Name'
-import { Age } from './sign-up/Age'
 import { Password } from './sign-up/Password'
 import { PhoneNumber } from './sign-up/PhoneNumber'
-import { FinishCreateAcc } from './sign-up/FinishCreateAcc'
-import { Email } from './sign-up/Email'
 import { Policy } from './sign-up/Policy'
 import { ConfirmAcc } from './sign-up/ConfirmAcc'
 import { Remind } from './sign-up/Remind'
 import { Remember } from './sign-up/Remember'
+import { CreatePost } from './post/create-post'
+import { Feeling } from './post/feeling'
+import { Activity } from './post/activity'
+import { Feeling_Activity } from './post/feeling_activity'
+
+import { Comments } from './comment/comments'
 
 export {
-
-    // Register
-    Register,
+    // main contain
+    MainContainer,
+    NewFeed,
+    FriendRequestTab,
+    WatchTab,
+    NotificationTab,
+    OptionTab,
 
     // Login
     LoginNewAccount,
@@ -29,15 +42,20 @@ export {
     // Create new account
     StartCreateAcc,
     Birthday,
-    FinishCreateAcc,
-    Gender,
-    Age,
     Name,
     Password,
     PhoneNumber,
-    Email,
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+
+    //Comments
+    Comments,
+    //create post
+    CreatePost,
+    Feeling,
+    Activity,
+    Feeling_Activity,
+    
 }

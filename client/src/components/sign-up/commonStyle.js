@@ -22,7 +22,7 @@ export const CommonStyle = StyleSheet.create({
 
     // Nút xác nhận mặc định màu blue, width 100%
     submitBtn: {
-        backgroundColor: "#204BF5",
+        backgroundColor: "#1577F2",
         height: 45,
         borderRadius: 8,
         display: "flex",
@@ -45,7 +45,7 @@ export const CommonStyle = StyleSheet.create({
         fontSize: 14,
         fontWeight: "600",
         textAlign: "center",
-        color: "#204BF5"
+        color: "#1577F2"
     },
 
     textBtn: {
@@ -58,7 +58,7 @@ export const CommonStyle = StyleSheet.create({
 
     // border bottom cho input khi focus 
     inputUnderLine: {
-        borderBottomColor: '#204bf5',
+        borderBottomColor: '#1577F2',
         borderBottomWidth: 2,
     },
 

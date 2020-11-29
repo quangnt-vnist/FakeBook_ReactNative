@@ -11,22 +11,35 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { pageName } from './constant.page';
 
 import {
-    Register,
+    // Main content
+    MainContainer,
+
+    // // New feed
+    // NewFeed,
+
+    // Login
     LoginNewAccount,
     LoginRecentlyAcc,
-    StartCreateAcc,
+
+    // Sign up
     Birthday,
-    FinishCreateAcc,
-    Gender,
     Name,
     Password,
     PhoneNumber,
-    Age,
-    Email,
     Policy,
     ConfirmAcc,
     Remind,
-    Remember
+    Remember,
+    StartCreateAcc,
+
+    Comments,
+    // create post
+    CreatePost,
+    Feeling,
+    Activity,
+    Feeling_Activity,
+
+
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -34,27 +47,38 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                {/* Main container */}
+                <Stack.Screen
+                    name={pageName.main.MAIN}
+                    component={MainContainer}
+                    options={{ headerShown: false }}
+                />
+                {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
 
-                <Stack.Screen name={pageName.REG_CONFIRM} component={ConfirmAcc} />
-                <Stack.Screen name={pageName.REG_REMIND} component={Remind} />
-                <Stack.Screen name={pageName.REG_REMEMBER} component={Remember} />
-                <Stack.Screen name={pageName.REG_BEGIN} component={Register} />
-                <Stack.Screen name={pageName.REG_PASSWORD} component={Password} />
+                {/* Commments */}
+                <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />
 
-                <Stack.Screen name={pageName.REG_PHONE} component={PhoneNumber} />
-                <Stack.Screen name={pageName.REG_EMAIL} component={Email} />
-
+                {/* Đăng nhập */}
+                <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
-                <Stack.Screen name={pageName.REG_BIRTH} component={Birthday} />
-                <Stack.Screen name={pageName.REG_GENDER} component={Gender} />
+                {/* Tạo tài khoản */}
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
+                <Stack.Screen name={pageName.sign_up.NAME} component={Name} />
+                <Stack.Screen name={pageName.sign_up.BIRTH} component={Birthday} />
+                <Stack.Screen name={pageName.sign_up.PHONE} component={PhoneNumber} />
+                <Stack.Screen name={pageName.sign_up.PASSWORD} component={Password} />
+                <Stack.Screen name={pageName.sign_up.POLICY} component={Policy} />
+                <Stack.Screen name={pageName.sign_up.CONFIRM} component={ConfirmAcc} />
+                <Stack.Screen name={pageName.sign_up.REMIND} component={Remind} />
+                <Stack.Screen name={pageName.sign_up.REMEMBER} component={Remember} />
 
-                <Stack.Screen name={pageName.REG_AGE} component={Age} />
 
-                <Stack.Screen name={pageName.REG_NAME} component={Name} />
-                <Stack.Screen name={pageName.REG_POLICY} component={Policy} />
-
-
+                {/*Tạo bài viết*/}
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
+                <Stack.Screen name={pageName.post_feeling} component={Feeling} />
+                <Stack.Screen name={pageName.post_activity} component={Activity} />
+                <Stack.Screen name={pageName.post_feeling_activity} component={Feeling_Activity} />
 
             </Stack.Navigator>
         </NavigationContainer>

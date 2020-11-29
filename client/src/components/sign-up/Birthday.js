@@ -15,7 +15,7 @@ const Birthday = ({ navigation }) => {
 
         if (nextPage) {
             setIsEnoughAge(true);
-            navigation.navigate(pageName.REG_GENDER);
+            navigation.navigate(pageName.sign_up.PHONE);
         }
         else {
             setIsEnoughAge(false);
@@ -42,10 +42,10 @@ const Birthday = ({ navigation }) => {
                     <Text style={CommonStyle.mediumText}>Sinh nhật của bạn khi nào?</Text>
 
                     {!isEnoughAge &&
-                        <Text style={{ textAlign: "center" }}>
+                        <View style={styles.noti}>
                             <Text style={[CommonStyle.smallText, { color: "red", marginTop: 10 }]}>Có vẻ như bạn đã nhập thông tin sai. Hãy đảm bảo sử dụng ngày sinh thật của mình.</Text>
                             <Icon name="exclamation-circle" style={[styles.warning]}></Icon>
-                        </Text>
+                        </View>
 
                     }
                     <DatePicker
@@ -87,11 +87,18 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 15,
     },
+    noti: {
+        flexDirection: "row",
+        marginLeft: 40
+    },
+
     warning: {
         color: "red",
         fontSize: 20,
-        textAlign: "right"
+        textAlignVertical: "bottom",
+        marginRight: 40
     },
+
     birthday: {
         flexDirection: "row",
         justifyContent: "center",

@@ -45,7 +45,7 @@ const NewFeed = () => {
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                     }
                 >
-                    <AppBar />
+                    {/* <AppBar /> */}
                     <ToolBar />
                     <Story />
                     <Users />

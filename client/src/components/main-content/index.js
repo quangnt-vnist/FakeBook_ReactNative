@@ -15,6 +15,9 @@ import { OptionTab } from "./../option-tab";
 
 import AppBar from '../new-feed/appBar';
 
+// import Animated, { Easing } from 'react-native-reanimated'
+// const { Value, timing } = Animated
+
 const MainTopTab = createMaterialTopTabNavigator();
 
 const MainContainer = (props) => {

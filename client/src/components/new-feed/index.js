@@ -19,18 +19,18 @@ const wait = (timeout) => {
     });
 }
 
-const NewFeed = () => {
+const NewFeed = ({ navigation }) => {
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         console.log('qangxt');
-        
+
         // check data return isLoading === false;
         wait(2000).then(() => {
             console.log('quang');
             setRefreshing(false)
-        
+
         });
     }, []);
     return (
@@ -45,8 +45,8 @@ const NewFeed = () => {
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                     }
                 >
-                    {/* <AppBar /> */}
-                    <ToolBar />
+                    <AppBar />
+                    <ToolBar navigation={navigation} />
                     <Story />
                     <Users />
                     <Feed />

@@ -1,17 +1,21 @@
 import React, { Component, useRef, useState } from 'react';
-import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
+import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import { pageName } from '../../navigator/constant.page'
+import { GridImage } from './gridImage';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const CreatePost = ({ navigation }) => {
 
     const sheetRef = useRef(null);
-    const [images, setImages] = useState(" ");
+    const [images, setImages] = useState([]);
     const [feeling, setFeeling] = useState("");
+
 
     const renderContent = () => (
         <View
@@ -113,7 +117,7 @@ const CreatePost = ({ navigation }) => {
             } else {
                 let source = response;
                 console.log('sssssss', source.uri);
-                setImages(source.uri);
+                setImages([...images, source.uri]);
                 sheetRef.current.snapTo(2);
             }
 
@@ -162,12 +166,8 @@ const CreatePost = ({ navigation }) => {
                     </TextInput>
 
 
-                    <Image
-                        style={styles.img}
-                        source={
-                            // require('../../public/img/fb_reg.png')
-                            { uri: images }
-                        }
+                    <GridImage style={styles.img}
+                        array={images}
                     />
                 </ScrollView>
             </View>
@@ -241,6 +241,9 @@ const styles = StyleSheet.create({
     },
     img: {
         //  backgroundColor: "red",
+        width: windowWidth,
+        height: 300,
+
     },
     icon_create_room: {
         color: `#6495ed`,

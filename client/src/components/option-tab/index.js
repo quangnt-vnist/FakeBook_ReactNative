@@ -1,9 +1,20 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-function OptionTab(props) {
+import { pageName } from '../../navigator/constant.page'
+function OptionTab({ navigation }) {
+
+    const onPressProfile = () => {
+        navigation.navigate(pageName.profile)
+    }
+
     return (
         <>
+            <TouchableOpacity
+                onPress={onPressProfile}
+            >
+                <Text>Xem trang cá nhân</Text>
+            </TouchableOpacity>
             <Text>OptionTab</Text>
         </>
     );

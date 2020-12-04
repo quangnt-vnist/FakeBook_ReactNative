@@ -26,6 +26,8 @@ import { Feeling_Activity } from './post/feeling_activity'
 
 import { Comments } from './comment/comments'
 
+import { Profile } from './profile/index';
+
 export {
     // main contain
     MainContainer,
@@ -57,5 +59,9 @@ export {
     Feeling,
     Activity,
     Feeling_Activity,
-    
+
+    // profile
+
+    Profile,
+
 }

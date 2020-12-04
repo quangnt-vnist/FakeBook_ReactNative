@@ -39,6 +39,8 @@ import {
     Activity,
     Feeling_Activity,
 
+    //profile
+    Profile,
 
 } from '../components';
 
@@ -79,6 +81,10 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
                 <Stack.Screen name={pageName.post_feeling_activity} component={Feeling_Activity} />
+
+                {/* Trang cá nhân */}
+                <Stack.Screen name={pageName.profile} component={Profile} />
+
 
             </Stack.Navigator>
         </NavigationContainer>

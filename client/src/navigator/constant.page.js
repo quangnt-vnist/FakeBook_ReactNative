@@ -39,6 +39,8 @@ export const pageName = {
     post_activity: "Bạn đang làm gì vậy",
     post_feeling_activity: "Cảm xúc/ Hoạt động",
 
+    profile : "Trang cá nhân",
+
 
 
 }

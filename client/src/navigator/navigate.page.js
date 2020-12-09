@@ -42,6 +42,10 @@ import {
     //profile
     Profile,
 
+    // Friend_tab
+    AllRequest,
+    SuggestFriend,
+
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -55,6 +59,9 @@ const Navigate = () => {
                     component={MainContainer}
                     options={{ headerShown: false }}
                 />
+                {/* Friend tab */}
+                <Stack.Screen name={pageName.friend_tab.SHOW_ALL} component={AllRequest} />
+                <Stack.Screen name={pageName.friend_tab.SUGGEST_FRIEND} component={SuggestFriend} />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
 
                 {/* Commments */}

@@ -28,6 +28,11 @@ import { Comments } from './comment/comments'
 
 import { Profile } from './profile/index';
 
+import { AllRequest } from './friend-request-tab/allRequest';
+import { SuggestFriend } from './friend-request-tab/suggestFriend';
+
+
+
 export {
     // main contain
     MainContainer,
@@ -36,6 +41,10 @@ export {
     WatchTab,
     NotificationTab,
     OptionTab,
+
+    // Friend Tab
+    AllRequest,
+    SuggestFriend,
 
     // Login
     LoginNewAccount,

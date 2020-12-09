@@ -20,10 +20,15 @@ const Row = styled.View`
 	padding: 0 11px;
 	align-items: center;
 `
-const Input = styled.TextInput`
-	height: 50px;
-	width: 100%;
-	padding: 0 8px;
+const Input = styled.TouchableOpacity`
+	height: 40px;
+    width: 85%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
 `
 const Divider = styled.View`
 	width: 100%;
@@ -64,11 +69,11 @@ const ToolBar = ({ navigation }) => {
             <Container>
                 <Row>
                     <Avatar source={require('./../../public/img/assets/user1.jpg')} />
-                    <TouchableOpacity
+                    <Input
                         onPress={onPressCreatePost}
                     >
                         <Text>Bạn đang nghĩ gì?</Text>
-                    </TouchableOpacity>
+                    </Input>
                     {/* <Input placeholder="Bạn đang nghĩ gì?" /> */}
                 </Row>
                 <Divider />

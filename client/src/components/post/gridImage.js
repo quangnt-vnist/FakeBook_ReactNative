@@ -10,13 +10,19 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const GridImage = (arrayImage) => {
-    const size = arrayImage.length;
-    console.log('gidddddd', arrayImage.array[0])
-    if (size === 1) {
+    const size = arrayImage.array.length;
+    console.log('gidddddd', size, arrayImage.array);
+    if (size === 0) {
+        return (
+            <>
+            </>
+        )
+    }
+    else if (size === 1) {
         return (
             <>
                 <Image
-                    style={styles.img}
+                    style={{ width: windowWidth, height: 400 }}
                     source={
                         { uri: arrayImage.array[0] }
                     }
@@ -25,41 +31,110 @@ const GridImage = (arrayImage) => {
         )
     }
 
+    else if (size === 2) {
+        return (
+            <View style={{ flexDirection: 'row' }}>
+                <View>
+                    <Image
+                        style={{ width: 190, height: 400 }}
+                        source={
+                            { uri: arrayImage.array[0] }
+                        }
+                    />
+                </View>
+                <View style={{ marginLeft: 5 }}>
+                    <Image
+                        style={{ width: 190, height: 400 }}
+                        source={
+                            { uri: arrayImage.array[1] }
+                        }
+                    />
+                </View>
+
+            </View>
+        )
+    }
+    else if (size === 3) {
+        return (
+            <View style={{ flexDirection: "row" }}>
+                <View>
+                    <Image
+                        style={{ width: 190, height: 400 }}
+                        source={
+                            { uri: arrayImage.array[0] }
+                        }
+                    />
+                </View>
+                <View style={{ flexDirection: "column", marginLeft: 10 }}>
+                    <View>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[1] }
+                            }
+                        />
+                    </View>
+                    <View style={{ marginTop: 5 }}>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[2] }
+                            }
+                        />
+                    </View>
+                </View>
+
+
+
+            </View>
+        )
+    }
     else {
         return (
-            <View style={{ flexDirection: 'row' }}>
-                <View>
-                    <Image
-                        style={styles.img}
-                        source={
-                            // require('../../public/img/fb_reg.png')
-                            { uri: arrayImage[0] }
-                        }
-                    />
+            <View style={{}}>
+                <View style={{ flexDirection: "row" }}>
+                    <View>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[0] }
+                            }
+                        />
+                    </View>
+                    <View style={{ marginLeft: 5 }}>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[1] }
+                            }
+                        />
+                    </View>
+
                 </View>
-                <View>
-                    <Image
-                        style={styles.img}
-                        source={
-                            // require('../../public/img/fb_reg.png')
-                            { uri: arrayImage[1] }
-                        }
-                    />
+                <View style={{ flexDirection: "row", marginTop: 5 }}>
+                    <View>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[2] }
+                            }
+                        />
+                    </View>
+                    <View style={{ marginLeft: 5 }}>
+                        <Image
+                            style={{ width: 190, height: 200 }}
+                            source={
+                                { uri: arrayImage.array[3] }
+                            }
+                        />
+                    </View>
+
                 </View>
 
             </View>
         )
     }
 
-    if (size === 3) {
-        return (
-            <View style={{ flexDirection: 'row' }}>
-                <View>
-
-                </View>
-            </View>
-        )
-    }
 
 }
 const styles = StyleSheet.create({
@@ -100,10 +175,9 @@ const styles = StyleSheet.create({
         // backgroundColor: "blue",
     },
     img: {
-        backgroundColor: "red",
+
         width: windowWidth,
         height: 300,
-
     },
     icon_create_room: {
         color: `#6495ed`,

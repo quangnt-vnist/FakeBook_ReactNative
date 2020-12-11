@@ -5,31 +5,44 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Feed from '../new-feed/feed';
+import ToolBar from '../new-feed/toolBar';
+import { SwipeImage } from './swipeImages';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({ navigation }) => {
 
+    let [ShowComment, setShowModelComment] = useState(false);
+    let [animateModal, setanimateModal] = useState(false);
 
+    const onPressAvatar = () => {
+        setanimateModal(true);
+        setShowModelComment(true);
+    }
 
     return (
         <>
             <ScrollView>
                 <View style={styles.header}>
-                    <Image
-                        style={styles.wall}
-                        source={
-                            require('../../public/img/barca_logo2.jpg')
-                        }
-                    />
-                    <View style={styles.avtframe}>
+                    <TouchableOpacity>
+                        <Image
+                            style={styles.wall}
+                            source={
+                                require('../../public/img/barca_logo2.jpg')
+                            }
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.avtframe}
+                        onPress={onPressAvatar}
+                    >
                         <Image
                             style={styles.avatar}
                             source={
                                 require('../../public/img/avt2.jpg')
                             }
                         />
-                    </View>
+                    </TouchableOpacity>
                     {/* <View style={styles.camera}>
 
                     </View> */}
@@ -146,11 +159,19 @@ const Profile = ({ navigation }) => {
                         <Text style={{ fontWeight: "bold", color: "#6a5acd", fontSize: 15 }}>Xem chi tiết bạn bè</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.lineStyle} />
+                <View style={styles.bigLineStyle} />
+                <View style={{ marginTop: 10 }}>
+                    <ToolBar navigation={navigation} />
+                </View>
+                <View style={styles.bigLineStyle} />
                 <Feed />
 
 
             </ScrollView>
+            <SwipeImage
+                showComment={ShowComment}
+                animeModal={animateModal}
+            />
         </>
     )
 }
@@ -224,6 +245,11 @@ const styles = StyleSheet.create({
     lineStyle: {
         borderWidth: 0.5,
         borderColor: '#dcdcdc',
+        marginTop: 10,
+    },
+    bigLineStyle: {
+        borderWidth: 5,
+        borderColor: '#a9a9a9',
         marginTop: 10,
     },
     icon: {

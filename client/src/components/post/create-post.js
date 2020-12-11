@@ -166,9 +166,12 @@ const CreatePost = ({ navigation }) => {
                     </TextInput>
 
 
-                    <GridImage style={styles.img}
-                        array={images}
-                    />
+                    <View>
+                        <GridImage
+                            array={images}
+                        />
+                        {/* <Image source={{ uri: images[0] }} style={{ width: 300, height: 200 }} /> */}
+                    </View>
                 </ScrollView>
             </View>
 
@@ -194,9 +197,6 @@ const CreatePost = ({ navigation }) => {
                 borderRadius={10}
                 renderContent={renderContent}
             />
-
-
-
 
         </>
     )

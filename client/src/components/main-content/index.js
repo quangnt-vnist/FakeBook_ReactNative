@@ -15,9 +15,12 @@ import { OptionTab } from "./../option-tab";
 
 import AppBar from '../new-feed/appBar';
 
+// import Animated, { Easing } from 'react-native-reanimated'
+// const { Value, timing } = Animated
+
 const MainTopTab = createMaterialTopTabNavigator();
 
-const MainContainer = (props) => {
+const MainContainer = ({ navigtion }) => {
 
     const tabBarOptions = {
         showIcon: true,
@@ -54,7 +57,7 @@ const MainContainer = (props) => {
                         tabBarLabel: 'Home',
                         tabBarIcon: ({ focused, color }) => {
                             return (
-                                <MaterialCommunityIcons name='home' size={23} color={focused ? "#007AFD": "#424040"} />
+                                <MaterialCommunityIcons name='home' size={23} color={focused ? "#007AFD" : "#424040"} />
                             )
                         },
                     }}
@@ -67,7 +70,7 @@ const MainContainer = (props) => {
                         tabBarLabel: 'Request',
                         tabBarIcon: ({ focused, color }) => {
                             return (
-                                <FontAWS color={focused ? "#007AFD": "#424040"} size={19} name={'user-friends'} />
+                                <FontAWS color={focused ? "#007AFD" : "#424040"} size={19} name={'user-friends'} />
                             )
                         },
                         // tabBarIcon: () => (
@@ -83,7 +86,7 @@ const MainContainer = (props) => {
                         tabBarLabel: 'Watch',
                         tabBarIcon: ({ focused, color }) => {
                             return (
-                                <MaterialCommunityIcons size={23} name={'television-play'} color={focused ? "#007AFD": "#424040"} />
+                                <MaterialCommunityIcons size={23} name={'television-play'} color={focused ? "#007AFD" : "#424040"} />
                             )
                         },
                         // tabBarLabel: 'Watch',
@@ -100,7 +103,7 @@ const MainContainer = (props) => {
                         tabBarLabel: 'Notify',
                         tabBarIcon: ({ focused, color }) => {
                             return (
-                                <Ionicons color={focused ? "#007AFD": "#424040"} size={20} name={'notifications-outline'} />
+                                <Ionicons color={focused ? "#007AFD" : "#424040"} size={20} name={'notifications-outline'} />
                             )
                         },
                         // tabBarIcon: () => (
@@ -115,7 +118,7 @@ const MainContainer = (props) => {
                         tabBarLabel: 'Option',
                         tabBarIcon: ({ focused, color }) => {
                             return (
-                                <Ionicons color={focused ? "#007AFD": "#424040"} size={25} name={'menu'} />
+                                <Ionicons color={focused ? "#007AFD" : "#424040"} size={25} name={'menu'} />
                             )
                         },
                         // tabBarIcon: () => (

@@ -77,6 +77,7 @@ const ListFriends = () => {
 
             {[1, 2, 3, 4, 5].map((e, key) => <View key={key}>
                 <MyFriend
+                    id={key}
                     srcAvt={require('./../../public/img/barca_logo2.jpg')}
                     friendName={"Nguyễn Thế Quang"}
                     numOfMutual={18}
@@ -85,6 +86,7 @@ const ListFriends = () => {
             )}
             {[1, 2, 3, 4, 5].map((e, key) => <View key={key}>
                 <MyFriend
+                    id={key}
                     srcAvt={require('./../../public/img/fb_reg.png')}
                     friendName={"Duyên Nguyễn"}
                     numOfMutual={17}

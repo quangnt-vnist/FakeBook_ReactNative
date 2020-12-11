@@ -11,12 +11,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { pageName } from './constant.page';
 
 import {
-    // Main content
-    MainContainer,
-
-    // // New feed
-    // NewFeed,
-
     // Login
     LoginNewAccount,
     LoginRecentlyAcc,
@@ -32,15 +26,29 @@ import {
     Remember,
     StartCreateAcc,
 
-    Comments,
     // create post
     CreatePost,
     Feeling,
     Activity,
     Feeling_Activity,
 
+    // comments
+    Comments,
+    
+    // Report Post
+    ReportPost,
+    ConfirmReport,
+
     //profile
     Profile,
+
+    // Main content
+    MainContainer,
+
+    // Friend_tab
+    AllRequest,
+    SuggestFriend,
+    ListFriends,
 
 } from '../components';
 
@@ -49,12 +57,17 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+
                 {/* Main container */}
                 <Stack.Screen
                     name={pageName.main.MAIN}
                     component={MainContainer}
                     options={{ headerShown: false }}
                 />
+                {/* Friend tab */}
+                <Stack.Screen name={pageName.friend_tab.SHOW_ALL} component={AllRequest} />
+                <Stack.Screen name={pageName.friend_tab.SUGGEST_FRIEND} component={SuggestFriend} />
+                <Stack.Screen name={pageName.friend_tab.All_FRIEND} component={ListFriends} />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
 
                 {/* Commments */}
@@ -85,6 +98,9 @@ const Navigate = () => {
                 {/* Trang cá nhân */}
                 <Stack.Screen name={pageName.profile} component={Profile} />
 
+                {/* báo cáo bài viết */}
+                <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />
+                <Stack.Screen name={pageName.report.CONFIRM_REPORT} component={ConfirmReport} />
 
             </Stack.Navigator>
         </NavigationContainer>

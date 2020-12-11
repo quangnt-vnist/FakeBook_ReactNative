@@ -26,6 +26,23 @@ exports.register = async (req, res) => {
     }
 }
 
+exports.getVerifyCode = async (req, res) => {
+    try {
+        const verifycode = await AuthService.getVerifyCode( req.params.phone );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['get_verify_code_success'],
+            content: verifycode
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['get_verify_code_faile'],
+            content: error
+        });
+    }
+};
 exports.checkVerifyCode = async (req, res) => {
     try {
         const User = await AuthService.checkVerifyCode(req.body);
@@ -90,6 +107,51 @@ exports.logout = async(req, res) => {
             success: false,
             message: ['logout_faile'],
             content: error,
+        });
+    }
+};
+
+exports.changeInformation = async (req, res) => {
+
+    try {
+        let avatar;
+        if(req.file){
+            let path = req.file.destination +'/'+ req.file.filename;
+             console.log("path", path)
+            avatar = path.substr(1, path.length)
+        }
+        console.log("re", req.body)
+        const profile = await AuthService.changeInformation( req.params.id, req.body.name, avatar);
+
+        res.status(200).json({
+            success: true,
+            messages: ['change_user_information_success'],
+            content: profile
+        });
+    } catch (error) {
+
+        res.status(400).json({
+            success: false,
+            messages: Array.isArray(error) ? error : ['change_user_information_faile'],
+            content: error
+        });
+    }
+};
+
+exports.getProfile = async (req, res) => {
+    try {
+        const profile = await AuthService.getProfile( req.params.id);
+
+        res.status(200).json({
+            success: true,
+            messages: ['show_profile_success'],
+            content: profile
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: Array.isArray(error) ? error : ['show_profile_faile'],
+            content: error
         });
     }
 };

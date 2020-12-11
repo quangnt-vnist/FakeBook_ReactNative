@@ -15,6 +15,12 @@ export const pageName = {
         NEW_FEED: "Dòng thời gian",
     },
 
+    friend_tab: {
+        SHOW_ALL: "Lời mời kết bạn",
+        All_FRIEND: "Tất cả bạn bè",
+        SUGGEST_FRIEND: "Gợi ý",
+    },
+
     sign_up: {
         BEGIN: "Tạo tài khoản",
         NAME: "Tên",
@@ -31,6 +37,11 @@ export const pageName = {
         COMMENT: "Binh luan"
     },
 
+    report: {
+        REPORT_POST: "Báo cáo bài viết",
+        CONFIRM_REPORT: "Xác nhận báo cáo"
+    },
+
     LOG_IN_NEW_ACC: "Đăng nhập",
     login_ACC_RECENTLY: "Đăng nhập gần đây",
 
@@ -39,7 +50,7 @@ export const pageName = {
     post_activity: "Bạn đang làm gì vậy",
     post_feeling_activity: "Cảm xúc/ Hoạt động",
 
-    profile : "Trang cá nhân",
+    profile: "Trang cá nhân",
 
 
 

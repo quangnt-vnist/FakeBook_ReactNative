@@ -21,7 +21,8 @@ const UserSchema = new Schema({
         type: String,
     },
     avatar: {
-        type: String
+        type: String,
+        default: "/upload/avatars/user.jpg"
     },
     token: [{
         type: String

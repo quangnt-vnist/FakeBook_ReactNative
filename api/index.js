@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const auth = require('./modules/auth/route')
 require('dotenv').config();
-
 const app = express();
 app.use(bodyParser.json());
+app.use("/upload/avatars", express.static("upload/avatars"));
+
 const db = process.env.DATABASE;// DB Config
 mongoose // Connect to MongoDB
     .connect(

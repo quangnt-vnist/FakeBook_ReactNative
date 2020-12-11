@@ -7,15 +7,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import { pageName } from '../../navigator/constant.page'
 import { GridImage } from './gridImage';
-
+import Emoji from 'react-native-emoji';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const CreatePost = ({ navigation }) => {
+const CreatePost = ({ route, navigation }) => {
 
     const sheetRef = useRef(null);
     const [images, setImages] = useState([]);
-    const [feeling, setFeeling] = useState("");
+    const [feeling, setFeeling] = useState(route.params);
 
+    const onChangeImage = (image) => {
+        setImages(image)
+    }
 
     const renderContent = () => (
         <View
@@ -79,13 +82,13 @@ const CreatePost = ({ navigation }) => {
         console.log('hello');
         sheetRef.current.snapTo(2)
     }
-    React.useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <Button title="Đăng" />
-            ),
-        });
-    }, [navigation]);
+    // React.useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerRight: () => (
+    //             <Button title="Đăng" />
+    //         ),
+    //     });
+    // }, [navigation]);
 
     const chooseFile = () => {
         // let options = {
@@ -128,7 +131,30 @@ const CreatePost = ({ navigation }) => {
         Keyboard.dismiss();
     }
 
+    const onDelete1 = () => {
+        images.splice(0, 1);
+        setImages(images)
+    };
+    const onDelete2 = () => {
+        let oldImage = images;
+        console.log('ahihi', oldImage);
+        images.splice(1, 1);
 
+        //console.log('aaaaa', images)
+        setImages(images);
+
+        console.log('imagess', images)
+    };
+    const onDelete3 = () => {
+        images.splice(2, 1);
+        setImages(images);
+    };
+    const onDelete4 = () => {
+        images.splice(3, 1);
+        setImages(images);
+    };
+
+    let ri;
     return (
         <>
             <View style={styles.p1}>
@@ -140,6 +166,11 @@ const CreatePost = ({ navigation }) => {
                 />
                 <View style={styles.name}>
                     <Text style={{ fontWeight: 'bold', }}>Nguyễn Xuân Thành</Text>
+                    {/* <View>
+                        <Text> - Đang</Text>
+                        <Emoji name={feeling.icon} style={{ fontSize: 20 }} />
+                        <Text>{feeling.status}</Text>
+                    </View> */}
                     <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity
                             style={{ height: 25, width: 80, borderRadius: 10, alignItems: "center", borderColor: `#a9a9a9` }}
@@ -169,6 +200,11 @@ const CreatePost = ({ navigation }) => {
                     <View>
                         <GridImage
                             array={images}
+                            // onDelete1={onDelete1}
+                            // onDelete2={onDelete2}
+                            // onDelete3={onDelete3}
+                            // onDelete4={onDelete4}
+                            onChangeImage={setImages}
                         />
                         {/* <Image source={{ uri: images[0] }} style={{ width: 300, height: 200 }} /> */}
                     </View>

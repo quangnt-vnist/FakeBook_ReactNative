@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import { Button, StyleSheet, View, Text, TextInput, Image, Alert, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import EmojiSelector from 'react-native-emoji-selector';
@@ -9,9 +9,29 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const GridImage = (arrayImage) => {
-    const size = arrayImage.array.length;
-    console.log('gidddddd', size, arrayImage.array);
+const GridImage = (props) => {
+    const [update, setUpdate] = useState(false);
+    const size = props.array.length;
+    let array = props.array;
+
+    // useEffect = (() => {
+    //     //  () => { setUpdate(!update) };
+    //     console.log('aloooo')
+    // }, [])
+
+    console.log('gidddddd', size, props.array);
+    const onPress1 = () => {
+        array.splice(0, 1);
+        props.onChangeImage(array);
+
+        // props.onChangeImage(props.array.splice(0, 1))
+    }
+    const onPress2 = () => {
+        array.splice(1, 1)
+        console.log('hahaha', array);
+        //console.log("rest", a);
+        props.onChangeImage(array);
+    }
     if (size === 0) {
         return (
             <>
@@ -20,14 +40,19 @@ const GridImage = (arrayImage) => {
     }
     else if (size === 1) {
         return (
-            <>
+            <View>
                 <Image
                     style={{ width: windowWidth, height: 400 }}
                     source={
-                        { uri: arrayImage.array[0] }
+                        { uri: props.array[0] }
                     }
                 />
-            </>
+
+                <TouchableOpacity style={styles.delete} onPress={props.onDelete1}>
+                    <Icon name="times-circle" style={styles.icon_delete}></Icon>
+                </TouchableOpacity>
+
+            </View>
         )
     }
 
@@ -38,17 +63,23 @@ const GridImage = (arrayImage) => {
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: arrayImage.array[0] }
+                            { uri: props.array[0] }
                         }
                     />
+                    <TouchableOpacity style={styles.delete} onPress={onPress1}>
+                        <Icon name="times-circle" style={styles.icon_delete}></Icon>
+                    </TouchableOpacity>
                 </View>
                 <View style={{ marginLeft: 5 }}>
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: arrayImage.array[1] }
+                            { uri: props.array[1] }
                         }
                     />
+                    <TouchableOpacity style={styles.delete} onPress={onPress2}>
+                        <Icon name="times-circle" style={styles.icon_delete}></Icon>
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -61,7 +92,7 @@ const GridImage = (arrayImage) => {
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: arrayImage.array[0] }
+                            { uri: props.array[0] }
                         }
                     />
                 </View>
@@ -70,7 +101,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[1] }
+                                { uri: props.array[1] }
                             }
                         />
                     </View>
@@ -78,7 +109,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[2] }
+                                { uri: props.array[2] }
                             }
                         />
                     </View>
@@ -97,7 +128,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[0] }
+                                { uri: props.array[0] }
                             }
                         />
                     </View>
@@ -105,7 +136,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[1] }
+                                { uri: props.array[1] }
                             }
                         />
                     </View>
@@ -116,7 +147,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[2] }
+                                { uri: props.array[2] }
                             }
                         />
                     </View>
@@ -124,7 +155,7 @@ const GridImage = (arrayImage) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: arrayImage.array[3] }
+                                { uri: props.array[3] }
                             }
                         />
                     </View>
@@ -210,6 +241,19 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         marginTop: 10,
     },
+    delete: {
+        position: 'absolute',
+        // backgroundColor: "red",
+        alignSelf: "flex-end",
+        width: 30,
+        height: 30,
+        marginTop: 10,
+        marginRight: 15,
+    },
+    icon_delete: {
+        fontSize: 30,
+        color: "#dcdcdc",
+    }
 
 })
 

@@ -15,6 +15,12 @@ export const pageName = {
         NEW_FEED: "Dòng thời gian",
     },
 
+    friend_tab: {
+        SHOW_ALL: "Lời mời kết bạn",
+        All_FRIEND: "Tất cả bạn bè",
+        SUGGEST_FRIEND: "Gợi ý",
+    },
+
     sign_up: {
         BEGIN: "Tạo tài khoản",
         NAME: "Tên",

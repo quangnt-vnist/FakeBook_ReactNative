@@ -28,17 +28,22 @@ import { Comments } from './comment/comments'
 
 import { Profile } from './profile/index';
 
-import { ReportPost } from './report';
 import { ConfirmReport } from './report/confirmReport';
+import { AllRequest } from './friend-request-tab/allRequest';
+
+
 
 export {
-    // main contain
     MainContainer,
     NewFeed,
     FriendRequestTab,
     WatchTab,
     NotificationTab,
     OptionTab,
+
+    // Friend Tab
+    AllRequest,
+    SuggestFriend,
 
     // Login
     LoginNewAccount,

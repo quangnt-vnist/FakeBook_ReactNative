@@ -28,6 +28,9 @@ import { Comments } from './comment/comments'
 
 import { Profile } from './profile/index';
 
+import { ReportPost } from './report';
+import { ConfirmReport } from './report/confirmReport';
+
 export {
     // main contain
     MainContainer,
@@ -63,5 +66,9 @@ export {
     // profile
 
     Profile,
+
+    // report post
+    ReportPost,
+    ConfirmReport,
 
 }

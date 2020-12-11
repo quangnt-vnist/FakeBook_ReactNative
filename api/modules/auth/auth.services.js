@@ -2,14 +2,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const User = require('../../models/user');
 const { registerValidation, loginValidation } = require('./validate');
-
-
+const fs = require("fs");
 
 
 /**
  *  API Register
  * @param {} data
- * @body data : username, name, email, password
+ * @body data : phoneNumber, name, password, birth
  * 
  * Did validate, check username, email, create new user
  * 
@@ -62,6 +61,14 @@ exports.register = async (data) => {
     };
 }
 
+exports.getVerifyCode = async (phone) => {
+    var user = await User.findOne({ phoneNumber: phone });
+    return {
+        success: true,
+        code: user.code
+    }
+}
+
 exports.checkVerifyCode = async (data) => {
     var user = await User.findOne({ phoneNumber: data.phoneNumber });
     if(user){
@@ -111,7 +118,6 @@ exports.login = async (data) => {
     //check username, password
 
     const user = await User.findOne({ phoneNumber: data.phoneNumber });
-    console.log(user);
     if (!user) {
         return {
             status: 404,
@@ -157,3 +163,35 @@ exports.logout = async(data) => {
     user.save();
     return user;
 }
+
+exports.changeInformation = async (
+    id,
+    name,
+    avatar = undefined
+) => {
+    
+    let user = await User.findById(id)
+
+    let deleteAvatar = "." + user.avatar;
+    user.name = name;
+    if (avatar) {
+        if (
+            deleteAvatar !== "./upload/avatars/user.jpg" &&
+            fs.existsSync(deleteAvatar)
+        )
+            fs.unlinkSync(deleteAvatar);
+        user.avatar = avatar;
+    }
+    await user.save();
+
+    return user;
+};
+
+exports.getProfile = async (id) => {
+    let user = await User.findById(id)
+                        .select("-password -active -token")
+
+    if (user === null) throw ["user_not_found"];
+
+    return user;
+};

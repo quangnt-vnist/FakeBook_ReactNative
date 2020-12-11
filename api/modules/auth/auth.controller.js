@@ -1,8 +1,7 @@
-const AuthService = require('./services');
+const AuthService = require('./auth.services');
 
 exports.register = async (req, res) => {
     try {
-        console.log("====", req.body)
         const User = await AuthService.register(req.body);
         console.log(User);
         if (User.success) {
@@ -71,7 +70,6 @@ exports.checkVerifyCode = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        console.log("req.body", req.body)
         const User = await AuthService.login(req.body);
         if (User.success) {
             res.status(200).json({

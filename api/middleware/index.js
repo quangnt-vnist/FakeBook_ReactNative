@@ -26,9 +26,9 @@ const auth =  async (req, res, next) => {
     }
 
 const uploadFile = (arrayFile, type) => {
-    console.log('===============', arrayFile, type);
     const staticPath = [
         '/avatars',
+        '/posts'
     ]
 
     let getFile = multer({

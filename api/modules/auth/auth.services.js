@@ -3,8 +3,6 @@ const jwt = require('jsonwebtoken')
 const User = require('../../models/user');
 const { registerValidation, loginValidation } = require('./validate');
 const fs = require("fs");
-const { getVerifyCode } = require('./controller');
-
 
 
 /**
@@ -120,7 +118,6 @@ exports.login = async (data) => {
     //check username, password
 
     const user = await User.findOne({ phoneNumber: data.phoneNumber });
-    console.log(user);
     if (!user) {
         return {
             status: 404,

@@ -6,6 +6,7 @@ import { AllRequest } from './allRequest';
 
 import styled from 'styled-components/native';
 import { pageName } from '../../navigator/constant.page';
+import { MyFriend } from './myFriend';
 
 const Title = styled.Text`
     margin: 0 0 0 10px;
@@ -71,6 +72,9 @@ function FriendRequestTab(props) {
     const onPressSuggest = () => {
         props.navigation.navigate(pageName.friend_tab.SUGGEST_FRIEND);
     }
+    const onPressAllFriends = () => {
+        props.navigation.navigate(pageName.friend_tab.All_FRIEND);
+    }
     
     return (
         <ScrollView
@@ -84,7 +88,9 @@ function FriendRequestTab(props) {
                 >
                     <Text>Gợi ý</Text>
                 </ButtonHeader>
-                <ButtonHeader>
+                <ButtonHeader
+                    onPress={onPressAllFriends}
+                >
                     <Text>Tất cả bạn bè</Text>
                 </ButtonHeader>
             </Row>

@@ -28,8 +28,10 @@ import { Comments } from './comment/comments'
 
 import { Profile } from './profile/index';
 
+// friends tab
 import { AllRequest } from './friend-request-tab/allRequest';
 import { SuggestFriend } from './friend-request-tab/suggestFriend';
+import { ListFriends } from './friend-request-tab/listFriends';
 
 
 
@@ -45,6 +47,7 @@ export {
     // Friend Tab
     AllRequest,
     SuggestFriend,
+    ListFriends,
 
     // Login
     LoginNewAccount,
@@ -63,6 +66,7 @@ export {
 
     //Comments
     Comments,
+
     //create post
     CreatePost,
     Feeling,
@@ -70,7 +74,6 @@ export {
     Feeling_Activity,
 
     // profile
-
     Profile,
 
 }

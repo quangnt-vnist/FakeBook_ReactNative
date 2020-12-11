@@ -11,12 +11,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { pageName } from './constant.page';
 
 import {
-    // Main content
-    MainContainer,
-
-    // // New feed
-    // NewFeed,
-
     // Login
     LoginNewAccount,
     LoginRecentlyAcc,
@@ -32,7 +26,9 @@ import {
     Remember,
     StartCreateAcc,
 
+    // comments
     Comments,
+
     // create post
     CreatePost,
     Feeling,
@@ -42,9 +38,13 @@ import {
     //profile
     Profile,
 
+    // Main content
+    MainContainer,
+
     // Friend_tab
     AllRequest,
     SuggestFriend,
+    ListFriends,
 
 } from '../components';
 
@@ -62,6 +62,7 @@ const Navigate = () => {
                 {/* Friend tab */}
                 <Stack.Screen name={pageName.friend_tab.SHOW_ALL} component={AllRequest} />
                 <Stack.Screen name={pageName.friend_tab.SUGGEST_FRIEND} component={SuggestFriend} />
+                <Stack.Screen name={pageName.friend_tab.All_FRIEND} component={ListFriends} />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
 
                 {/* Commments */}

@@ -33,10 +33,12 @@ import { AllRequest } from './friend-request-tab/allRequest';
 import { SuggestFriend } from './friend-request-tab/suggestFriend';
 import { ListFriends } from './friend-request-tab/listFriends';
 
+// report
+import { ReportPost } from './report';
+import { ConfirmReport } from './report/confirmReport';
 
 
 export {
-    // main contain
     MainContainer,
     NewFeed,
     FriendRequestTab,
@@ -75,5 +77,9 @@ export {
 
     // profile
     Profile,
+
+    // report post
+    ReportPost,
+    ConfirmReport,
 
 }

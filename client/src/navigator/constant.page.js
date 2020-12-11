@@ -37,6 +37,11 @@ export const pageName = {
         COMMENT: "Binh luan"
     },
 
+    report: {
+        REPORT_POST: "Báo cáo bài viết",
+        CONFIRM_REPORT: "Xác nhận báo cáo"
+    },
+
     LOG_IN_NEW_ACC: "Đăng nhập",
     login_ACC_RECENTLY: "Đăng nhập gần đây",
 
@@ -45,7 +50,7 @@ export const pageName = {
     post_activity: "Bạn đang làm gì vậy",
     post_feeling_activity: "Cảm xúc/ Hoạt động",
 
-    profile : "Trang cá nhân",
+    profile: "Trang cá nhân",
 
 
 

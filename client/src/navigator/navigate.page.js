@@ -26,14 +26,18 @@ import {
     Remember,
     StartCreateAcc,
 
-    // comments
-    Comments,
-
     // create post
     CreatePost,
     Feeling,
     Activity,
     Feeling_Activity,
+
+    // comments
+    Comments,
+    
+    // Report Post
+    ReportPost,
+    ConfirmReport,
 
     //profile
     Profile,
@@ -53,6 +57,7 @@ const Navigate = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+
                 {/* Main container */}
                 <Stack.Screen
                     name={pageName.main.MAIN}
@@ -93,6 +98,9 @@ const Navigate = () => {
                 {/* Trang cá nhân */}
                 <Stack.Screen name={pageName.profile} component={Profile} />
 
+                {/* báo cáo bài viết */}
+                <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />
+                <Stack.Screen name={pageName.report.CONFIRM_REPORT} component={ConfirmReport} />
 
             </Stack.Navigator>
         </NavigationContainer>

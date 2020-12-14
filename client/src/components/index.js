@@ -37,6 +37,9 @@ import { ListFriends } from './friend-request-tab/listFriends';
 import { ReportPost } from './report';
 import { ConfirmReport } from './report/confirmReport';
 
+// search page
+import { SearchPage } from './search-bar-common'
+
 
 export {
     MainContainer,
@@ -81,5 +84,8 @@ export {
     // report post
     ReportPost,
     ConfirmReport,
+
+    // search
+    SearchPage,
 
 }

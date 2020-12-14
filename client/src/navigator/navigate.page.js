@@ -50,6 +50,9 @@ import {
     SuggestFriend,
     ListFriends,
 
+    // search friend page
+    SearchPage,
+
 } from '../components';
 
 const Stack = createStackNavigator();
@@ -64,6 +67,13 @@ const Navigate = () => {
                     component={MainContainer}
                     options={{ headerShown: false }}
                 />
+                {/* Search friend page */}
+                <Stack.Screen 
+                    name={pageName.main.SEARCH} 
+                    component={SearchPage} 
+                    options={{headerTitle: ""}}    
+                />
+
                 {/* Friend tab */}
                 <Stack.Screen name={pageName.friend_tab.SHOW_ALL} component={AllRequest} />
                 <Stack.Screen name={pageName.friend_tab.SUGGEST_FRIEND} component={SuggestFriend} />

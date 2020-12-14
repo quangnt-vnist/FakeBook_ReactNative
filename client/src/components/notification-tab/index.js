@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import BottomSheet from 'reanimated-bottom-sheet';
 import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
+
+// Calculate window size
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 function NotificationTab(props) {
     const sheetRef = useRef(null);
@@ -110,7 +114,7 @@ function NotificationTab(props) {
                     </View>
                 }
                 ContentModal={
-                    <View style={{ backgroundColor: "#fff", height: 175, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                    <View style={{ backgroundColor: "#fff", height: HEIGHT, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                         <View style={{ alignItems: "center", borderBottomColor: "#CCC", borderBottomWidth: 1 }}>
                             <Image
                                 source={require('./../../public/img/fb_reg.png')}
@@ -119,7 +123,7 @@ function NotificationTab(props) {
                             <Text style={{ fontSize: 16, marginBottom: 10 }} >Linhdz đã thích hình ảnh của bạn</Text>
                         </View>
 
-                        <TouchableWithoutFeedback
+                        <TouchableOpacity
                             onPress={() => { console.log("delete?") }}
                         >
                             <View style={{ display: "flex", flexDirection: "row" }}>
@@ -128,7 +132,8 @@ function NotificationTab(props) {
                                 <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 16 }}>Gỡ thông báo này</Text>
 
                             </View>
-                        </TouchableWithoutFeedback>
+                        </TouchableOpacity>
+                        <View style={{height: 1, backgroundColor: "#E2E7E7", width: "100%"}}></View>
                     </View>
                 }
                 ContentModalStyle={styles.Modal}
@@ -179,11 +184,11 @@ const styles = StyleSheet.create({
         margin: 10
     },
     Modal: {
-        marginTop: 560,
+        marginTop: HEIGHT-200,
     },
     containerHeader: {
         display: "flex",
-        marginTop: 495,
+        marginTop: HEIGHT-270,
     },
     swipeDown: {
         display: "flex",

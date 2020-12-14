@@ -34,7 +34,7 @@ import {
 
     // comments
     Comments,
-    
+
     // Report Post
     ReportPost,
     ConfirmReport,
@@ -59,7 +59,9 @@ const Stack = createStackNavigator();
 const Navigate = () => {
     return (
         <NavigationContainer>
+
             <Stack.Navigator>
+                <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
 
                 {/* Main container */}
                 <Stack.Screen
@@ -85,7 +87,7 @@ const Navigate = () => {
 
                 {/* Đăng nhập */}
                 <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
-                <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
+                {/* <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} /> */}
 
                 {/* Tạo tài khoản */}
                 <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />

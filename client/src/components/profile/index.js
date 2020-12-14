@@ -1,31 +1,116 @@
 import React, { Component, useRef, useState } from 'react';
-import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 import Feed from '../new-feed/feed';
 import ToolBar from '../new-feed/toolBar';
-import { SwipeImage } from './swipeImages';
-
+import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({ navigation }) => {
 
     let [ShowComment, setShowModelComment] = useState(false);
-    let [animateModal, setanimateModal] = useState(false);
+    let [animateModal, setanimateModal] = useState(true);
 
+    let [ShowEditWall, setShowEditWall] = useState(false);
+    let [animateModalWall, setanimateWallModal] = useState(true);
     const onPressAvatar = () => {
-        setanimateModal(true);
         setShowModelComment(true);
+        // setanimateModal(true);
+        console.log('pressssssssss', ShowComment);
     }
+    const onPressWall = () => {
+        setShowEditWall(true);
+    }
+
+    const DATA = [
+        {
+            id: '1',
+            title: 'Thêm khung',
+            icon: "windows"
+        },
+        {
+            id: '2',
+            title: 'Quay video đại diện mới',
+            icon: "video-camera"
+        },
+        {
+            id: '3',
+            title: 'Chọn video đại diện',
+            icon: "youtube-play"
+        },
+        {
+            id: '4',
+            title: 'Chọn ảnh đại diện',
+            icon: "image"
+        },
+        {
+            id: '5',
+            title: 'Xem ảnh đại diện',
+            icon: "image"
+        },
+        {
+            id: '6',
+            title: 'Tắt Bảo vệ ảnh đại diện',
+            icon: "shield"
+        },
+        {
+            id: '7',
+            title: 'Thêm thiết kế',
+            icon: "magic"
+        },
+        {
+            id: '8',
+            title: 'Đặt avatar làm ảnh đại diện',
+            icon: "image"
+        },
+    ];
+    const DATAWALL = [
+        {
+            id: '1',
+            title: 'Xem ảnh bìa',
+            icon: "image"
+        },
+        {
+            id: '2',
+            title: 'Tải ảnh lên',
+            icon: "upload"
+        },
+        {
+            id: '3',
+            title: 'Chọn ảnh trên facebook',
+            icon: "facebook-f"
+        },
+        {
+            id: '4',
+            title: 'Tạo nhóm ảnh bìa',
+            icon: "windows"
+        },
+        {
+            id: '5',
+            title: 'Chọn ảnh nghệ thuật',
+            icon: "magic"
+        },
+    ]
+    const renderItem = ({ item }) => (
+        <Item item={item} />
+    );
+    const Item = ({ item }) => (
+        <TouchableOpacity style={styles.item}>
+            <Icon name={item.icon} style={styles.icon}></Icon>
+            <Text style={styles.title}>{item.title}</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <>
             <ScrollView>
                 <View style={styles.header}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onPressWall}>
                         <Image
                             style={styles.wall}
                             source={
@@ -42,6 +127,8 @@ const Profile = ({ navigation }) => {
                                 require('../../public/img/avt2.jpg')
                             }
                         />
+
+
                     </TouchableOpacity>
                     {/* <View style={styles.camera}>
 
@@ -165,13 +252,60 @@ const Profile = ({ navigation }) => {
                 </View>
                 <View style={styles.bigLineStyle} />
                 <Feed />
-
-
+                {/* <SwipeImage show={ShowComment}
+                    animateModal={animateModal} /> */}
+                <SwipeUpDownModal
+                    modalVisible={ShowComment}
+                    PressToanimate={true}
+                    //if you don't pass HeaderContent you should pass marginTop in view of ContentModel to Make modal swipeable
+                    ContentModal={
+                        <View style={styles.containerContent}>
+                            <FlatList
+                                data={DATA}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.id.toString()}
+                            />
+                        </View>
+                    }
+                    HeaderStyle={styles.headerContent}
+                    ContentModalStyle={styles.Modal}
+                    HeaderContent={
+                        <View style={styles.containerHeader}>
+                            <Icon3 name="minus" />
+                        </View>
+                    }
+                    onClose={() => {
+                        setShowModelComment(false);
+                        setanimateModal(false);
+                    }}
+                />
+                <SwipeUpDownModal
+                    modalVisible={ShowEditWall}
+                    PressToanimate={true}
+                    //if you don't pass HeaderContent you should pass marginTop in view of ContentModel to Make modal swipeable
+                    ContentModal={
+                        <View style={styles.containerContentWall}>
+                            <FlatList
+                                data={DATAWALL}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.id.toString()}
+                            />
+                        </View>
+                    }
+                    HeaderStyle={styles.headerContentWall}
+                    ContentModalStyle={styles.ModalWall}
+                    HeaderContent={
+                        <View style={styles.containerHeaderWall}>
+                            <Icon3 name="minus" />
+                        </View>
+                    }
+                    onClose={() => {
+                        setShowEditWall(false);
+                        setanimateWallModal(false);
+                    }}
+                />
             </ScrollView>
-            <SwipeImage
-                showComment={ShowComment}
-                animeModal={animateModal}
-            />
+
         </>
     )
 }
@@ -288,8 +422,61 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 10,
         // marginLeft: 20,
-        // marginTop: 10,
-    }
+        //, marginTop: 10,
+    },
+    containerContent: { flex: 1, marginTop: 40 },
+    containerHeader: {
+        // flex: 1,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        backgroundColor: '#f8f8ff',
+        borderRadius: 10,
+    },
+    headerContent: {
+        marginTop: (windowHeight - 470),
+    },
+    Modal: {
+        backgroundColor: '#f8f8ff',
+        marginTop: (windowHeight - 470),
+    },
+    container: {
+        flex: 1,
+        marginTop: 10,
+    },
+    item: {
+        backgroundColor: '#f8f8ff',
+        padding: 13,
+        //marginVertical: 8,
+        //marginHorizontal: 16,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    title: {
+        fontSize: 20,
+    },
+    icon: {
+        fontSize: 20,
+        marginRight: 10,
+    },
+    containerContentWall: { flex: 1, marginTop: 40 },
+    containerHeaderWall: {
+        // flex: 1,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        backgroundColor: '#f8f8ff',
+        borderRadius: 10,
+    },
+    headerContentWall: {
+        marginTop: (windowHeight - 300),
+    },
+    ModalWall: {
+        backgroundColor: '#f8f8ff',
+        marginTop: (windowHeight - 300),
+    },
 
 })
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, DatePickerAndroid } from 'react-native'
 import { CommonStyle } from './commonStyle'
-import { pageName } from './../../navigator/constant.page';
+import { pageName } from '../../../navigator/constant.page';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-date-picker'
 

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Dimensions, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import { Dimensions, Image, StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { OptionFriendModal } from './optionFriendModal';
+import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
@@ -50,22 +55,72 @@ const NameTitle = styled.Text`
 `
 
 const MyFriend = (props) => {
+
+    const sheetRef = useRef(null);
+    let [ShowComment, setModelComment] = useState(false);
+    let [animateModal, setAnimateModal] = useState(false);
+
+    const showOption = () => {
+        console.log("click show");
+        setAnimateModal(true);
+        setModelComment(true)
+    }
+
     return (
         <Container>
-            <Avatar 
+            <Avatar
                 source={props.srcAvt}
-            /> 
-        <RightContent>
-            <RowTitle>
-                <NameTitle>{props.friendName}</NameTitle>
-                <TouchableOpacity>
-                    <Icon name={"ios-ellipsis-horizontal"} size={20}/> 
-                </TouchableOpacity>
-            </RowTitle>
-            <Text>{props.numOfMutual} bạn chung</Text>
-        </RightContent>
+            />
+            <RightContent>
+                <RowTitle>
+                    <NameTitle>{props.friendName}</NameTitle>
+                    <TouchableOpacity
+                        onPress={showOption}
+                    >
+                        <Icon name={"ios-ellipsis-horizontal"} size={20} />
+                    </TouchableOpacity>
+                </RowTitle>
+                <Text>{props.numOfMutual} bạn chung</Text>
+            </RightContent>
+
+            <SwipeUpDownModal
+                modalVisible={ShowComment}
+                PressToanimate={true}
+                HeaderContent={
+                    <View style={[styles.containerHeader, {color: "#777"}]}>
+                        <Icon3 name="minus" style={styles.swipeDown} />
+                    </View>
+                }
+                ContentModal={ <OptionFriendModal key={props.id}/> }
+                ContentModalStyle={styles.Modal}
+
+                onClose={() => {
+                    setModelComment(false);
+                    setAnimateModal(false);
+                }}
+            />
+
         </Container>
+
+
     );
 };
 
+
+const styles = StyleSheet.create({
+    Modal: {
+        marginTop: (HEIGHT-330),
+    },
+    containerHeader: {
+        display: "flex",
+        marginTop: (HEIGHT-400),
+    },
+    swipeDown: {
+        display: "flex",
+        textAlign: "center",
+        fontSize: 50,
+        height: 30,
+        color: "#777"
+    }
+})
 export { MyFriend };

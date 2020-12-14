@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
 import { pageName } from '../../navigator/constant.page'
+import { connect } from 'react-redux'
+import { AuthActions } from '../redux/action'
 
 const imageDefault = {
     uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
@@ -26,8 +28,11 @@ const LoginNewAccount = ({ navigation }) => {
 
     // }
     const onPressLogin = () => {
-
-        Alert.alert('Account: ' + acc + '\n Password: ' + password)
+        let loginData = {
+            phoneNumber: acc,
+            password: password
+        }
+        props.login(loginData);
     }
     const onPressForgotPW = () => {
         Alert.alert('Forgot pw')
@@ -192,4 +197,14 @@ const styles = StyleSheet.create({
 
 });
 
-export { LoginNewAccount };
+const mapStateToProps = state => {
+    const { auth } = state;
+    return auth;
+}
+const mapActions = {
+    login: AuthActions.login,
+
+}
+let connected = connect(mapStateToProps, mapActions)(LoginNewAccount);
+
+export { connected as LoginNewAccount }

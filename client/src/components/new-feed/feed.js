@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 
 import { View } from 'react-native'
 
@@ -7,8 +7,11 @@ import styled from 'styled-components/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import BottomSheet from 'reanimated-bottom-sheet';
 
 import Avatar from './avatar'
+import { Comments } from '../comment/comments'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Container = styled.View`
 	flex: 1;
@@ -93,10 +96,138 @@ const BottomDivider = styled.View`
 `
 
 const listPost = [1, 2, 3, 4]
-
-const Feed = () => {
+const CommentSheet = () => {
 	return (
+		<Comments />
+	)
+}
+const Feed = () => {
+	const sheetRef = useRef(null);
+	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+
+
+
+
+
+	return (
+		// <View>
+		// 	{
+		// 		listPost.map((e, key) => {
+		// 			return <Container key={key}>
+		// 				<Header>
+		// 					<Row>
+		// 						<Avatar
+		// 							source={require('./../../public/img/assets/user3.jpg')}
+		// 						/>
+		// 						<View style={{ paddingLeft: 10 }}>
+		// 							<User>Regi P</User>
+		// 							<Row>
+		// 								<Time>9m</Time>
+		// 								<Entypo
+		// 									name='dot-single'
+		// 									size={12}
+		// 									color='#747476'
+		// 								/>
+		// 								<Entypo
+		// 									name='globe'
+		// 									size={10}
+		// 									color='#747476'
+		// 								/>
+		// 							</Row>
+		// 						</View>
+		// 					</Row>
+
+		// 					<Entypo
+		// 						name='dots-three-horizontal'
+		// 						size={15}
+		// 						color='#222121'
+		// 					/>
+		// 				</Header>
+
+		// 				<Post>
+		// 					Crie na prática uma aplicação utilizando NextJS,
+		// 					ReactJS, React Native e Strap Api.
+		// 					</Post>
+		// 				<Photo source={require('./../../public/img/assets/post1.jpg')} />
+
+		// 				<Footer>
+		// 					<FooterCount>
+		// 						<Row>
+		// 							<IconCount>
+		// 								<AntDesign
+		// 									name='like1'
+		// 									size={12}
+		// 									color='#FFFFFF'
+		// 								/>
+		// 							</IconCount>
+		// 							<TextCount>88 likes</TextCount>
+		// 						</Row>
+		// 						<TextCount>2k comments</TextCount>
+
+		// 					</FooterCount>
+
+		// 					<Separator />
+
+		// 					<FooterMenu>
+		// 						<Button>
+		// 							<Icon>
+		// 								<AntDesign
+		// 									name='like2'
+		// 									size={20}
+		// 									color='#424040'
+		// 								/>
+		// 							</Icon>
+		// 							<Text>Like</Text>
+		// 						</Button>
+
+		// 						<TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
+		// 							<Icon>
+		// 								<MaterialCommunityIcons
+		// 									name='comment-outline'
+		// 									size={20}
+		// 									color='#424040'
+		// 								/>
+		// 							</Icon>
+		// 							<Text> Bình luậndsfg</Text>
+		// 						</TouchableOpacity>
+
+		// 						{/* <Button>
+		// 							<Icon>
+		// 								<MaterialCommunityIcons
+		// 									name='comment-outline'
+		// 									size={20}
+		// 									color='#424040'
+		// 								/>
+		// 							</Icon>
+		// 							<Text>Comment</Text>
+		// 						</Button> */}
+
+		// 						<Button>
+		// 							<Icon>
+		// 								<MaterialCommunityIcons
+		// 									name='share-outline'
+		// 									size={20}
+		// 									color='#424040'
+		// 								/>
+		// 							</Icon>
+		// 							<Text>Share</Text>
+		// 						</Button>
+		// 					</FooterMenu>
+		// 				</Footer>
+		// 				<BottomDivider />
+		// 			</Container>
+		// 		})
+		// 	}
+		// 	<BottomSheet
+		// 		ref={sheetRef}
+		// 		snapPoints={["80%", "50%", "0%"]}
+		// 		borderRadius={10}
+		// 		renderContent={Comments}
+		// 		onCloseEnd={enabledBottomClamp}
+		// 	/>
+		// </View>
 		<>
+
 			{
 				listPost.map((e, key) => {
 					return <Container key={key}>
@@ -149,6 +280,7 @@ const Feed = () => {
 									<TextCount>88 likes</TextCount>
 								</Row>
 								<TextCount>2k comments</TextCount>
+
 							</FooterCount>
 
 							<Separator />
@@ -165,7 +297,18 @@ const Feed = () => {
 									<Text>Like</Text>
 								</Button>
 
-								<Button>
+								<TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
+									<Icon>
+										<MaterialCommunityIcons
+											name='comment-outline'
+											size={20}
+											color='#424040'
+										/>
+									</Icon>
+									<Text> Bình luận</Text>
+								</TouchableOpacity>
+
+								{/* <Button>
 									<Icon>
 										<MaterialCommunityIcons
 											name='comment-outline'
@@ -174,7 +317,7 @@ const Feed = () => {
 										/>
 									</Icon>
 									<Text>Comment</Text>
-								</Button>
+								</Button> */}
 
 								<Button>
 									<Icon>
@@ -189,99 +332,25 @@ const Feed = () => {
 							</FooterMenu>
 						</Footer>
 						<BottomDivider />
+						{/* <BottomSheet
+							style={{ display: "none" }}
+							ref={sheetRef}
+							snapPoints={["80%", "0%", "0%"]}
+							borderRadius={10}
+							renderContent={CommentSheet}
+							onCloseEnd={enabledBottomClamp}
+						/> */}
 					</Container>
 				})
 			}
 
-
-			<Container>
-				<Header>
-					<Row>
-						<Avatar
-							source={require('./../../public/img/assets/user2.jpg')}
-						/>
-						<View style={{ paddingLeft: 10 }}>
-							<User>Wanessa J</User>
-							<Row>
-								<Time>9m</Time>
-								<Entypo
-									name='dot-single'
-									size={12}
-									color='#747476'
-								/>
-								<Entypo
-									name='globe'
-									size={10}
-									color='#747476'
-								/>
-							</Row>
-						</View>
-					</Row>
-
-					<Entypo
-						name='dots-three-horizontal'
-						size={15}
-						color='#222121'
-					/>
-				</Header>
-
-				<Post>Post user</Post>
-				<Photo source={require('./../../public/img/assets/post2.jpg')} />
-
-				<Footer>
-					<FooterCount>
-						<Row>
-							<IconCount>
-								<AntDesign
-									name='like1'
-									size={12}
-									color='#FFFFFF'
-								/>
-							</IconCount>
-							<TextCount>88 likes</TextCount>
-						</Row>
-						<TextCount>2k comments</TextCount>
-					</FooterCount>
-
-					<Separator />
-
-					<FooterMenu>
-						<Button>
-							<Icon>
-								<AntDesign
-									name='like2'
-									size={20}
-									color='#424040'
-								/>
-							</Icon>
-							<Text>Like</Text>
-						</Button>
-
-						<Button>
-							<Icon>
-								<MaterialCommunityIcons
-									name='comment-outline'
-									size={20}
-									color='#424040'
-								/>
-							</Icon>
-							<Text>Comment</Text>
-						</Button>
-
-						<Button>
-							<Icon>
-								<MaterialCommunityIcons
-									name='share-outline'
-									size={20}
-									color='#424040'
-								/>
-							</Icon>
-							<Text>Share</Text>
-						</Button>
-					</FooterMenu>
-				</Footer>
-				<BottomDivider />
-			</Container>
+			<BottomSheet
+				ref={sheetRef}
+				snapPoints={["80%", "50%", "0%"]}
+				borderRadius={10}
+				renderContent={CommentSheet}
+				onCloseEnd={enabledBottomClamp}
+			/>
 		</>
 	)
 }

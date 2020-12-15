@@ -69,8 +69,11 @@ exports.checkVerifyCode = async (req, res) => {
 
 
 exports.login = async (req, res) => {
-    try {
+    // try {
+        console.log('quang dz vl');
         const User = await AuthService.login(req.body);
+        
+        console.log('quang vẫn dtrai', User);
         if (User.success) {
             res.status(200).json({
                 success: true,
@@ -83,13 +86,13 @@ exports.login = async (req, res) => {
                 message: User.message
             })
         }
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: ['login_faile'],
-            content: error,
-        })
-    }
+    // } catch (error) {
+    //     res.status(400).json({
+    //         success: false,
+    //         message: ['login_faile'],
+    //         content: error,
+    //     })
+    // }
 }
 
 

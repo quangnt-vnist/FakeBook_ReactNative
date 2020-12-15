@@ -7,9 +7,11 @@ export const AuthService = {
 };
 
 async function login(data) {
+    console.log('data req', data);
     return sendRequest({
-        url: 'https://fakebook-server.herokuapp.com/login/auth/login',
+        // url: 'https://fakebook-server.herokuapp.com/login',
+        url: 'http://localhost:8000/login',
         method: 'POST',
-        data
-    }, false, false, 'auth')
+        data: data,
+    })
 }

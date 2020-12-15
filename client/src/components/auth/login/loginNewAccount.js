@@ -42,7 +42,7 @@ const LoginNewAccount = (props) => {
         props.navigation.navigate(pageName.sign_up.BEGIN)
     }
 
-    console.log('auth props', props);
+    // console.log('auth props', props);
 
     return (
         <View style={styles.container}>

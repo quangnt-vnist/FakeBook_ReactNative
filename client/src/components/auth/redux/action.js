@@ -1,6 +1,6 @@
 import { AuthService } from "./service";
 import { AuthConstants } from "./constant";
-import { storeData } from "../../../helper/requestHelper";
+import { storeData, getData } from "../../../helper/requestHelper";
 
 export const AuthActions = {
     login,
@@ -8,11 +8,13 @@ export const AuthActions = {
 
 function login(user) {
     return dispatch => {
-        console.log('user', user);
         dispatch({ type: AuthConstants.LOGIN_REQUEST });
+        console.log('user', user);
         AuthService.login(user)
-            .then(res => {
-                storeData('auth-token', res.data.content.token);
+            .then(async res => {
+                console.log('login ok',res);
+                await storeData('auth-token', res.data.content.token);
+                console.log('token', await getData('auth-token'));
                 dispatch({
                     type: AuthConstants.LOGIN_SUCCESS,
                     payload: res.data.content.user

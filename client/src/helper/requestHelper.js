@@ -4,7 +4,9 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeData = async (key, value) => {
+    console.log('quang dẹp trai ghê');
     try {
+        console.log('quang async storage');
         await AsyncStorage.setItem(key, value);
         console.log("store data success");
     } catch (e) {
@@ -34,6 +36,15 @@ export const removeStore = async (key) => {
     }
 }
 
+const AuthenticateHeader = async() => {
+    const token = await getData('auth-token');
+
+    return {
+        'auth-token': token,
+        'Content-Type': 'application/json'
+    }
+}
+
 /**
  * Hàm gọi request đến server
  * @param {*} data Cấu trúc của data bao gồm (url method, data)
@@ -42,23 +53,24 @@ export const removeStore = async (key) => {
  * @data : data truyền đi - có thể có hoặc không
  */
 export async function sendRequest(options) {
-
     const requestOptions = {
         url: options.url,
         method: options.method,
         data: options.data,
         params: options.params,
-        responseType: options.responseType,
+        // responseType: options.responseType,
         headers: await AuthenticateHeader()
     };
 
-    return axios(requestOptions).then(res => {
+    // console.log('request options', requestOptions);
 
-        console.log("success");
-        return Promise.resolve(res);
-    }).catch(err => {
-
-        console.log("error");
-        return Promise.reject(err);
+    return axios(requestOptions)
+    .then(res => {
+        console.log("axios success", res);
+        // return Promise.resolve(res);
+    })
+    .catch(err => {
+        console.log("axios error", err);
+        // return Promise.reject(err);
     })
 }

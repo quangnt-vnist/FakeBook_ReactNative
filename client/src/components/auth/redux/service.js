@@ -1,9 +1,6 @@
 import {
-    getStorage
-} from '../../../config';
-import {
     sendRequest
-} from '../../../helpers/requestHelper';
+} from '../../../helper/requestHelper';
 
 export const AuthService = {
     login,

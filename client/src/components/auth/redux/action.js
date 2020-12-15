@@ -1,5 +1,5 @@
-import { AuthService } from "./services";
-import { AuthConstants } from "./constants";
+import { AuthService } from "./service";
+import { AuthConstants } from "./constant";
 import { storeData } from "../../../helper/requestHelper";
 
 export const AuthActions = {
@@ -8,6 +8,7 @@ export const AuthActions = {
 
 function login(user) {
     return dispatch => {
+        console.log('user', user);
         dispatch({ type: AuthConstants.LOGIN_REQUEST });
         AuthService.login(user)
             .then(res => {

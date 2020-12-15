@@ -1,7 +1,7 @@
 
 import {
     AuthConstants
-} from "./constants";
+} from "./constant";
 
 export const CallApiStatus = {
     INITIALIZED: 0,
@@ -11,17 +11,15 @@ export const CallApiStatus = {
 var initState = {
     calledAPI: CallApiStatus.INITIALIZED,
     user: {},
-    links: [],
-    components: [],
     error: null,
     forgotPassword: false,
     reset_password: false,
-    showFiles: [],
     isLoading: false
 }
 
 export function auth(state = initState, action) {
 
+    console.log('action type:  ', action.type);
     switch (action.type) {
 
         case AuthConstants.LOGIN_REQUEST:

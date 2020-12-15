@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
-import { pageName } from '../../navigator/constant.page'
+import { pageName } from '../../../navigator/constant.page'
 import { connect } from 'react-redux'
 import { AuthActions } from '../redux/action'
 
@@ -13,9 +13,7 @@ const imageResize = {
     // uri: "./fb_reg.png"
 }
 
-
-
-const LoginNewAccount = ({ navigation }) => {
+const LoginNewAccount = (props) => {
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
     const [resizeImage, setResizeImage] = useState(false);
@@ -28,18 +26,23 @@ const LoginNewAccount = ({ navigation }) => {
 
     // }
     const onPressLogin = () => {
+        console.log('initial auth', props.auth);
         let loginData = {
             phoneNumber: acc,
             password: password
         }
         props.login(loginData);
+        console.log(props.auth);
+        if( props.auth?.isLoading === false ) props.navigation.navigate(pageName.main.MAIN);
     }
     const onPressForgotPW = () => {
         Alert.alert('Forgot pw')
     }
     const onPressCreateAcc = () => {
-        navigation.navigate(pageName.sign_up.BEGIN)
+        props.navigation.navigate(pageName.sign_up.BEGIN)
     }
+
+    console.log('auth props', props);
 
     return (
         <View style={styles.container}>

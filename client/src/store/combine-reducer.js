@@ -1,7 +1,7 @@
-import { combineReducer } from 'redux';
+import { combineReducers } from 'redux';
 import { auth } from '../components/auth/redux/reducer';
 import { removeStore } from '../helper/requestHelper'
-const appReducer = combineReducer({
+const appReducer = combineReducers({
     auth,
 })
 const rootReducer = (state, action) => {

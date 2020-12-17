@@ -52,6 +52,35 @@ export function auth(state = initState, action) {
                 error: action.payload
             };
 
+        case AuthConstants.GET_VERIFY_CODE_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case AuthConstants.GET_VERIFY_CODE_SUCCESS:
+            return {
+                ...state,
+                verifycode: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case AuthConstants.GET_VERIFY_CODE_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                user: {
+                    _id: null,
+                    name: null,
+                    email: null,
+                    roles: null,
+                },
+                error: action.payload
+            };
+
 
         default:
             return {

@@ -61,7 +61,11 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
-                <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} />
+                <Stack.Screen 
+                    name={pageName.LOG_IN_NEW_ACC} 
+                    component={LoginNewAccount} 
+                    options={{ headerShown: false }}
+                />
 
                 {/* Main container */}
                 <Stack.Screen

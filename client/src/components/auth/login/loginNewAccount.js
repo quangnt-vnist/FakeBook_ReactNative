@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
 import { pageName } from '../../../navigator/constant.page'
 import { connect } from 'react-redux'
 import { AuthActions } from '../redux/action'
+import { getData } from '../../../helper/requestHelper'
+import axios from 'axios'
 
 const imageDefault = {
-    uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
+    // uri: "https://64.media.tumblr.com/73c96b375ab835c132f831fc3cd9db03/tumblr_pvr2anf2pk1w89qpgo1_1280.jpg"
+    src: require('./../../../public/img/assets/logo.png')
 }
 const imageResize = {
     uri: "http://nutrientsmdvn.com/image/catalog/nutrient/facebook.png"
@@ -25,15 +28,36 @@ const LoginNewAccount = (props) => {
     //     Alert.alert('change image flex to 2');
 
     // }
+    const userId = getData('userId');
+    useEffect(()=>{
+        userId && props.navigation.navigate(pageName.main.MAIN);
+    }, [])
+
+    useEffect(()=>{
+        props.auth?.user?.id && props.navigation.navigate(pageName.main.MAIN);
+    }, [props.auth])
+
     const onPressLogin = () => {
-        console.log('initial auth', props.auth);
         let loginData = {
             phoneNumber: acc,
             password: password
         }
         props.login(loginData);
-        console.log(props.auth);
-        if( props.auth?.isLoading === false ) props.navigation.navigate(pageName.main.MAIN);
+        // props.getVerifyCode("1234567890");
+        
+        // axios.get('https://jsonplaceholder.typicode.com/posts/1')
+        //     .then(function (response) {
+        //         // handle success
+        //         console.log(JSON.stringify(response.data));
+        //     }).catch(function (error) {
+        //         // handle error
+        //         console.log(error.message);
+        //     });
+
+        // if( props.auth?.isLoading === false && props.auth?.user?.id) props.navigation.navigate(pageName.main.MAIN);
+        // else {
+        //     console.log('bị lỗi gì đó, khôn chuyển được trang\n', props.auth);
+        // }
     }
     const onPressForgotPW = () => {
         Alert.alert('Forgot pw')
@@ -42,10 +66,13 @@ const LoginNewAccount = (props) => {
         props.navigation.navigate(pageName.sign_up.BEGIN)
     }
 
-    // console.log('auth props', props);
-
+    console.log('auth\n\n', props.auth);
     return (
         <View style={styles.container}>
+            <StatusBar
+                backgroundColor="#fff"
+                barStyle="dark-content"
+            />
             <ImageBackground
                 source={resizeImage ? imageResize : imageDefault}
                 style={resizeImage ? styles.imageOnFocusInput : styles.image}
@@ -202,11 +229,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     const { auth } = state;
-    return auth;
+    return { auth };
 }
 const mapActions = {
     login: AuthActions.login,
-
+    getVerifyCode: AuthActions.getVerifyCode,
 }
 let connected = connect(mapStateToProps, mapActions)(LoginNewAccount);
 

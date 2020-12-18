@@ -58,11 +58,11 @@ exports.getPost = async (id) => {
     return post
 };
 
-exports.setComment = async (id, data) => {
+exports.setComment = async (id, userId, data) => {
     let post = await Post.findByIdAndUpdate(id, 
         { $push: { 
             comment: {
-                creator: data.creator,
+                creator: userId,
                 described: data.described,
                 createAt: new Date()
             }   

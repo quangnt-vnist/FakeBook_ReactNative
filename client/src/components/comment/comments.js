@@ -10,40 +10,41 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Feather';
 
 const Comments = ({ navigation }) => {
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
 
-    const sheetRef = useRef(null);
-    const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+    // const sheetRef = useRef(null);
+    // const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
 
-    const onPressTextInput = () => {
-        setEnableBottomCamp(enabledBottomClamp => enabledBottomClamp = !enabledBottomClamp);
+    // const onPressTextInput = () => {
+    //     setEnableBottomCamp(enabledBottomClamp => enabledBottomClamp = !enabledBottomClamp);
 
-    }
+    // }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1500)
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setLoading(false);
+    //     }, 1500)
+    // }, [])
 
     return (
-        <View style={{ height: "100%", backgroundColor: "#999" }}>
+        // <View style={{ height: "100%", backgroundColor: "#999" }}>
 
-            <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} style={styles.p2}>
-                <Text
-                    style={styles.input}
-                > Xem binh luan
-                </Text>
-            </TouchableOpacity>
+        //     <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} style={styles.p2}>
+        //         <Text
+        //             style={styles.input}
+        //         > Xem binh luan
+        //         </Text>
+        //     </TouchableOpacity>
 
-            <BottomSheet
-                ref={sheetRef}
-                snapPoints={["80%", "50%", "0%"]}
-                borderRadius={10}
-                renderContent={loading ? LoadingComments : CommentList}
-                onCloseEnd={enabledBottomClamp}
-            />
-        </View>
+        //     <BottomSheet
+        //         ref={sheetRef}
+        //         snapPoints={["80%", "50%", "0%"]}
+        //         borderRadius={10}
+        //         renderContent={loading ? LoadingComments : CommentList}
+        //         onCloseEnd={enabledBottomClamp}
+        //     />
+        // </View>
+        <CommentList />
     )
 
 }

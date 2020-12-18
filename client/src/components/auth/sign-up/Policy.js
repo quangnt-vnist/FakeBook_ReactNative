@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { CommonStyle } from './commonStyle'
-import { pageName } from './../../navigator/constant.page'
+import { pageName } from './../../../navigator/constant.page'
 
 const Policy = ({ navigation }) => {
     const onPressNext = ()=>{

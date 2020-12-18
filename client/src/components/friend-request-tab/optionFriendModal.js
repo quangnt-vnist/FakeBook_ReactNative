@@ -12,7 +12,7 @@ const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.View`
     backgroundColor: #fff; 
-    height: 310px;
+    height: ${ HEIGHT/**385px*/}px;
     borderTopLeftRadius: 10px; 
     borderTopRightRadius: 10px;
 `
@@ -91,7 +91,7 @@ const OptionFriendModal = () => {
                     <MaterialIcon name="close-box-multiple-outline" color="#111" size={23} />
                 </IconView>
                 <RightContent
-                    onPress={() => { alert("Linh chó điên") }}
+                    onPress={() => { alert("Bỏ theo dõi!!!") }}
                 >
                     <OptionTitle>Bỏ theo dõi Quang</OptionTitle>
                     <Text>Không hiển thị bài viết của Quang, nhưng vẫn là bạn bè</Text>
@@ -115,7 +115,7 @@ const OptionFriendModal = () => {
                     <Text>Xóa Quang khỏi danh sách bạn bè</Text>
                 </RightContent>
             </Row>
-
+            <Separator />
         </Container>
     );
 };

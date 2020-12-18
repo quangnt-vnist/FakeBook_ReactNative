@@ -1,5 +1,5 @@
-import React from 'react';
-import { StatusBar, ScrollView, RefreshControl } from "react-native";
+import React, { useEffect } from 'react';
+import { StatusBar, ScrollView, RefreshControl, LogBox } from "react-native";
 import styled from "styled-components/native";
 
 import AppBar from './appBar';
@@ -20,8 +20,13 @@ const wait = (timeout) => {
 }
 
 const NewFeed = ({ navigation }) => {
+
     const [refreshing, setRefreshing] = React.useState(false);
 
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    }, []);
+    
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         console.log('qangxt');
@@ -41,6 +46,7 @@ const NewFeed = ({ navigation }) => {
             />
             <Container>
                 <ScrollView
+                    showsVerticalScrollIndicator={false}
                     refreshControl={
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                     }

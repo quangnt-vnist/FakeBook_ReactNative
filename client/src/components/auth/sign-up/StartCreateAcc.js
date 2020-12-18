@@ -1,9 +1,9 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image, ImageBackground, Button, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { pageName } from './../../navigator/constant.page'
+import { pageName } from './../../../navigator/constant.page'
 
-const FB_BG_REG = require('../../public/img/create_acc.png')
+const FB_BG_REG = require('../../../public/img/create_acc.png')
 
 // const onPressBtnNext = () => {
 //     // Alert.alert('Button Next pressed')

@@ -8,7 +8,7 @@ import Icon5 from 'react-native-vector-icons/FontAwesome5';
 // from "https://github.com/software-mansion/react-native-reanimated"
 import Animated, { Easing } from 'react-native-reanimated'
 import { Dimensions, StyleSheet, TextInput, TouchableHighlight, View, Image, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { pageName } from '../../navigator/constant.page';
 const { Value, timing } = Animated;
 
 // Calculate window size
@@ -53,91 +53,12 @@ const _back_button_opacity = new Value(0)
 const _content_translate_y = new Value(height)
 const _content_opacity = new Value(0)
 
-const AppBar = () => {
+const AppBar = (props) => {
 
-    const [isFocused, setFocused] = useState(false);
-    const [keyword, setKeyword] = useState("");
-    const inputSearch = useRef(null);
+    // console.log('props', props.navigation);
 
-    // console.log('input', _input_box_translate_x, _back_button_opacity, _content_opacity, _content_translate_y);
-
-    const _onFocus = () => {
-        // update state
-        setFocused(true);
-        console.log('focus', isFocused);
-        // animation config
-        // input box
-        const input_box_translate_x_config = {
-            duration: 200,
-            toValue: 0,
-            easing: Easing.inOut(Easing.ease)
-        }
-        const back_button_opacity_config = {
-            duration: 200,
-            toValue: 1,
-            easing: Easing.inOut(Easing.ease)
-        }
-
-        // content
-        const content_translate_y_config = {
-            duration: 0,
-            toValue: 0,
-            easing: Easing.inOut(Easing.ease)
-        }
-        const content_opacity_config = {
-            duration: 200,
-            toValue: 1,
-            easing: Easing.inOut(Easing.ease)
-        }
-
-        // run animation
-        timing(_input_box_translate_x, input_box_translate_x_config).start()
-        timing(_back_button_opacity, back_button_opacity_config).start()
-        timing(_content_translate_y, content_translate_y_config).start()
-        timing(_content_opacity, content_opacity_config).start()
-
-        // force focus
-        // const inputSearch = useRef();
-        inputSearch.current.focus();
-    }
-
-    const _onBlur = () => {
-        // update state
-        setFocused(false);
-        // animation config
-        // input box
-        const input_box_translate_x_config = {
-            duration: 200,
-            toValue: width,
-            easing: Easing.inOut(Easing.ease)
-        }
-        const back_button_opacity_config = {
-            duration: 50,
-            toValue: 0,
-            easing: Easing.inOut(Easing.ease)
-        }
-
-        // content
-        const content_translate_y_config = {
-            duration: 0,
-            toValue: height,
-            easing: Easing.inOut(Easing.ease)
-        }
-        const content_opacity_config = {
-            duration: 200,
-            toValue: 0,
-            easing: Easing.inOut(Easing.ease)
-        }
-
-        // run animation
-        timing(_input_box_translate_x, input_box_translate_x_config).start()
-        timing(_back_button_opacity, back_button_opacity_config).start()
-        timing(_content_translate_y, content_translate_y_config).start()
-        timing(_content_opacity, content_opacity_config).start()
-
-        // force 
-        inputSearch.current.blur();
-
+    const onPressSearch = () => {
+        props.navigation.navigate(pageName.main.SEARCH);
     }
 
     return <>
@@ -145,7 +66,7 @@ const AppBar = () => {
             <Text>facebook</Text>
             <Row>
                 <Button
-                    onPress={() => { alert("hello") }}
+                    onPress={onPressSearch}
                     // onPress={_onFocus}
                 >
                     <Icon name='search' size={20} color="#111" />
@@ -160,3 +81,90 @@ const AppBar = () => {
 }
 
 export default AppBar;
+
+// // sử dụng search bằng animated --- nhưng đang lỗi :))
+
+// const [isFocused, setFocused] = useState(false);
+// const [keyword, setKeyword] = useState("");
+// const inputSearch = useRef(null);
+
+// // console.log('input', _input_box_translate_x, _back_button_opacity, _content_opacity, _content_translate_y);
+
+// const _onFocus = () => {
+//     // update state
+//     setFocused(true);
+//     console.log('focus', isFocused);
+//     // animation config
+//     // input box
+//     const input_box_translate_x_config = {
+//         duration: 200,
+//         toValue: 0,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+//     const back_button_opacity_config = {
+//         duration: 200,
+//         toValue: 1,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+
+//     // content
+//     const content_translate_y_config = {
+//         duration: 0,
+//         toValue: 0,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+//     const content_opacity_config = {
+//         duration: 200,
+//         toValue: 1,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+
+//     // run animation
+//     timing(_input_box_translate_x, input_box_translate_x_config).start()
+//     timing(_back_button_opacity, back_button_opacity_config).start()
+//     timing(_content_translate_y, content_translate_y_config).start()
+//     timing(_content_opacity, content_opacity_config).start()
+
+//     // force focus
+//     // const inputSearch = useRef();
+//     inputSearch.current.focus();
+// }
+
+// const _onBlur = () => {
+//     // update state
+//     setFocused(false);
+//     // animation config
+//     // input box
+//     const input_box_translate_x_config = {
+//         duration: 200,
+//         toValue: width,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+//     const back_button_opacity_config = {
+//         duration: 50,
+//         toValue: 0,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+
+//     // content
+//     const content_translate_y_config = {
+//         duration: 0,
+//         toValue: height,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+//     const content_opacity_config = {
+//         duration: 200,
+//         toValue: 0,
+//         easing: Easing.inOut(Easing.ease)
+//     }
+
+//     // run animation
+//     timing(_input_box_translate_x, input_box_translate_x_config).start()
+//     timing(_back_button_opacity, back_button_opacity_config).start()
+//     timing(_content_translate_y, content_translate_y_config).start()
+//     timing(_content_opacity, content_opacity_config).start()
+
+//     // force 
+//     inputSearch.current.blur();
+
+// }

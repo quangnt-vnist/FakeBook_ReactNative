@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { pageName } from './../../navigator/constant.page';
+import { pageName } from './../../../navigator/constant.page';
 
 const Name = ({ navigation }) => {
 

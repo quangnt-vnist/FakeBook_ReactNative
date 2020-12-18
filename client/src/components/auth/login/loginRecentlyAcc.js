@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ImageBackground, ListView } from 'react-
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CommonStyle } from '../sign-up/commonStyle';
-import { pageName } from '../../navigator/constant.page';
+import { pageName } from '../../../navigator/constant.page';
 
 const LoginRecentlyAcc = ({ navigation }) => {
 

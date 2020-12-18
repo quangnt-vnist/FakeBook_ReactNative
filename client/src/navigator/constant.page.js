@@ -9,6 +9,7 @@ export const pageName = {
 
     main: {
         MAIN: "Main app content",
+        SEARCH: "Tìm kiếm"
     },
 
     feed: {

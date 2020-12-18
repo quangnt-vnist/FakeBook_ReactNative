@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import Feed from '../new-feed/feed';
 import ToolBar from '../new-feed/toolBar';
-import { SwipeImage } from './swipeImages';
 import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,7 +25,6 @@ const Profile = ({ navigation }) => {
     }
     const onPressWall = () => {
         setShowEditWall(true);
-        // setanimateModal(true);
     }
 
     const DATA = [

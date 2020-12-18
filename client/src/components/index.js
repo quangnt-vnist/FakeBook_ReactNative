@@ -7,18 +7,18 @@ import { WatchTab } from './watchs-tab'
 import { NotificationTab } from './notification-tab'
 import { OptionTab } from './option-tab'
 
-import { LoginNewAccount } from './login/loginNewAccount'
-import { LoginRecentlyAcc } from './login/loginRecentlyAcc'
+import { LoginNewAccount } from './auth/login/loginNewAccount'
+import { LoginRecentlyAcc } from './auth/login/loginRecentlyAcc'
 
-import { StartCreateAcc } from './sign-up/StartCreateAcc'
-import { Birthday } from './sign-up/Birthday'
-import { Name } from './sign-up/Name'
-import { Password } from './sign-up/Password'
-import { PhoneNumber } from './sign-up/PhoneNumber'
-import { Policy } from './sign-up/Policy'
-import { ConfirmAcc } from './sign-up/ConfirmAcc'
-import { Remind } from './sign-up/Remind'
-import { Remember } from './sign-up/Remember'
+import { StartCreateAcc } from './auth/sign-up/StartCreateAcc'
+import { Birthday } from './auth/sign-up/Birthday'
+import { Name } from './auth/sign-up/Name'
+import { Password } from './auth/sign-up/Password'
+import { PhoneNumber } from './auth/sign-up/PhoneNumber'
+import { Policy } from './auth/sign-up/Policy'
+import { ConfirmAcc } from './auth/sign-up/ConfirmAcc'
+import { Remind } from './auth/sign-up/Remind'
+import { Remember } from './auth/sign-up/Remember'
 import { CreatePost } from './post/create-post'
 import { Feeling } from './post/feeling'
 import { Activity } from './post/activity'
@@ -36,6 +36,9 @@ import { ListFriends } from './friend-request-tab/listFriends';
 // report
 import { ReportPost } from './report';
 import { ConfirmReport } from './report/confirmReport';
+
+// search page
+import { SearchPage } from './search-bar-common'
 
 
 export {
@@ -81,5 +84,8 @@ export {
     // report post
     ReportPost,
     ConfirmReport,
+
+    // search
+    SearchPage,
 
 }

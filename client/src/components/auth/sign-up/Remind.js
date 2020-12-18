@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Modal from 'react-native-modal';
-import { pageName } from '../../navigator/constant.page'
+import { pageName } from '../../../navigator/constant.page'
 
 const Remind = ({ navigation }) => {
     const [isVisible, setIsVisible] = useState(true);

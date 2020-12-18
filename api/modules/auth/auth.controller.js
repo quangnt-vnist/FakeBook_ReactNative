@@ -71,6 +71,7 @@ exports.checkVerifyCode = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const User = await AuthService.login(req.body);
+        
         if (User.success) {
             res.status(200).json({
                 success: true,

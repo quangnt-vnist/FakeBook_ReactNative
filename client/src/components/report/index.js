@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/Octicons';
 import Icon2 from 'react-native-vector-icons/Entypo';
-import { CommonStyle } from '../sign-up/commonStyle';
+import { CommonStyle } from '../auth/sign-up/commonStyle';
 import { pageName } from '../../navigator/constant.page';
 import Modal from 'react-native-modal';
 

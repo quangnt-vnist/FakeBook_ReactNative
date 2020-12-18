@@ -20,7 +20,7 @@ import AppBar from '../new-feed/appBar';
 
 const MainTopTab = createMaterialTopTabNavigator();
 
-const MainContainer = ({ navigtion }) => {
+const MainContainer = (props) => {
 
     const tabBarOptions = {
         showIcon: true,
@@ -41,7 +41,7 @@ const MainContainer = ({ navigtion }) => {
 
     return (
         <>
-            <AppBar />
+            <AppBar {...props}/>
             <MainTopTab.Navigator
                 tabBarPosition='top'
                 // initialRouteName="Watch"

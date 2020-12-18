@@ -8,10 +8,11 @@ import { FlatList } from 'react-native-gesture-handler';
 import { pageName } from '../../navigator/constant.page'
 const Feeling = ({ navigation }) => {
 
-    const onPressFeeling = () => {
-        navigation.navigate(pageName.post_NEW_POST)
+    const onPressFeeling = (item) => {
+        //console.log('iiiiiiiiiiiiiiiiiiiii', item)
+        navigation.navigate(pageName.post_NEW_POST, item)
     }
-    const onPressActivity = () => {
+    const onPressActivity = (item) => {
         navigation.navigate(pageName.post_activity)
     }
     const data = [
@@ -111,7 +112,7 @@ const Feeling = ({ navigation }) => {
     const Item = ({ item }) => (
         <View style={styles.items}>
             <TouchableOpacity style={{ flexDirection: 'row' }}
-                onPress={onPressFeeling}
+                onPress={() => onPressFeeling(item)}
             >
                 <Emoji name={item.icon} style={{ fontSize: 20 }} />
                 <Text style={styles.status}>{item.status}</Text>
@@ -119,7 +120,10 @@ const Feeling = ({ navigation }) => {
 
         </View>
     );
+
     return (
+
+
         <>
             <View>
                 <TextInput
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
 
     },
     items: {
-        maxWidth: Dimensions.get('window').width/2,
+        maxWidth: Dimensions.get('window').width / 2,
         flex: 0.5,
         padding: 20,
         backgroundColor: '#fff',
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
     icon: {
         color: `#ffd700`,
         fontSize: 30,
-       // marginRight: 10,
+        // marginRight: 10,
     }
 
 })

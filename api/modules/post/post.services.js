@@ -14,7 +14,7 @@ exports.addPost = async (id, data, files) => {
     return post;
 };
 
-exports.editPost = async (creator, id, data, files = undefined) => {
+exports.editPost = async (id, data, files = undefined) => {
     let post = await Post.findById({_id: id})
     post.described = data.described
     post.modified = new Date()

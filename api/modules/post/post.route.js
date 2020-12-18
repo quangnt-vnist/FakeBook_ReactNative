@@ -9,7 +9,7 @@ router.patch("/edit-post/:id", auth, uploadFile([{name:'post', path:'/posts'}], 
 router.delete("/delete-post/:id", postController.deletePost)
 router.get("/get-post/:id", postController.getPost)
 
-router.post("/set-comment/:id", postController.setComment)
+router.post("/set-comment/:id", auth, postController.setComment)
 router.get("/get-comment/:id", postController.getComment)
 
 router.post("/like-post/:id", auth, postController.likePost)

@@ -96,7 +96,7 @@ exports.login = async (req, res) => {
 
 exports.logout = async(req, res) => {
     try {
-        var logout = await AuthService.logout(req.body);
+        var logout = await AuthService.logout(req.user._id, req.body.token);
         res.status(200).json({
             success: true,
             messages: ['logout_success'],

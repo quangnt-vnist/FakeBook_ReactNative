@@ -156,9 +156,9 @@ exports.login = async (data) => {
 
 }
 
-exports.logout = async(data) => {
-    var user = await User.findById(data.id);
-    var position = await user.token.indexOf(data.token);
+exports.logout = async(id, token) => {
+    var user = await User.findById(id);
+    var position = await user.token.indexOf(token);
     user.token.splice(position, 1);
     user.save();
     return user;

@@ -93,7 +93,7 @@ exports.getPost = async (req, res) => {
 
 exports.setComment = async (req, res) => {
     try {
-        const post = await postService.setComment( req.params.id, req.body );
+        const post = await postService.setComment( req.params.id, req.user._id, req.body );
         
         res.status(200).json({
             success: true,

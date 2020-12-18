@@ -1,5 +1,5 @@
 import React, { Component, useRef, useState } from 'react';
-import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -10,15 +10,25 @@ import { GridImage } from './gridImage';
 import Emoji from 'react-native-emoji';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const CreatePost = ({ route, navigation }) => {
+const CreatePost = ({ navigation, route }) => {
 
     const sheetRef = useRef(null);
     const [images, setImages] = useState([]);
-    const [feeling, setFeeling] = useState(route.params);
-
-    const onChangeImage = (image) => {
-        setImages(image)
-    }
+    const [feeling, setFeeling] = useState({
+        title: "",
+        icon: "",
+        type: "",
+    });
+    React.useEffect(() => {
+        if (route.params) {
+            setFeeling({
+                title: route.params.status,
+                icon: route.params.icon,
+                type: 1,
+            })
+        }
+    }, [route.params]);
+    console.log('routtt', route.params);
 
     const renderContent = () => (
         <View
@@ -79,7 +89,6 @@ const CreatePost = ({ route, navigation }) => {
     }
 
     const onPressTextInput = () => {
-        console.log('hello');
         sheetRef.current.snapTo(2)
     }
     // React.useLayoutEffect(() => {
@@ -91,21 +100,23 @@ const CreatePost = ({ route, navigation }) => {
     // }, [navigation]);
 
     const chooseFile = () => {
-        // let options = {
-        //     title: 'Select Image',
-        //     customButtons: [
-        //         {
-        //             name: 'customOptionKey',
-        //             title: 'Choose Photo from Custom Option'
-        //         },
-        //     ],
-        //     // storageOptions: {
-        //     //     skipBackup: true,
-        //     //     path: 'images',
-        //     // },
-        // };
-        ImagePicker.showImagePicker((response) => {
-            //  console.log('Response = ', response);
+        let mediaType;
+        let options = {
+            title: 'Select Image',
+            customButtons: [
+                {
+                    name: 'customOptionKey',
+                    title: 'Choose Photo from Custom Option'
+                },
+
+            ],
+            mediaType: "video",
+            // storageOptions: {
+            //     skipBackup: true,
+            //     path: 'images',
+            // },
+        };
+        ImagePicker.showImagePicker(options, (response) => {
 
             if (response.didCancel) {
                 console.log('User cancelled image picker');
@@ -118,9 +129,14 @@ const CreatePost = ({ route, navigation }) => {
                 );
                 alert(response.customButton);
             } else {
-                let source = response;
-                console.log('sssssss', source.uri);
-                setImages([...images, source.uri]);
+                if (images.length < 4) {
+                    let source = response;
+                    console.log('sssssss', source.uri);
+                    setImages([...images, source.uri]);
+                }
+                else {
+                    Alert.alert("Hệ thống chỉ cho phép upload 4 ảnh");
+                }
                 sheetRef.current.snapTo(2);
             }
 
@@ -154,7 +170,7 @@ const CreatePost = ({ route, navigation }) => {
         setImages(images);
     };
 
-    let ri;
+    console.log('fffff', feeling)
     return (
         <>
             <View style={styles.p1}>
@@ -165,14 +181,21 @@ const CreatePost = ({ route, navigation }) => {
                     }
                 />
                 <View style={styles.name}>
-                    <Text style={{ fontWeight: 'bold', }}>Nguyễn Xuân Thành</Text>
-                    {/* <View>
-                        <Text> - Đang</Text>
-                        <Emoji name={feeling.icon} style={{ fontSize: 20 }} />
-                        <Text>{feeling.status}</Text>
-                    </View> */}
+                    <View style={{}}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text style={{ fontWeight: 'bold', }}>Nguyễn Xuân Thành</Text>
+                            <View style={{ flexDirection: "row" }}>
+                                {feeling.title ?
+                                    <Text> - Đang</Text> : <></>}
+                                <Emoji name={feeling.icon ? feeling.icon : "kissing_heart"} style={{ fontSize: 20 }} />
+                                {feeling.title ?
+                                    <Text>{feeling.type === 1 ? "Cảm thấy" : ""}</Text> : <></>}
+                            </View>
+                        </View>
+                        <Text style={{ fontWeight: "bold" }}>{feeling.title}</Text>
+                    </View>
                     <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={{ height: 25, width: 80, borderRadius: 10, alignItems: "center", borderColor: `#a9a9a9` }}
                         >
                             <Text style={{ fontWeight: "bold", color: `#a9a9a9`, }}>Công khai</Text>
@@ -181,7 +204,7 @@ const CreatePost = ({ route, navigation }) => {
                             style={{ height: 25, width: 80, borderRadius: 10, alignItems: "center", marginLeft: 10, }}
                         >
                             <Text style={{ fontWeight: "bold", color: `#a9a9a9` }}>+Album</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
             </View>
@@ -260,7 +283,8 @@ const styles = StyleSheet.create({
     name: {
         marginLeft: 10,
         marginTop: 10,
-        flexDirection: 'column'
+        flexDirection: 'row',
+        // backgroundColor: ,
     },
     p2: {
         flex: 6,

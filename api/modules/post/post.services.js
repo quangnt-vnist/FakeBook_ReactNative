@@ -93,3 +93,32 @@ exports.likePost = async (userId, id) => {
     post = await Post.findById({_id: id})
     return post
 }
+
+exports.unlikePost = async (userId, id) => {
+    let post = await Post.findByIdAndUpdate(id, 
+        { $pull: 
+            { 
+                like: {
+                    creator: userId
+                }   
+            },
+        })
+
+    post = await Post.findById({_id: id})
+    return post
+}
+
+exports.reportPost = async (userId, id, description) => {
+    let post = await Post.findByIdAndUpdate(id, 
+        { $push: { 
+            reported: {
+                creator: userId,
+                createAt: new Date(),
+                description: description
+            }   
+        },
+    })
+
+    post = await Post.findById({_id: id})
+    return post
+}

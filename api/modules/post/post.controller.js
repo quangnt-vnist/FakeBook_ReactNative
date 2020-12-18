@@ -144,3 +144,39 @@ exports.likePost = async (req, res) => {
         });
     }
 };
+
+exports.unlikePost = async (req, res) => {
+    try {
+        const post = await postService.unlikePost( req.user._id, req.params.id );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['unlike_post_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['unlike_post_faile'],
+            content: error
+        });
+    }
+};
+
+exports.reportPost = async (req, res) => {
+    try {
+        const post = await postService.reportPost(req.user._id, req.params.id, req.body.description );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['report_post_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['report_post_faile'],
+            content: error
+        });
+    }
+};

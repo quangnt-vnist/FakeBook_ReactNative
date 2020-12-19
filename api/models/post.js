@@ -51,7 +51,19 @@ const PostSchema = new Schema({
     // Khóa bình luận
     cancomment: {
         type: String
-    }
+    },
+    reported: [{
+        createAt: {
+            type: Date
+        },
+        creator: {
+            type: String,
+            ref: "users"
+        },
+        description: {
+            type: String,
+        }
+    }]
 })
 
 module.exports = mongoose.model('posts', PostSchema);

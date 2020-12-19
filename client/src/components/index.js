@@ -33,6 +33,9 @@ import { AllRequest } from './friend-request-tab/allRequest';
 import { SuggestFriend } from './friend-request-tab/suggestFriend';
 import { ListFriends } from './friend-request-tab/listFriends';
 
+// watch tab
+import ViewVideo from "./watchs-tab/viewVideo";
+
 // report
 import { ReportPost } from './report';
 import { ConfirmReport } from './report/confirmReport';
@@ -53,6 +56,9 @@ export {
     AllRequest,
     SuggestFriend,
     ListFriends,
+
+    // watch 
+    ViewVideo,
 
     // Login
     LoginNewAccount,

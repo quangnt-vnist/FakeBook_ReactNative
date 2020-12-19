@@ -133,11 +133,24 @@ const SearchPage = (props) => {
     useLayoutEffect(() => {
         props.navigation.setOptions({
             headerRight: () => (
-                <HeaderSearch />
+                <Row>
+                    <InputSearch
+                        placeholder={"Tìm kiếm..."}
+                        onChangeText={(txt) => {
+                            onChangeText(txt)
+                        }}
+                    />
+                    <RemoveTxtButton
+                        onPress={setTextSearch("")}
+                    >
+                        <Icon name='remove' size={20} color="#ccc" />
+                    </RemoveTxtButton>
+
+                </Row>
             ),
         });
 
-    }, [props.navigation, setTextSearch]);
+    }, [props.navigation]);
 
     return (
         <ScrollView
@@ -145,7 +158,7 @@ const SearchPage = (props) => {
             style={{ backgroundColor: "#fff" }}
         >
             <Container>
-                <Text>Count: {txtSearch} ----&gt; txt: {TXT} </Text>
+                {/* <Text>Count: {txtSearch} ----&gt; txt: {TXT} </Text> */}
                 <RowTitle>
                     <Text style={{ fontWeight: "700", fontSize: 18 }}>Mới đây</Text>
                     <TouchableOpacity>

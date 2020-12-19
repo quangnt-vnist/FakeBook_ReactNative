@@ -52,6 +52,7 @@ import {
 
     // search friend page
     SearchPage,
+    ViewVideo,
 
 } from '../components';
 
@@ -87,6 +88,15 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.friend_tab.SUGGEST_FRIEND} component={SuggestFriend} />
                 <Stack.Screen name={pageName.friend_tab.All_FRIEND} component={ListFriends} />
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
+
+                {/* watch tab */}
+                <Stack.Screen name={pageName.watch_tab.PLAY_VIDEO} component={ViewVideo} 
+                    options={{
+                        // headerShown: false, 
+                        headerTitle: "Xem video khác"
+                    }}
+                />
+
 
                 {/* Commments */}
                 <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />

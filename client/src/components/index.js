@@ -9,6 +9,7 @@ import { OptionTab } from './option-tab'
 
 import { LoginNewAccount } from './auth/login/loginNewAccount'
 import { LoginRecentlyAcc } from './auth/login/loginRecentlyAcc'
+import { Welcome } from './auth/login/welcome'
 
 import { StartCreateAcc } from './auth/sign-up/StartCreateAcc'
 import { Birthday } from './auth/sign-up/Birthday'
@@ -64,6 +65,7 @@ export {
     // Login
     LoginNewAccount,
     LoginRecentlyAcc,
+    Welcome,
 
     // Create new account
     StartCreateAcc,

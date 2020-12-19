@@ -8,6 +8,7 @@ export const PostService = {
     likePost,
     getCommentPost,
     addCommentPost,
+    createPost,
 };
 
 async function likePost(data) {
@@ -40,5 +41,15 @@ async function addCommentPost(id, data) {
         url: `https://fakebook-server.herokuapp.com/post/set-comment/${id}`,
         method: 'POST',
         data: data
+    })
+}
+
+async function createPost(data) {
+    console.log('data req', data);
+
+    return sendRequest({
+        url: 'https://fakebook-server.herokuapp.com/post/add-post',
+        method: 'POST',
+        data: data,
     })
 }

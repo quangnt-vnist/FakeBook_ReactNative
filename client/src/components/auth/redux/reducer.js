@@ -11,6 +11,7 @@ export const CallApiStatus = {
 var initState = {
     calledAPI: CallApiStatus.INITIALIZED,
     user: {},
+    profile: {},
     error: null,
     forgotPassword: false,
     reset_password: false,
@@ -23,6 +24,7 @@ export function auth(state = initState, action) {
     switch (action.type) {
 
         case AuthConstants.LOGIN_REQUEST:
+        case AuthConstants.LOGOUT_REQUEST:
 
             return {
                 ...state,
@@ -38,7 +40,24 @@ export function auth(state = initState, action) {
                 error: null
             };
 
+            
+        // case AuthConstants.GET_PROFILE_REQUEST:
+
+        //     return {
+        //         ...state,
+        //     };
+
+        case AuthConstants.GET_PROFILE_SUCCESS:
+            return {
+                ...state,
+                profile: action.payload,
+                // isLoading: false,
+                // error: null
+            };
+
         case AuthConstants.LOGIN_FAILE:
+        case AuthConstants.LOGOUT_FAILE:
+        case AuthConstants.GET_PROFILE_FAILE:
             return {
                 ...state,
                 isLoading: false,
@@ -49,9 +68,24 @@ export function auth(state = initState, action) {
                     roles: null,
                     company: null
                 },
-                error: action.payload
+                profile: {},
+                error: action.err
             };
-
+        case AuthConstants.LOGOUT_SUCCESS:
+                // await removeStore('auth-token');
+                // await removeStore('userId');
+                return {
+                    ...state,
+                    isLoading: false,
+                    user: {
+                        _id: null,
+                        name: null,
+                        email: null,
+                        roles: null,
+                        company: null
+                    },
+                    error: null
+                };
         case AuthConstants.REGISTER_REQUEST:
 
             return {

@@ -91,6 +91,41 @@ exports.getPost = async (req, res) => {
     }
 };
 
+exports.getListPost = async (req, res) => {
+    try {
+        const post = await postService.getListPost( req.user._id );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['get_list_post_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['get_list_post_faile'],
+            content: error
+        });
+    }
+};
+
+exports.getListPostPerson = async (req, res) => {
+    try {
+        const post = await postService.getListPostPerson( req.params.id );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['get_list_post_person_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['get_list_post_person_faile'],
+            content: error
+        });
+    }
+};
 exports.setComment = async (req, res) => {
     try {
         const post = await postService.setComment( req.params.id, req.user._id, req.body );

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { FlatList, View } from 'react-native'
+import { ActivityIndicator, FlatList, View } from 'react-native'
 
 import styled from 'styled-components/native'
 
@@ -97,9 +97,125 @@ const BottomDivider = styled.View`
 `
 
 
+const wait = (timeout) => {
+	return new Promise(resolve => {
+		setTimeout(resolve, timeout);
+	});
+}
 
-const Feed = (props) => {
 
+const PostItem = (props) => {
+	let item = props.item;
+	return (
+		<Container key={item.id}>
+			<Header>
+				<Row>
+					<Avatar
+						source={item.avatar}
+					/>
+					<View style={{ paddingLeft: 10 }}>
+						<User>{item.name}</User>
+						<Row>
+							<Time>{item.time}</Time>
+							<Entypo
+								name='dot-single'
+								size={12}
+								color='#747476'
+							/>
+							<Entypo
+								name='globe'
+								size={10}
+								color='#747476'
+							/>
+						</Row>
+					</View>
+				</Row>
+
+				<Entypo
+					name='dots-three-horizontal'
+					size={15}
+					color='#222121'
+				/>
+			</Header>
+
+			<Post>
+				{item.post}
+			</Post>
+			{ !(item.photo === "") && <Photo source={item.photo} />}
+
+			<Footer>
+				<FooterCount>
+					<Row>
+						<IconCount>
+							<AntDesign
+								name='like1'
+								size={12}
+								color='#FFFFFF'
+							/>
+						</IconCount>
+						<TextCount>{item.numOfLike} likes</TextCount>
+					</Row>
+					<TextCount>{item.numOfCmt} comments</TextCount>
+
+				</FooterCount>
+
+				<Separator />
+
+				<FooterMenu>
+					<Button>
+						<Icon>
+							<AntDesign
+								name='like2'
+								size={20}
+								color='#424040'
+							/>
+						</Icon>
+						<Text>Like</Text>
+					</Button>
+
+					{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
+								<Icon>
+									<MaterialCommunityIcons
+										name='comment-outline'
+										size={20}
+										color='#424040'
+									/>
+								</Icon>
+								<Text> Bình luận</Text>
+							</TouchableOpacity> */}
+					<Button
+						onPress={() => sheetRef.current.snapTo(0)}
+					>
+						<Icon>
+							<MaterialCommunityIcons
+								name='comment-outline'
+								size={20}
+								color='#424040'
+							/>
+						</Icon>
+						<Text>Comment</Text>
+					</Button>
+
+					<Button>
+						<Icon>
+							<MaterialCommunityIcons
+								name='share-outline'
+								size={20}
+								color='#424040'
+							/>
+						</Icon>
+						<Text>Share</Text>
+					</Button>
+				</FooterMenu>
+			</Footer>
+			<BottomDivider />
+		</Container>
+	)
+}
+
+const Feed = () => {
+	const sheetRef = useRef(null);
+	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
 
 	const listPost = [
 		{
@@ -149,127 +265,51 @@ const Feed = (props) => {
 
 	];
 
+	const [state, setState] = useState({
+		listPost: listPost,
+		loadingItem: false,
+	});
+
+
+	const handleLoadMore = () => {
+		setState({
+			...state,
+			loadingItem: true,
+		});
+		console.log('start');
+
+		// check data return isLoading === false;
+		wait(2000).then(() => {
+			console.log('end');
+			setState({
+				...state,
+				loadingItem: false,
+			});
+		});
+	};
 
 	return (
 		<>
+			{ listPost.map(item => <View key={item.id}>
+				<PostItem item={item} />
+			</View>
+			)}
 			{/* <FlatList
 				data={listPost}
 				keyExtractor={item => item.id}
-				renderItem={ ({ item }) =>  }
-				
-				/>
-				
-			*/}
-
-			{ listPost.map(item => {
-				return (
-					<Container key={item.id}>
-						<Header>
-							<Row>
-								<Avatar
-									source={item.avatar}
-								/>
-								<View style={{ paddingLeft: 10 }}>
-									<User>{item.name}</User>
-									<Row>
-										<Time>{item.time}</Time>
-										<Entypo
-											name='dot-single'
-											size={12}
-											color='#747476'
-										/>
-										<Entypo
-											name='globe'
-											size={10}
-											color='#747476'
-										/>
-									</Row>
-								</View>
-							</Row>
-
-							<Entypo
-								name='dots-three-horizontal'
-								size={15}
-								color='#222121'
-							/>
-						</Header>
-
-						<Post>
-							{item.post}
-						</Post>
-						{ !(item.photo === "") && <Photo source={item.photo} />}
-
-						<Footer>
-							<FooterCount>
-								<Row>
-									<IconCount>
-										<AntDesign
-											name='like1'
-											size={12}
-											color='#FFFFFF'
-										/>
-									</IconCount>
-									<TextCount>{item.numOfLike} likes</TextCount>
-								</Row>
-								<TextCount>{item.numOfCmt} comments</TextCount>
-
-							</FooterCount>
-
-							<Separator />
-
-							<FooterMenu>
-								<Button>
-									<Icon>
-										<AntDesign
-											name='like2'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Like</Text>
-								</Button>
-
-								{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
-									<Icon>
-										<MaterialCommunityIcons
-											name='comment-outline'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text> Bình luận</Text>
-								</TouchableOpacity> */}
-								<Button
-									onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
-								>
-									<Icon>
-										<MaterialCommunityIcons
-											name='comment-outline'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Comment</Text>
-								</Button>
-
-								<Button>
-									<Icon>
-										<MaterialCommunityIcons
-											name='share-outline'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Share</Text>
-								</Button>
-							</FooterMenu>
-						</Footer>
-						<BottomDivider />
-					</Container>
-
-				)
-			})
-			}
+				renderItem={({ item }) => <PostItem item={item} />}
+				ListFooterComponent={() => {
+					if (!state.loadingItem) return null;
+					return (
+						<ActivityIndicator
+							size={'large'}
+							color={"#ccc"}
+						/>
+					)
+				}}
+			// onEndReachedThreshold={0.4}
+			// onEndReached={() => handleLoadMore()}
+			/> */}
 			{/* <BottomSheet
 				ref={sheetRef}
 				snapPoints={["80%", "50%", "0%"]}

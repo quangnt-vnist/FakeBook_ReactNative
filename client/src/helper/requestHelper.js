@@ -3,21 +3,21 @@ import axios from 'axios';
 // import {AsyncStorage} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const storeData = (key, value) => {
+export const storeData = async (key, value) => {
     try {
-        AsyncStorage.setItem(key, value);
+        await AsyncStorage.setItem(key, value);
         console.log("store data success");
     } catch (e) {
         console.log("store data error");
     }
 }
 
-export const getData = (key) => {
+export const getData = async (key) => {
     try {
-        const token = AsyncStorage.getItem(key)
-        if (token !== null) {
+        const value = await AsyncStorage.getItem(key)
+        if (value !== null) {
             console.log("get data success");
-            return token;
+            return value;
         }
     } catch (e) {
         console.log("get data failure");
@@ -25,17 +25,17 @@ export const getData = (key) => {
     }
 }
 
-export const removeStore = (key) => {
+export const removeStore = async (key) => {
     try {
-        AsyncStorage.removeItem(key);
+        await AsyncStorage.removeItem(key);
         console.log("remove success");
     } catch (e) {
         console.log("remove failure");
     }
 }
 
-export const AuthenticateHeader = async() => {
-    const token = getData('auth-token');
+export const AuthenticateHeader = async () => {
+    const token = await getData('auth-token');
     // console.log('authenticate token', token);
     return {
         'auth-token': token,
@@ -60,12 +60,12 @@ export async function sendRequest(options) {
     };
 
     return axios(requestOptions)
-    .then(res => {
-        console.log("axios success");
-        return Promise.resolve(res);
-    })
-    .catch(err => {
-        console.log("axios error", err);
-        return Promise.reject(err);
-    })
+        .then(res => {
+            console.log("axios success");
+            return Promise.resolve(res);
+        })
+        .catch(err => {
+            console.log("axios error", err);
+            return Promise.reject(err);
+        })
 }

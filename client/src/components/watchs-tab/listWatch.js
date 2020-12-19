@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Dimensions, FlatList, View } from 'react-native'
+import { ActivityIndicator, Dimensions, FlatList, View } from 'react-native'
 
 import styled from 'styled-components/native'
 import Video from 'react-native-video';
@@ -173,6 +173,12 @@ const ListWatch = (props) => {
 
     return (
         <>
+            {/* <View>
+                <ActivityIndicator />
+                <ActivityIndicator size="large" color="#ccc" />
+                <ActivityIndicator size="small" color="#0000ff" />
+                <ActivityIndicator size="large" color="#00ff00" />
+            </View> */}
             <FlatList
                 data={listPost}
                 keyExtractor={item => item.id}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar, ActivityIndicator } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
 import { pageName } from '../../../navigator/constant.page'
 import { connect } from 'react-redux'
@@ -16,7 +16,9 @@ const imageResize = {
     // uri: "./fb_reg.png"
 }
 
+
 const LoginNewAccount = (props) => {
+    const [loading, setLoading] = useState(false);
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
     const [resizeImage, setResizeImage] = useState(false);
@@ -28,36 +30,36 @@ const LoginNewAccount = (props) => {
     //     Alert.alert('change image flex to 2');
 
     // }
-    const userId = getData('userId');
-    useEffect(()=>{
-        userId && props.navigation.navigate(pageName.main.MAIN);
-    }, [])
 
-    useEffect(()=>{
-        props.auth?.user?.id && props.navigation.navigate(pageName.main.MAIN);
+    // var userId;
+    // const useEffectAsync = (effect, inputs) => {
+    //     useEffect(() => {
+    //         effect();
+    //     }, inputs);
+    // }
+    // useEffectAsync( async () => {
+    //     userId = await getData('userId');
+    //     console.log('userId', userId);
+    //     userId && props.navigation.navigate(pageName.main.MAIN);
+    // }, [])
+
+    useEffect(() => {
+        console.log('props.auth?.user?.id', props.auth);
+        if (props.auth?.isLoading === false && props.auth?.user?.id){
+            // props.getProfile();
+            setLoading(false);
+            props.navigation.replace(pageName.main.MAIN);
+        }
     }, [props.auth])
 
-    const onPressLogin = () => {
+    const onPressLogin = (e) => {
+        e.preventDefault();
+        setLoading(true)
         let loginData = {
             phoneNumber: acc,
             password: password
         }
         props.login(loginData);
-        // props.getVerifyCode("1234567890");
-        
-        // axios.get('https://jsonplaceholder.typicode.com/posts/1')
-        //     .then(function (response) {
-        //         // handle success
-        //         console.log(JSON.stringify(response.data));
-        //     }).catch(function (error) {
-        //         // handle error
-        //         console.log(error.message);
-        //     });
-
-        // if( props.auth?.isLoading === false && props.auth?.user?.id) props.navigation.navigate(pageName.main.MAIN);
-        // else {
-        //     console.log('bị lỗi gì đó, khôn chuyển được trang\n', props.auth);
-        // }
     }
     const onPressForgotPW = () => {
         Alert.alert('Forgot pw')
@@ -66,7 +68,7 @@ const LoginNewAccount = (props) => {
         props.navigation.navigate(pageName.sign_up.BEGIN)
     }
 
-    console.log('auth\n\n', props.auth);
+    // console.log('auth\n\n', props.auth);
     return (
         <View style={styles.container}>
             <StatusBar
@@ -118,10 +120,20 @@ const LoginNewAccount = (props) => {
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
-                        onPress={onPressLogin}
+                        onPress={(e) => onPressLogin(e)}
                     >
                         <Text style={[CommonStyle.mediumText, { color: "#8DB0EB" }]}>Đăng nhập</Text>
                     </TouchableOpacity>
+                    {loading === true &&
+                        <View style={{
+                                margin: 10, height: 50, flexDirection: "column", justifyContent: "center", alignItems: "center"
+                            }}
+                        >
+                            <ActivityIndicator size="large" color="#ccc" />
+                            <Text>Loading...</Text>
+                        </View>
+                    }
+
                 </View>
 
                 {!resizeImage ?
@@ -233,6 +245,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     login: AuthActions.login,
+    getProfile: AuthActions.getProfile,
     getVerifyCode: AuthActions.getVerifyCode,
 }
 let connected = connect(mapStateToProps, mapActions)(LoginNewAccount);

@@ -54,6 +54,7 @@ import {
     // search friend page
     SearchPage,
     ViewVideo,
+    Welcome,
 
 } from '../components';
 
@@ -63,6 +64,24 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
+<<<<<<< HEAD
+=======
+
+                <Stack.Screen
+                    name={pageName.WELCOME}
+                    component={Welcome}
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                    name={pageName.LOG_IN_NEW_ACC}
+                    component={LoginNewAccount}
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
+
+>>>>>>> cede9271fdb756e3b90dd45be5ad5ed2c30d4294
                 {/* Main container */}
                 <Stack.Screen
                     name={pageName.main.MAIN}
@@ -80,7 +99,7 @@ const Navigate = () => {
                 <Stack.Screen
                     name={pageName.main.SEARCH}
                     component={SearchPage}
-                    options={{ headerTitle: "" }}
+                    options={{ headerTitle: "", headerShown: false }}
                 />
 
                 {/* Friend tab */}

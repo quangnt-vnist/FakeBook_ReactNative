@@ -63,7 +63,7 @@ const AppBar = (props) => {
 
     return <>
         <Container>
-            <Text>facebook</Text>
+            <Text>fakebook</Text>
             <Row>
                 <Button
                     onPress={onPressSearch}

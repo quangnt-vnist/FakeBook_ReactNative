@@ -9,12 +9,16 @@ import VideoPlayer from 'react-native-video-player';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import { pageName } from '../../navigator/constant.page'
 import { GridImage } from './gridImage';
 import Emoji from 'react-native-emoji';
 //import { Draft } from './draft';
 import { PostAction } from './redux/action';
 
+// Calculate window size
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const windowWidth = Dimensions.get('window').width;
 const CreatePost = (props) => {
@@ -92,8 +96,8 @@ const CreatePost = (props) => {
                 />
             ),
             headerRight: () => (
-                <TouchableOpacity onPress={onPost}>
-                    <Text>Đăng</Text>
+                <TouchableOpacity style={{ marginRight: 20, backgroundColor: "#1578EF", padding: 5, borderRadius: 5 }} onPress={onPost}>
+                    <Text style={{ fontWeight: "600", fontSize: 15, color: "#fff" }}>ĐĂNG</Text>
                 </TouchableOpacity>
             ),
         });
@@ -101,7 +105,7 @@ const CreatePost = (props) => {
     const renderContent = () => (
         <View
             style={{
-                backgroundColor: '#f8f8ff',
+                backgroundColor: '#FDFFFD',
                 padding: 20,
                 height: 400,
             }}
@@ -155,7 +159,7 @@ const CreatePost = (props) => {
     const Draft = () => {
         return (
             <View style={{
-                backgroundColor: '#f8f8ff',
+                backgroundColor: '#FDFFFD',
                 padding: 20,
                 height: 300,
             }}>
@@ -447,8 +451,29 @@ const CreatePost = (props) => {
     }
 
 
+    const onGoBackPage = () => {
+        props.navigation.goBack();
+    }
+
     return (
-        <>
+        <View style={{ flex: 1, backgroundColor: "#fff" }}>
+            <View style={{ backgroundColor: "#fff", flexDirection: "row", marginTop: 10, marginBottom: 10, marginRight: 10, marginLeft: 10, justifyContent: "space-between", alignItems: 'center' }}>
+                <TouchableOpacity
+                    onPress={() => onGoBackPage()}
+                >
+                    <Icon5 name='arrow-left' size={20} color="#111" />
+                </TouchableOpacity>
+                <View style={{ width: "90%", backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: "600" }}>Tạo bài viết</Text>
+                    <TouchableOpacity style={{ backgroundColor: "#1578EF", padding: 5, borderRadius: 5 }}
+                        onPress={onPost}
+                    >
+                        <Text style={{ fontWeight: "600", fontSize: 15, color: "#fff" }}>ĐĂNG</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+            <View style={{ height: 1, backgroundColor: "#ccc" }} />
             <View style={styles.p1}>
                 <Image
                     style={styles.picture}
@@ -492,7 +517,7 @@ const CreatePost = (props) => {
                         multiline={true}
                         placeholder="Bạn đang nghĩ gì?"
                         onFocus={onPressTextInput}
-                        // value={text}
+                        value={text}
                         onChangeText={(text) => setText(text)}
                     >
                     </TextInput>
@@ -541,7 +566,7 @@ const CreatePost = (props) => {
                 renderContent={Draft}
             />
 
-        </>
+        </View>
     )
 
 }
@@ -555,6 +580,9 @@ const styles = StyleSheet.create({
         height: 75,
         width: 400,
         flexDirection: 'row',
+        // justifyContent: "center",
+        // alignItems: "center",
+        backgroundColor: "#fff",
 
     },
 
@@ -572,12 +600,14 @@ const styles = StyleSheet.create({
     },
     p2: {
         flex: 6,
+        backgroundColor: "#fff",
     },
     p3: {
         flex: 0.4,
         display: 'flex',
         flexDirection: "row",
         alignItems: "center",
+        backgroundColor: "#fff",
     },
     input: {
         fontSize: 25,

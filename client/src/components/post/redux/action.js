@@ -4,6 +4,8 @@ import { storeData, getData } from "../../../helper/requestHelper";
 
 export const PostAction = {
     likePost,
+    getCommentPost,
+    addCommentPost,
     createPost,
 }
 
@@ -23,6 +25,26 @@ function likePost(data) {
     }
 }
 
+function getCommentPost(id) {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_COMMENT_POST_REQUEST });
+        PostService.getCommentPost(id)
+            .then(res => {
+                console.log("action received ", res.data.content);
+                dispatch({
+                    type: PostConstant.GET_COMMENT_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_COMMENT_POST_FAILE, payload: err });
+            })
+    }
+}
+
+
+
+
 function createPost(data) {
     return dispatch => {
         dispatch({ type: PostConstant.CREATE_POST_REQUEST });
@@ -35,6 +57,24 @@ function createPost(data) {
             })
             .catch(err => {
                 dispatch({ type: PostConstant.CREATE_POST_FAILE, payload: err });
+            })
+    }
+}
+
+function addCommentPost(id, data) {
+    console.log("action", id, data);
+    return dispatch => {
+        dispatch({ type: PostConstant.ADD_COMMENT_POST_REQUEST });
+        PostService.addCommentPost(id, data)
+            .then(res => {
+                console.log("action comment ", res.data.content);
+                dispatch({
+                    type: PostConstant.ADD_COMMENT_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.ADD_COMMENT_POST_FAILE, payload: err });
             })
     }
 }

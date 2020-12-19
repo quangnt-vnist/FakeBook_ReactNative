@@ -44,12 +44,20 @@ export function post(state = initState, action) {
                 error: action.payload
             };
 
+        case PostConstant.GET_COMMENT_POST_REQUEST:
+        case PostConstant.ADD_COMMENT_POST_REQUEST:
         case PostConstant.CREATE_POST_REQUEST:
 
             return {
                 ...state,
                 isLoading: true,
                 error: null
+            };
+
+        case PostConstant.GET_COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                comment: action.payload,
             };
 
         case PostConstant.CREATE_POST_SUCCESS:
@@ -61,6 +69,23 @@ export function post(state = initState, action) {
                 error: null
             };
 
+        case PostConstant.GET_COMMENT_POST_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.ADD_COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                comment: action.payload,
+                // listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.ADD_COMMENT_POST_FAILE:
         case PostConstant.CREATE_POST_FAILE:
             return {
                 ...state,

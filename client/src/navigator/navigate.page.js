@@ -63,20 +63,19 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
-                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
-
-                {/* <Stack.Screen
-                    name={pageName.LOG_IN_NEW_ACC}
-                    component={LoginNewAccount}
-                    options={{ headerShown: false }}
-                /> */}
-
                 {/* Main container */}
                 <Stack.Screen
                     name={pageName.main.MAIN}
                     component={MainContainer}
                     options={{ headerShown: false }}
                 />
+
+                <Stack.Screen
+                    name={pageName.LOG_IN_NEW_ACC}
+                    component={LoginNewAccount}
+                    options={{ headerShown: false }}
+                />
+
                 {/* Search friend page */}
                 <Stack.Screen
                     name={pageName.main.SEARCH}
@@ -100,14 +99,18 @@ const Navigate = () => {
 
 
                 {/* Commments */}
-                <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />
+                <Stack.Screen name={pageName.comment.COMMENT} component={Comments}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
 
                 {/* Đăng nhập */}
                 <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 {/* <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} /> */}
 
                 {/* Tạo tài khoản */}
-                {/* <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} /> */}
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
                 <Stack.Screen name={pageName.sign_up.NAME} component={Name} />
                 <Stack.Screen name={pageName.sign_up.BIRTH} component={Birthday} />
                 <Stack.Screen name={pageName.sign_up.PHONE} component={PhoneNumber} />

@@ -12,6 +12,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Avatar from './avatar'
 import { Comments } from '../comment/comments'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { pageName } from '../../navigator/constant.page';
 
 const Container = styled.View`
 	flex: 1;
@@ -95,16 +96,9 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
-const CommentSheet = () => {
-	return (
-		<Comments />
-	)
-}
 
-const Feed = () => {
-	const sheetRef = useRef(null);
-	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
 
+const Feed = (props) => {
 
 
 	const listPost = [
@@ -168,74 +162,74 @@ const Feed = () => {
 			*/}
 
 			{ listPost.map(item => {
-					return (
-						<Container key={item.id}>
-							<Header>
-								<Row>
-									<Avatar
-										source={item.avatar}
-									/>
-									<View style={{ paddingLeft: 10 }}>
-										<User>{item.name}</User>
-										<Row>
-											<Time>{item.time}</Time>
-											<Entypo
-												name='dot-single'
-												size={12}
-												color='#747476'
-											/>
-											<Entypo
-												name='globe'
-												size={10}
-												color='#747476'
-											/>
-										</Row>
-									</View>
-								</Row>
-
-								<Entypo
-									name='dots-three-horizontal'
-									size={15}
-									color='#222121'
+				return (
+					<Container key={item.id}>
+						<Header>
+							<Row>
+								<Avatar
+									source={item.avatar}
 								/>
-							</Header>
-
-							<Post>
-								{item.post}
-							</Post>
-							{ !(item.photo === "") && <Photo source={item.photo} />}
-
-							<Footer>
-								<FooterCount>
+								<View style={{ paddingLeft: 10 }}>
+									<User>{item.name}</User>
 									<Row>
-										<IconCount>
-											<AntDesign
-												name='like1'
-												size={12}
-												color='#FFFFFF'
-											/>
-										</IconCount>
-										<TextCount>{item.numOfLike} likes</TextCount>
+										<Time>{item.time}</Time>
+										<Entypo
+											name='dot-single'
+											size={12}
+											color='#747476'
+										/>
+										<Entypo
+											name='globe'
+											size={10}
+											color='#747476'
+										/>
 									</Row>
-									<TextCount>{item.numOfCmt} comments</TextCount>
+								</View>
+							</Row>
 
-								</FooterCount>
+							<Entypo
+								name='dots-three-horizontal'
+								size={15}
+								color='#222121'
+							/>
+						</Header>
 
-								<Separator />
+						<Post>
+							{item.post}
+						</Post>
+						{ !(item.photo === "") && <Photo source={item.photo} />}
 
-								<FooterMenu>
-									<Button>
-										<Icon>
-											<AntDesign
-												name='like2'
-												size={20}
-												color='#424040'
-											/>
-										</Icon>
-										<Text>Like</Text>
-									</Button>
+						<Footer>
+							<FooterCount>
+								<Row>
+									<IconCount>
+										<AntDesign
+											name='like1'
+											size={12}
+											color='#FFFFFF'
+										/>
+									</IconCount>
+									<TextCount>{item.numOfLike} likes</TextCount>
+								</Row>
+								<TextCount>{item.numOfCmt} comments</TextCount>
 
-									{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
+							</FooterCount>
+
+							<Separator />
+
+							<FooterMenu>
+								<Button>
+									<Icon>
+										<AntDesign
+											name='like2'
+											size={20}
+											color='#424040'
+										/>
+									</Icon>
+									<Text>Like</Text>
+								</Button>
+
+								{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
 									<Icon>
 										<MaterialCommunityIcons
 											name='comment-outline'
@@ -245,36 +239,36 @@ const Feed = () => {
 									</Icon>
 									<Text> Bình luận</Text>
 								</TouchableOpacity> */}
-									<Button
-										onPress={() => sheetRef.current.snapTo(0)}
-									>
-										<Icon>
-											<MaterialCommunityIcons
-												name='comment-outline'
-												size={20}
-												color='#424040'
-											/>
-										</Icon>
-										<Text>Comment</Text>
-									</Button>
+								<Button
+									onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
+								>
+									<Icon>
+										<MaterialCommunityIcons
+											name='comment-outline'
+											size={20}
+											color='#424040'
+										/>
+									</Icon>
+									<Text>Comment</Text>
+								</Button>
 
-									<Button>
-										<Icon>
-											<MaterialCommunityIcons
-												name='share-outline'
-												size={20}
-												color='#424040'
-											/>
-										</Icon>
-										<Text>Share</Text>
-									</Button>
-								</FooterMenu>
-							</Footer>
-							<BottomDivider />
-						</Container>
+								<Button>
+									<Icon>
+										<MaterialCommunityIcons
+											name='share-outline'
+											size={20}
+											color='#424040'
+										/>
+									</Icon>
+									<Text>Share</Text>
+								</Button>
+							</FooterMenu>
+						</Footer>
+						<BottomDivider />
+					</Container>
 
-					)
-				})
+				)
+			})
 			}
 			{/* <BottomSheet
 				ref={sheetRef}

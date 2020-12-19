@@ -52,6 +52,36 @@ export function auth(state = initState, action) {
                 error: action.payload
             };
 
+        case AuthConstants.REGISTER_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case AuthConstants.REGISTER_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case AuthConstants.REGISTER_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                user: {
+                    _id: null,
+                    name: null,
+                    email: null,
+                    roles: null,
+                    company: null
+                },
+                error: action.payload
+            };
+
         case AuthConstants.GET_VERIFY_CODE_REQUEST:
 
             return {

@@ -61,11 +61,13 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
-                <Stack.Screen 
-                    name={pageName.LOG_IN_NEW_ACC} 
-                    component={LoginNewAccount} 
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
+
+                {/* <Stack.Screen
+                    name={pageName.LOG_IN_NEW_ACC}
+                    component={LoginNewAccount}
                     options={{ headerShown: false }}
-                />
+                /> */}
 
                 {/* Main container */}
                 <Stack.Screen
@@ -74,10 +76,10 @@ const Navigate = () => {
                     options={{ headerShown: false }}
                 />
                 {/* Search friend page */}
-                <Stack.Screen 
-                    name={pageName.main.SEARCH} 
-                    component={SearchPage} 
-                    options={{headerTitle: ""}}    
+                <Stack.Screen
+                    name={pageName.main.SEARCH}
+                    component={SearchPage}
+                    options={{ headerTitle: "" }}
                 />
 
                 {/* Friend tab */}
@@ -94,7 +96,7 @@ const Navigate = () => {
                 {/* <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} /> */}
 
                 {/* Tạo tài khoản */}
-                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
+                {/* <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} /> */}
                 <Stack.Screen name={pageName.sign_up.NAME} component={Name} />
                 <Stack.Screen name={pageName.sign_up.BIRTH} component={Birthday} />
                 <Stack.Screen name={pageName.sign_up.PHONE} component={PhoneNumber} />

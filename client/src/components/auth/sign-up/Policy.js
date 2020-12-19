@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import { pageName } from './../../../navigator/constant.page'
 
-const Policy = ({ navigation }) => {
+const Policy = ({ navigation, route }) => {
     const onPressNext = ()=>{
-        navigation.navigate(pageName.sign_up.CONFIRM)
+        const data = route.params.data;
+        navigation.navigate(pageName.sign_up.CONFIRM, {data})
     }
     return (
         <>

@@ -13,9 +13,12 @@ const Name = ({ navigation }) => {
     const [enteringFirstName, setEnteringFirstName] = useState(false);
 
     const onPressBtnNext = () => {
+        const data = {
+            name: firstName + " " + lastName
+        }
         if (firstName.length && lastName.length) {
-            setFilled(true);
-            navigation.navigate(pageName.sign_up.BIRTH);
+            setFilled(true)
+            navigation.navigate(pageName.sign_up.BIRTH, { data: data });
         }
         else {
             setFilled(false)

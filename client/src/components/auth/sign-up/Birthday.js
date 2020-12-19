@@ -5,17 +5,21 @@ import { pageName } from '../../../navigator/constant.page';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-date-picker'
 
-const Birthday = ({ navigation }) => {
+const Birthday = ({ navigation, route }) => {
 
     const [date, setDate] = useState(new Date());
     const [isEnoughAge, setIsEnoughAge] = useState(true);
+
 
     const onPressBtnNext = () => {
         let nextPage = checkAge();
 
         if (nextPage) {
             setIsEnoughAge(true);
-            navigation.navigate(pageName.sign_up.PHONE);
+            const data = route.params.data;
+            const key = "birth";
+            data[key] = date;
+            navigation.navigate(pageName.sign_up.PHONE, { data });
         }
         else {
             setIsEnoughAge(false);
@@ -25,6 +29,7 @@ const Birthday = ({ navigation }) => {
 
     // Xử lý tuổi
     const checkAge = () => {
+        console.log(route);
         let today = new Date();
         let mod = Math.ceil((today.getFullYear() - date.getFullYear()) / 4); // so nam nhuan toi da
         let age = Math.floor((today - date - 86400000 * mod) / 31536000000);

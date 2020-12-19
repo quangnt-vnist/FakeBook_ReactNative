@@ -16,7 +16,7 @@ export const getData = (key) => {
     try {
         const token = AsyncStorage.getItem(key)
         if (token !== null) {
-            console.log("get data success");
+            console.log("get data success", token);
             return token;
         }
     } catch (e) {
@@ -34,7 +34,7 @@ export const removeStore = (key) => {
     }
 }
 
-export const AuthenticateHeader = async() => {
+export const AuthenticateHeader = async () => {
     const token = getData('auth-token');
     // console.log('authenticate token', token);
     return {
@@ -60,12 +60,12 @@ export async function sendRequest(options) {
     };
 
     return axios(requestOptions)
-    .then(res => {
-        console.log("axios success");
-        return Promise.resolve(res);
-    })
-    .catch(err => {
-        console.log("axios error", err);
-        return Promise.reject(err);
-    })
+        .then(res => {
+            console.log("axios success");
+            return Promise.resolve(res);
+        })
+        .catch(err => {
+            console.log("axios error", err);
+            return Promise.reject(err);
+        })
 }

@@ -32,12 +32,36 @@ export function post(state = initState, action) {
             return {
                 ...state,
                 post: action.payload,
-                listPost: state.listPost.filter(e => (e._id === action.payload._id )? action.payload : e ),
+                listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
                 isLoading: false,
                 error: null
             };
 
         case PostConstant.CHANGE_LIKE_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.CREATE_POST_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case PostConstant.CREATE_POST_SUCCESS:
+            return {
+                ...state,
+                post: action.payload,
+                // listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.CREATE_POST_FAILE:
             return {
                 ...state,
                 isLoading: false,

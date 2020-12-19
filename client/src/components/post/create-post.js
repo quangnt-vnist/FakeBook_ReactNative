@@ -5,14 +5,17 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import VideoPlayer from 'react-native-video-player';
+import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { pageName } from '../../navigator/constant.page'
 import { GridImage } from './gridImage';
 import Emoji from 'react-native-emoji';
 import { Draft } from './draft';
+import { PostAction } from './redux/action';
+
 
 const windowWidth = Dimensions.get('window').width;
-const CreatePost = ({ navigation, route }) => {
+const CreatePost = (props) => {
 
     const sheetRef = useRef(null);
     const sheetDraft = useRef(null);
@@ -33,34 +36,45 @@ const CreatePost = ({ navigation, route }) => {
         }
         else {
             console.log('backkkkkkkk');
-            navigation.goBack();
+            props.navigation.goBack();
         }
     }
+
+    const onPost = () => {
+        console.log('ahihiihi', text);
+        let data = {
+            //  post: images,
+            described: text,
+
+        };
+        console.log('dataaa', data)
+        props.post(data);
+    }
     React.useEffect(() => {
-        if (route.params) {
+        if (props.route.params) {
             setFeeling({
-                title: route.params.status,
-                icon: route.params.icon,
+                title: props.route.params.status,
+                icon: props.route.params.icon,
                 type: 1,
             })
         }
-    }, [route.params]);
-    // console.log('routtt', route.params);
+    }, [props.route.params]);
+    // console.log('routtt', props.route.params);
     React.useLayoutEffect(() => {
-        navigation.setOptions({
+        props.navigation.setOptions({
             headerLeft: (props) => (
                 <HeaderBackButton
                     {...props}
-                    onPress={() => (onGoBack)}
+                    onPress={() => onGoBack}
                 />
             ),
             headerRight: () => (
-                <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                    <Text>go back</Text>
+                <TouchableOpacity onPress={onPost}>
+                    <Text>Đăng</Text>
                 </TouchableOpacity>
             ),
         });
-    }, [navigation]);
+    }, [props.navigation]);
     const renderContent = () => (
         <View
             style={{
@@ -116,7 +130,7 @@ const CreatePost = ({ navigation, route }) => {
     );
 
     const onPressFeeling = () => {
-        navigation.navigate(pageName.post_feeling_activity)
+        props.navigation.navigate(pageName.post_feeling_activity)
     }
 
     const onPressTextInput = () => {
@@ -124,7 +138,7 @@ const CreatePost = ({ navigation, route }) => {
     }
 
     let imageGrid = null;
-    console.log('aaaa', textAlignVertical);
+    console.log('textttt', text);
     if (mediaStatus === 'image') {
         gridImages = (
             <View>
@@ -553,9 +567,16 @@ const styles = StyleSheet.create({
 
 })
 
+const mapStateToProps = state => {
+    const { post } = state;
+    return { post };
+}
+const mapActions = {
+    post: PostAction.createPost,
+}
+let connectCreatePost = connect(mapStateToProps, mapActions)(CreatePost);
 
-
-export { CreatePost };
+export { connectCreatePost as CreatePost };
 
 
 

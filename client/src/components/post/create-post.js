@@ -1,16 +1,18 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/stack';
+import { Controller, useForm } from 'react-hook-form';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import VideoPlayer from 'react-native-video-player';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 import { pageName } from '../../navigator/constant.page'
 import { GridImage } from './gridImage';
 import Emoji from 'react-native-emoji';
-import { Draft } from './draft';
+//import { Draft } from './draft';
 import { PostAction } from './redux/action';
 
 
@@ -22,33 +24,48 @@ const CreatePost = (props) => {
     const [text, setText] = useState('');
     const [images, setImages] = useState([]);
     const [video, setVideo] = useState(null);
+    // const { control, handleSubmit } = useForm();
+    let gridImages = null;
     const [mediaStatus, setMediaStatus] = useState(null);
     const [feeling, setFeeling] = useState({
         title: "",
         icon: "",
         type: "",
     });
+    // const { form, handleSubmit, setValue } = useForm();
 
-    const onGoBack = () => {
-        console.log('bacccccccccc');
-        if (images.length > 0) {
-            sheetDraft.current.snapTo(0);
+
+    const onGoBack = data => {
+        console.log('bacccccccccc', data.text);
+        if (images.length > 0 || text) {
+               sheetDraft.current.snapTo(0);
+            // console.log('backkkkkkkk');
+            // props.navigation.goBack();
         }
         else {
             console.log('backkkkkkkk');
             props.navigation.goBack();
+           // sheetDraft.current.snapTo(0);
         }
     }
 
     const onPost = () => {
-        console.log('ahihiihi', text);
-        let data = {
-            //  post: images,
-            described: text,
+        console.log('ahihiihi', text, images.length);
 
-        };
-        console.log('dataaa', data)
-        props.post(data);
+        if (images.length !== 0 || text !== "") {
+            let data = new FormData();
+
+            data.append('described', text);
+            for (let i in images) {
+                data.append('post', images[i]);
+            }
+            console.log('dataaa', data)
+            props.post(data);
+            props.navigation.goBack();
+        }
+        else {
+            Alert.alert("Bài viết chưa có gì!");
+        }
     }
     React.useEffect(() => {
         if (props.route.params) {
@@ -58,14 +75,20 @@ const CreatePost = (props) => {
                 type: 1,
             })
         }
+
     }, [props.route.params]);
+
+    React.useEffect(() => {
+            setText(text);
+        
+    }, [text]);
     // console.log('routtt', props.route.params);
     React.useLayoutEffect(() => {
         props.navigation.setOptions({
             headerLeft: (props) => (
                 <HeaderBackButton
                     {...props}
-                    onPress={() => onGoBack}
+                    onPress={onGoBack}
                 />
             ),
             headerRight: () => (
@@ -129,6 +152,33 @@ const CreatePost = (props) => {
         </View>
     );
 
+    const Draft = () => {
+        return (
+            <View style={{
+                backgroundColor: '#f8f8ff',
+                padding: 20,
+                height: 300,
+            }}>
+                <View>
+                    <Text>Bạn muốn hoàn thành bài viết của mình sau?</Text>
+                    <Text>Lưu làm bản nháp hoặc bạn có thể tiếp tục chỉnh sửa</Text>
+                </View>
+                <TouchableOpacity style={{ flexDirection: "row" }}>
+                    <Icon3 name="tagso" />
+                    <View style={{ flexDirection: "column" }}>
+                        <Text>Lưu làm bản nháp</Text>
+                        <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{ flexDirection: "row" }}>
+                    <Icon3 name="tagso" />
+                    <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     const onPressFeeling = () => {
         props.navigation.navigate(pageName.post_feeling_activity)
     }
@@ -138,7 +188,7 @@ const CreatePost = (props) => {
     }
 
     let imageGrid = null;
-    console.log('textttt', text);
+    //   console.log('textttt', text);
     if (mediaStatus === 'image') {
         gridImages = (
             <View>
@@ -154,9 +204,12 @@ const CreatePost = (props) => {
                                     if (images.length === 1) {
                                         setMediaStatus(null);
                                         setImages([]);
+                                        //setValue("images", []);
                                     } else {
                                         const newImages = [...images];
                                         newImages.splice(0, 1);
+                                        //setValue("images", newImages);
+
                                         setImages(newImages);
                                     }
                                 }}
@@ -412,7 +465,7 @@ const CreatePost = (props) => {
                         multiline={true}
                         placeholder="Bạn đang nghĩ gì?"
                         onFocus={onPressTextInput}
-                        value={text}
+                        // value={text}
                         onChangeText={(text) => setText(text)}
                     >
                     </TextInput>
@@ -452,12 +505,12 @@ const CreatePost = (props) => {
                 borderRadius={10}
                 renderContent={renderContent}
             />
-            {/* <BottomSheet
+            <BottomSheet
                 ref={sheetDraft}
                 snapPoints={[200, 0]}
                 borderRadius={10}
-                renderContent={renderContent}
-            /> */}
+                renderContent={Draft}
+            />
 
         </>
     )

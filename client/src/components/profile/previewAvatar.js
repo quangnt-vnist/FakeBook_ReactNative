@@ -12,8 +12,9 @@ const windowWidth = Dimensions.get('window').width;
 
 const PreViewAvatar = ({ navigation, route }) => {
     //let images = route.params.images;
-    const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
+    //const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
     let [images, setImages] = useState(route.params.images)
+    //let [text, setT]
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (

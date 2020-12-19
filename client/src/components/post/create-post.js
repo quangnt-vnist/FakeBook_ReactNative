@@ -164,20 +164,47 @@ const CreatePost = (props) => {
                 height: 300,
             }}>
                 <View>
-                    <Text>Bạn muốn hoàn thành bài viết của mình sau?</Text>
-                    <Text>Lưu làm bản nháp hoặc bạn có thể tiếp tục chỉnh sửa</Text>
+                    <Text style={{
+                        fontSize: 17
+                    }}>Bạn muốn hoàn thành bài viết của mình sau?</Text>
+                    <Text style={{
+                        fontSize: 14,
+                        color: "#a9a9a9",
+                        marginTop: 10,
+                    }}>Lưu làm bản nháp hoặc bạn có thể tiếp tục chỉnh sửa</Text>
                 </View>
-                <TouchableOpacity style={{ flexDirection: "row" }}>
-                    <Icon3 name="tagso" />
+                <TouchableOpacity style={{ flexDirection: "row", marginTop: 15 }}>
+                    <Icon3 name="tagso" style={{ fontSize: 45 }} />
                     <View style={{ flexDirection: "column" }}>
-                        <Text>Lưu làm bản nháp</Text>
-                        <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
+                        <Text style={{
+                            fontSize: 17
+                        }}>Lưu làm bản nháp</Text>
+                        <Text style={{
+                            fontSize: 14,
+                            color: "#a9a9a9",
+                            marginTop: 3,
+                        }}>Bạn sẽ nhận được thông báo về bản nháp</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ flexDirection: "row" }}>
-                    <Icon3 name="tagso" />
-                    <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
+                <TouchableOpacity
+                    style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}
+                    onPress={() => { props.navigation.goBack() }}
+                >
+                    <Ionicons name="trash-outline" style={{ fontSize: 45 }} />
+                    <Text style={{
+                        fontSize: 17
+                    }}>Bỏ bài viết</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
+                    onPress={() => { sheetDraft.current.snapTo(0); }}
+                >
+                    <Ionicons name="checkmark" style={{ fontSize: 45, color: "#1e90ff" }} />
+                    <Text style={{
+                        fontSize: 17,
+                        color: "#1e90ff"
+                    }}>Tiếp tục chỉnh sửa</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -419,7 +446,7 @@ const CreatePost = (props) => {
     };
 
     const onPressButtomSheet = () => {
-        sheetRef.current.snapTo(1);
+        sheetDraft.current.snapTo(1);
         Keyboard.dismiss();
     }
 
@@ -527,13 +554,15 @@ const CreatePost = (props) => {
             <BottomSheet
                 ref={sheetRef}
                 snapPoints={[400, 300, 0]}
-                borderRadius={10}
+                initialSnap={2}
+                enabledContentTapInteraction={false}
                 renderContent={renderContent}
             />
             <BottomSheet
                 ref={sheetDraft}
-                snapPoints={[200, 0]}
-                borderRadius={10}
+                snapPoints={[0, 300]}
+                initialSnap={1}
+                enabledContentTapInteraction={false}
                 renderContent={Draft}
             />
 

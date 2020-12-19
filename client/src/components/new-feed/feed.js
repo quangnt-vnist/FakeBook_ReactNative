@@ -129,12 +129,13 @@ const PostItem = (props) => {
 						</Row>
 					</View>
 				</Row>
-
-				<Entypo
-					name='dots-three-horizontal'
-					size={15}
-					color='#222121'
-				/>
+				<TouchableOpacity onPress={() => props.navigation.navigate(pageName.report.REPORT_POST)}>
+					<Entypo
+						name='dots-three-horizontal'
+						size={15}
+						color='#222121'
+					/>
+				</TouchableOpacity>
 			</Header>
 
 			<Post>

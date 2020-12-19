@@ -18,12 +18,11 @@ const Comments = (props) => {
     const [show, setShow] = useState(false);
     useEffect(() => {
         props.getCommentPost("5fdde5348156a30017bfe759");
-        console.log(`https://fakebook-server.herokuapp.com/upload/avatars/user.jpg`);
     }, [])
 
     useEffect(() => {
         if (props.post.isLoading === true) setShow(true);
-    }, [props.post.isLoading])
+    }, [props.post.isLoading, props.post?.comment])
 
     return (
         <>
@@ -159,12 +158,12 @@ const CommentList = (props) => {
 const AddComment = (props) => {
     const [content, setContent] = useState("");
     const submitAdd = () => {
-        console.log("adddddddddddddinggggggggggg", content);
         let data = {
             described: content
         }
         props.addCommentPost("5fdde5348156a30017bfe759", data);
     }
+
     return (
         <View style={{ height: 50, borderTopColor: "#DDD", borderTopWidth: 1, alignItems: "center", justifyContent: "center" }}>
             <View style={{ flexDirection: "row", backgroundColor: "#EEE", borderRadius: 20, width: "80%", height: "80%" }}>

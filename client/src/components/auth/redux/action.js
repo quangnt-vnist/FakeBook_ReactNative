@@ -4,6 +4,7 @@ import { storeData, getData } from "../../../helper/requestHelper";
 
 export const AuthActions = {
     login,
+    register,
     getVerifyCode,
 }
 
@@ -28,13 +29,31 @@ function login(user) {
             })
     }
 }
+function register(user) {
+    return dispatch => {
+        dispatch({ type: AuthConstants.REGISTER_REQUEST });
+        AuthService.register(user)
+            .then(res => {
+                storeData('auth-token', res.data.content.payload.token);
+                storeData('userId', res.data.content.payload.id);
+                dispatch({
+                    type: AuthConstants.REGISTER_SUCCESS,
+                    payload: res.data.content.payload
+                })
+            })
+            .catch(err => {
+                console.log('lỗi đăng KÝ    ');
+                dispatch({ type: AuthConstants.REGISTER_FAILE, payload: err });
+            })
+    }
+}
 
 function getVerifyCode(phone) {
     return dispatch => {
         dispatch({ type: AuthConstants.GET_VERIFY_CODE_REQUEST });
         AuthService.getVerifyCode(phone)
             .then(async res => {
-                console.log('ok',res.data.content);
+                console.log('ok', res.data.content);
                 dispatch({
                     type: AuthConstants.GET_VERIFY_CODE_SUCCESS,
                     payload: res.data.content.code

@@ -14,7 +14,7 @@ exports.addPost = async (id, data, files) => {
     return post;
 };
 
-exports.editPost = async (creator, id, data, files = undefined) => {
+exports.editPost = async (id, data, files = undefined) => {
     let post = await Post.findById({_id: id})
     post.described = data.described
     post.modified = new Date()
@@ -58,11 +58,11 @@ exports.getPost = async (id) => {
     return post
 };
 
-exports.setComment = async (id, data) => {
+exports.setComment = async (id, userId, data) => {
     let post = await Post.findByIdAndUpdate(id, 
         { $push: { 
             comment: {
-                creator: data.creator,
+                creator: userId,
                 described: data.described,
                 createAt: new Date()
             }   
@@ -86,6 +86,35 @@ exports.likePost = async (userId, id) => {
             like: {
                 creator: userId,
                 createAt: new Date()
+            }   
+        },
+    })
+
+    post = await Post.findById({_id: id})
+    return post
+}
+
+exports.unlikePost = async (userId, id) => {
+    let post = await Post.findByIdAndUpdate(id, 
+        { $pull: 
+            { 
+                like: {
+                    creator: userId
+                }   
+            },
+        })
+
+    post = await Post.findById({_id: id})
+    return post
+}
+
+exports.reportPost = async (userId, id, description) => {
+    let post = await Post.findByIdAndUpdate(id, 
+        { $push: { 
+            reported: {
+                creator: userId,
+                createAt: new Date(),
+                description: description
             }   
         },
     })

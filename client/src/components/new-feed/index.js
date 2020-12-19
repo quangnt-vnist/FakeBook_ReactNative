@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { StatusBar, ScrollView, RefreshControl, LogBox } from "react-native";
+import { StatusBar, RefreshControl, ScrollView, LogBox, View, SafeAreaView } from "react-native";
+// import { ScrollView } from 'react-native-gesture-handler';
 import styled from "styled-components/native";
 
 import AppBar from './appBar';
@@ -38,6 +39,7 @@ const NewFeed = ({ navigation }) => {
 
         });
     }, []);
+
     return (
         <>
             <StatusBar

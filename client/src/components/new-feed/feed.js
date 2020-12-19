@@ -95,87 +95,147 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
-const listPost = [1, 2, 3, 4]
 const CommentSheet = () => {
 	return (
 		<Comments />
 	)
 }
+
 const Feed = () => {
 	const sheetRef = useRef(null);
 	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+
+
+
+	const listPost = [
+		{
+			id: "1",
+			avatar: require('./../../public/img/assets/user1.jpg'),
+			name: "Phạm Tuấn Anh",
+			post: "Tiên tửu, thần cồn, ma men Tuấn Anh tìm đối thủ. @@",
+			time: "6 giờ",
+			photo: require('./../../public/img/assets/post1.jpg'),
+			video: "",
+			numOfLike: 98,
+			numOfCmt: 17,
+		},
+		{
+			id: "2",
+			avatar: require('./../../public/img/assets/user2.jpg'),
+			name: "Nguyễn Quang Linh",
+			post: "Nguyễn LInh Phù Ninh",
+			time: "4 giờ",
+			photo: "",
+			video: "",
+			numOfLike: 28,
+			numOfCmt: 17,
+		},
+		{
+			id: "3",
+			avatar: require('./../../public/img/assets/user3.jpg'),
+			name: "Xuân Thành",
+			post: "Nghe nói Tuấn Anh thích uống rượu",
+			time: "5 giờ",
+			photo: require('./../../public/img/assets/post2.jpg'),
+			video: "",
+			numOfLike: 18,
+			numOfCmt: 17,
+		},
+		{
+			id: "4",
+			avatar: require('./../../public/img/assets/user4.jpg'),
+			name: "Nguyễn Thế Quang",
+			post: "QuangDz",
+			time: "5 giờ",
+			photo: "",
+			video: "",
+			numOfLike: 18,
+			numOfCmt: 17,
+		},
+
+	];
+
+
 	return (
 		<>
-			<FlatList
+			{/* <FlatList
 				data={listPost}
-				keyExtractor={item => item}
-				renderItem={({ item }) =><Container >
-						<Header>
-							<Row>
-								<Avatar
-									source={require('./../../public/img/assets/user3.jpg')}
-								/>
-								<View style={{ paddingLeft: 10 }}>
-									<User>Phạm Tuấn Anh</User>
-									<Row>
-										<Time>9m</Time>
-										<Entypo
-											name='dot-single'
-											size={12}
-											color='#747476'
-										/>
-										<Entypo
-											name='globe'
-											size={10}
-											color='#747476'
-										/>
-									</Row>
-								</View>
-							</Row>
+				keyExtractor={item => item.id}
+				renderItem={ ({ item }) =>  }
+				
+				/>
+				
+			*/}
 
-							<Entypo
-								name='dots-three-horizontal'
-								size={15}
-								color='#222121'
-							/>
-						</Header>
-
-						<Post>
-							Tiên tửu, thần cồn, ma men Tuấn Anh tìm đối thủ. @@
-						</Post>
-						<Photo source={require('./../../public/img/assets/post1.jpg')} />
-
-						<Footer>
-							<FooterCount>
+			{ listPost.map(item => {
+					return (
+						<Container key={item.id}>
+							<Header>
 								<Row>
-									<IconCount>
-										<AntDesign
-											name='like1'
-											size={12}
-											color='#FFFFFF'
-										/>
-									</IconCount>
-									<TextCount>88 likes</TextCount>
+									<Avatar
+										source={item.avatar}
+									/>
+									<View style={{ paddingLeft: 10 }}>
+										<User>{item.name}</User>
+										<Row>
+											<Time>{item.time}</Time>
+											<Entypo
+												name='dot-single'
+												size={12}
+												color='#747476'
+											/>
+											<Entypo
+												name='globe'
+												size={10}
+												color='#747476'
+											/>
+										</Row>
+									</View>
 								</Row>
-								<TextCount>2k comments</TextCount>
 
-							</FooterCount>
+								<Entypo
+									name='dots-three-horizontal'
+									size={15}
+									color='#222121'
+								/>
+							</Header>
 
-							<Separator />
+							<Post>
+								{item.post}
+							</Post>
+							{ !(item.photo === "") && <Photo source={item.photo} />}
 
-							<FooterMenu>
-								<Button>
-									<Icon>
-										<AntDesign
-											name='like2'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Like</Text>
-								</Button>
+							<Footer>
+								<FooterCount>
+									<Row>
+										<IconCount>
+											<AntDesign
+												name='like1'
+												size={12}
+												color='#FFFFFF'
+											/>
+										</IconCount>
+										<TextCount>{item.numOfLike} likes</TextCount>
+									</Row>
+									<TextCount>{item.numOfCmt} comments</TextCount>
 
-								{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
+								</FooterCount>
+
+								<Separator />
+
+								<FooterMenu>
+									<Button>
+										<Icon>
+											<AntDesign
+												name='like2'
+												size={20}
+												color='#424040'
+											/>
+										</Icon>
+										<Text>Like</Text>
+									</Button>
+
+									{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
 									<Icon>
 										<MaterialCommunityIcons
 											name='comment-outline'
@@ -185,42 +245,44 @@ const Feed = () => {
 									</Icon>
 									<Text> Bình luận</Text>
 								</TouchableOpacity> */}
-								<Button
-									onPress={() => sheetRef.current.snapTo(0)}
-								>
-									<Icon>
-										<MaterialCommunityIcons
-											name='comment-outline'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Comment</Text>
-								</Button>
+									<Button
+										onPress={() => sheetRef.current.snapTo(0)}
+									>
+										<Icon>
+											<MaterialCommunityIcons
+												name='comment-outline'
+												size={20}
+												color='#424040'
+											/>
+										</Icon>
+										<Text>Comment</Text>
+									</Button>
 
-								<Button>
-									<Icon>
-										<MaterialCommunityIcons
-											name='share-outline'
-											size={20}
-											color='#424040'
-										/>
-									</Icon>
-									<Text>Share</Text>
-								</Button>
-							</FooterMenu>
-						</Footer>
-						<BottomDivider />
-					</Container>
-				}
-			/>
-			<BottomSheet
+									<Button>
+										<Icon>
+											<MaterialCommunityIcons
+												name='share-outline'
+												size={20}
+												color='#424040'
+											/>
+										</Icon>
+										<Text>Share</Text>
+									</Button>
+								</FooterMenu>
+							</Footer>
+							<BottomDivider />
+						</Container>
+
+					)
+				})
+			}
+			{/* <BottomSheet
 				ref={sheetRef}
 				snapPoints={["80%", "50%", "0%"]}
 				borderRadius={10}
 				renderContent={CommentSheet}
 				onCloseEnd={enabledBottomClamp}
-			/>
+			/> */}
 		</>
 	)
 }

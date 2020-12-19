@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const auth = require('./modules/auth/auth.route')
 const post = require('./modules/post/post.route')
+const search = require('./modules/search/search.route')
 require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use('/', auth);
 app.use('/post', post);
+app.use('/search', search)
 
 
 const port = process.env.PORT || 5000;

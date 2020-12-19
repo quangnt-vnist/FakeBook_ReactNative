@@ -2,8 +2,9 @@ const AuthService = require('./auth.services');
 
 exports.register = async (req, res) => {
     try {
+        console.log("show my body ", req.body);
+
         const User = await AuthService.register(req.body);
-        console.log(User);
         if (User.success) {
             res.status(200).json({
                 success: true,
@@ -27,8 +28,8 @@ exports.register = async (req, res) => {
 
 exports.getVerifyCode = async (req, res) => {
     try {
-        const verifycode = await AuthService.getVerifyCode( req.params.phone );
-        
+        const verifycode = await AuthService.getVerifyCode(req.params.phone);
+
         res.status(200).json({
             success: true,
             messages: ['get_verify_code_success'],
@@ -71,7 +72,7 @@ exports.checkVerifyCode = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const User = await AuthService.login(req.body);
-        
+
         if (User.success) {
             res.status(200).json({
                 success: true,
@@ -94,9 +95,9 @@ exports.login = async (req, res) => {
 }
 
 
-exports.logout = async(req, res) => {
+exports.logout = async (req, res) => {
     try {
-        var logout = await AuthService.logout(req.body);
+        var logout = await AuthService.logout(req.user._id, req.body.token);
         res.status(200).json({
             success: true,
             messages: ['logout_success'],
@@ -114,13 +115,13 @@ exports.changeInformation = async (req, res) => {
 
     try {
         let avatar;
-        if(req.file){
-            let path = req.file.destination +'/'+ req.file.filename;
-             console.log("path", path)
+        if (req.file) {
+            let path = req.file.destination + '/' + req.file.filename;
+            console.log("path", path)
             avatar = path.substr(1, path.length)
         }
         console.log("re", req.body)
-        const profile = await AuthService.changeInformation( req.params.id, req.body.name, avatar);
+        const profile = await AuthService.changeInformation(req.params.id, req.body.name, avatar);
 
         res.status(200).json({
             success: true,
@@ -139,7 +140,7 @@ exports.changeInformation = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
     try {
-        const profile = await AuthService.getProfile( req.params.id);
+        const profile = await AuthService.getProfile(req.params.id);
 
         res.status(200).json({
             success: true,

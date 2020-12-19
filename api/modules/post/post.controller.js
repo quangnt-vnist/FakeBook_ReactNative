@@ -93,7 +93,7 @@ exports.getPost = async (req, res) => {
 
 exports.setComment = async (req, res) => {
     try {
-        const post = await postService.setComment( req.params.id, req.body );
+        const post = await postService.setComment( req.params.id, req.user._id, req.body );
         
         res.status(200).json({
             success: true,
@@ -140,6 +140,42 @@ exports.likePost = async (req, res) => {
         res.status(400).json({
             success: false,
             messages: ['like_post_faile'],
+            content: error
+        });
+    }
+};
+
+exports.unlikePost = async (req, res) => {
+    try {
+        const post = await postService.unlikePost( req.user._id, req.params.id );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['unlike_post_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['unlike_post_faile'],
+            content: error
+        });
+    }
+};
+
+exports.reportPost = async (req, res) => {
+    try {
+        const post = await postService.reportPost(req.user._id, req.params.id, req.body.description );
+        
+        res.status(200).json({
+            success: true,
+            messages: ['report_post_success'],
+            content: post
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['report_post_faile'],
             content: error
         });
     }

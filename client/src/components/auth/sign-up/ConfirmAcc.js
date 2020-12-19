@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Modal } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { pageName } from './../../../navigator/constant.page'
 
-const ConfirmAcc = ({ navigation }) => {
+import { connect } from 'react-redux'
+import { AuthActions } from '../redux/action'
 
-    const [phoneNumber, setPhoneNumber] = useState("");
+const ConfirmAcc = (props) => {
+
+    const [code, setConfirmCode] = useState("");
     const [validConfirmCode, setValidConfirmCode] = useState(true)
-    const [code, setCode] = useState(Math.round(Math.random() * 10000))
-
+    const data = props.route.params.data;
     const onPressBtnNext = () => {
-
         // if (validatePhoneNumber()) {
         //     setValidConfirmCode(true);
-        navigation.navigate(pageName.sign_up.REMIND);
+        props.navigation.navigate(pageName.sign_up.REMIND, { data });
+
         // }
         // else {
         //     setValidConfirmCode(false)
@@ -33,14 +35,13 @@ const ConfirmAcc = ({ navigation }) => {
                 <View style={{ flex: 2 }}>
                     <Text style={[CommonStyle.content]}>Nhập mã gồm 5 chữ số được gửi cho bạn.</Text>
 
-                    <Text style={[CommonStyle.content]}>Mã xác thực của bạn là: {code}</Text>
+                    <Text style={[CommonStyle.content]}>Mã xác thực của bạn là: </Text>
 
                     <View style={[styles.input]}>
                         <TextInput
-                            value={phoneNumber}
-                            onChangeText={phone => setPhoneNumber(phone)}
+                            value={code}
+                            onChangeText={code => setConfirmCode(code)}
                             style={styles.phoneNumberInput}
-                            keyboardType="numeric"
                             autoFocus={true}
                         >
                         </TextInput>
@@ -105,5 +106,13 @@ const styles = StyleSheet.create({
         textAlign: "right"
     }
 })
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {
+    getVerifyCode: AuthActions.getVerifyCode,
+}
+let connected = connect(mapStateToProps, mapActions)(ConfirmAcc);
 
-export { ConfirmAcc }
+export { connected as ConfirmAcc }

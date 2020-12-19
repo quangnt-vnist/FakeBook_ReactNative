@@ -14,17 +14,13 @@ const PhoneNumber = ({ navigation, route }) => {
         if (validatePhoneNumber()) {
             setValidPhoneNumber(true);
             const data = route.params.data;
-            const key = "phoneNumber";
-            data[key] = phoneNumber;
+            data.phoneNumber = phoneNumber;
             navigation.navigate(pageName.sign_up.PASSWORD, { data });
         }
         else {
             setValidPhoneNumber(false)
         }
 
-    }
-    const handleUseEmail = () => {
-        // navigation.navigate(pageName.sign_up.PASSWORD);
     }
 
     const validatePhoneNumber = () => {

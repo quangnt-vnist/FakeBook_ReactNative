@@ -11,10 +11,8 @@ const Remember = (props) => {
 
 
     const onPressBtnNext = () => {
-        // alert("Tạo tài khoản xong, chúc bạn sớm tìm được ny")
         const data = props.route.params.data;
-        console.log("finish create acc", data);
-        props.register(data);
+        setIsVisible(false);
         props.navigation.navigate(pageName.main.MAIN)
     }
 

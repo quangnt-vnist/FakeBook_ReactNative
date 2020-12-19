@@ -17,8 +17,7 @@ const Birthday = ({ navigation, route }) => {
         if (nextPage) {
             setIsEnoughAge(true);
             const data = route.params.data;
-            const key = "birth";
-            data[key] = date;
+            data.birth = date;
             navigation.navigate(pageName.sign_up.PHONE, { data });
         }
         else {

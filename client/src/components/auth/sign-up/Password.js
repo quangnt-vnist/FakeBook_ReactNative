@@ -13,9 +13,7 @@ const Password = ({ navigation, route }) => {
 
         setStrongPassword(false);
         const data = route.params.data;
-        const key = "password";
-        data[key] = password;
-
+        data.password = password;
         if (validatePassword()) {
             setStrongPassword(true);
             navigation.navigate(pageName.sign_up.POLICY, { data })

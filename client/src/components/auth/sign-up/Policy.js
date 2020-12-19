@@ -27,10 +27,8 @@ const Policy = (props) => {
     },[props.auth.user])
 
     return (
-        <View style={{flex:1, backgroundColor:"#fff"}}>
-            {
-                loading && <ActivityIndicator size="large" color="#CCC"/>
-            }
+        <View style={{flex:1,opacity:0.5, backgroundColor:"#fff"}}>
+            
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1 }}></View>
 
@@ -42,7 +40,9 @@ const Policy = (props) => {
                         Thông tin từ danh bạ của bạn sẽ được tải lên Faceboook liên tục để chúng tôi có thể gợi ý bạn bè, cung cấp và cải thiện quảng cáo cho bạn và người khác, cũng như mang đến dịch vụ tốt hơn.
                     </Text>
                 </View> 
-
+                {
+                loading && <ActivityIndicator size="large" color="#CCC"/>
+            }
                 <View style={{ flex: 4 }}>
                     <TouchableOpacity
                         activeOpacity={0.5}

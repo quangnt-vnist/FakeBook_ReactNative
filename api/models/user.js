@@ -34,6 +34,10 @@ const UserSchema = new Schema({
         type: String,
         ref: "users"
     }],
+    listfriends: [{
+        type: String,
+        ref: "users"
+    }],
     active: {
         type: Boolean,
     }

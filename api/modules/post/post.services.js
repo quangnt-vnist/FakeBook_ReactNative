@@ -1,5 +1,6 @@
 
 const Post = require('../../models/post');
+const User = require('../../models/user')
 const fs = require("fs");
 
 exports.addPost = async (id, data, files) => {
@@ -56,6 +57,31 @@ exports.getPost = async (id) => {
     let post = await Post.findById({_id: id})
 
     return post
+};
+
+exports.getListPost = async (id) => {
+    let user = await User.findOne({_id: id})
+    var listpost = [];
+    // if(user && user.listfriends.length){
+    //     for(let i in user.listfriend){
+    //         let post = await Post.find({creator: user.listfriends[i]})
+    //         if(post.length){
+    //             listpost.push(post[i])
+    //         }
+    //     }
+    // }
+
+    let post = await Post.find({})
+                        .populate({path: "creator", populate: "users", select: "name avatar"})
+
+    return post;
+};
+
+exports.getListPost = async (id) => {
+    let post = await Post.find({creator: id})
+                        .populate({path: "creator", populate: "users", select: "name avatar"})
+
+    return post;
 };
 
 exports.setComment = async (id, userId, data) => {

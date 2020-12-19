@@ -9,7 +9,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Feather';
 
-const Comments = ({ navigation }) => {
+const Comments = (props) => {
     // const [loading, setLoading] = useState(true)
 
     // const sheetRef = useRef(null);
@@ -44,7 +44,7 @@ const Comments = ({ navigation }) => {
         //         onCloseEnd={enabledBottomClamp}
         //     />
         // </View>
-        <CommentList />
+        <CommentList {...props}/>
     )
 
 }
@@ -92,6 +92,13 @@ const LoadingComments = () => {
 }
 
 const CommentList = (props) => {
+    let height = "100%";
+    let showLike = true;
+    if (props.height) {
+        height = props.height
+    }
+    if (props.showLike === false) showLike = props.showLike;
+
     const listCmt = [
         {
             id: "1",
@@ -124,18 +131,20 @@ const CommentList = (props) => {
     ];
 
     return (
-        <View style={{ backgroundColor: "#fff", height: "100%" }}>
-            <View style={{ height: 50, borderBottomColor: "#DDD", borderBottomWidth: 1, justifyContent: "center" }}>
-                <View style={{ flexDirection: "row" }}>
-                    <Icon
-                        name="like1"
-                        color="#204fb5"
-                        size={20}
-                        style={{ marginLeft: 10, marginRight: 10 }}
-                    />
-                    <Text style={{ fontWeight: "700" }}>100</Text>
+        <View style={{ backgroundColor: "#fff", height: height }}>
+            { showLike &&
+                <View style={{ height: 50, borderBottomColor: "#DDD", borderBottomWidth: 1, justifyContent: "center" }}>
+                    <View style={{ flexDirection: "row" }}>
+                        <Icon
+                            name="like1"
+                            color="#204fb5"
+                            size={20}
+                            style={{ marginLeft: 10, marginRight: 10 }}
+                        />
+                        <Text style={{ fontWeight: "700" }}>100</Text>
+                    </View>
                 </View>
-            </View>
+            }
             {
                 listCmt.length >= 20 ?
                     <View style={styles.moreComments}>
@@ -146,7 +155,9 @@ const CommentList = (props) => {
             }
 
             {/* Comment list */}
+
             <FlatList
+                showsVerticalScrollIndicator={false}
                 data={listCmt}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) =>

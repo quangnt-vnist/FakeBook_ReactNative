@@ -25,8 +25,9 @@ import { Activity } from './post/activity'
 import { Feeling_Activity } from './post/feeling_activity'
 
 import { Comments } from './comment/comments'
-
+//Profile
 import { Profile } from './profile/index';
+import { PreViewAvatar } from './profile/previewAvatar';
 
 // friends tab
 import { AllRequest } from './friend-request-tab/allRequest';
@@ -86,6 +87,7 @@ export {
 
     // profile
     Profile,
+    PreViewAvatar,
 
     // report post
     ReportPost,

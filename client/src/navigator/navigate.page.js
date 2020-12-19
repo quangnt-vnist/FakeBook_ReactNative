@@ -41,6 +41,7 @@ import {
 
     //profile
     Profile,
+    PreViewAvatar,
 
     // Main content
     MainContainer,
@@ -90,7 +91,7 @@ const Navigate = () => {
                 {/* <Stack.Screen name={pageName.feed.NEW_FEED} component={NewFeed} /> */}
 
                 {/* watch tab */}
-                <Stack.Screen name={pageName.watch_tab.PLAY_VIDEO} component={ViewVideo} 
+                <Stack.Screen name={pageName.watch_tab.PLAY_VIDEO} component={ViewVideo}
                     options={{
                         // headerShown: false, 
                         headerTitle: "Xem video khác"
@@ -125,6 +126,7 @@ const Navigate = () => {
 
                 {/* Trang cá nhân */}
                 <Stack.Screen name={pageName.profile} component={Profile} />
+                <Stack.Screen name={pageName.preview_avatar} component={PreViewAvatar} />
 
                 {/* báo cáo bài viết */}
                 <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />

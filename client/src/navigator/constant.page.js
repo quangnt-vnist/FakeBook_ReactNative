@@ -57,6 +57,7 @@ export const pageName = {
     post_feeling_activity: "Cảm xúc/ Hoạt động",
 
     profile: "Trang cá nhân",
+    preview_avatar: "Xem trước ảnh đại diện",
 
 
 

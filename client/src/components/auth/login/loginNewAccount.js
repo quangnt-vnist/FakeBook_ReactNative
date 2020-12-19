@@ -30,7 +30,8 @@ const LoginNewAccount = (props) => {
     // }
     const userId = getData('userId');
     useEffect(()=>{
-        userId && props.navigation.navigate(pageName.main.MAIN);
+        console.log('userId', userId);
+        // userId && props.navigation.navigate(pageName.main.MAIN);
     }, [])
 
     useEffect(()=>{

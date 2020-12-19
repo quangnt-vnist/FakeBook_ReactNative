@@ -8,7 +8,17 @@ export const AuthService = {
     login,
     register,
     getVerifyCode,
+    logout,
 };
+
+async function logout(data) {
+    console.log('data req', data);
+    return sendRequest({
+        url: 'https://fakebook-server.herokuapp.com/logout',
+        method: 'POST',
+        data: data,
+    })
+}
 
 async function login(data) {
     console.log('data req', data);

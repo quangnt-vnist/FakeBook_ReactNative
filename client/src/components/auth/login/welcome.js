@@ -36,9 +36,9 @@ const Welcome = (props) => {
         console.log('auth-token', token);
         if(userId) {
             props.getProfile();
-            props.navigation.navigate(pageName.main.MAIN);
+            props.navigation.replace(pageName.main.MAIN);
         } else {
-            props.navigation.navigate(pageName.LOG_IN_NEW_ACC);
+            props.navigation.replace(pageName.LOG_IN_NEW_ACC);
         }
     }, [])
 

@@ -12,7 +12,7 @@ function OptionTab(props) {
     const onPressLogout = () => {
         props.logout();
         console.log('props', props);
-        props.navigation.navigate(pageName.LOG_IN_NEW_ACC)
+        props.navigation.replace(pageName.LOG_IN_NEW_ACC)
     }
 
     return (

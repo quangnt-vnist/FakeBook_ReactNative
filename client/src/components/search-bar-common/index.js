@@ -1,8 +1,9 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Dimensions, Image, ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
@@ -16,6 +17,7 @@ const Container = styled.View`
 const Row = styled.View`
     flexDirection: row;
     alignItems: center;
+    margin: 2px 0;
 `
 
 const RowTitle = styled.View`
@@ -61,7 +63,7 @@ const AvatarSearch = styled.Image`
 
 const InputSearch = styled.TextInput`
     height: 35px;
-    width: ${WIDTH - 60}px;
+    width: ${WIDTH - 100}px;
     margin: 0 10px 0 0px;
     padding: 0 20px 0 15px;
     border: 1px solid #ccc;
@@ -70,11 +72,30 @@ const InputSearch = styled.TextInput`
     justify-content: center;
 `
 
-const RemoveTxtButton = styled.View`
+const RemoveTxtButton = styled.TouchableOpacity`
     width: 25px;
     height: 25px;
     margin: 0 10px 0 -35px;
     borderRadius: 50px;
+`
+
+const ButtonBack = styled.TouchableOpacity`
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 5px;
+    borderRadius: 50px;
+`
+
+const ButtonSearch = styled.TouchableOpacity`
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 5px;
+    borderRadius: 50px;
+`
+
+const LoadingView = styled.View`
+    justifyContent: center;
+    alignItems: center;
 `
 
 let TXT = "";
@@ -92,65 +113,47 @@ const SearchPage = (props) => {
 
     // state input
     const [txtSearch, setTextSearch] = useState("");
+    const [loading, setLoading] = useState(false);
 
     // onChangeTextSearch
     const onChangeText = (value) => {
         setTextSearch(value);
-        TXT = value;
-        console.log('value', value, TXT);
+        console.log('value', value);
         console.log('vtxtx', txtSearch);
     }
 
     // onChangeTextSearch
     const onRemoveTxt = () => {
         setTextSearch("");
-        TXT = "";
         console.log('txtSearch', txtSearch);
     }
 
-
-    const HeaderSearch = () => {
-        return (
-            <Row>
-                <InputSearch
-                    placeholder={"Tìm kiếm..."}
-                    onChangeText={(txt) => {
-                        onChangeText(txt)
-                    }}
-                />
-                { TXT !== "" &&
-                    <RemoveTxtButton
-                        onPress={setTextSearch("")}
-                    >
-                        <Icon name='remove' size={20} color="#ccc" />
-                    </RemoveTxtButton>
-                }
-            </Row>
-        )
-    }
-
     // input search
-    useLayoutEffect(() => {
-        props.navigation.setOptions({
-            headerRight: () => (
-                <Row>
-                    <InputSearch
-                        placeholder={"Tìm kiếm..."}
-                        onChangeText={(txt) => {
-                            onChangeText(txt)
-                        }}
-                    />
-                    <RemoveTxtButton
-                        onPress={setTextSearch("")}
-                    >
-                        <Icon name='remove' size={20} color="#ccc" />
-                    </RemoveTxtButton>
+    // useLayoutEffect(() => {
+    //     props.navigation.setOptions({
+    //         headerRight: () => (
+    //             <Row>
+    //                 <InputSearch
+    //                     placeholder={"Tìm kiếm..."}
+    //                     onChangeText={(txt) => {
+    //                         onChangeText(txt)
+    //                     }}
+    //                 />
+    //                 <RemoveTxtButton
+    //                     onPress={setTextSearch("")}
+    //                 >
+    //                     <Icon name='remove' size={20} color="#ccc" />
+    //                 </RemoveTxtButton>
 
-                </Row>
-            ),
-        });
+    //             </Row>
+    //         ),
+    //     });
 
-    }, [props.navigation]);
+    // }, [props.navigation]);
+
+    const onGoBack = () => {
+        props.navigation.goBack();
+    }
 
     return (
         <ScrollView
@@ -158,17 +161,59 @@ const SearchPage = (props) => {
             style={{ backgroundColor: "#fff" }}
         >
             <Container>
-                {/* <Text>Count: {txtSearch} ----&gt; txt: {TXT} </Text> */}
-                <RowTitle>
-                    <Text style={{ fontWeight: "700", fontSize: 18 }}>Mới đây</Text>
-                    <TouchableOpacity>
-                        <Text>CHỈNH SỬA</Text>
-                    </TouchableOpacity>
-                </RowTitle>
-
+                <Row>
+                    <ButtonBack
+                        onPress={() => onGoBack()}
+                    >
+                        <Icon5 name='arrow-left' size={20} color="#111" />
+                    </ButtonBack>
+                    <InputSearch
+                        placeholder={"Tìm kiếm..."}
+                        onChangeText={txtSearch => {
+                            setTextSearch(txtSearch);
+                            console.log('text', txtSearch);
+                        }}
+                        value={txtSearch}
+                    />
+                    {txtSearch !== "" &&
+                        <RemoveTxtButton
+                            onPress={() => {
+                                setTextSearch("");
+                                console.log('click', txtSearch);
+                            }}
+                        >
+                            <Icon name='remove' size={20} color="#ccc" />
+                        </RemoveTxtButton>
+                    }
+                    <ButtonSearch
+                        onPress={() => {
+                            setLoading(true)
+                            console.log(txtSearch);
+                        }}
+                    >
+                        <Icon name='search' size={20} color="#111" />
+                    </ButtonSearch>
+                </Row>
                 <Separator />
+                { !loading &&
+                    <RowTitle>
+                        <Text style={{ fontWeight: "700", fontSize: 18 }}>Mới đây</Text>
+                        <TouchableOpacity>
+                            <Text>CHỈNH SỬA</Text>
+                        </TouchableOpacity>
+                    </RowTitle>
+                }
 
-                {
+                { !loading && <Separator /> }
+
+                { loading &&
+                    <LoadingView>
+                        <ActivityIndicator size="large" color="#ccc" />
+                        <Text>Loading ...</Text>
+                    </LoadingView>
+                }
+                
+                { !loading ?
                     dataRecent.map((e, key) => {
                         return (
                             <RowSearchItem key={key}>
@@ -188,7 +233,7 @@ const SearchPage = (props) => {
                                 </RightSearchContent>
                             </RowSearchItem>
                         )
-                    })
+                    }) : null
                 }
             </Container>
         </ScrollView>

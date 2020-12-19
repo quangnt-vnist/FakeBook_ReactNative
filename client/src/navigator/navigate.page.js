@@ -89,7 +89,7 @@ const Navigate = () => {
                 <Stack.Screen
                     name={pageName.main.SEARCH}
                     component={SearchPage}
-                    options={{ headerTitle: "" }}
+                    options={{ headerTitle: "", headerShown: false }}
                 />
 
                 {/* Friend tab */}

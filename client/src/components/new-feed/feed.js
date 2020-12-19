@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, FlatList, View } from 'react-native'
+import { ActivityIndicator, FlatList, View, TouchableOpacity } from 'react-native'
 
 import styled from 'styled-components/native'
 
@@ -11,7 +11,6 @@ import BottomSheet from 'reanimated-bottom-sheet';
 
 import Avatar from './avatar'
 import { Comments } from '../comment/comments'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { pageName } from '../../navigator/constant.page';
 
 const Container = styled.View`

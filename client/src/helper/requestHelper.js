@@ -36,7 +36,7 @@ export const removeStore = async (key) => {
 
 export const AuthenticateHeader = async() => {
     const token = await getData('auth-token');
-    console.log('authenticate token', token);
+    // console.log('authenticate token', token);
     return {
         'auth-token': token,
         "Content-Type": "application/json"

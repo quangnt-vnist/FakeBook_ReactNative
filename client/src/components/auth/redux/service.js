@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
     sendRequest,
-    AuthenticateHeader
+    AuthenticateHeader,
+    getData
 } from '../../../helper/requestHelper';
 
 export const AuthService = {
@@ -10,14 +11,25 @@ export const AuthService = {
     getVerifyCode,
     logout,
     checkVerifyCode,
+    getProfile,
 };
 
-async function logout(data) {
-    console.log('data req', data);
+async function getProfile() {
+    let id = await getData("userId");
+    console.log('id', id);
+    return sendRequest({
+        url: `https://fakebook-server.herokuapp.com/get-profile/${id}`,
+        method: 'GET',
+    })
+}
+
+async function logout() {
+    let token = await getData("auth-token");
+    console.log('token', token);
     return sendRequest({
         url: 'https://fakebook-server.herokuapp.com/logout',
         method: 'POST',
-        data: data,
+        data: { token },
     })
 }
 

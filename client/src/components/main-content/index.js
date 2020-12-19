@@ -14,6 +14,7 @@ import { NotificationTab } from "./../notification-tab";
 import { OptionTab } from "./../option-tab";
 
 import AppBar from '../new-feed/appBar';
+import { connect } from 'react-redux';
 
 // import Animated, { Easing } from 'react-native-reanimated'
 // const { Value, timing } = Animated
@@ -21,6 +22,8 @@ import AppBar from '../new-feed/appBar';
 const MainTopTab = createMaterialTopTabNavigator();
 
 const MainContainer = (props) => {
+
+    console.log('auth main content \n\n', props.auth);
 
     const tabBarOptions = {
         showIcon: true,
@@ -131,4 +134,12 @@ const MainContainer = (props) => {
     );
 }
 
-export { MainContainer };
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {}
+let connected = connect(mapStateToProps, mapActions)(MainContainer);
+
+export { connected as MainContainer }
+

@@ -1,12 +1,14 @@
 import { AuthService } from "./service";
 import { AuthConstants } from "./constant";
-import { storeData, getData } from "../../../helper/requestHelper";
+import { storeData, getData, removeStore } from "../../../helper/requestHelper";
 
 export const AuthActions = {
     login,
     register,
     getVerifyCode,
     checkVerifyCode,
+    logout,
+    getProfile,
 }
 
 function login(user) {
@@ -82,6 +84,40 @@ function checkVerifyCode(data) {
             .catch(err => {
                 console.log('looix rooif');
                 dispatch({ type: AuthConstants.CHECK_VERIFY_CODE_FAILE, payload: err });
+            })
+    }
+}
+
+function logout(){
+    return dispatch => {
+        dispatch({type: AuthConstants.LOGOUT_REQUEST});
+        AuthService.logout()
+            .then( async res => {
+                console.log('reset logout ok');
+                await removeStore('auth-token');
+                await removeStore('userId');
+                // Do sẽ reset localStorage và redux, không cần gọi dispatch({type: AuthConstants.LOGOUT_SUCCESS});
+                // dispatch({type: 'RESET'})
+                dispatch({type: AuthConstants.LOGOUT_SUCCESS});
+            })
+            .catch(err => {
+                dispatch({type: AuthConstants.LOGOUT_FAILE});
+            })
+    }
+}
+
+function getProfile(){
+    return dispatch => {
+        dispatch({type: AuthConstants.GET_PROFILE_REQUEST});
+        AuthService.getProfile()
+            .then( res => {
+                dispatch({
+                    type: AuthConstants.GET_PROFILE_SUCCESS,
+                    payload: res.data.content
+                });
+            })
+            .catch(err => {
+                dispatch({type: AuthConstants.GET_PROFILE_FAILE, err: err});
             })
     }
 }

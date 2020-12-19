@@ -42,11 +42,16 @@ const LoginNewAccount = (props) => {
     //     userId && props.navigation.navigate(pageName.main.MAIN);
     // }, [])
 
-    useEffect(()=>{
-        props.auth?.user?.id && props.navigation.navigate(pageName.main.MAIN);
+    useEffect(() => {
+        console.log('props.auth?.user?.id', props.auth);
+        if (props.auth?.isLoading === false && props.auth?.user?.id){
+            // props.getProfile();
+            props.navigation.navigate(pageName.main.MAIN);
+        }
     }, [props.auth])
 
-    const onPressLogin = () => {
+    const onPressLogin = (e) => {
+        e.preventDefault();
         let loginData = {
             phoneNumber: acc,
             password: password
@@ -112,7 +117,7 @@ const LoginNewAccount = (props) => {
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
-                        onPress={onPressLogin}
+                        onPress={(e) => onPressLogin(e)}
                     >
                         <Text style={[CommonStyle.mediumText, { color: "#8DB0EB" }]}>Đăng nhập</Text>
                     </TouchableOpacity>
@@ -227,6 +232,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     login: AuthActions.login,
+    getProfile: AuthActions.getProfile,
     getVerifyCode: AuthActions.getVerifyCode,
 }
 let connected = connect(mapStateToProps, mapActions)(LoginNewAccount);

@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 import { auth } from '../components/auth/redux/reducer';
-import { removeStore } from '../helper/requestHelper'
+import { getData, removeStore } from '../helper/requestHelper'
 const appReducer = combineReducers({
     auth,
 })
 const rootReducer = (state, action) => {
     if (action.type === 'RESET') {
         state = undefined;
-        removeStore('auth-token');
+        // await removeStore('auth-token');
+        // await removeStore('userId');
+        // console.log('userId', await getData("userId"));
     }
 
     return appReducer(state, action);

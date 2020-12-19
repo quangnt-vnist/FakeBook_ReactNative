@@ -48,6 +48,8 @@ export const pageName = {
         CONFIRM_REPORT: "Xác nhận báo cáo"
     },
 
+    WELCOME: "WELCOME",
+
     LOG_IN_NEW_ACC: "Đăng nhập",
     login_ACC_RECENTLY: "Đăng nhập gần đây",
 

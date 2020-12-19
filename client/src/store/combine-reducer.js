@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { auth } from '../components/auth/redux/reducer';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { post } from '../components/post/redux/reducer';
 import { removeStore } from '../helper/requestHelper'
 const appReducer = combineReducers({
@@ -8,6 +9,8 @@ const appReducer = combineReducers({
     post
 =======
 import { removeStore } from '../helper/requestHelper';
+=======
+>>>>>>> e10b18cda1573450c15f979216a403e135c42b23
 import { post } from '../components/post/redux/reducer';
 import { profile } from '../components/profile/redux/reducer';
 import { getData, removeStore } from '../helper/requestHelper'

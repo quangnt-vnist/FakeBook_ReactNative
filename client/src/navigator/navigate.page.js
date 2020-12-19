@@ -133,7 +133,8 @@ const Navigate = () => {
 
 
                 {/*Tạo bài viết*/}
-                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} 
+                    options={{ headerTitle: "", headerShown: false }} />
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
                 <Stack.Screen name={pageName.post_feeling_activity} component={Feeling_Activity} />

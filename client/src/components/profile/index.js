@@ -8,9 +8,10 @@ import Icon3 from 'react-native-vector-icons/AntDesign';
 import Feed from '../new-feed/feed';
 import ToolBar from '../new-feed/toolBar';
 import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
+import ImagePicker from 'react-native-image-picker';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
+import { pageName } from '../../navigator/constant.page'
 const Profile = ({ navigation }) => {
 
     let [ShowComment, setShowModelComment] = useState(false);
@@ -18,6 +19,7 @@ const Profile = ({ navigation }) => {
 
     let [ShowEditWall, setShowEditWall] = useState(false);
     let [animateModalWall, setanimateWallModal] = useState(true);
+    let [avatar, setAvatar] = useState(true);
     const onPressAvatar = () => {
         setShowModelComment(true);
         // setanimateModal(true);
@@ -100,11 +102,53 @@ const Profile = ({ navigation }) => {
         <Item item={item} />
     );
     const Item = ({ item }) => (
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item}
+            onPress={() => onPressAvartar(item.id)}>
             <Icon name={item.icon} style={styles.icon}></Icon>
             <Text style={styles.title}>{item.title}</Text>
         </TouchableOpacity>
     );
+
+    const onPressAvartar = (option) => {
+        console.log('aaaaaaaaaa', option);
+        if (option === "4") {
+
+            let mediaType;
+            let options = {
+                title: 'Select Image',
+                customButtons: [
+
+                ],
+                mediaType: "mixed",
+                // storageOptions: {
+                //     skipBackup: true,
+                //     path: 'images',
+                // },
+            };
+            ImagePicker.showImagePicker(options, (response) => {
+
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.error) {
+                    console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                    console.log(
+                        'User tapped custom button: ',
+                        response.customButton
+                    );
+                    alert(response.customButton);
+                } else {
+                    let source = response;
+                    console.log('sssssss', source.uri);
+                    setAvatar(source.uri);
+                    navigation.navigate(pageName.preview_avatar, { images: source.uri })
+
+                }
+
+            });
+        }
+    }
+
 
     return (
         <>

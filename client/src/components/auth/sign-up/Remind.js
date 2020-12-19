@@ -3,15 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import { CommonStyle } from './commonStyle'
 import Modal from 'react-native-modal';
 import { pageName } from '../../../navigator/constant.page'
+import { connect } from 'react-redux'
 
-const Remind = ({ navigation }) => {
+const Remind = (props) => {
     const [isVisible, setIsVisible] = useState(true);
-
+    const data = props.route.params.data;
 
     const onPressBtnNext = () => {
         setIsVisible(false);
-
-        navigation.navigate(pageName.sign_up.REMEMBER);
+        props.navigation.navigate(pageName.sign_up.REMEMBER, { data });
     }
 
     return (
@@ -38,10 +38,10 @@ const Remind = ({ navigation }) => {
                             </Text>
 
                         <Text style={[CommonStyle.smallText, styles.alignLeft, { marginLeft: 10 }]}>Số điện thoại</Text>
-                        <Text style={[CommonStyle.content, styles.alignLeft]}>026656666</Text>
+                        <Text style={[CommonStyle.content, styles.alignLeft]}>{data.phoneNumber}</Text>
 
                         <Text style={[CommonStyle.smallText, styles.alignLeft, { marginLeft: 10 }]}>Mật khẩu</Text>
-                        <Text style={[CommonStyle.content, styles.alignLeft]}>linhdeptraiquatroi</Text>
+                        <Text style={[CommonStyle.content, styles.alignLeft]}>{data.password}</Text>
 
 
                     </View>
@@ -72,5 +72,12 @@ const styles = StyleSheet.create({
         textAlign: "left"
     }
 })
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {
+}
+let connected = connect(mapStateToProps, mapActions)(Remind);
 
-export { Remind }
+export { connected as Remind }

@@ -1,24 +1,41 @@
 import React, { Component, useRef, useState } from 'react';
 import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
-
-import Animated from 'react-native-reanimated';
+import { HeaderBackButton } from '@react-navigation/stack';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
+import VideoPlayer from 'react-native-video-player';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { pageName } from '../../navigator/constant.page'
 import { GridImage } from './gridImage';
 import Emoji from 'react-native-emoji';
+import { Draft } from './draft';
+
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 const CreatePost = ({ navigation, route }) => {
 
     const sheetRef = useRef(null);
+    const sheetDraft = useRef(null);
+    const [text, setText] = useState('');
     const [images, setImages] = useState([]);
+    const [video, setVideo] = useState(null);
+    const [mediaStatus, setMediaStatus] = useState(null);
     const [feeling, setFeeling] = useState({
         title: "",
         icon: "",
         type: "",
     });
+
+    const onGoBack = () => {
+        console.log('bacccccccccc');
+        if (images.length > 0) {
+            sheetDraft.current.snapTo(0);
+        }
+        else {
+            console.log('backkkkkkkk');
+            navigation.goBack();
+        }
+    }
     React.useEffect(() => {
         if (route.params) {
             setFeeling({
@@ -28,8 +45,22 @@ const CreatePost = ({ navigation, route }) => {
             })
         }
     }, [route.params]);
-    console.log('routtt', route.params);
-
+    // console.log('routtt', route.params);
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: (props) => (
+                <HeaderBackButton
+                    {...props}
+                    onPress={() => (onGoBack)}
+                />
+            ),
+            headerRight: () => (
+                <TouchableOpacity onPress={() => { navigation.goBack() }}>
+                    <Text>go back</Text>
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
     const renderContent = () => (
         <View
             style={{
@@ -91,86 +122,237 @@ const CreatePost = ({ navigation, route }) => {
     const onPressTextInput = () => {
         sheetRef.current.snapTo(2)
     }
-    // React.useLayoutEffect(() => {
-    //     navigation.setOptions({
-    //         headerRight: () => (
-    //             <Button title="Đăng" />
-    //         ),
-    //     });
-    // }, [navigation]);
 
+    let imageGrid = null;
+    console.log('aaaa', textAlignVertical);
+    if (mediaStatus === 'image') {
+        gridImages = (
+            <View>
+                <View style={styles.gridImagesViewLine}>
+                    <View style={styles.gridImagesViewView}>
+                        <Image
+                            source={images[0]}
+                            style={styles.gridImagesImage}
+                        />
+                        <View style={styles.gridImagesViewIcon}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    if (images.length === 1) {
+                                        setMediaStatus(null);
+                                        setImages([]);
+                                    } else {
+                                        const newImages = [...images];
+                                        newImages.splice(0, 1);
+                                        setImages(newImages);
+                                    }
+                                }}
+                            >
+                                <Ionicons name="close" color="red" size={24} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.gridImagesViewView}>
+                        {images[1] ? (
+                            <>
+                                <Image
+                                    source={images[1]}
+                                    style={styles.gridImagesImage}
+                                />
+                                <View style={styles.gridImagesViewIcon}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            const newImages = [...images];
+                                            newImages.splice(1, 1);
+                                            setImages(newImages);
+                                        }}
+                                    >
+                                        <Ionicons name="close" color="red" size={24} />
+                                    </TouchableOpacity>
+                                </View>
+                            </>
+                        ) : (
+                                <Image
+                                    source={require('../../public/img/fb_reg.png')}
+                                    style={styles.gridImagesImage}
+                                />
+                            )}
+                    </View>
+                </View>
+                <View style={styles.gridImagesViewLine}>
+                    <View style={styles.gridImagesViewView}>
+                        {images[2] ? (
+                            <>
+                                <Image
+                                    source={images[2]}
+                                    style={styles.gridImagesImage}
+                                />
+                                <View style={styles.gridImagesViewIcon}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            const newImages = [...images];
+                                            newImages.splice(2, 1);
+                                            setImages(newImages);
+                                        }}
+                                    >
+                                        <Ionicons name="close" color="red" size={24} />
+                                    </TouchableOpacity>
+                                </View>
+                            </>
+                        ) : (
+                                <Image
+                                    source={require('../../public/img/fb_reg.png')}
+                                    style={styles.gridImagesImage}
+                                />
+                            )}
+                    </View>
+                    <View style={styles.gridImagesViewView}>
+                        {images[3] ? (
+                            <>
+                                <Image
+                                    source={images[3]}
+                                    style={styles.gridImagesImage}
+                                />
+                                <View style={styles.gridImagesViewIcon}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            const newImages = [...images];
+                                            newImages.splice(3, 1);
+                                            setImages(newImages);
+                                        }}
+                                    >
+                                        <Ionicons name="close" color="red" size={24} />
+                                    </TouchableOpacity>
+                                </View>
+                            </>
+                        ) : (
+                                <Image
+                                    source={require('../../public/img/fb_reg.png')}
+                                    style={styles.gridImagesImage}
+                                />
+                            )}
+                    </View>
+                </View>
+            </View>
+        );
+    }
     const chooseFile = () => {
-        let mediaType;
-        let options = {
-            title: 'Select Image',
+        ImagePicker.showImagePicker({
+            title: 'Ảnh/Video',
+            mediaType: 'mixed',
+            takePhotoButtonTitle: null,
+            chooseFromLibraryButtonTitle: null,
             customButtons: [
                 {
-                    name: 'customOptionKey',
-                    title: 'Choose Photo from Custom Option'
+                    name: 'myPhotoFromCamera',
+                    title: 'Chụp ảnh',
                 },
-
+                {
+                    name: 'myVideoFromCamera',
+                    title: 'Quay video',
+                },
+                {
+                    name: 'mylibrary',
+                    title: 'Thư viện',
+                },
             ],
-            mediaType: "video",
-            // storageOptions: {
-            //     skipBackup: true,
-            //     path: 'images',
-            // },
-        };
-        ImagePicker.showImagePicker(options, (response) => {
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log(
-                    'User tapped custom button: ',
-                    response.customButton
-                );
-                alert(response.customButton);
-            } else {
-                if (images.length < 4) {
-                    let source = response;
-                    console.log('sssssss', source.uri);
-                    setImages([...images, source.uri]);
+        }, (response) => {
+            if (response.customButton) {
+                if (images.length >= 4) {
+                    // eslint-disable-next-line no-alert
+                    alert('Hệ thống cho phép đăng tải tối đa 4 ảnh!');
+                    return;
                 }
-                else {
-                    Alert.alert("Hệ thống chỉ cho phép upload 4 ảnh");
+                if (mediaStatus === 'video') {
+                    // eslint-disable-next-line no-alert
+                    alert('Hệ thống cho phép đăng tải tối đa 1 video!');
+                    return;
                 }
-                sheetRef.current.snapTo(2);
             }
+            if (response.customButton === 'myPhotoFromCamera') {
+                ImagePicker.launchCamera({
+                    storageOptions: {
+                        path: 'PhotoCamera',
+                    },
+                    mediaType: 'photo',
+                }, (myResponse) => {
+                    if (myResponse.didCancel) {
 
+                    } else if (myResponse.error) {
+
+                    } else {
+                        if (!mediaStatus) {
+                            setMediaStatus('image');
+                        }
+                        const source = { uri: myResponse.uri };
+                        setImages([...images, source]);
+                    }
+                });
+            } else if (response.customButton === 'myVideoFromCamera') {
+                if (mediaStatus === 'image') {
+                    // eslint-disable-next-line no-alert
+                    alert('Bạn chỉ được thêm một loại đa phương tiện. Bạn đã thêm ảnh!');
+                    return;
+                }
+                ImagePicker.launchCamera({
+                    storageOptions: {
+                        path: 'VideoCamera',
+                    },
+                    mediaType: 'video',
+                }, (myResponse) => {
+                    if (myResponse.didCancel) {
+
+                    } else if (myResponse.error) {
+
+                    } else {
+                        const source = { uri: myResponse.uri };
+                        setMediaStatus('video');
+                        setVideo(source);
+                        console.log('Error at upload video type 1:', myResponse.errorMessage);
+                    }
+                });
+            } else if (response.customButton === 'mylibrary') {
+                ImagePicker.launchImageLibrary({
+                    storageOptions: {
+                        path: 'library',
+                    },
+                    mediaType: 'mixed',
+                }, (myResponse) => {
+                    if (myResponse.didCancel) {
+
+                    } else if (myResponse.error) {
+
+                    } else {
+                        const source = { uri: myResponse.uri };
+                        const type = myResponse.type;
+                        if (!mediaStatus) {
+                            if (type === 'image/jpeg') {
+                                setMediaStatus('image');
+                                setImages([source]);
+                            } else {
+                                setMediaStatus('video');
+                                setVideo(source);
+                                console.log('Error at upload video type 2:', myResponse.errorMessage);
+                            }
+                        } else {
+                            if (type === 'image/jpeg') {
+                                setImages([...images, source]);
+                            } else {
+                                // eslint-disable-next-line no-alert
+                                alert('Bạn chỉ được thêm một loại đa phương tiện. Bạn đã thêm ảnh!');
+                            }
+                        }
+                    }
+                });
+            }
         });
     };
+
     const onPressButtomSheet = () => {
         sheetRef.current.snapTo(1);
         Keyboard.dismiss();
     }
 
-    const onDelete1 = () => {
-        images.splice(0, 1);
-        setImages(images)
-    };
-    const onDelete2 = () => {
-        let oldImage = images;
-        console.log('ahihi', oldImage);
-        images.splice(1, 1);
 
-        //console.log('aaaaa', images)
-        setImages(images);
-
-        console.log('imagess', images)
-    };
-    const onDelete3 = () => {
-        images.splice(2, 1);
-        setImages(images);
-    };
-    const onDelete4 = () => {
-        images.splice(3, 1);
-        setImages(images);
-    };
-
-    console.log('fffff', feeling)
     return (
         <>
             <View style={styles.p1}>
@@ -216,20 +398,20 @@ const CreatePost = ({ navigation, route }) => {
                         multiline={true}
                         placeholder="Bạn đang nghĩ gì?"
                         onFocus={onPressTextInput}
+                        value={text}
+                        onChangeText={(text) => setText(text)}
                     >
                     </TextInput>
 
 
                     <View>
-                        <GridImage
-                            array={images}
-                            // onDelete1={onDelete1}
-                            // onDelete2={onDelete2}
-                            // onDelete3={onDelete3}
-                            // onDelete4={onDelete4}
-                            onChangeImage={setImages}
-                        />
-                        {/* <Image source={{ uri: images[0] }} style={{ width: 300, height: 200 }} /> */}
+
+                        {mediaStatus === 'image' && gridImages}
+                        {mediaStatus === 'video' && (<VideoPlayer
+                            video={video}
+                            videoWidth={1600}
+                            videoHeight={900}
+                        />)}
                     </View>
                 </ScrollView>
             </View>
@@ -256,6 +438,12 @@ const CreatePost = ({ navigation, route }) => {
                 borderRadius={10}
                 renderContent={renderContent}
             />
+            {/* <BottomSheet
+                ref={sheetDraft}
+                snapPoints={[200, 0]}
+                borderRadius={10}
+                renderContent={renderContent}
+            /> */}
 
         </>
     )
@@ -323,18 +511,44 @@ const styles = StyleSheet.create({
         textAlignVertical: "center",
         marginRight: 10,
     },
-    // create_room: {
-    //     color: `#6495ed`,
-    //     fontSize: 20,
-    //     textAlignVertical: "center",
-    //     // marginLeft: 3,
-    //     marginRight: 10,
-    // },
+
 
     lineStyle: {
         borderWidth: 0.5,
         borderColor: 'black',
         marginTop: 10,
+    },
+    delete: {
+        position: 'absolute',
+        // backgroundColor: "red",
+        alignSelf: "flex-end",
+        width: 30,
+        height: 30,
+        marginTop: 10,
+        marginRight: 15,
+    },
+    icon_delete: {
+        fontSize: 30,
+        color: "#dcdcdc",
+    },
+    gridImagesViewLine: {
+        flexDirection: 'row',
+    },
+    gridImagesViewView: {
+        flexBasis: 1,
+        flexGrow: 1,
+        padding: 3,
+    },
+    gridImagesImage: {
+        height: windowWidth / 2 - 6,
+        resizeMode: 'cover',
+        width: '100%',
+    },
+    gridImagesViewIcon: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        right: 10,
+        top: 10,
     },
 
 })

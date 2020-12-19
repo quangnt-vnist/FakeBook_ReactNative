@@ -4,7 +4,7 @@ import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { pageName } from './../../../navigator/constant.page'
 
-const PhoneNumber = ({ navigation }) => {
+const PhoneNumber = ({ navigation, route }) => {
 
     const [phoneNumber, setPhoneNumber] = useState("");
     const [validPhoneNumber, setValidPhoneNumber] = useState(true)
@@ -13,19 +13,17 @@ const PhoneNumber = ({ navigation }) => {
 
         if (validatePhoneNumber()) {
             setValidPhoneNumber(true);
-            navigation.navigate(pageName.sign_up.PASSWORD);
+            const data = route.params.data;
+            data.phoneNumber = phoneNumber;
+            navigation.navigate(pageName.sign_up.PASSWORD, { data });
         }
         else {
             setValidPhoneNumber(false)
         }
 
     }
-    const handleUseEmail = () => {
-        // navigation.navigate(pageName.sign_up.PASSWORD);
-    }
 
     const validatePhoneNumber = () => {
-
         let reg = /([0-9]{10})\b/;
 
         return reg.test(phoneNumber);

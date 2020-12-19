@@ -3,14 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import { CommonStyle } from './commonStyle'
 import Modal from 'react-native-modal';
 import { pageName } from '../../../navigator/constant.page'
+import { connect } from 'react-redux'
+import { AuthActions } from '../redux/action'
 
-const Remember = ({ navigation }) => {
+const Remember = (props) => {
     const [isVisible, setIsVisible] = useState(true);
 
 
     const onPressBtnNext = () => {
-        // alert("Tạo tài khoản xong, chúc bạn sớm tìm được ny")
-        navigation.navigate(pageName.sign_up.BEGIN)
+        const data = props.route.params.data;
+        setIsVisible(false);
+        props.navigation.navigate(pageName.main.MAIN)
     }
 
 
@@ -62,5 +65,13 @@ const styles = StyleSheet.create({
         width: "40%"
     }
 })
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {
+    register: AuthActions.register,
+}
+let connected = connect(mapStateToProps, mapActions)(Remember);
 
-export { Remember }
+export { connected as Remember }

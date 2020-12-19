@@ -4,7 +4,7 @@ import { CommonStyle } from './commonStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { pageName } from '../../../navigator/constant.page';
 
-const Password = ({ navigation }) => {
+const Password = ({ navigation, route }) => {
 
     const [password, setPassword] = useState("");
     const [strongPassword, setStrongPassword] = useState(true);
@@ -12,16 +12,15 @@ const Password = ({ navigation }) => {
     const onPressBtnNext = () => {
 
         setStrongPassword(false);
-
-        // COMMENT VALIDATE ĐỂ CHECK CHO NHANH
-
-        // if (validatePassword()) {
-        //     setStrongPassword(true);
-        navigation.navigate(pageName.sign_up.POLICY)
-        // }
-        // else {
-        //     setStrongPassword(false);
-        // }
+        const data = route.params.data;
+        data.password = password;
+        if (validatePassword()) {
+            setStrongPassword(true);
+            navigation.navigate(pageName.sign_up.POLICY, { data })
+        }
+        else {
+            setStrongPassword(false);
+        }
     }
 
     const validatePassword = () => {
@@ -52,6 +51,7 @@ const Password = ({ navigation }) => {
                             style={styles.passwordInput}
                             placeholder="Mật khẩu"
                             autoFocus={true}
+                            secureTextEntry={true}
                         >
                         </TextInput>
                     </View>

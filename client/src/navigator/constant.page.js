@@ -21,6 +21,11 @@ export const pageName = {
         All_FRIEND: "Tất cả bạn bè",
         SUGGEST_FRIEND: "Gợi ý",
     },
+    
+    watch_tab: {
+        PLAY_VIDEO: "Xem video",
+        SEARCH_VIDEO: "Tìm kiếm video",
+    },
 
     sign_up: {
         BEGIN: "Tạo tài khoản",
@@ -43,6 +48,8 @@ export const pageName = {
         CONFIRM_REPORT: "Xác nhận báo cáo"
     },
 
+    WELCOME: "WELCOME",
+
     LOG_IN_NEW_ACC: "Đăng nhập",
     login_ACC_RECENTLY: "Đăng nhập gần đây",
 
@@ -52,6 +59,7 @@ export const pageName = {
     post_feeling_activity: "Cảm xúc/ Hoạt động",
 
     profile: "Trang cá nhân",
+    preview_avatar: "Xem trước ảnh đại diện",
 
 
 

@@ -9,6 +9,7 @@ import { OptionTab } from './option-tab'
 
 import { LoginNewAccount } from './auth/login/loginNewAccount'
 import { LoginRecentlyAcc } from './auth/login/loginRecentlyAcc'
+import Welcome from './auth/login/welcome'
 
 import { StartCreateAcc } from './auth/sign-up/StartCreateAcc'
 import { Birthday } from './auth/sign-up/Birthday'
@@ -25,13 +26,17 @@ import { Activity } from './post/activity'
 import { Feeling_Activity } from './post/feeling_activity'
 
 import { Comments } from './comment/comments'
-
+//Profile
 import { Profile } from './profile/index';
+import { PreViewAvatar } from './profile/previewAvatar';
 
 // friends tab
 import { AllRequest } from './friend-request-tab/allRequest';
 import { SuggestFriend } from './friend-request-tab/suggestFriend';
 import { ListFriends } from './friend-request-tab/listFriends';
+
+// watch tab
+import ViewVideo from "./watchs-tab/viewVideo";
 
 // report
 import { ReportPost } from './report';
@@ -54,9 +59,13 @@ export {
     SuggestFriend,
     ListFriends,
 
+    // watch 
+    ViewVideo,
+
     // Login
     LoginNewAccount,
     LoginRecentlyAcc,
+    Welcome,
 
     // Create new account
     StartCreateAcc,
@@ -80,6 +89,7 @@ export {
 
     // profile
     Profile,
+    PreViewAvatar,
 
     // report post
     ReportPost,

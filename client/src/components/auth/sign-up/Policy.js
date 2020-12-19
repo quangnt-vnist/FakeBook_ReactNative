@@ -1,14 +1,36 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import { CommonStyle } from './commonStyle'
 import { pageName } from './../../../navigator/constant.page'
 
-const Policy = ({ navigation }) => {
+import { connect } from 'react-redux'
+import { AuthActions } from '../redux/action'
+
+const Policy = (props) => {
+    const [loading, setLoading] = useState(false);
+
+    const data = props.route.params.data;
+
     const onPressNext = ()=>{
-        navigation.navigate(pageName.sign_up.CONFIRM)
+        setLoading(true);
+        setTimeout(()=>{
+            props.register(data);
+        }, 1000)
+        
     }
+    
+    useEffect(() => {
+        if (props.auth.user?._id) {
+            setLoading(false);
+            props.navigation.navigate(pageName.sign_up.CONFIRM, {data})
+        } 
+    },[props.auth.user])
+
     return (
-        <>
+        <View style={{flex:1, backgroundColor:"#fff"}}>
+            {
+                loading && <ActivityIndicator size="large" color="#CCC"/>
+            }
             <View style={CommonStyle.row_90}>
                 <View style={{ flex: 1 }}></View>
 
@@ -44,11 +66,20 @@ const Policy = ({ navigation }) => {
 
             </View >
 
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
 
 })
-export { Policy }
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {
+    register: AuthActions.register,
+}
+let connected = connect(mapStateToProps, mapActions)(Policy);
+
+export { connected as Policy }

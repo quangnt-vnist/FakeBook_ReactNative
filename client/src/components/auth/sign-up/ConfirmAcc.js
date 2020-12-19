@@ -13,17 +13,18 @@ const ConfirmAcc = (props) => {
     const [validConfirmCode, setValidConfirmCode] = useState(true)
     const data = props.route.params.data;
     const onPressBtnNext = () => {
-        // if (validatePhoneNumber()) {
-        //     setValidConfirmCode(true);
-        props.navigation.navigate(pageName.sign_up.REMIND, { data });
-
-        // }
-        // else {
-        //     setValidConfirmCode(false)
-        // }
+        let phoneNumber = data.phoneNumber;
+        props.checkVerifyCode({ phoneNumber, code });
 
     }
-
+    useEffect(() => {
+        if (props.auth?.verifycode?.success) {
+            setValidConfirmCode(true);
+            props.navigation.navigate(pageName.sign_up.REMIND, { data })
+        } else {
+            setValidConfirmCode(false);
+        }
+    }, [props.auth.verifycode])
 
     return (
         <View style={CommonStyle.background}>
@@ -32,11 +33,23 @@ const ConfirmAcc = (props) => {
 
                 </View>
 
-                <View style={{ flex: 2 }}>
-                    <Text style={[CommonStyle.content]}>Nhập mã gồm 5 chữ số được gửi cho bạn.</Text>
+                <View style={{ flex: 3 }}>
 
-                    <Text style={[CommonStyle.content]}>Mã xác thực của bạn là: </Text>
-
+                    <Text style={[CommonStyle.content]}>Mã xác thực của bạn là: {props.auth.user.code}</Text>
+                    {/* {!validConfirmCode &&
+                        <View style={{
+                            flexDirection: "row",
+                            width: "90%",
+                            marginLeft: "5%"
+                        }}>
+                            <Text style={[CommonStyle.smallText, { color: "red" }]}>Mã xác thực không đúng, hãy nhập lại</Text>
+                            <Icon name="exclamation-circle" style={{
+                                color: "red",
+                                fontSize: 20,
+                                textAlignVertical: "bottom",
+                            }}></Icon>
+                        </View>
+                    } */}
                     <View style={[styles.input]}>
                         <TextInput
                             value={code}
@@ -111,7 +124,7 @@ const mapStateToProps = state => {
     return { auth };
 }
 const mapActions = {
-    getVerifyCode: AuthActions.getVerifyCode,
+    checkVerifyCode: AuthActions.checkVerifyCode,
 }
 let connected = connect(mapStateToProps, mapActions)(ConfirmAcc);
 

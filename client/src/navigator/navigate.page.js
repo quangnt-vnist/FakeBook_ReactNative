@@ -41,6 +41,7 @@ import {
 
     //profile
     Profile,
+    PreViewAvatar,
 
     // Main content
     MainContainer,
@@ -61,11 +62,11 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
-                <Stack.Screen 
-                    name={pageName.LOG_IN_NEW_ACC} 
-                    component={LoginNewAccount} 
+                {/* <Stack.Screen
+                    name={pageName.LOG_IN_NEW_ACC}
+                    component={LoginNewAccount}
                     options={{ headerShown: false }}
-                />
+                /> */}
 
                 {/* Main container */}
                 <Stack.Screen
@@ -74,10 +75,10 @@ const Navigate = () => {
                     options={{ headerShown: false }}
                 />
                 {/* Search friend page */}
-                <Stack.Screen 
-                    name={pageName.main.SEARCH} 
-                    component={SearchPage} 
-                    options={{headerTitle: ""}}    
+                <Stack.Screen
+                    name={pageName.main.SEARCH}
+                    component={SearchPage}
+                    options={{ headerTitle: "" }}
                 />
 
                 {/* Friend tab */}
@@ -113,6 +114,7 @@ const Navigate = () => {
 
                 {/* Trang cá nhân */}
                 <Stack.Screen name={pageName.profile} component={Profile} />
+                <Stack.Screen name={pageName.preview_avatar} component={PreViewAvatar} />
 
                 {/* báo cáo bài viết */}
                 <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />

@@ -64,8 +64,6 @@ const Navigate = () => {
         <NavigationContainer>
 
             <Stack.Navigator>
-<<<<<<< HEAD
-=======
 
                 <Stack.Screen
                     name={pageName.WELCOME}
@@ -79,9 +77,7 @@ const Navigate = () => {
                     options={{ headerShown: false }}
                 />
 
-                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
 
->>>>>>> cede9271fdb756e3b90dd45be5ad5ed2c30d4294
                 {/* Main container */}
                 <Stack.Screen
                     name={pageName.main.MAIN}
@@ -89,11 +85,7 @@ const Navigate = () => {
                     options={{ headerShown: false }}
                 />
 
-                <Stack.Screen
-                    name={pageName.LOG_IN_NEW_ACC}
-                    component={LoginNewAccount}
-                    options={{ headerShown: false }}
-                />
+
 
                 {/* Search friend page */}
                 <Stack.Screen

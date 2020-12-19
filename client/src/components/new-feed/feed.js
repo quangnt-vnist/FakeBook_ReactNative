@@ -184,7 +184,7 @@ const PostItem = (props) => {
 								<Text> Bình luận</Text>
 							</TouchableOpacity> */}
 					<Button
-						onPress={() => sheetRef.current.snapTo(0)}
+						onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
 					>
 						<Icon>
 							<MaterialCommunityIcons
@@ -213,9 +213,7 @@ const PostItem = (props) => {
 	)
 }
 
-const Feed = () => {
-	const sheetRef = useRef(null);
-	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+const Feed = (props) => {
 
 	const listPost = [
 		{
@@ -291,7 +289,7 @@ const Feed = () => {
 	return (
 		<>
 			{ listPost.map(item => <View key={item.id}>
-				<PostItem item={item} />
+				<PostItem item={item} {...props} />
 			</View>
 			)}
 			{/* <FlatList

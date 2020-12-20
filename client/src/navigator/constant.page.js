@@ -14,6 +14,7 @@ export const pageName = {
 
     feed: {
         NEW_FEED: "Dòng thời gian",
+        SINGLE_POST: "Bài viết",
     },
 
     friend_tab: {

@@ -13,7 +13,8 @@ export const PostService = {
     addCommentPost,
     createPost,
     reportPost,
-    changeAvatar
+    changeAvatar,
+    getPost
 };
 
 async function getPostByUser() {
@@ -27,6 +28,13 @@ async function getPostByUser() {
 
 async function getAllPost() {
     let url = `https://fakebook-server.herokuapp.com/post/get-list-post`
+    return sendRequest({
+        url: url,
+        method: 'GET',
+    })
+}
+async function getPost(id) {
+    let url = `https://fakebook-server.herokuapp.com/post/get-post/${id}`
     return sendRequest({
         url: url,
         method: 'GET',

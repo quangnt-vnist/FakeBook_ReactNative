@@ -9,6 +9,7 @@ import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
 import { connect } from 'react-redux';
 import { NotificationAction } from './redux/action';
 import moment from 'moment'
+import { pageName } from '../../navigator/constant.page';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
@@ -41,7 +42,7 @@ function NotificationTab(props) {
 
     const onPressViewNoti = (id) => {
         id && props.editNotification(id);
-
+        props.navigation.navigate(pageName.feed.SINGLE_POST, { id: id })
     }
 
     const SingleNotification = ({ item, index }) => {

@@ -98,11 +98,12 @@ export function post(state = initState, action) {
                 isLoadingPost: true,
                 error: null
             };
-            
+
         case PostConstant.GET_COMMENT_POST_REQUEST:
         case PostConstant.ADD_COMMENT_POST_REQUEST:
         case PostConstant.REPORT_POST_REQUEST:
         case PostConstant.CHANGE_AVATAR_REQUEST:
+        case PostConstant.GET_POST_REQUEST:
             return {
                 ...state,
                 isLoading: true,
@@ -113,6 +114,14 @@ export function post(state = initState, action) {
             return {
                 ...state,
                 comment: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.GET_POST_SUCCESS:
+            return {
+                ...state,
+                singlePost: action.payload,
                 isLoading: false,
                 error: null
             };
@@ -159,6 +168,7 @@ export function post(state = initState, action) {
         case PostConstant.ADD_COMMENT_POST_FAILE:
         case PostConstant.REPORT_POST_FAILE:
         case PostConstant.CHANGE_AVATAR_FAILE:
+        case PostConstant.GET_POST_FAILE:
             return {
                 ...state,
                 isLoading: false,

@@ -134,7 +134,7 @@ const OptionTab = (props) => {
                 >
                     <Avatar
                         source={{ uri: `https://fakebook-server.herokuapp.com${auth.profile?.avatar}` }}
-                    // source={{ uri: `https://fakebook-server.herokuapp.com/upload/avatars/user.jpg` }}
+                        // source={{ uri: `https://fakebook-server.herokuapp.com/upload/avatars/user.jpg` }}
                     />
                     <RightContent
                         onPress={() => onPressProfile()}

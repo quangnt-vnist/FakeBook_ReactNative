@@ -7,6 +7,7 @@ import styled from 'styled-components/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import Avatar from './avatar'
+import { connect } from 'react-redux'
 
 const Container = styled.View`
 	width: 100%;
@@ -35,6 +36,7 @@ const CardUser = styled.View`
 	height: 39px;
 	align-items: center;
 	justify-content: center;
+	border: 1px solid #ccc;
 `
 const CardFooter = styled.View`
 	width: 100%;
@@ -46,7 +48,7 @@ const Text = styled.Text`
 	font-size: 13px;
 	font-weight: bold;
 	color: #ffffff;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 `
 const BottomDivider = styled.View`
 	width: 100%;
@@ -54,7 +56,9 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
-const Story = () => {
+const Story = (props) => {
+	const { auth } = props;
+
 	return (
 		<>
 			<Container>
@@ -64,7 +68,8 @@ const Story = () => {
 					style={{ paddingLeft: 11 }}>
 					<Card>
 						<CardStory
-							source={require('./../../public/img/assets/story1.jpg')}
+							// source={require('./../../public/img/assets/story1.jpg')}
+							source={{ uri: `https://fakebook-server.herokuapp.com${auth.profile?.avatar}` }}
 						/>
 						<CardUser>
 							<AntDesign
@@ -74,7 +79,7 @@ const Story = () => {
 							/>
 						</CardUser>
 						<CardFooter>
-							<Text>Add To Story</Text>
+							<Text>Tạo tin</Text>
 						</CardFooter>
 					</Card>
 
@@ -89,7 +94,7 @@ const Story = () => {
 							/>
 						</CardUser>
 						<CardFooter>
-							<Text>Wanessa J</Text>
+							<Text>Dzuyên NT</Text>
 						</CardFooter>
 					</Card>
 
@@ -104,7 +109,7 @@ const Story = () => {
 							/>
 						</CardUser>
 						<CardFooter>
-							<Text>Regi P</Text>
+							<Text>Quang Dz</Text>
 						</CardFooter>
 					</Card>
 
@@ -119,7 +124,7 @@ const Story = () => {
 							/>
 						</CardUser>
 						<CardFooter>
-							<Text>Anna M</Text>
+							<Text>Love Together</Text>
 						</CardFooter>
 					</Card>
 				</ScrollView>
@@ -129,4 +134,14 @@ const Story = () => {
 	)
 }
 
-export default Story
+const mapStateToProps = state => {
+	const { auth } = state;
+	return { auth };
+}
+const mapActions = {};
+
+let connected = connect(mapStateToProps, mapActions)(Story);
+
+export { connected as Story }
+
+// export default Story

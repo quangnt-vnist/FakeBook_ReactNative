@@ -7,7 +7,24 @@ export const PostAction = {
     getCommentPost,
     addCommentPost,
     createPost,
-    reportPost
+    reportPost,
+    getAllPost,
+}
+
+function getAllPost() {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_LIST_POST_REQUEST });
+        PostService.getAllPost()
+            .then(res => {
+                dispatch({
+                    type: PostConstant.GET_LIST_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_LIST_POST_FAILE, payload: err });
+            })
+    }
 }
 
 function likePost(data) {

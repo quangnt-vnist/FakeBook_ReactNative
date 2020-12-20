@@ -20,7 +20,30 @@ export function post(state = initState, action) {
     // console.log('action type:  ', action.type);
     switch (action.type) {
 
-        case PostConstant.CHANGE_LIKE_REQUEST:
+        case PostConstant.GET_LIST_POST_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case PostConstant.GET_LIST_POST_SUCCESS:
+            return {
+                ...state,
+                listPost: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.GET_LIST_POST_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+            case PostConstant.CHANGE_LIKE_REQUEST:
 
             return {
                 ...state,

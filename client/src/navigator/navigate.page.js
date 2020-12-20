@@ -133,7 +133,7 @@ const Navigate = () => {
 
 
                 {/*Tạo bài viết*/}
-                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} 
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost}
                     options={{ headerTitle: "", headerShown: false }} />
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
@@ -141,7 +141,9 @@ const Navigate = () => {
 
                 {/* Trang cá nhân */}
                 <Stack.Screen name={pageName.profile} component={Profile} />
-                <Stack.Screen name={pageName.preview_avatar} component={PreViewAvatar} />
+                <Stack.Screen name={pageName.preview_avatar} component={PreViewAvatar}
+                    options={{ headerTitle: "", headerShown: false }}
+                />
 
                 {/* báo cáo bài viết */}
                 <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />

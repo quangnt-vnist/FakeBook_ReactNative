@@ -48,7 +48,7 @@ export function post(state = initState, action) {
         case PostConstant.ADD_COMMENT_POST_REQUEST:
         case PostConstant.CREATE_POST_REQUEST:
         case PostConstant.REPORT_POST_REQUEST:
-
+        case PostConstant.CHANGE_AVATAR_REQUEST:
             return {
                 ...state,
                 isLoading: true,
@@ -79,6 +79,14 @@ export function post(state = initState, action) {
                 isLoading: false,
                 error: null
             };
+        case PostConstant.CHANGE_AVATAR_SUCCESS:
+            return {
+                ...state,
+                post: action.payload,
+                // listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
+                isLoading: false,
+                error: null
+            };
 
         case PostConstant.REPORT_POST_SUCCESS:
             return {
@@ -93,6 +101,7 @@ export function post(state = initState, action) {
         case PostConstant.ADD_COMMENT_POST_FAILE:
         case PostConstant.CREATE_POST_FAILE:
         case PostConstant.REPORT_POST_FAILE:
+        case PostConstant.CHANGE_AVATAR_FAILE:
             return {
                 ...state,
                 isLoading: false,

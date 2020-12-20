@@ -5,6 +5,7 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import Feed from '../new-feed/feed';
 import ToolBar from '../new-feed/toolBar';
 import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
@@ -53,7 +54,7 @@ const Profile = ({ navigation }) => {
         {
             id: '5',
             title: 'Xem ảnh đại diện',
-            icon: "image"
+            icon: "id-badge"
         },
         {
             id: '6',
@@ -68,7 +69,7 @@ const Profile = ({ navigation }) => {
         {
             id: '8',
             title: 'Đặt avatar làm ảnh đại diện',
-            icon: "image"
+            icon: "github-alt"
         },
     ];
     const DATAWALL = [
@@ -114,38 +115,76 @@ const Profile = ({ navigation }) => {
         if (option === "4") {
 
             let mediaType;
-            let options = {
-                title: 'Select Image',
+            ImagePicker.showImagePicker({
+                title: 'Chọn ảnh đại diện',
+                mediaType: 'photo',
+                takePhotoButtonTitle: null,
+                chooseFromLibraryButtonTitle: null,
                 customButtons: [
+                    {
+                        name: 'myPhotoFromCamera',
+                        title: 'Chụp ảnh',
+                    },
 
+                    {
+                        name: 'mylibrary',
+                        title: 'Thư viện',
+                    },
                 ],
-                mediaType: "mixed",
-                // storageOptions: {
-                //     skipBackup: true,
-                //     path: 'images',
-                // },
-            };
-            ImagePicker.showImagePicker(options, (response) => {
+            }, (response) => {
 
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                } else if (response.customButton) {
-                    console.log(
-                        'User tapped custom button: ',
-                        response.customButton
-                    );
-                    alert(response.customButton);
-                } else {
-                    let source = response;
-                    console.log('sssssss', source.uri);
-                    setAvatar(source.uri);
-                    navigation.navigate(pageName.preview_avatar, { images: source.uri })
+                if (response.customButton === 'myPhotoFromCamera') {
+                    ImagePicker.launchCamera({
+                        storageOptions: {
+                            path: 'PhotoCamera',
+                        },
+                        mediaType: 'photo',
+                    }, (myResponse) => {
+                        if (myResponse.didCancel) {
 
+                        } else if (myResponse.error) {
+
+                        } else {
+
+                            const source = {
+                                uri: myResponse.uri,
+                                type: myResponse.type,
+                                name: myResponse.fileName
+                            };
+                            console.log('srr', source)
+                            setAvatar(source);
+                        }
+                    });
+                } else if (response.customButton === 'mylibrary') {
+                    ImagePicker.launchImageLibrary({
+                        storageOptions: {
+                            path: 'library',
+                        },
+                        mediaType: 'photo',
+                    }, (myResponse) => {
+                        if (myResponse.didCancel) {
+
+                        } else if (myResponse.error) {
+
+                        } else {
+                            const source = {
+                                uri: myResponse.uri,
+                                type: myResponse.type,
+                                name: myResponse.fileName
+                            };
+                            console.log('srccccc', source)
+                            console.log('srr', source)
+                            setAvatar(source);
+                            setShowModelComment(false);
+                            navigation.navigate(pageName.preview_avatar, { images: source })
+
+                        }
+                    });
                 }
-
             });
+        }
+        else {
+            setShowModelComment(false);
         }
     }
 
@@ -154,7 +193,7 @@ const Profile = ({ navigation }) => {
         <>
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={{backgroundColor: "#fff"}}
+                style={{ backgroundColor: "#fff" }}
             >
                 <View style={styles.header}>
                     <TouchableOpacity onPress={onPressWall}>
@@ -186,15 +225,15 @@ const Profile = ({ navigation }) => {
                             <Text style={{ fontSize: 20, color: "#fff" }}>Thêm vào tin</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.more}>
-                            <Text style={{fontWeight: "700"}}>...</Text>
+                            <Text style={{ fontWeight: "700" }}>...</Text>
                         </TouchableOpacity>
                     </View>
 
                 </View>
                 <View style={styles.lineStyle} />
                 <View style={{
-                        marginLeft: 10 
-                    }}
+                    marginLeft: 10
+                }}
                 >
                     <View style={{ flexDirection: 'row', marginTop: 15, }}>
                         <Icon name="graduation-cap" style={styles.icon} color={"#878E8E"}></Icon>
@@ -219,7 +258,7 @@ const Profile = ({ navigation }) => {
                         <Text style={styles.textProfile}>Xem thông tin giới thiệu của bạn</Text>
                     </View>
                     <View>
-                        <TouchableOpacity style={[styles.editProfile, {backgroundColor: `#E5F3FC`} ]}>
+                        <TouchableOpacity style={[styles.editProfile, { backgroundColor: `#E5F3FC` }]}>
                             <Text style={{ fontWeight: "700", color: "#1578EF", fontSize: 15 }}>Chỉnh sửa chi tiết công khai</Text>
                         </TouchableOpacity>
                     </View>
@@ -292,7 +331,7 @@ const Profile = ({ navigation }) => {
 
                         </View>
                     </View>
-                    <TouchableOpacity style={[styles.editProfile, {backgroundColor: `#E2E7E7`} ]}>
+                    <TouchableOpacity style={[styles.editProfile, { backgroundColor: `#E2E7E7` }]}>
                         <Text style={{ fontWeight: "bold", color: "#111", fontSize: 15 }}>Xem chi tiết bạn bè</Text>
                     </TouchableOpacity>
                 </View>
@@ -301,10 +340,10 @@ const Profile = ({ navigation }) => {
                     <ToolBar navigation={navigation} />
                 </View>
                 {/* <View style={styles.bigLineStyle} /> */}
-                <View style={{backgroundColor: "#fff"}}>
+                <View style={{ backgroundColor: "#fff" }}>
                     <Feed />
                 </View>
-                
+
                 {/* <SwipeImage show={ShowComment}
                     animateModal={animateModal} /> */}
                 <SwipeUpDownModal
@@ -440,7 +479,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     icon: {
-        color:"#878E8E",
+        color: "#878E8E",
         fontSize: 20,
         textAlignVertical: "center",
         marginRight: 10,

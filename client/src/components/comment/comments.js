@@ -16,8 +16,10 @@ import moment from 'moment'
 const Comments = (props) => {
 
     const [show, setShow] = useState(false);
+    const { route } = props;
     useEffect(() => {
-        props.getCommentPost("5fdef6b3c2916600170accfd");
+        // props.getCommentPost("5fdef6b3c2916600170accfd");
+        props.getCommentPost(route.params.id);
     }, [])
 
     useEffect(() => {
@@ -161,7 +163,8 @@ const AddComment = (props) => {
         let data = {
             described: content
         }
-        props.addCommentPost("5fdef6b3c2916600170accfd", data);
+        // props.addCommentPost("5fdef6b3c2916600170accfd", data);
+        props.addCommentPost(props.route.params.id, data);
     }
 
     return (

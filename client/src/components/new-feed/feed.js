@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, FlatList, View, TouchableOpacity, Dimensions } from 'react-native'
+import { ActivityIndicator, FlatList, View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 
 import styled from 'styled-components/native'
 import moment from 'moment'
@@ -106,9 +106,6 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
-
 const wait = (timeout) => {
 	return new Promise(resolve => {
 		setTimeout(resolve, timeout);
@@ -190,7 +187,7 @@ const PostItem = (props) => {
 					</Button>
 
 					<Button
-						onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
+						onPress={() => props.navigation.navigate(pageName.comment.COMMENT, {id: item.id}) }
 					>
 						<Icon>
 							<MaterialCommunityIcons

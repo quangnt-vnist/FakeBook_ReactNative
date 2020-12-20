@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const User = require('../../models/user');
-const Post = require('../../models/post')
+const Post = require('../../models/post');
+const Notification =  require('../../models/notification')
 const { registerValidation, loginValidation } = require('./validate');
 const fs = require("fs");
 
@@ -223,4 +224,12 @@ exports.getProfile = async (id) => {
     if (user === null) throw ["user_not_found"];
 
     return user;
+};
+
+exports.getNotifications = async (id) => {
+    let notification = await Notification.findOne({creator: id})
+                        .populate({path: "data.from", populate: "users", select: "name avatar"})
+                        .populate({path: "data.post", populate: "posts", select: ""})
+
+    return notification;
 };

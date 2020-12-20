@@ -126,8 +126,8 @@ export function post(state = initState, action) {
             };
 
         case PostConstant.CREATE_POST_SUCCESS:
-            let newList = state.listPost.unshift(action.payload);
-            let newMyPost = state.newMyPost.unshift(action.payload);
+            let newList = [...[action.payload], ...state.listPost];
+            let newMyPost = [...[action.payload], ...state.myPost];
             return {
                 ...state,
                 post: action.payload,

@@ -111,6 +111,7 @@ const Profile = ({ navigation }) => {
     );
 
     const onPressAvartar = (option) => {
+        setShowModelComment(false);
         console.log('aaaaaaaaaa', option);
         if (option === "4") {
 
@@ -175,7 +176,7 @@ const Profile = ({ navigation }) => {
                             console.log('srccccc', source)
                             console.log('srr', source)
                             setAvatar(source);
-                            setShowModelComment(false);
+
                             navigation.navigate(pageName.preview_avatar, { images: source })
 
                         }
@@ -183,9 +184,11 @@ const Profile = ({ navigation }) => {
                 }
             });
         }
-        else {
-            setShowModelComment(false);
+        else if (option === "5") {
+            navigation.navigate(pageName.view_avatar, { images: avatar });
+
         }
+
     }
 
 

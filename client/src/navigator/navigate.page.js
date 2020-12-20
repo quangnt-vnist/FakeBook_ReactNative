@@ -42,7 +42,7 @@ import {
     //profile
     Profile,
     PreViewAvatar,
-
+    ViewAvatar,
     // Main content
     MainContainer,
 
@@ -144,6 +144,7 @@ const Navigate = () => {
                 <Stack.Screen name={pageName.preview_avatar} component={PreViewAvatar}
                     options={{ headerTitle: "", headerShown: false }}
                 />
+                <Stack.Screen name={pageName.view_avatar} component={ViewAvatar} />
 
                 {/* báo cáo bài viết */}
                 <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />

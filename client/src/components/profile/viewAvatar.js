@@ -7,20 +7,23 @@ import { connect } from 'react-redux';
 import { PostAction } from '../post/redux/action';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Ionicons';
+const windowWidth = Dimensions.get('window').width;
 
+const ViewAvatar = ({ route }) => {
 
-const ViewAvatar = ({ navigation }) => {
-
+    let [image, setImage] = useState(route.images)
     return (
         <>
-            <View>
+            <View style={{ marginTop: "30%" }}>
                 <Image
-                    style={{ width: windowWidth, height: 400 }}
+                    style={{ width: windowWidth, height: "80%" }}
                     source={
-                        { uri: images.uri }
+                        require('../../public/img/avt2.jpg')
                     }
                 />
             </View>
         </>
     )
 }
+
+export { ViewAvatar }

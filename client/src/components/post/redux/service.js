@@ -6,12 +6,21 @@ import {
 
 export const PostService = {
     likePost,
+    getAllPost,
     getCommentPost,
     addCommentPost,
     createPost,
     reportPost,
     changeAvatar
 };
+
+async function getAllPost() {
+    let url = `https://fakebook-server.herokuapp.com/post/get-list-post`
+    return sendRequest({
+        url: url,
+        method: 'GET',
+    })
+}
 
 async function likePost(data) {
     console.log('data req', data);

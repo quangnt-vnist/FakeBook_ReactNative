@@ -8,6 +8,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
 
 import { pageName } from '../../navigator/constant.page'
+import { AuthActions } from '../auth/redux/action';
+import { connect } from 'react-redux';
 
 const Container = styled.View`
 	width: 100%;
@@ -57,18 +59,21 @@ const BottomDivider = styled.View`
 	height: 9px;
 	background: #f0f2f5;
 `
-const ToolBar = ({ navigation }) => {
+const ToolBar = (props) => {
+    const { auth } = props;
 
-    
     const onPressCreatePost = () => {
-        navigation.navigate(pageName.post_NEW_POST)
+        props.navigation.navigate(pageName.post_NEW_POST)
     }
 
     return (
         <>
             <Container>
                 <Row>
-                    <Avatar source={require('./../../public/img/assets/user1.jpg')} />
+                    <Avatar 
+                        // source={require('./../../public/img/assets/user1.jpg')} 
+                        source={{ uri: `https://fakebook-server.herokuapp.com${auth.profile?.avatar}` }} 
+                    />
                     <Input
                         onPress={onPressCreatePost}
                     >
@@ -80,7 +85,7 @@ const ToolBar = ({ navigation }) => {
                 <Row>
                     <Menu>
                         <IonicIcon name='ios-videocam' size={22} color='#F44337' />
-                        <MenuText>Live</MenuText>
+                        <MenuText>Phát trực tiếp</MenuText>
                     </Menu>
                     <Separator />
 
@@ -90,7 +95,7 @@ const ToolBar = ({ navigation }) => {
                             size={20}
                             color='#4CAF50'
                         />
-                        <MenuText>Photo</MenuText>
+                        <MenuText>Ảnh</MenuText>
                     </Menu>
                     <Separator />
 
@@ -100,7 +105,7 @@ const ToolBar = ({ navigation }) => {
                             size={22}
                             color='#E141FC'
                         />
-                        <MenuText>Room</MenuText>
+                        <MenuText>Phòng họp mặt</MenuText>
                     </Menu>
                 </Row>
             </Container>
@@ -110,4 +115,13 @@ const ToolBar = ({ navigation }) => {
 
 }
 
-export default ToolBar;
+const mapStateToProps = state => {
+    const { auth } = state;
+    return { auth };
+}
+const mapActions = {};
+
+let connected = connect(mapStateToProps, mapActions)(ToolBar);
+
+export { connected as ToolBar }
+// export default ToolBar;

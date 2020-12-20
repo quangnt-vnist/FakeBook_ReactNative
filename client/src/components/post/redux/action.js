@@ -8,7 +8,27 @@ export const PostAction = {
     addCommentPost,
     createPost,
     reportPost,
+<<<<<<< HEAD
     changeAvatar,
+=======
+    getAllPost,
+}
+
+function getAllPost() {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_LIST_POST_REQUEST });
+        PostService.getAllPost()
+            .then(res => {
+                dispatch({
+                    type: PostConstant.GET_LIST_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_LIST_POST_FAILE, payload: err });
+            })
+    }
+>>>>>>> f067f50e890d9e7d9549dad14f92563dbebf37ab
 }
 
 function likePost(data) {

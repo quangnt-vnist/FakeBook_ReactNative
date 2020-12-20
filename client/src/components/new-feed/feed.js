@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, FlatList, View, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, FlatList, View, TouchableOpacity, Dimensions } from 'react-native'
 
 import styled from 'styled-components/native'
+import moment from 'moment'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -12,6 +14,12 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Avatar from './avatar'
 import { Comments } from '../comment/comments'
 import { pageName } from '../../navigator/constant.page';
+import { connect } from 'react-redux';
+import { GridImage } from '../post/gridImage';
+
+// Calculate window size
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.View`
 	flex: 1;
@@ -141,7 +149,8 @@ const PostItem = (props) => {
 			<Post>
 				{item.post}
 			</Post>
-			{ !(item.photo === "") && <Photo source={item.photo} />}
+			{/* { !(item.photo === "") && <Photo source={item.photo} />} */}
+			{item.photo.length > 0 && <GridImage array={item.photo}/>}
 
 			<Footer>
 				<FooterCount>
@@ -173,16 +182,6 @@ const PostItem = (props) => {
 						<Text>Like</Text>
 					</Button>
 
-					{/* <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} >
-								<Icon>
-									<MaterialCommunityIcons
-										name='comment-outline'
-										size={20}
-										color='#424040'
-									/>
-								</Icon>
-								<Text> Bình luận</Text>
-							</TouchableOpacity> */}
 					<Button
 						onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
 					>
@@ -213,9 +212,86 @@ const PostItem = (props) => {
 	)
 }
 
+const LoadingPost = (props) => {
+	const { post } = props;
+	let { isLoading, listPost } = post;
+
+	let checkShowLoading = true;
+	if(isLoading === false && listPost.length !== 0) {
+		checkShowLoading = false;
+	}
+
+	return (
+		<View>
+			{checkShowLoading ?
+				<View
+					style={{ justifyContent: 'center', alignItems: 'center', height: HEIGHT / 3 }}
+				>
+					<ActivityIndicator
+						size="large"
+						color="#747476"
+					/>
+					<Text style={{ fontSize: 30, fontWeight: "700", color: "#747476" }}>Loading ...</Text>
+				</View> :
+				<View
+					style={{ justifyContent: 'center', alignItems: 'center', height: HEIGHT / 3 }}
+				>
+					<MaterialIcons
+						name='error-outline'
+						size={50}
+						color='#747476'
+					/>
+					<Text style={{ fontSize: 30, fontWeight: "700", color: "#747476" }}>Chưa có bài viết nào</Text>
+				</View>
+			}
+		</View>
+	)
+}
+
 const Feed = (props) => {
 
-	const listPost = [
+	const { auth, post } = props;
+
+	let listPost = [];
+	let a = {
+		"__v": 0,
+		"_id": "5fdddcde1cf5ff00176648a6",
+		"comment": [
+			"Array"
+		],
+		"created": "2020-12-19T10:58:38.598Z",
+		"creator": [
+			"Object"
+		],
+		"described": "aefhihe",
+		"image": [
+			"Array"
+		],
+		"like": [
+			"Array"
+		],
+		"reported": [
+			"Array"
+		]
+	}
+	if (post.listPost.length > 0) {
+		listPost = post.listPost.map(e => {
+			return {
+				id: e._id,
+				comment: e.comment,
+				avatar: { uri: `https://fakebook-server.herokuapp.com${e?.creator?.avatar}` },
+				name: e?.creator?.name,
+				post: e.described,
+				time: moment(e.createAt).fromNow(),
+				photo: e.image,
+				video: "",
+				numOfLike: e.like?.length,
+				numOfCmt: e.comment?.length,
+			}
+		})
+	}
+
+	const listPost2 = [
 		{
 			id: "1",
 			avatar: require('./../../public/img/assets/user1.jpg'),
@@ -288,10 +364,10 @@ const Feed = (props) => {
 
 	return (
 		<>
-			{ listPost.map(item => <View key={item.id}>
+			{ listPost.length !== 0 ? listPost.map(item => <View key={item.id}>
 				<PostItem item={item} {...props} />
-			</View>
-			)}
+			</View>) : <LoadingPost {...props} />	
+			}
 			{/* <FlatList
 				data={listPost}
 				keyExtractor={item => item.id}
@@ -305,18 +381,22 @@ const Feed = (props) => {
 						/>
 					)
 				}}
-			// onEndReachedThreshold={0.4}
-			// onEndReached={() => handleLoadMore()}
-			/> */}
-			{/* <BottomSheet
-				ref={sheetRef}
-				snapPoints={["80%", "50%", "0%"]}
-				borderRadius={10}
-				renderContent={CommentSheet}
-				onCloseEnd={enabledBottomClamp}
+				// onEndReachedThreshold={0.4}
+				// onEndReached={() => handleLoadMore()}
 			/> */}
 		</>
 	)
 }
 
-export default Feed
+
+const mapStateToProps = state => {
+	const { auth, post } = state;
+	return { auth, post };
+}
+const mapActions = {};
+
+let connected = connect(mapStateToProps, mapActions)(Feed);
+
+export { connected as Feed }
+
+// export { Feed }

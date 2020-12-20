@@ -27,7 +27,7 @@ const NewFeed = ({ navigation }) => {
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     }, []);
-    
+
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         console.log('qangxt');
@@ -57,7 +57,7 @@ const NewFeed = ({ navigation }) => {
                     <ToolBar navigation={navigation} />
                     <Story />
                     <Users />
-                    <Feed />
+                    <Feed navigation={navigation} />
                 </ScrollView>
             </Container>
         </>

@@ -40,7 +40,7 @@ const Menu = styled.View`
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	height: 42px;
+	height: 30px;
 `
 const MenuText = styled.Text`
 	padding-left: 11px;

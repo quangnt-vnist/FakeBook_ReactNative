@@ -8,43 +8,30 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Feather';
+import { pageName } from "../../navigator/constant.page";
+import { PostAction } from "../post/redux/action";
+import { connect } from "react-redux";
+import moment from 'moment'
 
 const Comments = (props) => {
-    // const [loading, setLoading] = useState(true)
 
-    // const sheetRef = useRef(null);
-    // const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+    const [show, setShow] = useState(false);
+    useEffect(() => {
+        props.getCommentPost("5fdde5348156a30017bfe759");
+    }, [])
 
-    // const onPressTextInput = () => {
-    //     setEnableBottomCamp(enabledBottomClamp => enabledBottomClamp = !enabledBottomClamp);
-
-    // }
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setLoading(false);
-    //     }, 1500)
-    // }, [])
+    useEffect(() => {
+        if (props.post.isLoading === true) setShow(true);
+    }, [props.post.isLoading, props.post?.comment])
 
     return (
-        // <View style={{ height: "100%", backgroundColor: "#999" }}>
-
-        //     <TouchableOpacity onPress={() => sheetRef.current.snapTo(0)} style={styles.p2}>
-        //         <Text
-        //             style={styles.input}
-        //         > Xem binh luan
-        //         </Text>
-        //     </TouchableOpacity>
-
-        //     <BottomSheet
-        //         ref={sheetRef}
-        //         snapPoints={["80%", "50%", "0%"]}
-        //         borderRadius={10}
-        //         renderContent={loading ? LoadingComments : CommentList}
-        //         onCloseEnd={enabledBottomClamp}
-        //     />
-        // </View>
-        <CommentList {...props}/>
+        <>
+            {show ?
+                <CommentList {...props} style={{ backgroundColor: "#000", paddingTop: 100 }} />
+                :
+                <LoadingComments />
+            }
+        </>
     )
 
 }
@@ -99,41 +86,12 @@ const CommentList = (props) => {
     }
     if (props.showLike === false) showLike = props.showLike;
 
-    const listCmt = [
-        {
-            id: "1",
-            avatar: "",
-            name: "Linh",
-            content: "cmt 111111111111",
-            time: "1 giờ",
-        },
-        {
-            id: "2",
-            avatar: "",
-            name: "Linhdz",
-            content: "comment comment comment comment comment comment",
-            time: "2 giờ",
-        },
-        {
-            id: "3",
-            avatar: "",
-            name: "Linh2",
-            content: "comment comment comment ",
-            time: "6 giờ",
-        },
-        {
-            id: "4",
-            avatar: "",
-            name: "Linhs",
-            content: "comment comment comment comment ",
-            time: "2 giờ",
-        }
-    ];
+    const listCmt = props.post.comment;
 
     return (
         <View style={{ backgroundColor: "#fff", height: height }}>
             { showLike &&
-                <View style={{ height: 50, borderBottomColor: "#DDD", borderBottomWidth: 1, justifyContent: "center" }}>
+                <View style={{ height: 50, borderBottomColor: "#DDD", borderBottomWidth: 1, borderTopColor: "#DDD", borderTopWidth: 1, justifyContent: "center" }}>
                     <View style={{ flexDirection: "row" }}>
                         <Icon
                             name="like1"
@@ -142,30 +100,39 @@ const CommentList = (props) => {
                             style={{ marginLeft: 10, marginRight: 10 }}
                         />
                         <Text style={{ fontWeight: "700" }}>100</Text>
+                        <TouchableOpacity onPress={() => props.navigation.navigate(pageName.main.MAIN)}>
+                            <Icon2
+                                name="x"
+                                color="#111"
+                                size={20}
+                                style={{ marginLeft: 300, marginRight: 10 }}
+                            />
+                        </TouchableOpacity>
+
                     </View>
                 </View>
             }
-            {
+            {/* {
                 listCmt.length >= 20 ?
                     <View style={styles.moreComments}>
                         <TouchableWithoutFeedback>
                             <Text style={styles.userName}>Xem các bình luận trước...</Text>
                         </TouchableWithoutFeedback>
                     </View> : null
-            }
+            } */}
 
             {/* Comment list */}
 
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={listCmt}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item._id}
                 renderItem={({ item }) =>
                     <View style={styles.singleComment}>
 
                         {/* avatar */}
                         <Image
-                            source={require('./../../public/img/fb_reg.png')}
+                            source={{ uri: `https://fakebook-server.herokuapp.com${item.creator.avatar}` }}
                             style={styles.avatar}
                         />
 
@@ -173,27 +140,38 @@ const CommentList = (props) => {
                         <View>
                             <View style={styles.contentCmt}>
                                 <TouchableWithoutFeedback>
-                                    <Text style={styles.userName}>{item.name}</Text>
+                                    <Text style={styles.userName}>{item.creator.name}</Text>
                                 </TouchableWithoutFeedback>
 
-                                <Text>{item.content}</Text>
+                                <Text>{item.described}</Text>
 
                             </View>
-                            <Text>{item.time}</Text>
+                            <Text>{moment(item.createAt).fromNow()}</Text>
                         </View>
                     </View>}
             />
-            <AddComment />
+            <AddComment {...props} />
         </View>
     )
 }
 
-const AddComment = () => {
+const AddComment = (props) => {
+    const [content, setContent] = useState("");
+    const submitAdd = () => {
+        let data = {
+            described: content
+        }
+        props.addCommentPost("5fdde5348156a30017bfe759", data);
+    }
+
     return (
         <View style={{ height: 50, borderTopColor: "#DDD", borderTopWidth: 1, alignItems: "center", justifyContent: "center" }}>
             <View style={{ flexDirection: "row", backgroundColor: "#EEE", borderRadius: 20, width: "80%", height: "80%" }}>
                 <TextInput
                     placeholder="Viết bình luận..."
+                    onChangeText={text => setContent(text)}
+                    value={content}
+                    onSubmitEditing={submitAdd}
                     style={{ marginLeft: 10, width: 260 }}
                 />
                 <Icon2
@@ -248,6 +226,16 @@ const styles = StyleSheet.create({
     }
 
 })
+const mapStateToProps = state => {
+    const { post } = state;
+    return { post };
+}
+const mapActions = {
+    getCommentPost: PostAction.getCommentPost,
+    addCommentPost: PostAction.addCommentPost,
+}
+let connected = connect(mapStateToProps, mapActions)(Comments);
 
-export { Comments }
+export { connected as Comments }
+// export { Comments }
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native'
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, TouchableOpacity, Alert, StatusBar, ActivityIndicator } from 'react-native'
 import { CommonStyle } from '../sign-up/commonStyle'
 import { pageName } from '../../../navigator/constant.page'
 import { connect } from 'react-redux'
@@ -18,6 +18,7 @@ const imageResize = {
 
 
 const LoginNewAccount = (props) => {
+    const [loading, setLoading] = useState(false);
     const [acc, setAcc] = useState("");
     const [password, setPassword] = useState("");
     const [resizeImage, setResizeImage] = useState(false);
@@ -42,11 +43,18 @@ const LoginNewAccount = (props) => {
     //     userId && props.navigation.navigate(pageName.main.MAIN);
     // }, [])
 
-    useEffect(()=>{
-        props.auth?.user?.id && props.navigation.navigate(pageName.main.MAIN);
+    useEffect(() => {
+        console.log('props.auth?.user?.id', props.auth);
+        if (props.auth?.isLoading === false && props.auth?.user?.id){
+            // props.getProfile();
+            setLoading(false);
+            props.navigation.replace(pageName.main.MAIN);
+        }
     }, [props.auth])
 
-    const onPressLogin = () => {
+    const onPressLogin = (e) => {
+        e.preventDefault();
+        setLoading(true)
         let loginData = {
             phoneNumber: acc,
             password: password
@@ -112,10 +120,20 @@ const LoginNewAccount = (props) => {
                     <TouchableOpacity
                         activeOpacity={0.5}
                         style={CommonStyle.submitBtn}
-                        onPress={onPressLogin}
+                        onPress={(e) => onPressLogin(e)}
                     >
                         <Text style={[CommonStyle.mediumText, { color: "#8DB0EB" }]}>Đăng nhập</Text>
                     </TouchableOpacity>
+                    {loading === true &&
+                        <View style={{
+                                margin: 10, height: 50, flexDirection: "column", justifyContent: "center", alignItems: "center"
+                            }}
+                        >
+                            <ActivityIndicator size="large" color="#ccc" />
+                            <Text>Loading...</Text>
+                        </View>
+                    }
+
                 </View>
 
                 {!resizeImage ?
@@ -227,6 +245,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     login: AuthActions.login,
+    getProfile: AuthActions.getProfile,
     getVerifyCode: AuthActions.getVerifyCode,
 }
 let connected = connect(mapStateToProps, mapActions)(LoginNewAccount);

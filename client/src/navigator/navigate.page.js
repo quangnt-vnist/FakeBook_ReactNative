@@ -77,7 +77,6 @@ const Navigate = () => {
                     options={{ headerShown: false }}
                 />
 
-                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
 
                 {/* Main container */}
                 <Stack.Screen
@@ -85,11 +84,14 @@ const Navigate = () => {
                     component={MainContainer}
                     options={{ headerShown: false }}
                 />
+
+
+
                 {/* Search friend page */}
                 <Stack.Screen
                     name={pageName.main.SEARCH}
                     component={SearchPage}
-                    options={{ headerTitle: "" }}
+                    options={{ headerTitle: "", headerShown: false }}
                 />
 
                 {/* Friend tab */}
@@ -108,14 +110,18 @@ const Navigate = () => {
 
 
                 {/* Commments */}
-                <Stack.Screen name={pageName.comment.COMMENT} component={Comments} />
+                <Stack.Screen name={pageName.comment.COMMENT} component={Comments}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
 
                 {/* Đăng nhập */}
                 <Stack.Screen name={pageName.login_ACC_RECENTLY} component={LoginRecentlyAcc} />
                 {/* <Stack.Screen name={pageName.LOG_IN_NEW_ACC} component={LoginNewAccount} /> */}
 
                 {/* Tạo tài khoản */}
-                {/* <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} /> */}
+                <Stack.Screen name={pageName.sign_up.BEGIN} component={StartCreateAcc} />
                 <Stack.Screen name={pageName.sign_up.NAME} component={Name} />
                 <Stack.Screen name={pageName.sign_up.BIRTH} component={Birthday} />
                 <Stack.Screen name={pageName.sign_up.PHONE} component={PhoneNumber} />
@@ -127,7 +133,8 @@ const Navigate = () => {
 
 
                 {/*Tạo bài viết*/}
-                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} />
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} 
+                    options={{ headerTitle: "", headerShown: false }} />
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
                 <Stack.Screen name={pageName.post_feeling_activity} component={Feeling_Activity} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, FlatList, View } from 'react-native'
+import { ActivityIndicator, FlatList, View, TouchableOpacity } from 'react-native'
 
 import styled from 'styled-components/native'
 
@@ -11,7 +11,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 
 import Avatar from './avatar'
 import { Comments } from '../comment/comments'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { pageName } from '../../navigator/constant.page';
 
 const Container = styled.View`
 	flex: 1;
@@ -95,11 +95,6 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
-const CommentSheet = () => {
-	return (
-		<Comments />
-	)
-}
 
 const wait = (timeout) => {
 	return new Promise(resolve => {
@@ -134,12 +129,13 @@ const PostItem = (props) => {
 						</Row>
 					</View>
 				</Row>
-
-				<Entypo
-					name='dots-three-horizontal'
-					size={15}
-					color='#222121'
-				/>
+				<TouchableOpacity onPress={() => props.navigation.navigate(pageName.report.REPORT_POST)}>
+					<Entypo
+						name='dots-three-horizontal'
+						size={15}
+						color='#222121'
+					/>
+				</TouchableOpacity>
 			</Header>
 
 			<Post>
@@ -188,7 +184,7 @@ const PostItem = (props) => {
 								<Text> Bình luận</Text>
 							</TouchableOpacity> */}
 					<Button
-						onPress={() => sheetRef.current.snapTo(0)}
+						onPress={() => props.navigation.navigate(pageName.comment.COMMENT)}
 					>
 						<Icon>
 							<MaterialCommunityIcons
@@ -217,9 +213,7 @@ const PostItem = (props) => {
 	)
 }
 
-const Feed = () => {
-	const sheetRef = useRef(null);
-	const [enabledBottomClamp, setEnableBottomCamp] = useState(false);
+const Feed = (props) => {
 
 	const listPost = [
 		{
@@ -294,10 +288,10 @@ const Feed = () => {
 
 	return (
 		<>
-		{ listPost.map(item => <View key={item.id}>
-			<PostItem item={item} /> 
-		</View>		
-		)}
+			{ listPost.map(item => <View key={item.id}>
+				<PostItem item={item} {...props} />
+			</View>
+			)}
 			{/* <FlatList
 				data={listPost}
 				keyExtractor={item => item.id}

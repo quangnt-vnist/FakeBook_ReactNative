@@ -4,19 +4,28 @@ import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture
 import Icon from 'react-native-vector-icons/Octicons';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import { CommonStyle } from '../auth/sign-up/commonStyle';
+import { PostAction } from '../post/redux/action';
+import { connect } from 'react-redux';
+import { pageName } from '../../navigator/constant.page';
 
-const ConfirmReport = () => {
+const ConfirmReport = (props) => {
+    const optionArr = ["Ảnh khỏa thân", "Bạo lực", "Quấy rối", "Tự tử/Tự gây thương tích", "Tin giả", "Spam", "Bán hàng trái phép", "Ngôn từ gây thù ghét", "Khủng bố", "Vấn đề khác"];
+    const idx = props.route.params.option;
+    const onPressReport = () => {
+        let data = {
+            described: optionArr[idx]
+        }
+        props.reportPost("5fdde5348156a30017bfe759", data)
+        props.navigation.navigate(pageName.main.MAIN)
+    }
     return (
         <ScrollView style={{ backgroundColor: "#ffffff" }}>
             <View style={styles.listChose}>
                 <Icon name="report" style={styles.reportIcon}></Icon>
 
                 <Text style={{ fontSize: 16, fontWeight: "700", margin: 10 }}>Bạn đã chọn</Text>
-                <TouchableWithoutFeedback
-                    style={{ backgroundColor: "#1577F2", padding: 8, borderRadius: 20, margin: 5, width: 55 }}
-                >
-                    <Text style={{ fontSize: 14, fontWeight: "700", color: "#fff" }}>Spam</Text>
-                </TouchableWithoutFeedback>
+
+                <Text style={{ fontSize: 16, fontWeight: "700", color: "#1577F2", marginBottom: 5 }}>{optionArr[idx]}</Text>
                 <Text style={{ fontSize: 16, fontWeight: "500", color: "#555", textAlign: "center" }} >Ý kiến đóng góp của bạn giúp hệ thống của chúng tôi biết khi có gì đó không ổn.</Text>
             </View>
 
@@ -43,7 +52,7 @@ const ConfirmReport = () => {
             <TouchableOpacity
                 activeOpacity={0.5}
                 style={[CommonStyle.submitBtn, { width: "94%", marginLeft: "3%" }]}
-            // onPress={onPressBtnNext}
+                onPress={onPressReport}
             >
                 <Text style={[CommonStyle.textBtn]}>Xong</Text>
             </TouchableOpacity>
@@ -91,4 +100,13 @@ const styles = StyleSheet.create({
 
 })
 
-export { ConfirmReport }
+const mapStateToProps = state => {
+    const { post } = state;
+    return { post };
+}
+const mapActions = {
+    reportPost: PostAction.reportPost,
+}
+let connected = connect(mapStateToProps, mapActions)(ConfirmReport);
+
+export { connected as ConfirmReport }

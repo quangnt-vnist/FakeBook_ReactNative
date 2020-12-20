@@ -152,7 +152,10 @@ const Profile = ({ navigation }) => {
 
     return (
         <>
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{backgroundColor: "#fff"}}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity onPress={onPressWall}>
                         <Image
@@ -180,49 +183,52 @@ const Profile = ({ navigation }) => {
                     <Text style={styles.name}>Nguyễn Xuân Thành</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity style={styles.addStory}>
-                            <Text style={{ fontSize: 20, color: "#f8f8ff" }}>Thêm vào tin</Text>
+                            <Text style={{ fontSize: 20, color: "#fff" }}>Thêm vào tin</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.more}>
-                            <Text>...</Text>
+                            <Text style={{fontWeight: "700"}}>...</Text>
                         </TouchableOpacity>
                     </View>
 
                 </View>
                 <View style={styles.lineStyle} />
-                <View>
+                <View style={{
+                        marginLeft: 10 
+                    }}
+                >
                     <View style={{ flexDirection: 'row', marginTop: 15, }}>
-                        <Icon name="graduation-cap" style={styles.icon}></Icon>
+                        <Icon name="graduation-cap" style={styles.icon} color={"#878E8E"}></Icon>
                         <Text style={styles.textProfile}>Học tại </Text>
                         <Text style={styles.textProfile1}>Đại học Bách Khoa Hà Nội</Text>
 
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: 15, }}>
-                        <Icon name="home" style={styles.icon}></Icon>
+                        <Icon name="home" style={styles.icon} color={"#878E8E"} ></Icon>
                         <Text style={styles.textProfile}>Sống tại </Text>
                         <Text style={styles.textProfile1}>Hà Nội</Text>
 
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: 15, }}>
-                        <Icon name="calendar-times-o" style={styles.icon}></Icon>
+                        <Icon name="calendar-times-o" style={styles.icon} color={"#878E8E"}></Icon>
                         <Text style={styles.textProfile}>Tham gia vào tháng 3 năm 2016 </Text>
                         {/* <Text style={styles.textProfile1}>Hà Nội</Text> */}
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: 15, }}>
                         {/* <Icon name="dots-three-horizontal" style={styles.icon}></Icon> */}
-                        <Text style={styles.icon}>...</Text>
+                        <Text style={styles.icon} >...</Text>
                         <Text style={styles.textProfile}>Xem thông tin giới thiệu của bạn</Text>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.editProfile}>
-                            <Text style={{ fontWeight: "bold", color: "#6a5acd", fontSize: 15 }}>Chỉnh sửa chi tiết công khai</Text>
+                        <TouchableOpacity style={[styles.editProfile, {backgroundColor: `#E5F3FC`} ]}>
+                            <Text style={{ fontWeight: "700", color: "#1578EF", fontSize: 15 }}>Chỉnh sửa chi tiết công khai</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.lineStyle} />
                 <View>
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginLeft: 10, marginRight: 10, marginTop: 10 }}>
                         <Text style={{ fontSize: 20, fontWeight: "bold" }}>Bạn bè</Text>
-                        <Text style={{ fontSize: 18, marginLeft: 220, color: "#87cefa" }}>Tìm bạn bè</Text>
+                        <Text style={{ fontSize: 18, color: "#1578EF" }}>Tìm bạn bè</Text>
                     </View>
                     <View>
                         <View style={{ flexDirection: "row" }}>
@@ -230,28 +236,28 @@ const Profile = ({ navigation }) => {
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/assets/logo.png')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Quang</Text>
                             </View>
                             <View style={styles.paddingFriend}>
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/avt2.jpg')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Tuấn Anh</Text>
                             </View>
                             <View style={styles.paddingFriend}>
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/assets/story1.jpg')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Linh</Text>
                             </View>
 
                         </View>
@@ -260,42 +266,45 @@ const Profile = ({ navigation }) => {
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/create_acc.png')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Hùng</Text>
                             </View>
                             <View style={styles.paddingFriend}>
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/assets/story4.jpg')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Vượng</Text>
                             </View>
                             <View style={styles.paddingFriend}>
                                 <Image
                                     style={styles.avatarFriend}
                                     source={
-                                        require('../../public/img/dali_mask.jpg')
+                                        require('../../public/img/fb_reg.png')
                                     }
                                 />
-                                <Text>Hello</Text>
+                                <Text>Đức</Text>
                             </View>
 
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.editProfile}>
-                        <Text style={{ fontWeight: "bold", color: "#6a5acd", fontSize: 15 }}>Xem chi tiết bạn bè</Text>
+                    <TouchableOpacity style={[styles.editProfile, {backgroundColor: `#E2E7E7`} ]}>
+                        <Text style={{ fontWeight: "bold", color: "#111", fontSize: 15 }}>Xem chi tiết bạn bè</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.bigLineStyle} />
-                <View style={{ marginTop: 10 }}>
+                <View style={{ backgroundColor: "#fff", marginTop: 10 }}>
                     <ToolBar navigation={navigation} />
                 </View>
-                <View style={styles.bigLineStyle} />
-                <Feed />
+                {/* <View style={styles.bigLineStyle} /> */}
+                <View style={{backgroundColor: "#fff"}}>
+                    <Feed />
+                </View>
+                
                 {/* <SwipeImage show={ShowComment}
                     animateModal={animateModal} /> */}
                 <SwipeUpDownModal
@@ -405,7 +414,7 @@ const styles = StyleSheet.create({
         width: 300,
         height: 40,
         borderRadius: 10,
-        backgroundColor: `#00bfff`,
+        backgroundColor: `#1578EF`,
         marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -414,7 +423,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 40,
         borderRadius: 10,
-        backgroundColor: `#dcdcdc`,
+        backgroundColor: `#E2E7E7`,
         marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -427,11 +436,11 @@ const styles = StyleSheet.create({
     },
     bigLineStyle: {
         borderWidth: 5,
-        borderColor: '#a9a9a9',
+        borderColor: '#f1f1f1',
         marginTop: 10,
     },
     icon: {
-        color: `#a9a9a9`,
+        color:"#878E8E",
         fontSize: 20,
         textAlignVertical: "center",
         marginRight: 10,
@@ -445,9 +454,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     editProfile: {
-        width: 350,
+        width: "93%",
         height: 40,
-        backgroundColor: `#87cefa`,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',

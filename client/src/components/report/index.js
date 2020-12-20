@@ -8,7 +8,7 @@ import { pageName } from '../../navigator/constant.page';
 import Modal from 'react-native-modal';
 
 const ReportPost = ({ navigation }) => {
-    const [option, setOption] = useState(0);
+    const [option, setOption] = useState(-1);
     const [choose, setChoose] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -17,13 +17,12 @@ const ReportPost = ({ navigation }) => {
         setOption(index);
     }
     const onBlockUser = () => {
-        console.log("block");
         setIsVisible(true);
 
     }
     const onPressBtnNext = () => {
         setIsVisible(false);
-        navigation.navigate(pageName.report.CONFIRM_REPORT)
+        navigation.navigate(pageName.report.CONFIRM_REPORT, { option: option })
     }
 
     return (
@@ -31,14 +30,14 @@ const ReportPost = ({ navigation }) => {
             <View >
 
                 {/* Modal chan nguoi dung */}
-                <Modal
+                {/* <Modal
                     isVisible={isVisible}
                     backdropOpacity={0.5}
                 >
                     <View style={{ backgroundColor: "#fff" }}>
                         <Text>Checker four</Text>
                     </View>
-                </Modal>
+                </Modal> */}
                 {/* End: Modal chan nguoi dung */}
 
                 <View style={{ marginLeft: "3%" }}>
@@ -51,26 +50,26 @@ const ReportPost = ({ navigation }) => {
 
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 1 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 110 }}
+                            style={{ backgroundColor: `${option === 0 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 110 }}
                             onPress={
-                                () => onChooseOption(1)
+                                () => onChooseOption(0)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Ảnh khỏa thân</Text>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 2 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 70 }}
+                            style={{ backgroundColor: `${option === 1 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 70 }}
                             onPress={
-                                () => onChooseOption(2)
+                                () => onChooseOption(1)
                             }
 
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Bạo lực</Text>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 3 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 70 }}
+                            style={{ backgroundColor: `${option === 2 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 70 }}
                             onPress={
-                                () => onChooseOption(3)
+                                () => onChooseOption(2)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Quấy rối</Text>
@@ -78,12 +77,20 @@ const ReportPost = ({ navigation }) => {
                     </View>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 4 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 180 }}
+                            style={{ backgroundColor: `${option === 3 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 180 }}
+                            onPress={
+                                () => onChooseOption(3)
+                            }
+                        >
+                            <Text style={{ fontSize: 14, fontWeight: "700" }}>Tự tử/Tự gây thương tích</Text>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            style={{ backgroundColor: `${option === 4 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 60 }}
                             onPress={
                                 () => onChooseOption(4)
                             }
                         >
-                            <Text style={{ fontSize: 14, fontWeight: "700" }}>Tự tử/Tự gây thương tích</Text>
+                            <Text style={{ fontSize: 14, fontWeight: "700" }}>Tin giả</Text>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
                             style={{ backgroundColor: `${option === 5 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 60 }}
@@ -91,30 +98,22 @@ const ReportPost = ({ navigation }) => {
                                 () => onChooseOption(5)
                             }
                         >
-                            <Text style={{ fontSize: 14, fontWeight: "700" }}>Tin giả</Text>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 6 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 60 }}
-                            onPress={
-                                () => onChooseOption(6)
-                            }
-                        >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Spam</Text>
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 7 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 140 }}
+                            style={{ backgroundColor: `${option === 6 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 140 }}
                             onPress={
-                                () => onChooseOption(7)
+                                () => onChooseOption(6)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Bán hàng trái phép</Text>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 8 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 155 }}
+                            style={{ backgroundColor: `${option === 7 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 155 }}
                             onPress={
-                                () => onChooseOption(8)
+                                () => onChooseOption(7)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Ngôn từ gây thù ghét</Text>
@@ -123,17 +122,17 @@ const ReportPost = ({ navigation }) => {
                     </View>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 9 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 80 }}
+                            style={{ backgroundColor: `${option === 8 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 80 }}
                             onPress={
-                                () => onChooseOption(9)
+                                () => onChooseOption(8)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Khủng bố</Text>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
-                            style={{ backgroundColor: `${option === 10 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 100 }}
+                            style={{ backgroundColor: `${option === 9 ? "#1577F2" : "#CCC"}`, padding: 8, borderRadius: 20, margin: 5, width: 100 }}
                             onPress={
-                                () => onChooseOption(10)
+                                () => onChooseOption(9)
                             }
                         >
                             <Text style={{ fontSize: 14, fontWeight: "700" }}>Vấn đề khác</Text>

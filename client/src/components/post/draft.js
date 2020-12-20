@@ -3,7 +3,7 @@ import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOp
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 
-const Draft = ({ navigation }) => {
+const Draft = () => {
 
 
     return (
@@ -13,7 +13,7 @@ const Draft = ({ navigation }) => {
                 <Text>Lưu làm bản nháp hoặc bạn có thể tiếp tục chỉnh sửa</Text>
             </View>
             <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Icon name="tagso" />
+                <Icon3 name="tagso" />
                 <View style={{ flexDirection: "column" }}>
                     <Text>Lưu làm bản nháp</Text>
                     <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
@@ -21,8 +21,8 @@ const Draft = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Icon name="tagso" />
-                <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>\
+                <Icon3 name="tagso" />
+                <Text>Bạn sẽ nhận được thông báo về bản nháp</Text>
             </TouchableOpacity>
         </>
     )

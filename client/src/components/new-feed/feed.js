@@ -312,7 +312,7 @@ const Feed = (props) => {
 				avatar: { uri: `https://fakebook-server.herokuapp.com${e?.creator?.avatar}` },
 				name: e?.creator?.name,
 				post: e.described,
-				time: moment(e.createAt).fromNow(),
+				time: moment(e.created).fromNow(),
 				photo: e.image,
 				video: "",
 				numOfLike: e.like?.length,

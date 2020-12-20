@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StatusBar, RefreshControl, ScrollView, LogBox, View, SafeAreaView } from "react-native";
+import { StatusBar, RefreshControl, ScrollView, LogBox, View, Text, SafeAreaView, ActivityIndicator } from "react-native";
 import { connect } from 'react-redux';
 // import { ScrollView } from 'react-native-gesture-handler';
 import styled from "styled-components/native";
@@ -83,6 +83,10 @@ const NewFeed = (props) => {
                     <ToolBar navigation={props.navigation} />
                     <Story />
                     <Users />
+                    {/* {props.post.isLoadingPost ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Text>Đang đăng bài viết...</Text>
+                        <ActivityIndicator size="large" color="#ccc" />
+                    </View> : <View></View>} */}
                     <Feed navigation={props.navigation} />
                 </ScrollView>
             </Container>

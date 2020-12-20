@@ -1,6 +1,7 @@
 
 const Post = require('../../models/post');
-const User = require('../../models/user')
+const User = require('../../models/user');
+const Notification = require('../../models/notification')
 const fs = require("fs");
 
 exports.addPost = async (id, data, files = undefined) => {
@@ -81,8 +82,12 @@ exports.getListPost = async (id) => {
 
     let post = await Post.find({})
                         .populate({path: "creator", populate: "users", select: "name avatar"})
+    
+    for(let i = 0 ; i< 10; i++){
+        listpost.push(post[post.length - i])
+    }
 
-    return post;
+    return listpost;
 };
 
 exports.getListPostPerson = async (id) => {
@@ -102,6 +107,27 @@ exports.setComment = async (id, userId, data) => {
             }   
         },
     })
+    let notification = await Notification.findOne({creator: post.creator})
+    if(notification){
+        notification.data.push({
+            post: id,
+            type: "Comment",
+            from: userId,
+            createAt: new Date()
+        })
+
+        notification.save()
+    } else {
+        notification = await Notification.create({
+            creator: post.creator,
+            data: [{
+                post: id,
+                type: "Comment",
+                from: userId,
+                createAt: new Date()
+            }]
+        })
+    }
 
     post = await Post.findById({_id: id})
     return post
@@ -124,6 +150,27 @@ exports.likePost = async (userId, id) => {
             }   
         },
     })
+
+    let notification = await Notification.findOne({creator: post.creator})
+    if(notification){
+        notification.data.push({
+            post: id,
+            type: "Like",
+            from: userId,
+            createAt: new Date()
+        }),
+        notification.save()
+    } else {
+        notification = await Notification.create({
+            creator: post.creator,
+            data: [{
+                post: id,
+                type: "Like",
+                from: userId,
+                createAt: new Date()
+            }]
+        })
+    }
 
     post = await Post.findById({_id: id})
     return post

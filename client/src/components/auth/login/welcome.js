@@ -44,7 +44,7 @@ const Welcome = (props) => {
 
     return (
         <Container>
-            <TextLogo>fakeBook</TextLogo>
+            <TextLogo>fakebook</TextLogo>
             <ActivityIndicator color="#ccc" size="large"/>
         </Container>
     );

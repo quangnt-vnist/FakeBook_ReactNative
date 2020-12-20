@@ -9,6 +9,7 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 app.use("/upload/avatars", express.static("upload/avatars"));
+app.use("/upload/posts", express.static("upload/posts"));
 
 const db = process.env.DATABASE;// DB Config
 mongoose // Connect to MongoDB

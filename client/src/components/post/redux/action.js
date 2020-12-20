@@ -7,6 +7,7 @@ export const PostAction = {
     getCommentPost,
     addCommentPost,
     createPost,
+    reportPost
 }
 
 function likePost(data) {
@@ -43,8 +44,6 @@ function getCommentPost(id) {
 }
 
 
-
-
 function createPost(data) {
     return dispatch => {
         dispatch({ type: PostConstant.CREATE_POST_REQUEST });
@@ -61,8 +60,8 @@ function createPost(data) {
     }
 }
 
+
 function addCommentPost(id, data) {
-    console.log("action", id, data);
     return dispatch => {
         dispatch({ type: PostConstant.ADD_COMMENT_POST_REQUEST });
         PostService.addCommentPost(id, data)
@@ -75,6 +74,22 @@ function addCommentPost(id, data) {
             })
             .catch(err => {
                 dispatch({ type: PostConstant.ADD_COMMENT_POST_FAILE, payload: err });
+            })
+    }
+}
+function reportPost(id, data) {
+    return dispatch => {
+        dispatch({ type: PostConstant.REPORT_POST_REQUEST });
+        PostService.addCommentPost(id, data)
+            .then(res => {
+                console.log("action report ", res.data.content);
+                dispatch({
+                    type: PostConstant.REPORT_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.REPORT_POST_FAILE, payload: err });
             })
     }
 }

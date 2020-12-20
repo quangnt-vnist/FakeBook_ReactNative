@@ -7,9 +7,9 @@ router.post('/register', authController.register);
 router.get('/get-verifycode/:phone', authController.getVerifyCode)
 router.post('/verifycode', authController.checkVerifyCode);
 router.post('/login', authController.login);
-router.post("/logout", authController.logout);
+router.post("/logout", auth, authController.logout);
 router.patch("/profile/:id/change-information", auth, uploadFile([{name:'avatar', path:'/avatars'}], 'single') ,authController.changeInformation)
 router.get("/get-profile/:id", authController.getProfile);
-
+router.patch("/profile/change-avatar", auth, uploadFile([{name:'avatar', path:'/avatars'}], 'single') ,authController.changeAvatar)
 
 module.exports = router;

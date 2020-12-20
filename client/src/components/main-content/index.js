@@ -17,6 +17,7 @@ import AppBar from '../new-feed/appBar';
 import { connect } from 'react-redux';
 import { getData } from '../../helper/requestHelper';
 import { AuthActions } from '../auth/redux/action';
+import { PostAction } from '../post/redux/action';
 
 // import Animated, { Easing } from 'react-native-reanimated'
 // const { Value, timing } = Animated
@@ -156,6 +157,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     getProfile: AuthActions.getProfile,
+    getPostByUser: PostAction.getPostByUser,
 }
 let connected = connect(mapStateToProps, mapActions)(MainContainer);
 

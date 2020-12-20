@@ -1,17 +1,28 @@
 import axios from 'axios';
 import {
     sendRequest,
-    AuthenticateHeader
+    AuthenticateHeader,
+    getData
 } from '../../../helper/requestHelper';
 
 export const PostService = {
     likePost,
     getAllPost,
+    getPostByUser,
     getCommentPost,
     addCommentPost,
     createPost,
     reportPost
 };
+
+async function getPostByUser() {
+    let id = await getData('userId')
+    let url = `https://fakebook-server.herokuapp.com/post/get-list-post-person/${id}`
+    return sendRequest({
+        url: url,
+        method: 'GET',
+    })
+}
 
 async function getAllPost() {
     let url = `https://fakebook-server.herokuapp.com/post/get-list-post`

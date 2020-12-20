@@ -11,6 +11,7 @@ import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { PostAction } from '../post/redux/action';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
@@ -119,6 +120,12 @@ const OptionTab = (props) => {
         console.log('props', props);
         props.navigation.replace(pageName.LOG_IN_NEW_ACC)
     }
+
+    // useEffect(() => {
+    //     if (props.auth?.isLoading === false && props.auth?.user?.id){
+    //         props.getPostByUser();
+    //     }
+    // }, [])
 
     console.log(`https://fakebook-server.herokuapp.com${auth.profile?.avatar}`);
 
@@ -288,6 +295,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     logout: AuthActions.logout,
+    getPostByUser: PostAction.getPostByUser,
 }
 let connected = connect(mapStateToProps, mapActions)(OptionTab);
 

@@ -9,6 +9,24 @@ export const PostAction = {
     createPost,
     reportPost,
     getAllPost,
+    getPostByUser,
+}
+
+function getPostByUser(id) {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_POST_BY_USER_REQUEST });
+        PostService.getPostByUser(id)
+            .then(res => {
+                console.log('res.data.content', res.data.content);
+                dispatch({
+                    type: PostConstant.GET_POST_BY_USER_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_POST_BY_USER_FAILE, payload: err });
+            })
+    }
 }
 
 function getAllPost() {

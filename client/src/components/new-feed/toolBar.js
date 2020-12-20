@@ -66,14 +66,23 @@ const ToolBar = (props) => {
         props.navigation.navigate(pageName.post_NEW_POST)
     }
 
+    const onOpenProfile = () => {
+        props.navigation.navigate(pageName.profile)
+    }
+
     return (
         <>
             <Container>
                 <Row>
-                    <Avatar 
-                        // source={require('./../../public/img/assets/user1.jpg')} 
-                        source={{ uri: `https://fakebook-server.herokuapp.com${auth.profile?.avatar}` }} 
-                    />
+                    <TouchableOpacity
+                        onPress={() => onOpenProfile()}
+                    >
+                        <Avatar
+                            // source={require('./../../public/img/assets/user1.jpg')} 
+                            source={{ uri: `https://fakebook-server.herokuapp.com${auth.profile?.avatar}` }}
+                        />
+                    </TouchableOpacity>
+
                     <Input
                         onPress={onPressCreatePost}
                     >

@@ -49,7 +49,22 @@ const NewFeed = (props) => {
         });
     }, []);
 
-    console.log('list post', post);
+    // const refreshData = () => {
+    //     setRefreshing(true);
+    //     props.getAllPost();
+    //     props.getPostByUser();
+    //     console.log('refresh trang chu');
+
+    //     // check data return isLoading === false;
+    //     wait(2000).then(() => {
+    //         console.log('done');
+    //         setRefreshing(false)
+
+    //     });
+    // }
+
+    // console.log('list post', post);
+    console.log('auth', auth);
 
     return (
         <>
@@ -83,6 +98,7 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     getAllPost: PostAction.getAllPost,
+    getPostByUser: PostAction.getPostByUser,
 };
 
 let connected = connect(mapStateToProps, mapActions)(NewFeed);

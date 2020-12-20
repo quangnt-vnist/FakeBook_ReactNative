@@ -54,6 +54,7 @@ const CreatePost = (props) => {
         }
     }
 
+    const [isPosting, setIsPosting] = useState(false);
     const onPost = () => {
         console.log('ahihiihi', text, images);
 
@@ -206,7 +207,7 @@ const CreatePost = (props) => {
     }
 
     let imageGrid = null;
-    console.log('textttt', images);
+    // console.log('textttt', images);
     if (mediaStatus === 'image') {
         gridImages = (
             <View>
@@ -469,7 +470,7 @@ const CreatePost = (props) => {
                 <View style={{ width: "90%", backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: "600" }}>Tạo bài viết</Text>
                     <TouchableOpacity style={{ backgroundColor: "#1578EF", padding: 5, borderRadius: 5 }}
-                        onPress={onPost}
+                        onPress={()=>onPost()}
                     >
                         <Text style={{ fontWeight: "600", fontSize: 15, color: "#fff" }}>ĐĂNG</Text>
                     </TouchableOpacity>
@@ -480,14 +481,12 @@ const CreatePost = (props) => {
             <View style={styles.p1}>
                 <Image
                     style={styles.picture}
-                    source={
-                        require('../../public/img/fb_reg.png')
-                    }
+                    source={{ uri: `https://fakebook-server.herokuapp.com${props.auth?.profile?.avatar}` }}
                 />
                 <View style={styles.name}>
                     <View style={{}}>
                         <View style={{ flexDirection: "row" }}>
-                            <Text style={{ fontWeight: 'bold', }}>Nguyễn Xuân Thành</Text>
+                            <Text style={{ fontWeight: 'bold', }}>{props.auth?.profile?.name}</Text>
                             <View style={{ flexDirection: "row" }}>
                                 {feeling.title ?
                                     <Text> - Đang</Text> : <></>}
@@ -683,8 +682,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-    const { post } = state;
-    return { post };
+    const { post, auth } = state;
+    return { post, auth };
 }
 const mapActions = {
     post: PostAction.createPost,

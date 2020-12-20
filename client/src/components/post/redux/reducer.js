@@ -13,6 +13,7 @@ var initState = {
     error: null,
     isLoading: false,
     listPost: [],
+    myPost: [],
 }
 
 export function post(state = initState, action) {
@@ -43,7 +44,30 @@ export function post(state = initState, action) {
                 error: action.payload
             };
 
-            case PostConstant.CHANGE_LIKE_REQUEST:
+        case PostConstant.GET_POST_BY_USER_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case PostConstant.GET_POST_BY_USER_SUCCESS:
+            return {
+                ...state,
+                myPost: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.GET_POST_BY_USER_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.CHANGE_LIKE_REQUEST:
 
             return {
                 ...state,
@@ -67,6 +91,14 @@ export function post(state = initState, action) {
                 error: action.payload
             };
 
+        case PostConstant.CREATE_POST_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isLoadingPost: true,
+                error: null
+            };
+            
         case PostConstant.GET_COMMENT_POST_REQUEST:
         case PostConstant.ADD_COMMENT_POST_REQUEST:
         case PostConstant.CREATE_POST_REQUEST:
@@ -95,11 +127,15 @@ export function post(state = initState, action) {
             };
 
         case PostConstant.CREATE_POST_SUCCESS:
+            let newList = state.listPost.unshift(action.payload);
+            let newMyPost = state.newMyPost.unshift(action.payload);
             return {
                 ...state,
                 post: action.payload,
-                // listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
+                listPost: newList,
+                myPost: newMyPost,
                 isLoading: false,
+                isLoadingPost: false,
                 error: null
             };
 
@@ -119,6 +155,14 @@ export function post(state = initState, action) {
             return {
                 ...state,
                 isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.CREATE_POST_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                isLoadingPost: false,
                 error: action.payload
             };
 

@@ -16,6 +16,7 @@ import { Comments } from '../comment/comments'
 import { pageName } from '../../navigator/constant.page';
 import { connect } from 'react-redux';
 import { GridImage } from '../post/gridImage';
+import { PostAction } from '../post/redux/action';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
@@ -150,7 +151,7 @@ const PostItem = (props) => {
 				{item.post}
 			</Post>
 			{/* { !(item.photo === "") && <Photo source={item.photo} />} */}
-			{item.photo.length > 0 && <GridImage array={item.photo}/>}
+			{item.photo.length > 0 && <GridImage array={item.photo} />}
 
 			<Footer>
 				<FooterCount>
@@ -217,7 +218,7 @@ const LoadingPost = (props) => {
 	let { isLoading, listPost } = post;
 
 	let checkShowLoading = true;
-	if(isLoading === false && listPost.length !== 0) {
+	if (isLoading === false && listPost.length !== 0) {
 		checkShowLoading = false;
 	}
 
@@ -252,7 +253,13 @@ const Feed = (props) => {
 
 	const { auth, post } = props;
 
-	let listPost = [];
+	// useEffect(() => {
+	// 	console.log('render',post.isLoadingPost);
+	// 	props.getPostByUser();
+	// 	props.getAllPost();
+	// }, [post.post?._id])
+
+	let listPost = [], allPost = [], myPost = [];
 	let a = {
 		"__v": 0,
 		"_id": "5fdddcde1cf5ff00176648a6",
@@ -275,7 +282,23 @@ const Feed = (props) => {
 		]
 	}
 	if (post.listPost.length > 0) {
-		listPost = post.listPost.map(e => {
+		allPost = post.listPost.map(e => {
+			return {
+				id: e._id,
+				comment: e.comment,
+				avatar: { uri: `https://fakebook-server.herokuapp.com${e?.creator?.avatar}` },
+				name: e?.creator?.name,
+				post: e.described,
+				time: moment(e.created).fromNow(),
+				photo: e.image,
+				video: "",
+				numOfLike: e.like?.length,
+				numOfCmt: e.comment?.length,
+			}
+		})
+	}
+	if (post.myPost.length > 0) {
+		myPost = post.myPost.map(e => {
 			return {
 				id: e._id,
 				comment: e.comment,
@@ -289,6 +312,12 @@ const Feed = (props) => {
 				numOfCmt: e.comment?.length,
 			}
 		})
+	}
+
+	listPost = allPost;
+
+	if (props.isProfile) {
+		listPost = myPost;
 	}
 
 	const listPost2 = [
@@ -364,10 +393,17 @@ const Feed = (props) => {
 
 	return (
 		<>
-			{ listPost.length !== 0 ? listPost.map(item => <View key={item.id}>
-				<PostItem item={item} {...props} />
-			</View>) : <LoadingPost {...props} />	
-			}
+			{post.isLoadingPost && <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<Text>Đang đăng bài viết...</Text>
+				<ActivityIndicator size="large" color="#ccc" />	
+			</View>}
+			<View>
+				{listPost.length !== 0 ? listPost.map(item => <View key={item.id}>
+					<PostItem item={item} {...props} />
+				</View>) : <LoadingPost {...props} />
+				}
+			</View>
+
 			{/* <FlatList
 				data={listPost}
 				keyExtractor={item => item.id}
@@ -393,7 +429,10 @@ const mapStateToProps = state => {
 	const { auth, post } = state;
 	return { auth, post };
 }
-const mapActions = {};
+const mapActions = {
+	getAllPost: PostAction.getAllPost,
+	getPostByUser: PostAction.getPostByUser,
+};
 
 let connected = connect(mapStateToProps, mapActions)(Feed);
 

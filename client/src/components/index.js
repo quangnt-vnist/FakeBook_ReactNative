@@ -41,6 +41,7 @@ import ViewVideo from "./watchs-tab/viewVideo";
 // report
 import { ReportPost } from './report';
 import { ConfirmReport } from './report/confirmReport';
+import { Advanced } from './post/advanced';
 
 // search page
 import { SearchPage } from './search-bar-common'
@@ -94,6 +95,7 @@ export {
     // report post
     ReportPost,
     ConfirmReport,
+    Advanced,
 
     // search
     SearchPage,

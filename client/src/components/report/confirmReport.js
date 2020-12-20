@@ -15,7 +15,7 @@ const ConfirmReport = (props) => {
         let data = {
             described: optionArr[idx]
         }
-        props.reportPost("5fdde5348156a30017bfe759", data)
+        props.reportPost("5fdef6b3c2916600170accfd", data)
         props.navigation.navigate(pageName.main.MAIN)
     }
     return (

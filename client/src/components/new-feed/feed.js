@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, FlatList, View } from 'react-native'
+import { ActivityIndicator, Dimensions, FlatList, Modal, StyleSheet, View } from 'react-native'
 
 import styled from 'styled-components/native'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Octicons from 'react-native-vector-icons/Octicons';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import Avatar from './avatar'
 import { Comments } from '../comment/comments'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { pageName } from '../../navigator/constant.page';
+import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
+import { Image } from 'react-native-svg';
 
 const Container = styled.View`
 	flex: 1;
@@ -96,6 +100,8 @@ const BottomDivider = styled.View`
 	background: #f0f2f5;
 `
 
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const wait = (timeout) => {
 	return new Promise(resolve => {
@@ -105,9 +111,11 @@ const wait = (timeout) => {
 
 
 const PostItem = (props) => {
+
 	let item = props.item;
 	return (
 		<Container key={item.id}>
+
 			<Header>
 				<Row>
 					<Avatar
@@ -210,6 +218,7 @@ const PostItem = (props) => {
 				</FooterMenu>
 			</Footer>
 			<BottomDivider />
+
 		</Container>
 	)
 }
@@ -316,8 +325,58 @@ const Feed = (props) => {
 				renderContent={CommentSheet}
 				onCloseEnd={enabledBottomClamp}
 			/> */}
+
 		</>
 	)
 }
+const styles = StyleSheet.create({
+	singleNoti: {
+		display: "flex",
+		flexDirection: "row",
+		backgroundColor: "#E7F3FF",
+		padding: 5
+	},
+	avatar: {
+		width: 50,
+		height: 50,
+		borderRadius: 25,
+		marginRight: 10,
+		marginLeft: 5,
 
+	},
+	avatarNoti: {
+		width: 50,
+		height: 50,
+		borderRadius: 25,
+		margin: 10,
+		marginTop: 20,
+	},
+	notiContent: {
+		width: "70%",
+		marginRight: 10
+	},
+	removeIcon: {
+		backgroundColor: "#DDD",
+		padding: 5,
+		borderRadius: 20,
+		fontSize: 30,
+		margin: 10
+	},
+	Modal: {
+		marginTop: HEIGHT - 200,
+	},
+	containerHeader: {
+		display: "flex",
+		marginTop: HEIGHT - 270,
+	},
+	swipeDown: {
+		display: "flex",
+		textAlign: "center",
+		fontSize: 50,
+		height: 30,
+		color: "#777"
+	}
+
+
+})
 export default Feed

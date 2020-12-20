@@ -24,7 +24,7 @@ const PhoneNumber = ({ navigation, route }) => {
     }
 
     const validatePhoneNumber = () => {
-        let reg = /([0-9]{10})\b/;
+        let reg = /((09|03|07|08|05)+([0-9]{8})\b)/g;
 
         return reg.test(phoneNumber);
     }

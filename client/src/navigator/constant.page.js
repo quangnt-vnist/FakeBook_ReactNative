@@ -21,7 +21,7 @@ export const pageName = {
         All_FRIEND: "Tất cả bạn bè",
         SUGGEST_FRIEND: "Gợi ý",
     },
-    
+
     watch_tab: {
         PLAY_VIDEO: "Xem video",
         SEARCH_VIDEO: "Tìm kiếm video",
@@ -57,6 +57,7 @@ export const pageName = {
     post_feeling: "Bạn đang cảm thấy thế nào",
     post_activity: "Bạn đang làm gì vậy",
     post_feeling_activity: "Cảm xúc/ Hoạt động",
+    post_advanced_option: "Tùy chỉnh bài viết",
 
     profile: "Trang cá nhân",
     preview_avatar: "Xem trước ảnh đại diện",

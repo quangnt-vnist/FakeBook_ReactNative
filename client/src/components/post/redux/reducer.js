@@ -83,7 +83,7 @@ export function post(state = initState, action) {
         case PostConstant.REPORT_POST_SUCCESS:
             return {
                 ...state,
-                post: action.payload,
+                report: action.payload,
                 // listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
                 isLoading: false,
                 error: null

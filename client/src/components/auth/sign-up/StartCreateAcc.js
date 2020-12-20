@@ -2,7 +2,11 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image, ImageBackground, Button, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { pageName } from './../../../navigator/constant.page'
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+]);
 const FB_BG_REG = require('../../../public/img/create_acc.png')
 
 // const onPressBtnNext = () => {

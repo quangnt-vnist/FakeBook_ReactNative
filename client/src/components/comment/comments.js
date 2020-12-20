@@ -17,7 +17,7 @@ const Comments = (props) => {
 
     const [show, setShow] = useState(false);
     useEffect(() => {
-        props.getCommentPost("5fdde5348156a30017bfe759");
+        props.getCommentPost("5fdef6b3c2916600170accfd");
     }, [])
 
     useEffect(() => {
@@ -161,7 +161,7 @@ const AddComment = (props) => {
         let data = {
             described: content
         }
-        props.addCommentPost("5fdde5348156a30017bfe759", data);
+        props.addCommentPost("5fdef6b3c2916600170accfd", data);
     }
 
     return (

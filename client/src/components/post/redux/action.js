@@ -77,15 +77,16 @@ function addCommentPost(id, data) {
             })
     }
 }
+
 function reportPost(id, data) {
     return dispatch => {
         dispatch({ type: PostConstant.REPORT_POST_REQUEST });
-        PostService.addCommentPost(id, data)
+        PostService.reportPost(id, data)
             .then(res => {
                 console.log("action report ", res.data.content);
                 dispatch({
                     type: PostConstant.REPORT_POST_SUCCESS,
-                    payload: res.data.content
+                    payload: res.data.content.reported
                 })
             })
             .catch(err => {
@@ -93,3 +94,4 @@ function reportPost(id, data) {
             })
     }
 }
+

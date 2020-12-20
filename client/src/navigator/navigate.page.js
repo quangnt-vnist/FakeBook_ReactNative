@@ -38,6 +38,7 @@ import {
     // Report Post
     ReportPost,
     ConfirmReport,
+    Advanced,
 
     //profile
     Profile,
@@ -133,7 +134,7 @@ const Navigate = () => {
 
 
                 {/*Tạo bài viết*/}
-                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost} 
+                <Stack.Screen name={pageName.post_NEW_POST} component={CreatePost}
                     options={{ headerTitle: "", headerShown: false }} />
                 <Stack.Screen name={pageName.post_feeling} component={Feeling} />
                 <Stack.Screen name={pageName.post_activity} component={Activity} />
@@ -146,6 +147,11 @@ const Navigate = () => {
                 {/* báo cáo bài viết */}
                 <Stack.Screen name={pageName.report.REPORT_POST} component={ReportPost} />
                 <Stack.Screen name={pageName.report.CONFIRM_REPORT} component={ConfirmReport} />
+                <Stack.Screen name={pageName.post_advanced_option}
+                    options={{
+                        headerShown: false,
+                    }}
+                    component={Advanced} />
 
             </Stack.Navigator>
         </NavigationContainer>

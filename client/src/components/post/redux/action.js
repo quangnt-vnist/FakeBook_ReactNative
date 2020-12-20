@@ -10,6 +10,7 @@ export const PostAction = {
     reportPost,
     getAllPost,
     getPostByUser,
+    changeAvatar,
 }
 
 function getPostByUser(id) {
@@ -125,6 +126,24 @@ function reportPost(id, data) {
             })
             .catch(err => {
                 dispatch({ type: PostConstant.REPORT_POST_FAILE, payload: err });
+            })
+    }
+}
+
+
+
+function changeAvatar(data) {
+    return dispatch => {
+        dispatch({ type: PostConstant.CHANGE_AVATAR_REQUEST });
+        PostService.createPost(data)
+            .then(res => {
+                dispatch({
+                    type: PostConstant.CHANGE_AVATAR_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.CHANGE_AVATAR_FAILE, payload: err });
             })
     }
 }

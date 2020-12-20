@@ -12,7 +12,8 @@ export const PostService = {
     getCommentPost,
     addCommentPost,
     createPost,
-    reportPost
+    reportPost,
+    changeAvatar
 };
 
 async function getPostByUser() {
@@ -84,3 +85,16 @@ async function reportPost(id, data) {
         data: data
     })
 }
+
+
+async function changeAvatar(data) {
+    console.log('data req', data);
+
+    return sendRequest({
+        url: `https://fakebook-server.herokuapp.com/profile/${data.id}/change-information`,
+        method: 'POST',
+        data: data,
+    })
+}
+
+

@@ -12,4 +12,5 @@ router.patch("/profile/:id/change-information", auth, uploadFile([{name:'avatar'
 router.get("/get-profile/:id", authController.getProfile);
 router.patch("/profile/change-avatar", auth, uploadFile([{name:'avatar', path:'/avatars'}], 'single') ,authController.changeAvatar)
 
+router.get('/notifications', auth, authController.getNotifications)
 module.exports = router;

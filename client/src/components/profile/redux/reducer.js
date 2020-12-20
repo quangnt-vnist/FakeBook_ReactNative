@@ -17,7 +17,6 @@ var initState = {
 
 export function profile(state = initState, action) {
 
-    // console.log('action type:  ', action.type);
     switch (action.type) {
 
         case ProfileConstant.CHANGE_AVATAR_REQUEST:
@@ -32,7 +31,6 @@ export function profile(state = initState, action) {
             return {
                 ...state,
                 profile: action.payload,
-                //listPost: state.listPost.filter(e => (e._id === action.payload._id) ? action.payload : e),
                 isLoading: false,
                 error: null
             };

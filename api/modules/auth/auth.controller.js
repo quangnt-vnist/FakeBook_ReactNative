@@ -182,3 +182,21 @@ exports.getProfile = async (req, res) => {
         });
     }
 };
+
+exports.getNotifications = async (req, res) => {
+    try {
+        const notification = await AuthService.getNotifications(req.user._id);
+
+        res.status(200).json({
+            success: true,
+            messages: ['get_notifications_success'],
+            content: notification
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: Array.isArray(error) ? error : ['get_notifiactions_faile'],
+            content: error
+        });
+    }
+};

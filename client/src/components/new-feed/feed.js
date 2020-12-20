@@ -19,13 +19,14 @@ import { pageName } from '../../navigator/constant.page';
 import { connect } from 'react-redux';
 import { GridImage } from '../post/gridImage';
 import { PostAction } from '../post/redux/action';
+import { getData, sendRequest } from '../../helper/requestHelper';
 
 // Calculate window size
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.View`
-	flex: 1;
+	
 `
 const Header = styled.View`
 	height: 50px;
@@ -257,11 +258,17 @@ const Feed = (props) => {
 
 	const { auth, post } = props;
 
+	const [updating, setUpdate] = useState(false);
 	useEffect(() => {
 		console.log('render', post.isLoadingPost);
+		// setUpdate(!updating);
+		// forceUpdate();
 		// props.getPostByUser();
 		// props.getAllPost();
 	}, [post.post])
+
+	const [, updateState] = React.useState();
+	const forceUpdate = React.useCallback(() => updateState({}), []);
 
 	let listPost = [], allPost = [], myPost = [];
 	let a = {
@@ -375,24 +382,21 @@ const Feed = (props) => {
 	const [state, setState] = useState({
 		listPost: listPost,
 		loadingItem: false,
+		currentPage: 1,
 	});
 
 
-	const handleLoadMore = () => {
-		setState({
-			...state,
-			loadingItem: true,
-		});
-		console.log('start');
+	const handleLoadMore = async () => {
+		let userId = await getData("userId");
+		
+		// let url = "https://fakebook-server.herokuapp.com/post/get-list-post"
+		// if(props.isProfile) {
+		// 	url = `https://fakebook-server.herokuapp.com/post/get-list-post-person/${userId}`
+		// }
 
-		// check data return isLoading === false;
-		wait(2000).then(() => {
-			console.log('end');
-			setState({
-				...state,
-				loadingItem: false,
-			});
-		});
+		setState({...state, currentPage: state.currentPage + 1});
+		props.getAllPost();
+		// props.getPostByUser();
 	};
 
 	return (
@@ -413,7 +417,7 @@ const Feed = (props) => {
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => <PostItem item={item} />}
 				ListFooterComponent={() => {
-					if (!state.loadingItem) return null;
+					// if (state.loadingItem) return null;
 					return (
 						<ActivityIndicator
 							size={'large'}
@@ -422,7 +426,7 @@ const Feed = (props) => {
 					)
 				}}
 				// onEndReachedThreshold={0.4}
-				// onEndReached={() => handleLoadMore()}
+				onEndReached={() => handleLoadMore()}
 			/> */}
 
 		</>

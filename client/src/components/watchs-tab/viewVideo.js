@@ -152,10 +152,10 @@ const ViewVideo = ({ navigation, route }) => {
                 </FooterMenu>
             </Footer>
             <BottomDivider />
-            <Comments 
+            {/* <Comments 
                 showLike={false}
                 height={HEIGHT - 300 - 10 - 10 - 35}
-            />
+            /> */}
         </ScrollView>
 
     );

@@ -18,7 +18,7 @@ function getPostByUser(id) {
         dispatch({ type: PostConstant.GET_POST_BY_USER_REQUEST });
         PostService.getPostByUser(id)
             .then(res => {
-                console.log('res.data.content', res.data.content);
+                // console.log('res.data.content', res.data.content);
                 dispatch({
                     type: PostConstant.GET_POST_BY_USER_SUCCESS,
                     payload: res.data.content

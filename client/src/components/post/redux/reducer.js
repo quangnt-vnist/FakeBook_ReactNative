@@ -126,13 +126,14 @@ export function post(state = initState, action) {
             };
 
         case PostConstant.CREATE_POST_SUCCESS:
-            let newList = [...[action.payload], ...state.listPost];
-            let newMyPost = [...[action.payload], ...state.myPost];
+            // let newList = [...[action.payload], ...state.listPost];
+            // let newMyPost = [...[action.payload], ...state.myPost];
             return {
                 ...state,
-                post: action.payload,
-                listPost: newList,
-                myPost: newMyPost,
+                listPost: action.payload.listpost,
+                myPost: action.payload.listmypost,
+                // listPost: newList,
+                // myPost: newMyPost,
                 isLoading: false,
                 isLoadingPost: false,
                 error: null

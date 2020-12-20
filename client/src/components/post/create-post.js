@@ -67,7 +67,15 @@ const CreatePost = (props) => {
             }
             console.log('dataaa', data)
             props.post(data);
-            props.navigation.goBack();
+            // props.getAllPost();
+            // props.getPostByUser();
+            console.log('isLoadingPost', props.post.isLoadingPost);
+            {
+                // props.post?.isLoadingPost && 
+                props.navigation.goBack();
+            
+            }
+            
         }
         else {
             Alert.alert("Bài viết chưa có gì!");
@@ -89,6 +97,10 @@ const CreatePost = (props) => {
 
     }, [text]);
     // console.log('routtt', props.route.params);
+
+    // React.useEffect(() => {
+    //     {props.post.isLoadingPost && props.navigation.goBack();}
+    // });
 
     const renderContent = () => (
         <View
@@ -468,7 +480,13 @@ const CreatePost = (props) => {
                     <Icon5 name='arrow-left' size={20} color="#111" />
                 </TouchableOpacity>
                 <View style={{ width: "90%", backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: "600" }}>Tạo bài viết</Text>
+                    <View>
+                        <Text style={{ fontSize: 20, fontWeight: "600" }}>Tạo bài viết</Text>
+                        {/* {props.post.isLoadingPost ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                <ActivityIndicator size="large" color="#ccc" />
+                            </View> : <View></View>} */}
+                    </View>
+                    
                     <TouchableOpacity style={{ backgroundColor: "#1578EF", padding: 5, borderRadius: 5 }}
                         onPress={()=>onPost()}
                     >
@@ -687,6 +705,8 @@ const mapStateToProps = state => {
 }
 const mapActions = {
     post: PostAction.createPost,
+    getAllPost: PostAction.getAllPost,
+    getPostByUser: PostAction.getPostByUser,
 }
 let connectCreatePost = connect(mapStateToProps, mapActions)(CreatePost);
 

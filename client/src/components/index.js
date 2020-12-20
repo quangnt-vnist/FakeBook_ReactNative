@@ -2,6 +2,7 @@
 
 import { MainContainer } from './main-content'
 import { NewFeed } from './new-feed'
+import { SinglePost } from './new-feed/singlePost'
 import { FriendRequestTab } from './friend-request-tab'
 import { WatchTab } from './watchs-tab'
 import { NotificationTab } from './notification-tab'
@@ -54,6 +55,7 @@ export {
     WatchTab,
     NotificationTab,
     OptionTab,
+    SinglePost,
 
     // Friend Tab
     AllRequest,

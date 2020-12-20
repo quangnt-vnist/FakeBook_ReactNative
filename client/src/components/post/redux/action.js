@@ -11,6 +11,7 @@ export const PostAction = {
     getAllPost,
     getPostByUser,
     changeAvatar,
+    getPost,
 }
 
 function getPostByUser(id) {
@@ -26,6 +27,22 @@ function getPostByUser(id) {
             })
             .catch(err => {
                 dispatch({ type: PostConstant.GET_POST_BY_USER_FAILE, payload: err });
+            })
+    }
+}
+function getPost(id) {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_POST_REQUEST });
+        PostService.getPost(id)
+            .then(res => {
+                console.log('get post ', res.data.content);
+                dispatch({
+                    type: PostConstant.GET_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_POST_FAILE, payload: err });
             })
     }
 }

@@ -31,6 +31,7 @@ import {
     Feeling,
     Activity,
     Feeling_Activity,
+    SinglePost,
 
     // comments
     Comments,
@@ -84,6 +85,12 @@ const Navigate = () => {
                     name={pageName.main.MAIN}
                     component={MainContainer}
                     options={{ headerShown: false }}
+                />
+                {/* xem bai viet */}
+                <Stack.Screen
+                    name={pageName.feed.SINGLE_POST}
+                    component={SinglePost}
+                // options={{ headerShown: false }}
                 />
 
 

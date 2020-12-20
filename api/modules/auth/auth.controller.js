@@ -121,7 +121,7 @@ exports.changeInformation = async (req, res) => {
             avatar = path.substr(1, path.length)
         }
         console.log("re", req.body)
-        const profile = await AuthService.changeInformation(req.params.id, req.body.name, avatar);
+        const profile = await AuthService.changeInformation(req.user._id, req.body.name, avatar);
 
         res.status(200).json({
             success: true,
@@ -133,6 +133,33 @@ exports.changeInformation = async (req, res) => {
         res.status(400).json({
             success: false,
             messages: Array.isArray(error) ? error : ['change_user_information_faile'],
+            content: error
+        });
+    }
+};
+
+
+exports.changeAvatar = async (req, res) => {
+
+    try {
+        let avatar;
+        if (req.file) {
+            let path = req.file.destination + '/' + req.file.filename;
+            avatar = path.substr(1, path.length)
+        }
+        console.log("avta", avatar)
+        const profile = await AuthService.changeAvatar(req.user._id, req.body.described , avatar);
+
+        res.status(200).json({
+            success: true,
+            messages: ['change_avatar_success'],
+            content: profile
+        });
+    } catch (error) {
+
+        res.status(400).json({
+            success: false,
+            messages: Array.isArray(error) ? error : ['change_avatar_faile'],
             content: error
         });
     }
@@ -151,6 +178,24 @@ exports.getProfile = async (req, res) => {
         res.status(400).json({
             success: false,
             messages: Array.isArray(error) ? error : ['show_profile_faile'],
+            content: error
+        });
+    }
+};
+
+exports.getNotifications = async (req, res) => {
+    try {
+        const notification = await AuthService.getNotifications(req.user._id);
+
+        res.status(200).json({
+            success: true,
+            messages: ['get_notifications_success'],
+            content: notification
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: Array.isArray(error) ? error : ['get_notifiactions_faile'],
             content: error
         });
     }

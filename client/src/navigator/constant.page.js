@@ -61,6 +61,7 @@ export const pageName = {
 
     profile: "Trang cá nhân",
     preview_avatar: "Xem trước ảnh đại diện",
+    view_avatar: "Ảnh đại diện",
 
 
 

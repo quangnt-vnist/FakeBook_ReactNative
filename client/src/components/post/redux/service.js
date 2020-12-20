@@ -1,16 +1,37 @@
 import axios from 'axios';
 import {
     sendRequest,
-    AuthenticateHeader
+    AuthenticateHeader,
+    getData
 } from '../../../helper/requestHelper';
 
 export const PostService = {
     likePost,
+    getAllPost,
+    getPostByUser,
     getCommentPost,
     addCommentPost,
     createPost,
-    reportPost
+    reportPost,
+    changeAvatar
 };
+
+async function getPostByUser() {
+    let id = await getData('userId')
+    let url = `https://fakebook-server.herokuapp.com/post/get-list-post-person/${id}`
+    return sendRequest({
+        url: url,
+        method: 'GET',
+    })
+}
+
+async function getAllPost() {
+    let url = `https://fakebook-server.herokuapp.com/post/get-list-post`
+    return sendRequest({
+        url: url,
+        method: 'GET',
+    })
+}
 
 async function likePost(data) {
     console.log('data req', data);
@@ -64,3 +85,16 @@ async function reportPost(id, data) {
         data: data
     })
 }
+
+
+async function changeAvatar(data) {
+    console.log('data req', data);
+
+    return sendRequest({
+        url: `https://fakebook-server.herokuapp.com/profile/${data.id}/change-information`,
+        method: 'POST',
+        data: data,
+    })
+}
+
+

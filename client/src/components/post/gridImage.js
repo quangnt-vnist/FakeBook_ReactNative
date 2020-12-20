@@ -14,12 +14,6 @@ const GridImage = (props) => {
     const size = props.array.length;
     let array = props.array;
 
-    // useEffect = (() => {
-    //     //  () => { setUpdate(!update) };
-    //     console.log('aloooo')
-    // }, [])
-
-    console.log('gidddddd', size, props.array);
     const onPress1 = () => {
         array.splice(0, 1);
         props.onChangeImage(array);
@@ -28,7 +22,6 @@ const GridImage = (props) => {
     }
     const onPress2 = () => {
         array.splice(1, 1)
-        console.log('hahaha', array);
         //console.log("rest", a);
         props.onChangeImage(array);
     }
@@ -44,13 +37,13 @@ const GridImage = (props) => {
                 <Image
                     style={{ width: windowWidth, height: 400 }}
                     source={
-                        { uri: props.array[0] }
+                        { uri: `https://fakebook-server.herokuapp.com${props.array[0]}` }
                     }
                 />
 
-                <TouchableOpacity style={styles.delete} onPress={props.onDelete1}>
+                {/* <TouchableOpacity style={styles.delete} onPress={props.onDelete1}>
                     <Icon name="times-circle" style={styles.icon_delete}></Icon>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         )
@@ -63,23 +56,23 @@ const GridImage = (props) => {
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: props.array[0] }
+                            { uri: `https://fakebook-server.herokuapp.com${props.array[0]}` }
                         }
                     />
-                    <TouchableOpacity style={styles.delete} onPress={onPress1}>
+                    {/* <TouchableOpacity style={styles.delete} onPress={onPress1}>
                         <Icon name="times-circle" style={styles.icon_delete}></Icon>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <View style={{ marginLeft: 5 }}>
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: props.array[1] }
+                            { uri: `https://fakebook-server.herokuapp.com${props.array[1]}` }
                         }
                     />
-                    <TouchableOpacity style={styles.delete} onPress={onPress2}>
+                    {/* <TouchableOpacity style={styles.delete} onPress={onPress2}>
                         <Icon name="times-circle" style={styles.icon_delete}></Icon>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
             </View>
@@ -92,7 +85,7 @@ const GridImage = (props) => {
                     <Image
                         style={{ width: 190, height: 400 }}
                         source={
-                            { uri: props.array[0] }
+                            { uri: `https://fakebook-server.herokuapp.com${props.array[0]}` }
                         }
                     />
                 </View>
@@ -101,7 +94,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[1] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[1]}` }
                             }
                         />
                     </View>
@@ -109,7 +102,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[2] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[2]}` }
                             }
                         />
                     </View>
@@ -128,7 +121,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[0] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[0]}` }
                             }
                         />
                     </View>
@@ -136,7 +129,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[1] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[1]}` }
                             }
                         />
                     </View>
@@ -147,7 +140,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[2] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[2]}` }
                             }
                         />
                     </View>
@@ -155,7 +148,7 @@ const GridImage = (props) => {
                         <Image
                             style={{ width: 190, height: 200 }}
                             source={
-                                { uri: props.array[3] }
+                                { uri: `https://fakebook-server.herokuapp.com${props.array[3]}` }
                             }
                         />
                     </View>

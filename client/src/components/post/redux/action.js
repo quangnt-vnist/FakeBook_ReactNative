@@ -7,7 +7,43 @@ export const PostAction = {
     getCommentPost,
     addCommentPost,
     createPost,
-    reportPost
+    reportPost,
+    getAllPost,
+    getPostByUser,
+    changeAvatar,
+}
+
+function getPostByUser(id) {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_POST_BY_USER_REQUEST });
+        PostService.getPostByUser(id)
+            .then(res => {
+                console.log('res.data.content', res.data.content);
+                dispatch({
+                    type: PostConstant.GET_POST_BY_USER_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_POST_BY_USER_FAILE, payload: err });
+            })
+    }
+}
+
+function getAllPost() {
+    return dispatch => {
+        dispatch({ type: PostConstant.GET_LIST_POST_REQUEST });
+        PostService.getAllPost()
+            .then(res => {
+                dispatch({
+                    type: PostConstant.GET_LIST_POST_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.GET_LIST_POST_FAILE, payload: err });
+            })
+    }
 }
 
 function likePost(data) {
@@ -95,3 +131,20 @@ function reportPost(id, data) {
     }
 }
 
+
+
+function changeAvatar(data) {
+    return dispatch => {
+        dispatch({ type: PostConstant.CHANGE_AVATAR_REQUEST });
+        PostService.createPost(data)
+            .then(res => {
+                dispatch({
+                    type: PostConstant.CHANGE_AVATAR_SUCCESS,
+                    payload: res.data.content
+                })
+            })
+            .catch(err => {
+                dispatch({ type: PostConstant.CHANGE_AVATAR_FAILE, payload: err });
+            })
+    }
+}

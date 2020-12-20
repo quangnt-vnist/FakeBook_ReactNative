@@ -13,12 +13,59 @@ var initState = {
     error: null,
     isLoading: false,
     listPost: [],
+    myPost: [],
 }
 
 export function post(state = initState, action) {
 
     // console.log('action type:  ', action.type);
     switch (action.type) {
+
+        case PostConstant.GET_LIST_POST_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case PostConstant.GET_LIST_POST_SUCCESS:
+            return {
+                ...state,
+                listPost: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.GET_LIST_POST_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.GET_POST_BY_USER_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+
+        case PostConstant.GET_POST_BY_USER_SUCCESS:
+            return {
+                ...state,
+                myPost: action.payload,
+                isLoading: false,
+                error: null
+            };
+
+        case PostConstant.GET_POST_BY_USER_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
 
         case PostConstant.CHANGE_LIKE_REQUEST:
 
@@ -44,11 +91,18 @@ export function post(state = initState, action) {
                 error: action.payload
             };
 
+        case PostConstant.CREATE_POST_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                isLoadingPost: true,
+                error: null
+            };
+            
         case PostConstant.GET_COMMENT_POST_REQUEST:
         case PostConstant.ADD_COMMENT_POST_REQUEST:
-        case PostConstant.CREATE_POST_REQUEST:
         case PostConstant.REPORT_POST_REQUEST:
-
+        case PostConstant.CHANGE_AVATAR_REQUEST:
             return {
                 ...state,
                 isLoading: true,
@@ -72,6 +126,18 @@ export function post(state = initState, action) {
             };
 
         case PostConstant.CREATE_POST_SUCCESS:
+            let newList = [...[action.payload], ...state.listPost];
+            let newMyPost = [...[action.payload], ...state.myPost];
+            return {
+                ...state,
+                post: action.payload,
+                listPost: newList,
+                myPost: newMyPost,
+                isLoading: false,
+                isLoadingPost: false,
+                error: null
+            };
+        case PostConstant.CHANGE_AVATAR_SUCCESS:
             return {
                 ...state,
                 post: action.payload,
@@ -91,11 +157,19 @@ export function post(state = initState, action) {
 
         case PostConstant.GET_COMMENT_POST_FAILE:
         case PostConstant.ADD_COMMENT_POST_FAILE:
-        case PostConstant.CREATE_POST_FAILE:
         case PostConstant.REPORT_POST_FAILE:
+        case PostConstant.CHANGE_AVATAR_FAILE:
             return {
                 ...state,
                 isLoading: false,
+                error: action.payload
+            };
+
+        case PostConstant.CREATE_POST_FAILE:
+            return {
+                ...state,
+                isLoading: false,
+                isLoadingPost: false,
                 error: action.payload
             };
 

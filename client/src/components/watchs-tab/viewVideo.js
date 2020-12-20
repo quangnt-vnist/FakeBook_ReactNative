@@ -85,7 +85,8 @@ const ViewVideo = ({ navigation, route }) => {
                 // paused={true}
                 // muted={true}
                 repeat
-                source={{ uri: item.video }}
+                // source={{ uri: item.video }}
+                source={item.video}
                 resizeMode={'cover'}
                 style={{
                     // flex: 1,

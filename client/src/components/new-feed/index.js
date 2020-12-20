@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { StatusBar, RefreshControl, ScrollView, LogBox, View, SafeAreaView } from "react-native";
+import { connect } from 'react-redux';
 // import { ScrollView } from 'react-native-gesture-handler';
 import styled from "styled-components/native";
+import { PostAction } from '../post/redux/action';
 
 import AppBar from './appBar';
-import Feed from './feed';
-import Story from './story';
-import ToolBar from './toolBar';
+import { Feed } from './feed';
+import { Story } from './story';
+import { ToolBar } from './toolBar';
 import Users from './users';
 
 const Container = styled.SafeAreaView`
@@ -20,25 +22,49 @@ const wait = (timeout) => {
     });
 }
 
-const NewFeed = ({ navigation }) => {
+const NewFeed = (props) => {
+
+    const { auth, post } = props;
 
     const [refreshing, setRefreshing] = React.useState(false);
 
     useEffect(() => {
+        // ignore Logs
         LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+
+        // get list post,
+        props.getAllPost();
     }, []);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        console.log('qangxt');
+        props.getAllPost();
+        console.log('refresh trang chu');
 
         // check data return isLoading === false;
         wait(2000).then(() => {
-            console.log('quang');
+            console.log('done');
             setRefreshing(false)
 
         });
     }, []);
+
+    // const refreshData = () => {
+    //     setRefreshing(true);
+    //     props.getAllPost();
+    //     props.getPostByUser();
+    //     console.log('refresh trang chu');
+
+    //     // check data return isLoading === false;
+    //     wait(2000).then(() => {
+    //         console.log('done');
+    //         setRefreshing(false)
+
+    //     });
+    // }
+
+    // console.log('list post', post);
+    // console.log('auth', auth);
 
     return (
         <>
@@ -54,14 +80,29 @@ const NewFeed = ({ navigation }) => {
                     }
                 >
                     {/* <AppBar /> */}
-                    <ToolBar navigation={navigation} />
+                    <ToolBar navigation={props.navigation} />
                     <Story />
                     <Users />
-                    <Feed navigation={navigation} />
+                    <Feed navigation={props.navigation} />
                 </ScrollView>
             </Container>
         </>
     )
 }
 
-export { NewFeed };
+
+
+const mapStateToProps = state => {
+    const { auth, post } = state;
+    return { auth, post };
+}
+const mapActions = {
+    getAllPost: PostAction.getAllPost,
+    getPostByUser: PostAction.getPostByUser,
+};
+
+let connected = connect(mapStateToProps, mapActions)(NewFeed);
+
+export { connected as NewFeed }
+
+// export { NewFeed };

@@ -9,7 +9,7 @@ export const ProfileAction = {
 function changeAvatar(data) {
     return dispatch => {
         dispatch({ type: ProfileConstant.CHANGE_AVATAR_REQUEST });
-        ProfileService.createProfile(data)
+        ProfileService.changeAvatar(data)
             .then(res => {
                 dispatch({
                     type: ProfileConstant.CHANGE_AVATAR_SUCCESS,

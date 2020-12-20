@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ScrollView } from 'react-native'
 import styled from 'styled-components/native'
@@ -15,6 +15,9 @@ import { OptionTab } from "./../option-tab";
 
 import AppBar from '../new-feed/appBar';
 import { connect } from 'react-redux';
+import { getData } from '../../helper/requestHelper';
+import { AuthActions } from '../auth/redux/action';
+import { PostAction } from '../post/redux/action';
 
 // import Animated, { Easing } from 'react-native-reanimated'
 // const { Value, timing } = Animated
@@ -22,9 +25,23 @@ import { connect } from 'react-redux';
 const MainTopTab = createMaterialTopTabNavigator();
 
 const MainContainer = (props) => {
+    var userId, token;
+    const useEffectAsync = (effect, inputs) => {
+        useEffect(() => {
+            effect();
+        }, inputs);
+    }
+    useEffectAsync( async () => {
+        userId = await getData('userId');
+        token = await getData('auth-token');
+        if(userId) {
+            console.log('\n\n\n\ncall get profile\n\n\n\n');
+            props.getProfile();
+        }
+    }, [])
 
-    console.log('auth main content \n\n', props.auth);
-
+    // console.log('auth main content \n\n', props.auth);
+    
     const tabBarOptions = {
         showIcon: true,
         showLabel: false,
@@ -138,7 +155,10 @@ const mapStateToProps = state => {
     const { auth } = state;
     return { auth };
 }
-const mapActions = {}
+const mapActions = {
+    getProfile: AuthActions.getProfile,
+    getPostByUser: PostAction.getPostByUser,
+}
 let connected = connect(mapStateToProps, mapActions)(MainContainer);
 
 export { connected as MainContainer }

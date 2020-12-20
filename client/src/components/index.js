@@ -29,7 +29,7 @@ import { Comments } from './comment/comments'
 //Profile
 import { Profile } from './profile/index';
 import { PreViewAvatar } from './profile/previewAvatar';
-
+import { ViewAvatar } from './profile/viewAvatar';
 // friends tab
 import { AllRequest } from './friend-request-tab/allRequest';
 import { SuggestFriend } from './friend-request-tab/suggestFriend';
@@ -91,6 +91,7 @@ export {
     // profile
     Profile,
     PreViewAvatar,
+    ViewAvatar,
 
     // report post
     ReportPost,

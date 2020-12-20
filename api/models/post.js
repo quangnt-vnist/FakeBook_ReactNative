@@ -42,7 +42,7 @@ const PostSchema = new Schema({
             type: Date
         } 
      }],
-    state: {
+    status: {
         type: String
     },
     banned: {

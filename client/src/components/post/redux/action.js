@@ -102,10 +102,10 @@ function addCommentPost(id, data) {
         dispatch({ type: PostConstant.ADD_COMMENT_POST_REQUEST });
         PostService.addCommentPost(id, data)
             .then(res => {
-                console.log("action comment ", res.data.content);
+                console.log("action comment ", res.data.content.comment);
                 dispatch({
                     type: PostConstant.ADD_COMMENT_POST_SUCCESS,
-                    payload: res.data.content
+                    payload: res.data.content.comment
                 })
             })
             .catch(err => {

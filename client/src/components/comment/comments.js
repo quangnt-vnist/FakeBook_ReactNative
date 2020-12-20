@@ -19,7 +19,7 @@ const Comments = (props) => {
     const { route } = props;
     useEffect(() => {
         // props.getCommentPost("5fdef6b3c2916600170accfd");
-        props.getCommentPost(route.params.id);
+        route?.params?.id && props.getCommentPost(route.params.id);
     }, [])
 
     useEffect(() => {
@@ -88,8 +88,7 @@ const CommentList = (props) => {
     }
     if (props.showLike === false) showLike = props.showLike;
 
-    const listCmt = props.post.comment;
-
+    const listCmt = props.post.comment ? props.post.comment : [];
     return (
         <View style={{ backgroundColor: "#fff", height: height }}>
             { showLike &&
@@ -114,16 +113,6 @@ const CommentList = (props) => {
                     </View>
                 </View>
             }
-            {/* {
-                listCmt.length >= 20 ?
-                    <View style={styles.moreComments}>
-                        <TouchableWithoutFeedback>
-                            <Text style={styles.userName}>Xem các bình luận trước...</Text>
-                        </TouchableWithoutFeedback>
-                    </View> : null
-            } */}
-
-            {/* Comment list */}
 
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -132,13 +121,11 @@ const CommentList = (props) => {
                 renderItem={({ item }) =>
                     <View style={styles.singleComment}>
 
-                        {/* avatar */}
                         <Image
                             source={{ uri: `https://fakebook-server.herokuapp.com${item.creator.avatar}` }}
                             style={styles.avatar}
                         />
 
-                        {/* comment's body */}
                         <View>
                             <View style={styles.contentCmt}>
                                 <TouchableWithoutFeedback>
@@ -153,7 +140,7 @@ const CommentList = (props) => {
                     </View>}
             />
             <AddComment {...props} />
-        </View>
+        </View >
     )
 }
 
@@ -163,7 +150,6 @@ const AddComment = (props) => {
         let data = {
             described: content
         }
-        // props.addCommentPost("5fdef6b3c2916600170accfd", data);
         props.addCommentPost(props.route.params.id, data);
     }
 

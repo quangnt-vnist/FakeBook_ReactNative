@@ -3,13 +3,20 @@ const Post = require('../../models/post');
 const User = require('../../models/user')
 const fs = require("fs");
 
-exports.addPost = async (id, data, files) => {
+exports.addPost = async (id, data, files = undefined) => {
+    let listfile = []
+    if(files){
+        for(let i in files){
+            let file = files[i].substring(1)
+            listfile.push(file)
+        }
+    }
     let post = await Post.create({
         creator: id,
         created: new Date(),
         described: data.described,
         status: data.status,
-        image: files
+        image: listfile
     })
 
     return post;
@@ -22,8 +29,9 @@ exports.editPost = async (id, data, files = undefined) => {
     if(files){
         if( post.image.length !== 0){
             for(let i in post.image){
-                if (fs.existsSync(post.image[i])){
-                    fs.unlinkSync(post.image[i])
+                let image = "." + post.image[i]
+                if (fs.existsSync(image)){
+                    fs.unlinkSync(image)
                 }
             } 
         }

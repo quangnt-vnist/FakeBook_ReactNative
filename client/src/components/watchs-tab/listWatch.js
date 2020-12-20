@@ -125,7 +125,8 @@ const ListWatch = (props) => {
             post: "Animal beer and fish",
             time: "6 giờ",
             photo: require('./../../public/img/assets/post1.jpg'),
-            video: "https://www.w3schools.com/html/movie.mp4",
+            // video: "https://www.w3schools.com/html/movie.mp4",
+            video: require('../../public/video/movie.mp4'),
             numOfLike: 98,
             numOfCmt: 17,
         },
@@ -136,7 +137,7 @@ const ListWatch = (props) => {
             post: "Nguyễn LInh Phù Ninh",
             time: "4 giờ",
             photo: "",
-            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            video: require('../../public/video/short_cartoon.mp4'),
             numOfLike: 28,
             numOfCmt: 17,
         },
@@ -147,7 +148,7 @@ const ListWatch = (props) => {
             post: "",
             time: "5 giờ",
             photo: require('./../../public/img/assets/post2.jpg'),
-            video: "https://www.w3schools.com/html/movie.mp4",
+            video: require('../../public/video/movie.mp4'),
             numOfLike: 18,
             numOfCmt: 17,
         },
@@ -158,7 +159,8 @@ const ListWatch = (props) => {
             post: "Chó chó",
             time: "5 giờ",
             photo: "",
-            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            // video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            video: require('../../public/video/short_cartoon.mp4'),
             // video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             numOfLike: 18,
             numOfCmt: 17,
@@ -228,7 +230,8 @@ const ListWatch = (props) => {
                             paused={true}
                             muted={true}
                             repeat={false}
-                            source={{ uri: item.video }}
+                            // source={{ uri: item.video }}
+                            source={item.video}
                             resizeMode={'cover'}
                             style={{
                                 width: Dimensions.get('window').width,

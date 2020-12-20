@@ -1,5 +1,8 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
-import { Button, StyleSheet, View, Text, TextInput, Image, Keyboard, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
+import {
+    Button, StyleSheet, View, Text, TextInput, Image, Keyboard,
+    TouchableOpacity, ScrollView, Dimensions, Alert, ActivityIndicator
+} from 'react-native';
 import { HeaderBackButton } from '@react-navigation/stack';
 import { Controller, useForm } from 'react-hook-form';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -39,22 +42,20 @@ const CreatePost = (props) => {
     // const { form, handleSubmit, setValue } = useForm();
 
 
-    const onGoBack = data => {
-        console.log('bacccccccccc', data.text);
+    const onGoBack = () => {
+        console.log('bacccccccccc', text);
         if (images.length > 0 || text) {
-            sheetDraft.current.snapTo(0);
-            // console.log('backkkkkkkk');
-            // props.navigation.goBack();
+            sheetDraft.current.snapTo(1);
+
         }
         else {
             console.log('backkkkkkkk');
             props.navigation.goBack();
-            // sheetDraft.current.snapTo(0);
         }
     }
 
     const onPost = () => {
-        console.log('ahihiihi', text, images.length);
+        console.log('ahihiihi', text, images);
 
         if (images.length !== 0 || text !== "") {
             let data = new FormData();
@@ -87,21 +88,7 @@ const CreatePost = (props) => {
 
     }, [text]);
     // console.log('routtt', props.route.params);
-    React.useLayoutEffect(() => {
-        props.navigation.setOptions({
-            headerLeft: (props) => (
-                <HeaderBackButton
-                    {...props}
-                    onPress={onGoBack}
-                />
-            ),
-            headerRight: () => (
-                <TouchableOpacity style={{ marginRight: 20, backgroundColor: "#1578EF", padding: 5, borderRadius: 5 }} onPress={onPost}>
-                    <Text style={{ fontWeight: "600", fontSize: 15, color: "#fff" }}>ĐĂNG</Text>
-                </TouchableOpacity>
-            ),
-        });
-    }, [props.navigation]);
+
     const renderContent = () => (
         <View
             style={{
@@ -219,7 +206,7 @@ const CreatePost = (props) => {
     }
 
     let imageGrid = null;
-    //   console.log('textttt', text);
+    console.log('textttt', images);
     if (mediaStatus === 'image') {
         gridImages = (
             <View>
@@ -381,7 +368,12 @@ const CreatePost = (props) => {
                         if (!mediaStatus) {
                             setMediaStatus('image');
                         }
-                        const source = { uri: myResponse.uri };
+                        const source = {
+                            uri: myResponse.uri,
+                            type: myResponse.type,
+                            name: myResponse.fileName
+                        };
+                        console.log('srr', source)
                         setImages([...images, source]);
                     }
                 });
@@ -402,7 +394,11 @@ const CreatePost = (props) => {
                     } else if (myResponse.error) {
 
                     } else {
-                        const source = { uri: myResponse.uri };
+                        const source = {
+                            uri: myResponse.uri,
+                            type: myResponse.type,
+                            name: myResponse.fileName
+                        };
                         setMediaStatus('video');
                         setVideo(source);
                         console.log('Error at upload video type 1:', myResponse.errorMessage);
@@ -420,7 +416,12 @@ const CreatePost = (props) => {
                     } else if (myResponse.error) {
 
                     } else {
-                        const source = { uri: myResponse.uri };
+                        const source = {
+                            uri: myResponse.uri,
+                            type: myResponse.type,
+                            name: myResponse.fileName
+                        };
+                        console.log('srccccc', source)
                         const type = myResponse.type;
                         if (!mediaStatus) {
                             if (type === 'image/jpeg') {
@@ -433,6 +434,7 @@ const CreatePost = (props) => {
                             }
                         } else {
                             if (type === 'image/jpeg') {
+                                console.log('srr', source)
                                 setImages([...images, source]);
                             } else {
                                 // eslint-disable-next-line no-alert
@@ -446,12 +448,13 @@ const CreatePost = (props) => {
     };
 
     const onPressButtomSheet = () => {
-        sheetDraft.current.snapTo(1);
+        sheetRef.current.snapTo(1);
         Keyboard.dismiss();
     }
 
 
     const onGoBackPage = () => {
+
         props.navigation.goBack();
     }
 
@@ -459,7 +462,7 @@ const CreatePost = (props) => {
         <View style={{ flex: 1, backgroundColor: "#fff" }}>
             <View style={{ backgroundColor: "#fff", flexDirection: "row", marginTop: 10, marginBottom: 10, marginRight: 10, marginLeft: 10, justifyContent: "space-between", alignItems: 'center' }}>
                 <TouchableOpacity
-                    onPress={() => onGoBackPage()}
+                    onPress={() => onGoBack()}
                 >
                     <Icon5 name='arrow-left' size={20} color="#111" />
                 </TouchableOpacity>
@@ -554,14 +557,14 @@ const CreatePost = (props) => {
             <BottomSheet
                 ref={sheetRef}
                 snapPoints={[400, 300, 0]}
-                initialSnap={2}
+                initialSnap={1}
                 enabledContentTapInteraction={false}
                 renderContent={renderContent}
             />
             <BottomSheet
                 ref={sheetDraft}
                 snapPoints={[0, 300]}
-                initialSnap={1}
+                initialSnap={0}
                 enabledContentTapInteraction={false}
                 renderContent={Draft}
             />

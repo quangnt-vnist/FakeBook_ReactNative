@@ -34,12 +34,12 @@ const MainContainer = (props) => {
         userId = await getData('userId');
         token = await getData('auth-token');
         if(userId) {
-            console.log('call get profile\n\n\n\n');
+            console.log('\n\n\n\ncall get profile\n\n\n\n');
             props.getProfile();
         }
     }, [])
 
-    console.log('auth main content \n\n', props.auth);
+    // console.log('auth main content \n\n', props.auth);
     
     const tabBarOptions = {
         showIcon: true,

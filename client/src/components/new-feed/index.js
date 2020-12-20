@@ -64,7 +64,7 @@ const NewFeed = (props) => {
     // }
 
     // console.log('list post', post);
-    console.log('auth', auth);
+    // console.log('auth', auth);
 
     return (
         <>

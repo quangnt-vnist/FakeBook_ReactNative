@@ -253,11 +253,11 @@ const Feed = (props) => {
 
 	const { auth, post } = props;
 
-	// useEffect(() => {
-	// 	console.log('render',post.isLoadingPost);
-	// 	props.getPostByUser();
-	// 	props.getAllPost();
-	// }, [post.post?._id])
+	useEffect(() => {
+		console.log('render',post.isLoadingPost);
+		// props.getPostByUser();
+		// props.getAllPost();
+	}, [post.post])
 
 	let listPost = [], allPost = [], myPost = [];
 	let a = {

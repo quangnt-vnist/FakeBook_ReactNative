@@ -101,7 +101,6 @@ export function post(state = initState, action) {
             
         case PostConstant.GET_COMMENT_POST_REQUEST:
         case PostConstant.ADD_COMMENT_POST_REQUEST:
-        case PostConstant.CREATE_POST_REQUEST:
         case PostConstant.REPORT_POST_REQUEST:
         case PostConstant.CHANGE_AVATAR_REQUEST:
             return {
@@ -158,7 +157,6 @@ export function post(state = initState, action) {
 
         case PostConstant.GET_COMMENT_POST_FAILE:
         case PostConstant.ADD_COMMENT_POST_FAILE:
-        case PostConstant.CREATE_POST_FAILE:
         case PostConstant.REPORT_POST_FAILE:
         case PostConstant.CHANGE_AVATAR_FAILE:
             return {
